@@ -36,12 +36,12 @@ const Hero: React.FC = () => {
       
       <div ref={heroRef} className="container mx-auto px-6 text-center relative z-10 opacity-0 transform translate-y-8">
         <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-          Creative
-          <span className="block text-blue-600">Developer</span>
+          Suraj
+          <span className="block text-blue-600">Nandan</span>
         </h1>
         
         <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-          Crafting digital experiences that blend creativity with functionality
+          Creative Developer crafting digital experiences that blend creativity with functionality
         </p>
         
         <div className="flex justify-center space-x-6 mb-12">

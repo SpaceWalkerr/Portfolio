@@ -93,12 +93,7 @@ const Hero = () => {
                 <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4">
                   Suraj Nandan
                 </span>
-                <span className="block text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.3]">
-                  Full Stack Developer Building
-                </span>
-                <span className="block text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.3]">
-                  Scalable & Intelligent Digital Products
-                </span>
+               
               </h1>
             </motion.div>
 

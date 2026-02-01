@@ -1,0 +1,343 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:wght@300;400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Space Theme - Deep cosmic darkness */
+    --background: 230 25% 3%;
+    --foreground: 200 100% 95%;
+
+    /* Card/Panel - Glassmorphism base */
+    --card: 220 30% 8%;
+    --card-foreground: 200 100% 95%;
+
+    --popover: 220 30% 8%;
+    --popover-foreground: 200 100% 95%;
+
+    /* Primary - Electric Cyan */
+    --primary: 185 100% 50%;
+    --primary-foreground: 230 25% 3%;
+
+    /* Secondary - Magenta Nebula */
+    --secondary: 300 100% 60%;
+    --secondary-foreground: 230 25% 3%;
+
+    /* Muted - Deep space grey */
+    --muted: 220 20% 15%;
+    --muted-foreground: 220 15% 55%;
+
+    /* Accent - Gold/Amber */
+    --accent: 45 100% 55%;
+    --accent-foreground: 230 25% 3%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 200 50% 25%;
+    --input: 220 30% 12%;
+    --ring: 185 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Space Colors */
+    --space-void: 230 30% 2%;
+    --space-deep: 230 25% 5%;
+    --neon-cyan: 185 100% 50%;
+    --neon-magenta: 300 100% 60%;
+    --neon-gold: 45 100% 55%;
+    --neon-green: 150 100% 45%;
+    --neon-orange: 25 100% 55%;
+    --hologram-blue: 200 100% 70%;
+    --hologram-purple: 270 100% 70%;
+    
+    /* Glow intensities */
+    --glow-sm: 0 0 10px;
+    --glow-md: 0 0 20px;
+    --glow-lg: 0 0 40px;
+    --glow-xl: 0 0 60px;
+
+    /* Planet colors */
+    --planet-earth: 200 70% 50%;
+    --planet-mars: 15 80% 45%;
+    --planet-venus: 40 90% 60%;
+    --planet-saturn: 35 60% 55%;
+    --planet-station: 185 100% 50%;
+
+    --sidebar-background: 220 30% 5%;
+    --sidebar-foreground: 200 100% 95%;
+    --sidebar-primary: 185 100% 50%;
+    --sidebar-primary-foreground: 230 25% 3%;
+    --sidebar-accent: 220 30% 15%;
+    --sidebar-accent-foreground: 200 100% 95%;
+    --sidebar-border: 200 50% 25%;
+    --sidebar-ring: 185 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+@layer components {
+  /* Glassmorphism panels */
+  .glass-panel {
+    @apply bg-card/30 backdrop-blur-xl border border-primary/20 rounded-lg;
+    box-shadow: 
+      inset 0 1px 0 0 hsl(var(--primary) / 0.1),
+      0 0 30px -10px hsl(var(--primary) / 0.3);
+  }
+
+  .glass-panel-strong {
+    @apply bg-card/50 backdrop-blur-2xl border border-primary/30 rounded-lg;
+    box-shadow: 
+      inset 0 1px 0 0 hsl(var(--primary) / 0.2),
+      0 0 40px -10px hsl(var(--primary) / 0.4);
+  }
+
+  /* Neon text effects */
+  .neon-text-cyan {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      0 0 10px hsl(var(--neon-cyan)),
+      0 0 20px hsl(var(--neon-cyan)),
+      0 0 40px hsl(var(--neon-cyan) / 0.5);
+  }
+
+  .neon-text-magenta {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-magenta)),
+      0 0 10px hsl(var(--neon-magenta)),
+      0 0 20px hsl(var(--neon-magenta)),
+      0 0 40px hsl(var(--neon-magenta) / 0.5);
+  }
+
+  .neon-text-gold {
+    text-shadow: 
+      0 0 5px hsl(var(--neon-gold)),
+      0 0 10px hsl(var(--neon-gold)),
+      0 0 20px hsl(var(--neon-gold)),
+      0 0 40px hsl(var(--neon-gold) / 0.5);
+  }
+
+  /* Neon borders */
+  .neon-border-cyan {
+    box-shadow: 
+      0 0 5px hsl(var(--neon-cyan)),
+      0 0 10px hsl(var(--neon-cyan) / 0.5),
+      inset 0 0 5px hsl(var(--neon-cyan) / 0.1);
+  }
+
+  .neon-border-magenta {
+    box-shadow: 
+      0 0 5px hsl(var(--neon-magenta)),
+      0 0 10px hsl(var(--neon-magenta) / 0.5),
+      inset 0 0 5px hsl(var(--neon-magenta) / 0.1);
+  }
+
+  /* Hologram effect */
+  .hologram {
+    @apply relative;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--hologram-blue) / 0.1) 0%,
+      hsl(var(--hologram-purple) / 0.1) 50%,
+      hsl(var(--hologram-blue) / 0.1) 100%
+    );
+    animation: hologram-shimmer 3s ease-in-out infinite;
+  }
+
+  .hologram::before {
+    content: '';
+    @apply absolute inset-0 pointer-events-none;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      hsl(var(--primary) / 0.03) 2px,
+      hsl(var(--primary) / 0.03) 4px
+    );
+    animation: scanlines 8s linear infinite;
+  }
+
+  /* HUD elements */
+  .hud-element {
+    @apply relative;
+  }
+
+  .hud-element::before,
+  .hud-element::after {
+    content: '';
+    @apply absolute w-3 h-3 border-primary;
+  }
+
+  .hud-element::before {
+    @apply top-0 left-0 border-t-2 border-l-2;
+  }
+
+  .hud-element::after {
+    @apply bottom-0 right-0 border-b-2 border-r-2;
+  }
+
+  /* Cockpit button */
+  .cockpit-button {
+    @apply relative px-8 py-4 font-orbitron font-bold uppercase tracking-widest;
+    @apply bg-transparent border-2 border-primary text-primary;
+    @apply transition-all duration-300 overflow-hidden;
+    clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+  }
+
+  .cockpit-button::before {
+    content: '';
+    @apply absolute inset-0 bg-primary opacity-0 transition-opacity duration-300;
+  }
+
+  .cockpit-button:hover::before {
+    @apply opacity-20;
+  }
+
+  .cockpit-button:hover {
+    box-shadow: 
+      0 0 20px hsl(var(--neon-cyan)),
+      0 0 40px hsl(var(--neon-cyan) / 0.5),
+      inset 0 0 20px hsl(var(--neon-cyan) / 0.1);
+    text-shadow: 
+      0 0 10px hsl(var(--neon-cyan)),
+      0 0 20px hsl(var(--neon-cyan));
+  }
+
+  /* Planet card */
+  .planet-card {
+    @apply glass-panel p-6 relative overflow-hidden;
+    border-left: 3px solid hsl(var(--primary));
+  }
+
+  .planet-card::before {
+    content: '';
+    @apply absolute top-0 left-0 w-full h-1;
+    background: linear-gradient(90deg, hsl(var(--primary)), transparent);
+  }
+
+  /* Transmission form */
+  .transmission-input {
+    @apply w-full bg-muted/50 border border-primary/30 rounded px-4 py-3;
+    @apply text-foreground placeholder:text-muted-foreground;
+    @apply focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary;
+    @apply transition-all duration-300;
+  }
+
+  .transmission-input:focus {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.3);
+  }
+}
+
+@layer utilities {
+  .font-orbitron {
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  .font-exo {
+    font-family: 'Exo 2', sans-serif;
+  }
+
+  /* Star warp effect */
+  .star-warp {
+    animation: star-warp 0.5s ease-out forwards;
+  }
+
+  /* Pulse glow */
+  .pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+  /* Float animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .float-delayed {
+    animation: float 6s ease-in-out infinite;
+    animation-delay: -3s;
+  }
+}
+
+/* Keyframe animations */
+@keyframes hologram-shimmer {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    filter: brightness(1);
+  }
+  50% {
+    opacity: 0.8;
+    filter: brightness(1.2);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes star-warp {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(20);
+    opacity: 0;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--space-deep));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.5);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary));
+}

@@ -54,25 +54,25 @@ const Hero = () => {
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f05_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f05_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
 
       {/* Main Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 w-full py-8 sm:py-0">
+        <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
-            className="space-y-8 text-left"
+            className="space-y-6 sm:space-y-8 text-left"
           >
             {/* Small intro text */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="flex items-center gap-3"
+              className="flex items-center gap-2 sm:gap-3"
             >
-              <div className="h-px w-12 bg-gradient-to-r from-cyan-500 to-transparent"></div>
-              <span className="text-cyan-400 text-sm font-medium tracking-wider uppercase">
+              <div className="h-px w-8 sm:w-12 bg-gradient-to-r from-cyan-500 to-transparent"></div>
+              <span className="text-cyan-400 text-xs sm:text-sm font-medium tracking-wider uppercase">
                 Full Stack Developer
               </span>
             </motion.div>
@@ -86,12 +86,18 @@ const Hero = () => {
                 duration: 0.7,
                 ease: [0.25, 0.4, 0.25, 1]
               }}
-              className="space-y-4"
+              className="space-y-3 sm:space-y-4"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight">
-                <span className="block text-white">Hi, I'm</span>
-                <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                  Suraj
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.2] space-y-1">
+                <span className="block text-white mb-1">Hi, I'm </span>
+                <span className="block bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent mb-3 sm:mb-4">
+                  Suraj Nandan
+                </span>
+                <span className="block text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.3]">
+                  Full Stack Developer Building
+                </span>
+                <span className="block text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.3]">
+                  Scalable & Intelligent Digital Products
                 </span>
               </h1>
             </motion.div>
@@ -105,9 +111,23 @@ const Hero = () => {
                 duration: 0.7,
                 ease: [0.25, 0.4, 0.25, 1]
               }}
-              className="text-xl sm:text-2xl text-slate-400 max-w-xl leading-relaxed"
+              className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl leading-relaxed pt-2"
             >
-              I craft intelligent & immersive digital experiences with modern web technologies and AI
+              I design and develop high-performance web applications, AI-powered systems, and user-focused platforms that turn complex ideas into real-world solutions.
+            </motion.p>
+
+            {/* Short Intro Line */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                delay: 0.75, 
+                duration: 0.7,
+                ease: [0.25, 0.4, 0.25, 1]
+              }}
+              className="text-sm sm:text-base text-slate-400 max-w-xl leading-relaxed -mt-2"
+            >
+              From financial platforms to enterprise systems, I build technology that is fast, reliable, and impactful.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -119,12 +139,12 @@ const Hero = () => {
                 duration: 0.6,
                 ease: [0.25, 0.4, 0.25, 1]
               }}
-              className="flex flex-col sm:flex-row gap-4 pt-4"
+              className="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-4 sm:pt-6"
             >
               {/* Primary Button - Futuristic with Glow */}
               <button
                 onClick={() => scrollToSection('#projects')}
-                className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 ease-out flex items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.4)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-400 before:via-blue-500 before:to-purple-500 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
+                className="group relative px-6 py-3.5 sm:px-8 sm:py-4 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden transition-all duration-500 ease-out flex items-center justify-center gap-2 hover:-translate-y-1 hover:shadow-[0_20px_50px_rgba(6,182,212,0.4)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-400 before:via-blue-500 before:to-purple-500 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 active:scale-95 min-h-[48px]"
               >
                 <span className="relative z-10">View My Work</span>
                 <ArrowRight className="relative z-10 w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
@@ -133,14 +153,15 @@ const Hero = () => {
               </button>
               
               {/* Secondary Button - Glassmorphism */}
-              <button
-                onClick={() => scrollToSection('#contact')}
-                className="group relative px-8 py-4 bg-slate-800/30 backdrop-blur-md text-white font-semibold rounded-xl border border-slate-700/50 overflow-hidden transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-slate-800/40 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-500/10 before:to-blue-500/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500"
+              <a
+                href="/Suraj_Resume.pdf"
+                download="Suraj_Nandan_Resume.pdf"
+                className="group relative px-6 py-3.5 sm:px-8 sm:py-4 bg-slate-800/30 backdrop-blur-md text-white font-semibold rounded-xl border border-slate-700/50 overflow-hidden transition-all duration-500 ease-out hover:-translate-y-0.5 hover:bg-slate-800/40 hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(6,182,212,0.2)] before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-500/10 before:to-blue-500/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-500 active:scale-95 min-h-[48px] flex items-center justify-center"
               >
-                <span className="relative z-10">Get In Touch</span>
+                <span className="relative z-10">Download Resume</span>
                 {/* Border glow on hover */}
                 <div className="absolute inset-0 -z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 blur-sm"></div>
-              </button>
+              </a>
             </motion.div>
 
             {/* Social Links */}
@@ -152,29 +173,29 @@ const Hero = () => {
                 duration: 0.6,
                 ease: [0.25, 0.4, 0.25, 1]
               }}
-              className="flex items-center gap-5 pt-4"
+              className="flex items-center gap-3 sm:gap-5 pt-2 sm:pt-4"
             >
               <a
                 href="https://github.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300 active:scale-95"
               >
-                <Github size={20} />
+                <Github size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
                 href="https://linkedin.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300 active:scale-95"
               >
-                <Linkedin size={20} />
+                <Linkedin size={18} className="sm:w-5 sm:h-5" />
               </a>
               <a
                 href="mailto:your.email@example.com"
-                className="w-12 h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300"
+                className="w-11 h-11 sm:w-12 sm:h-12 rounded-lg bg-slate-800/50 border border-slate-700 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500 hover:bg-slate-800 transition-all duration-300 active:scale-95"
               >
-                <Mail size={20} />
+                <Mail size={18} className="sm:w-5 sm:h-5" />
               </a>
             </motion.div>
 

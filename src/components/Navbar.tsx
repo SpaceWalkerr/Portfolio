@@ -12,7 +12,7 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['#home', '#about', '#skills', '#projects', '#certifications', '#timeline', '#contact'];
+      const sections = ['#home', '#about', '#skills', '#experience', '#projects', '#certifications', '#contact'];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -35,9 +35,9 @@ const Navbar = () => {
     { href: '#home', label: 'Home' },
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
+    { href: '#experience', label: 'Experience' },
     { href: '#projects', label: 'Projects' },
     { href: '#certifications', label: 'Certifications' },
-    { href: '#timeline', label: 'Journey' },
     { href: '#contact', label: 'Contact' },
   ];
 
@@ -54,42 +54,18 @@ const Navbar = () => {
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.3, ease: "easeOut" }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? 'bg-slate-900/70 backdrop-blur-xl border-b border-slate-700/50 shadow-lg shadow-cyan-500/5'
-            : 'bg-transparent'
+            ? "bg-slate-900/60 backdrop-blur-xl border-b border-slate-700/40 shadow-[0_8px_30px_rgba(8,145,178,0.12)] after:content-[''] after:absolute after:inset-x-0 after:-bottom-px after:h-px after:bg-gradient-to-r after:from-transparent after:via-cyan-400/50 after:to-transparent"
+            : 'bg-slate-900/40 backdrop-blur-md'
         }`}
+        style={{ position: 'fixed', top: 0 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <motion.a
-              href="#home"
-              onClick={(e) => scrollToSection(e, '#home')}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex items-center gap-2 group cursor-pointer"
-            >
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-lg blur-md opacity-50 group-hover:opacity-75 transition-opacity duration-300"></div>
-                <div className="relative bg-slate-800/50 p-2 rounded-lg border border-slate-700/50 group-hover:border-cyan-500/50 transition-all duration-300">
-                  <Code2 className="w-6 h-6 text-cyan-400" />
-                </div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                  Suraj Nandan
-                </span>
-                <span className="text-[10px] text-slate-400 tracking-wider uppercase">
-                  Full Stack Developer
-                </span>
-              </div>
-            </motion.a>
-
+          <div className="flex justify-center items-center h-20">
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link, index) => (
@@ -100,7 +76,7 @@ const Navbar = () => {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 * index }}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-300 rounded-lg group ${
+                  className={`relative px-4 py-2 text-sm font-medium transition-all duration-200 rounded-lg group hover:-translate-y-0.5 ${
                     activeSection === link.href
                       ? 'text-cyan-400'
                       : 'text-slate-300 hover:text-cyan-400'
@@ -108,53 +84,36 @@ const Navbar = () => {
                 >
                   {link.label}
                   
-                  {/* Active indicator */}
+                  {/* Active indicator - gradient underline */}
                   {activeSection === link.href && (
                     <motion.span
-                      layoutId="activeSection"
-                      className="absolute inset-0 bg-slate-800/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg -z-10"
+                      layoutId="activeUnderline"
+                      className="absolute -bottom-0.5 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-full shadow-[0_0_8px_rgba(34,211,238,0.6)]"
                       initial={false}
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 30 }}
                     />
                   )}
                   
                   {/* Hover glow */}
-                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/0 via-cyan-500/10 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-20"></span>
+                  <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-cyan-500/0 via-cyan-500/20 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-200 -z-20 blur-sm"></span>
                   
-                  {/* Bottom line */}
-                  <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-300 group-hover:w-3/4"></span>
+                  {/* Hover bottom line */}
+                  <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent transition-all duration-200 group-hover:w-full"></span>
                 </motion.a>
               ))}
             </div>
-
-            {/* Resume Button & Mobile Menu */}
-            <div className="flex items-center gap-3">
-              {/* Resume Button - Desktop */}
-              <motion.a
-                href="/Suraj_Resume.pdf"
-                download="Suraj_Nandan_Resume.pdf"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="hidden lg:flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 hover:-translate-y-0.5 transition-all duration-300 relative overflow-hidden group"
-              >
-                <span className="relative z-10">Resume</span>
-                <Download className="relative z-10 w-4 h-4" />
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </motion.a>
-
-              {/* Mobile Menu Button */}
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="lg:hidden relative p-2.5 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                aria-label="Toggle menu"
-              >
-                {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
-              </motion.button>
-            </div>
+            
+            {/* Mobile Menu Button */}
+            <motion.button
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="lg:hidden absolute right-4 p-2.5 rounded-lg bg-slate-800/50 border border-slate-700/50 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/50 transition-all duration-300"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X size={22} /> : <Menu size={22} />}
+            </motion.button>
           </div>
         </div>
       </motion.nav>

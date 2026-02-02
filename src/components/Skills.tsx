@@ -1,58 +1,60 @@
 import { motion } from 'framer-motion';
-import { Code2, Server, Database, Wrench } from 'lucide-react';
+import { Code2, Globe, Server, Database, GraduationCap } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
       icon: <Code2 className="w-6 h-6" />,
-      title: 'Frontend',
+      title: 'Programming Languages',
       color: 'from-cyan-500 to-blue-500',
       skills: [
-        { name: 'React', level: 90 },
-        { name: 'TypeScript', level: 85 },
-        { name: 'Tailwind CSS', level: 95 },
-        { name: 'Next.js', level: 80 },
-        { name: 'Vue.js', level: 75 },
-        { name: 'Redux', level: 85 },
+        { name: 'Java', level: 90 },
+        { name: 'Python', level: 85 },
+        { name: 'JavaScript', level: 88 },
+      ],
+    },
+    {
+      icon: <Globe className="w-6 h-6" />,
+      title: 'Frontend Development',
+      color: 'from-blue-500 to-purple-500',
+      skills: [
+        { name: 'React.js', level: 90 },
+        { name: 'HTML5', level: 95 },
+        { name: 'CSS3', level: 90 },
+        { name: 'Tailwind CSS', level: 92 },
       ],
     },
     {
       icon: <Server className="w-6 h-6" />,
-      title: 'Backend',
-      color: 'from-blue-500 to-purple-500',
+      title: 'Backend Development',
+      color: 'from-purple-500 to-pink-500',
       skills: [
-        { name: 'Node.js', level: 90 },
-        { name: 'Python', level: 85 },
-        { name: 'Express', level: 88 },
-        { name: 'FastAPI', level: 80 },
-        { name: 'REST APIs', level: 92 },
-        { name: 'GraphQL', level: 75 },
+        { name: 'Node.js', level: 85 },
+        { name: 'Express.js', level: 88 },
+        { name: 'REST API Development', level: 90 },
       ],
     },
     {
       icon: <Database className="w-6 h-6" />,
-      title: 'Databases',
-      color: 'from-purple-500 to-pink-500',
+      title: 'Databases & Deployment',
+      color: 'from-pink-500 to-rose-500',
       skills: [
         { name: 'PostgreSQL', level: 85 },
-        { name: 'MongoDB', level: 88 },
-        { name: 'Supabase', level: 90 },
-        { name: 'Redis', level: 75 },
-        { name: 'MySQL', level: 82 },
-        { name: 'Firebase', level: 80 },
+        { name: 'Supabase', level: 88 },
+        { name: 'Vercel', level: 90 },
+        { name: 'Render', level: 85 },
+        { name: 'GoDaddy', level: 80 },
       ],
     },
     {
-      icon: <Wrench className="w-6 h-6" />,
-      title: 'Tools & AI',
-      color: 'from-pink-500 to-cyan-500',
+      icon: <GraduationCap className="w-6 h-6" />,
+      title: 'Core Computer Science',
+      color: 'from-rose-500 to-cyan-500',
       skills: [
-        { name: 'Git', level: 95 },
-        { name: 'Docker', level: 80 },
-        { name: 'AWS', level: 75 },
-        { name: 'Machine Learning', level: 70 },
-        { name: 'TensorFlow', level: 68 },
-        { name: 'OpenAI', level: 85 },
+        { name: 'Data Structures & Algorithms', level: 90 },
+        { name: 'Operating Systems', level: 85 },
+        { name: 'Computer Networks', level: 85 },
+        { name: 'Object Oriented Programming', level: 92 },
       ],
     },
   ];
@@ -104,7 +106,7 @@ const Skills = () => {
         </motion.div>
 
         {/* Skills Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {skillCategories.map((category, index) => (
             <motion.div
               key={category.title}

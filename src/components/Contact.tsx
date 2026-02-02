@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,23 +11,46 @@ const Contact = () => {
   });
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
+    setShowError(false);
     
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    console.log('Form submitted:', formData);
-    setIsLoading(false);
-    setShowSuccess(true);
-    setFormData({ name: '', email: '', message: '' });
-    
-    // Hide success message after 5 seconds
-    setTimeout(() => {
-      setShowSuccess(false);
-    }, 5000);
+    try {
+      // EmailJS configuration
+      const serviceId = 'service_tmmpyud';
+      const templateId = 'template_75e58ah';
+      const publicKey = 'my_dIqRX5ixRlREAC';
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_email: 'surajnandan78@gmail.com',
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      setIsLoading(false);
+      setShowSuccess(true);
+      setFormData({ name: '', email: '', message: '' });
+      
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        setShowSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      setIsLoading(false);
+      setShowError(true);
+      
+      // Hide error message after 5 seconds
+      setTimeout(() => {
+        setShowError(false);
+      }, 5000);
+    }
   };
 
   const handleChange = (
@@ -133,10 +157,28 @@ const Contact = () => {
                     <div>
                       <p className="text-slate-400 text-sm mb-1.5">Email</p>
                       <a
-                        href="mailto:your.email@example.com"
+                        href="mailto:surajnandan78@gmail.com"
                         className="text-white hover:text-cyan-400 transition-colors text-sm sm:text-base font-medium"
                       >
-                        your.email@example.com
+                        surajnandan78@gmail.com
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="relative flex-shrink-0">
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-400/30 to-blue-500/30 rounded-xl blur-md"></div>
+                      <div className="relative p-3 bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl text-cyan-400 border border-cyan-400/20">
+                        <Phone size={20} />
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-slate-400 text-sm mb-1.5">Phone</p>
+                      <a
+                        href="tel:+916203484989"
+                        className="text-white hover:text-cyan-400 transition-colors text-sm sm:text-base font-medium"
+                      >
+                        +91 6203484989
                       </a>
                     </div>
                   </div>
@@ -150,7 +192,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-slate-400 text-sm mb-1.5">Location</p>
-                      <p className="text-white text-sm sm:text-base font-medium">San Francisco, CA</p>
+                      <p className="text-white text-sm sm:text-base font-medium">Teghariya Road, Kishanganj 855107</p>
                     </div>
                   </div>
                 </div>
@@ -178,7 +220,7 @@ const Contact = () => {
                 <div className="space-y-4">
                   {/* GitHub Link */}
                   <motion.a
-                    href="https://github.com"
+                    href="https://github.com/SpaceWalkerr"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 4 }}
@@ -192,13 +234,13 @@ const Contact = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-white font-medium text-sm group-hover/link:text-cyan-400 transition-colors">GitHub</p>
-                      <p className="text-slate-500 text-xs">@yourusername</p>
+                      <p className="text-slate-500 text-xs">@SpaceWalkerr</p>
                     </div>
                   </motion.a>
 
                   {/* LinkedIn Link */}
                   <motion.a
-                    href="https://linkedin.com"
+                    href="https://www.linkedin.com/in/surajnandan/"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 4 }}
@@ -212,13 +254,13 @@ const Contact = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-white font-medium text-sm group-hover/link:text-blue-400 transition-colors">LinkedIn</p>
-                      <p className="text-slate-500 text-xs">@yourprofile</p>
+                      <p className="text-slate-500 text-xs">@surajnandan</p>
                     </div>
                   </motion.a>
 
                   {/* Twitter Link */}
                   <motion.a
-                    href="https://twitter.com"
+                    href="https://x.com/SurajNandan1625"
                     target="_blank"
                     rel="noopener noreferrer"
                     whileHover={{ x: 4 }}
@@ -232,7 +274,7 @@ const Contact = () => {
                     </div>
                     <div className="flex-1">
                       <p className="text-white font-medium text-sm group-hover/link:text-sky-400 transition-colors">Twitter</p>
-                      <p className="text-slate-500 text-xs">@yourhandle</p>
+                      <p className="text-slate-500 text-xs">@SurajNandan1625</p>
                     </div>
                   </motion.a>
                 </div>
@@ -369,6 +411,33 @@ const Contact = () => {
                         </p>
                         <p className="text-green-300/80 text-xs sm:text-sm mt-1">
                           I'll get back to you soon.
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {showError && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-4 p-4 backdrop-blur-sm bg-red-500/10 border border-red-500/30 rounded-xl"
+                  >
+                    <div className="flex items-start gap-3">
+                      <div className="flex-shrink-0 w-5 h-5 rounded-full bg-red-500 flex items-center justify-center mt-0.5">
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </div>
+                      <div>
+                        <p className="text-red-400 font-semibold text-sm sm:text-base">
+                          Failed to send message
+                        </p>
+                        <p className="text-red-300/80 text-xs sm:text-sm mt-1">
+                          Please try again or contact me directly via email.
                         </p>
                       </div>
                     </div>

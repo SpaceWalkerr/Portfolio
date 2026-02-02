@@ -4,10 +4,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Github size={18} />, url: 'https://github.com', label: 'GitHub' },
-    { icon: <Linkedin size={18} />, url: 'https://linkedin.com', label: 'LinkedIn' },
-    { icon: <Twitter size={18} />, url: 'https://twitter.com', label: 'Twitter' },
-    { icon: <Mail size={18} />, url: 'mailto:your.email@example.com', label: 'Email' },
+    { icon: <Github size={18} />, url: 'https://github.com/SpaceWalkerr', label: 'GitHub' },
+    { icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/surajnandan/', label: 'LinkedIn' },
+    { icon: <Twitter size={18} />, url: 'https://x.com/SurajNandan1625', label: 'Twitter' },
+    { icon: <Mail size={18} />, url: 'mailto:surajnandan78@gmail.com', label: 'Email' },
   ];
 
   return (

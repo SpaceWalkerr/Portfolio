@@ -7,63 +7,80 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'AI-Powered Analytics Dashboard',
+      title: 'Airline Reservation System',
       description:
-        'Real-time analytics platform with machine learning insights and predictive modeling',
-      tags: ['React', 'TypeScript', 'Python', 'TensorFlow', 'PostgreSQL'],
+        'A full-stack airline booking platform featuring dynamic flight search, interactive seat selection, and automated PDF boarding pass generation. Built with a secure backend using PostgreSQL and Supabase, including Row Level Security policies and database triggers to manage booking logic and authentication.',
+      tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'REST API', 'PDF Generation'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/AirLine-Reservation-System',
+      image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80',
       gradient: 'from-cyan-500 to-blue-600',
-      category: 'AI',
+      category: 'Full Stack',
     },
     {
-      title: 'E-Commerce Platform',
+      title: 'Sutan Legal Corp Platform',
       description:
-        'Full-stack marketplace with payment integration, inventory management, and admin panel',
-      tags: ['Next.js', 'Node.js', 'Stripe', 'MongoDB', 'Redis'],
+        'A scalable legal services platform designed with dynamic attorney directories, logic-based intake forms, and automated appointment scheduling. The system uses a well-structured relational database to manage complex legal data relationships efficiently.',
+      tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'REST API', 'Tailwind CSS'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/Sutan-Legal-Corp',
+      image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&q=80',
       gradient: 'from-blue-500 to-purple-600',
       category: 'Full Stack',
     },
     {
-      title: 'Real-Time Collaboration Tool',
+      title: 'Weather Pro',
       description:
-        'WebSocket-based collaborative workspace with live editing and video conferencing',
-      tags: ['React', 'WebRTC', 'Socket.io', 'Express', 'PostgreSQL'],
+        'A real-time weather application that collects and displays live weather data with accurate forecasts, interactive maps, and location-based weather alerts. Features a clean, responsive interface with dynamic weather visualizations and multi-day forecasts.',
+      tags: ['React', 'JavaScript', 'Weather API', 'Geolocation', 'REST API', 'CSS3'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/WeatherPro',
+      image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80',
       gradient: 'from-purple-500 to-pink-600',
       category: 'Web',
     },
     {
-      title: 'Smart Task Manager',
+      title: 'Autonomous Vehicles Research',
       description:
-        'AI-assisted productivity app with natural language processing and task prioritization',
-      tags: ['React Native', 'FastAPI', 'OpenAI', 'Supabase'],
+        'Research project focused on autonomous vehicle navigation using deep neural networks. Implementing advanced computer vision and machine learning algorithms to enable real-time object detection, path planning, and decision-making for self-driving systems.',
+      tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'Neural Networks', 'OpenCV'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/Research-Project',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
       gradient: 'from-pink-500 to-red-600',
       category: 'AI',
     },
     {
-      title: 'Developer Portfolio Builder',
+      title: 'Classic Games Collection',
       description:
-        'SaaS platform for creating professional developer portfolios with customizable templates',
-      tags: ['Next.js', 'Tailwind', 'Supabase', 'Stripe'],
+        'An interactive collection of classic puzzle and strategy games including Sudoku, Tic-Tac-Toe, 2048, and Snake. Built with vanilla JavaScript and modern UI/UX design, featuring smooth animations, score tracking, and responsive gameplay across all devices.',
+      tags: ['JavaScript', 'HTML5', 'CSS3', 'Algorithms', 'Game Logic', 'DOM Manipulation'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/GAMES',
+      image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80',
       gradient: 'from-red-500 to-orange-600',
       category: 'Web',
     },
     {
-      title: 'Blockchain Explorer',
+      title: 'City of Noctura',
       description:
-        'Web3 application for exploring blockchain transactions with real-time data visualization',
-      tags: ['React', 'Web3.js', 'Node.js', 'GraphQL', 'MongoDB'],
+        'An immersive interactive storytelling experience set in the mysterious City of Noctura. Features branching narratives, atmospheric sound design, and dynamic character interactions that respond to player choices, creating a unique story experience with every playthrough.',
+      tags: ['JavaScript', 'HTML5', 'CSS3', 'Interactive Design', 'Audio API', 'Story Engine'],
       liveDemo: '#',
-      github: '#',
+      github: 'https://github.com/SpaceWalkerr/The-City-of-Noctura-',
+      image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80',
       gradient: 'from-orange-500 to-yellow-600',
+      category: 'Web',
+    },
+    {
+      title: 'E-Commerce Platform',
+      description:
+        'A comprehensive full-stack e-commerce solution with product catalog management, secure shopping cart functionality, payment gateway integration, and order tracking. Features an intuitive admin dashboard for inventory management and customer analytics.',
+      tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Stripe', 'REST API', 'Authentication'],
+      liveDemo: '#',
+      github: 'https://github.com/SpaceWalkerr/E-commerce-platform',
+      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80',
+      gradient: 'from-yellow-500 to-green-600',
       category: 'Full Stack',
     },
   ];
@@ -188,10 +205,14 @@ const Projects = () => {
 
               {/* Glassmorphism Card */}
               <div className="backdrop-blur-xl bg-gradient-to-br from-slate-800/40 via-slate-900/40 to-slate-800/40 rounded-2xl border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-300 h-full flex flex-col overflow-hidden hover:shadow-2xl hover:shadow-cyan-500/10">
-                {/* Gradient Thumbnail Area */}
+                {/* Banner Image Thumbnail Area */}
                 <div className="relative h-48 sm:h-52 overflow-hidden rounded-t-2xl">
-                  {/* Background gradient with zoom effect */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} transition-transform duration-500 ease-out group-hover:scale-110`}></div>
+                  {/* Background image with zoom effect */}
+                  <img 
+                    src={project.image} 
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                  />
                   
                   {/* Dark overlay */}
                   <div className="absolute inset-0 bg-slate-950/50 backdrop-blur-sm transition-opacity duration-300 group-hover:bg-slate-950/30"></div>

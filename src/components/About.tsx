@@ -4,8 +4,8 @@ import { Code2, Sparkles, Rocket, Award, Zap, Target } from 'lucide-react';
 const About = () => {
   const stats = [
     { label: 'Years Experience', value: '3+' },
-    { label: 'Projects Completed', value: '50+' },
-    { label: 'Technologies', value: '20+' },
+    { label: 'Projects Completed', value: '20' },
+    { label: 'Technologies', value: '10+' },
   ];
 
   const highlights = [
@@ -301,9 +301,9 @@ const About = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { value: '50+', label: 'Projects Built' },
-              { value: '20+', label: 'Technologies Used' },
-              { value: '10+', label: 'Certifications Earned' },
+              { value: '20+', label: 'Projects Built' },
+              { value: '10+', label: 'Technologies Used' },
+              { value: '60+', label: 'Certifications Earned' },
             ].map((stat, index) => (
               <motion.div
                 key={stat.label}

@@ -12,11 +12,8 @@ const Certifications = () => {
     { title: 'Bootcamp on Big Data & Data Science', platform: 'C-DAC, NOIDA & SRM IST', year: 'Jan 2025', category: 'AI/ML', url: '/certificates/bootcamp-big-data-data-science.pdf', featured: true },
     { title: 'Campus Mantri (Campus Ambassador)', platform: 'GeeksforGeeks', year: '2024-2025', category: 'Certifications', url: '/certificates/campus-mantri-ambassador.pdf', featured: true, score: 'Completed 1 Year' },
     { title: 'International Conference on Viksit Bharat 2047', platform: 'Department of Chemistry, SRM IST', year: 'Feb 2025', category: 'Leadership', url: '/certificates/viksit-bharat-2047.pdf', featured: true, score: 'Lead Student Coordinator' },
-    { title: 'Career Essentials in Generative AI by Microsoft and LinkedIn', platform: 'Microsoft and LinkedIn', year: 'November 2024', category: 'AI/ML', url: '/certificates/career-essentials-generative-ai.pdf', featured: true },
     { title: 'AI/ML for Geodata Analysis', platform: 'IIRS, ISRO', year: 'Aug 2024', category: 'AI/ML', url: '/certificates/aiml-geodata-analysis.pdf', featured: true, score: 'Computer Ethics, Generative AI' },
     { title: 'Brand Revamp (Innovate 2024) - I Position', platform: 'SRM Institute of Science & Technology', year: 'April 2024', category: 'Competitions', url: '/certificates/brand-revamp-innovate-2024.pdf', featured: true, score: 'Winner' },
-    { title: 'FutureSkills PRIME Project', platform: 'NIELIT', year: '2024', category: 'AI/ML', url: '/certificates/futureskills-prime-project.pdf', featured: true },
-    { title: 'Generative AI & Computer Ethics', platform: 'IIRS, ISRO', year: '2024', category: 'AI/ML', url: '/certificates/generative-ai-computer-ethics.pdf', featured: true },
 
     // Programming & Development
     { title: 'Alpha (DSA with Java)', platform: 'Apna College', year: '2024', category: 'Programming', url: '/certificates/alpha-dsa-java.pdf' },

@@ -33,13 +33,13 @@ const Experience = () => {
         'Led a team of 3 developers, managing sprints and code quality standards',
         'Implemented authentication and authorization systems with JWT and OAuth2',
         'Built real-time data visualization dashboards for financial analytics',
-        'Established CI/CD pipelines reducing deployment time by 70%',
+        'Built a newsletter system automation that provides daily emails to subscribers',
       ],
       technologies: ['Node.js', 'Express', 'React', 'PostgreSQL','GoDaddy','Supabase', 'Vercel', 'Render', 'REST APIs'],
       gradient: 'from-blue-500 to-purple-600',
     },
     {
-      role: 'Team Leader',
+      role: 'Team Leader - Ambassador Program',
       company: 'Viral Fission',
       period: '2024 - 2025',
       description:
@@ -166,28 +166,22 @@ const Experience = () => {
                             </div>
                             
                             <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3">
-                              {/* Company name as gradient pill tag */}
-                              <div className="relative inline-block">
-                                <div className={`absolute inset-0 bg-gradient-to-r ${exp.gradient} blur-sm rounded-full opacity-60`}></div>
-                                {exp.companyUrl ? (
-                                  <a
-                                    href={exp.companyUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className={`relative inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${exp.gradient} bg-opacity-20 border border-current backdrop-blur-sm hover:bg-opacity-30 hover:shadow-lg transition-all duration-300 group/link`}
-                                    style={{
-                                      color: exp.gradient.includes('cyan') ? '#06b6d4' : exp.gradient.includes('blue') ? '#3b82f6' : '#a855f7'
-                                    }}
-                                  >
-                                    <span className="font-semibold text-sm">{exp.company}</span>
-                                    <ExternalLink className="w-3.5 h-3.5 opacity-70 group-hover/link:opacity-100 group-hover/link:translate-x-0.5 transition-all" />
-                                  </a>
-                                ) : (
-                                  <div className={`relative px-4 py-1.5 rounded-full bg-gradient-to-r ${exp.gradient} bg-opacity-20 border border-current backdrop-blur-sm`}>
-                                    <span className="font-semibold text-sm">{exp.company}</span>
-                                  </div>
-                                )}
-                              </div>
+                              {/* Company name - clean and visible */}
+                              {exp.companyUrl ? (
+                                <a
+                                  href={exp.companyUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r ${exp.gradient} text-white font-semibold text-sm hover:opacity-90 transition-opacity duration-300`}
+                                >
+                                  <span>{exp.company}</span>
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                              ) : (
+                                <div className={`inline-flex items-center px-4 py-1.5 rounded-full bg-gradient-to-r ${exp.gradient} text-white font-semibold text-sm`}>
+                                  <span>{exp.company}</span>
+                                </div>
+                              )}
                               
                               {/* Period - smaller and muted */}
                               <span className="text-xs text-slate-500 font-medium">

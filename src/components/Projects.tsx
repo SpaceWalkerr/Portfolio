@@ -11,8 +11,8 @@ const Projects = () => {
       description:
         'A full-stack airline booking platform featuring dynamic flight search, interactive seat selection, and automated PDF boarding pass generation. Built with a secure backend using PostgreSQL and Supabase, including Row Level Security policies and database triggers to manage booking logic and authentication.',
       tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'REST API', 'PDF Generation'],
-      liveDemo: '#',
-      github: 'https://github.com/SpaceWalkerr/AirLine-Reservation-System',
+      liveDemo: 'https://air-line-reservation-system.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/AirLine-Reservation-System.git',
       image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80',
       gradient: 'from-cyan-500 to-blue-600',
       category: 'Full Stack',
@@ -22,8 +22,8 @@ const Projects = () => {
       description:
         'A scalable legal services platform designed with dynamic attorney directories, logic-based intake forms, and automated appointment scheduling. The system uses a well-structured relational database to manage complex legal data relationships efficiently.',
       tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'REST API', 'Tailwind CSS'],
-      liveDemo: '#',
-      github: 'https://github.com/SpaceWalkerr/Sutan-Legal-Corp',
+      liveDemo: 'https://sutan-legal-corp.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/Sutan-Legal-Corp.git',
       image: 'https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&q=80',
       gradient: 'from-blue-500 to-purple-600',
       category: 'Full Stack',
@@ -44,8 +44,8 @@ const Projects = () => {
       description:
         'Research project focused on autonomous vehicle navigation using deep neural networks. Implementing advanced computer vision and machine learning algorithms to enable real-time object detection, path planning, and decision-making for self-driving systems.',
       tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'Neural Networks', 'OpenCV'],
-      liveDemo: '#',
-      github: 'https://github.com/SpaceWalkerr/Research-Project',
+      liveDemo: 'https://intelli-ride-x.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/IntelliRideX.git',
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
       gradient: 'from-pink-500 to-red-600',
       category: 'AI',

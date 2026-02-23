@@ -14,6 +14,7 @@ const Certifications = () => {
     { title: 'International Conference on Viksit Bharat 2047', platform: 'Department of Chemistry, SRM IST', year: 'Feb 2025', category: 'Leadership', url: '/certificates/viksit-bharat-2047.pdf', featured: true, score: 'Lead Student Coordinator' },
     { title: 'AI/ML for Geodata Analysis', platform: 'IIRS, ISRO', year: 'Aug 2024', category: 'AI/ML', url: '/certificates/aiml-geodata-analysis.pdf', featured: true, score: 'Computer Ethics, Generative AI' },
     { title: 'Brand Revamp (Innovate 2024) - I Position', platform: 'SRM Institute of Science & Technology', year: 'April 2024', category: 'Competitions', url: '/certificates/brand-revamp-innovate-2024.pdf', featured: true, score: 'Winner' },
+    { title: 'Generative AI & Prompt Engineering Internship', platform: 'IGDTUW & Sansoftech', year: 'Jun-Jul 2025', category: 'AI/ML', url: '/certificates/generative-ai-prompt-engineering-igdtuw.pdf', featured: true, score: '6-Week Summer Internship' },
 
     // Programming & Development
     { title: 'Alpha (DSA with Java)', platform: 'Apna College', year: '2024', category: 'Programming', url: '/certificates/alpha-dsa-java.pdf' },

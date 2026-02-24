@@ -1,9 +1,21 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Github } from 'lucide-react';
+import { ExternalLink, Github, X } from 'lucide-react';
 import { useState } from 'react';
+
+interface Project {
+  title: string;
+  description: string;
+  tags: string[];
+  liveDemo: string;
+  github: string;
+  image: string;
+  gradient: string;
+  category: string;
+}
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const projects = [
     {
@@ -199,6 +211,7 @@ const Projects = () => {
                 transition: { duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }
               }}
               className="group relative cursor-pointer"
+              onClick={() => setSelectedProject(project)}
             >
               {/* Glow effect on hover */}
               <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-20 rounded-2xl blur-xl transition-opacity duration-300 -z-10`}></div>
@@ -238,6 +251,11 @@ const Projects = () => {
 
                   <p className="text-sm sm:text-base text-slate-400 mb-4 flex-grow line-clamp-2">
                     {project.description}
+                  </p>
+
+                  {/* View Details Hint */}
+                  <p className="text-xs text-cyan-400/60 mb-3 group-hover:text-cyan-400 transition-colors duration-300">
+                    Click to view details
                   </p>
 
                   {/* Tech Stack Tags */}
@@ -284,6 +302,112 @@ const Projects = () => {
           </motion.div>
         </AnimatePresence>
       </div>
+
+      {/* Project Detail Modal */}
+      <AnimatePresence>
+        {selectedProject && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50"
+              onClick={() => setSelectedProject(null)}
+            />
+
+            {/* Modal */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 40 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 40 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              className="fixed inset-4 sm:inset-8 md:inset-16 lg:inset-y-20 lg:inset-x-[15%] z-50 overflow-y-auto rounded-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="backdrop-blur-xl bg-gradient-to-br from-slate-800/90 via-slate-900/95 to-slate-800/90 border border-slate-700/50 rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/10 min-h-full">
+                {/* Modal Header Image */}
+                <div className="relative h-56 sm:h-72 overflow-hidden">
+                  <img
+                    src={selectedProject.image}
+                    alt={selectedProject.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/60 to-slate-900/30"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-br ${selectedProject.gradient} opacity-20`}></div>
+
+                  {/* Close Button */}
+                  <button
+                    onClick={() => setSelectedProject(null)}
+                    className="absolute top-4 right-4 p-2.5 bg-slate-900/70 backdrop-blur-sm rounded-xl border border-slate-700/50 text-slate-300 hover:text-white hover:border-cyan-500/50 transition-all duration-300"
+                    aria-label="Close modal"
+                  >
+                    <X size={20} />
+                  </button>
+
+                  {/* Title overlay */}
+                  <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+                    <span className={`inline-block px-3 py-1 text-xs font-medium rounded-full bg-gradient-to-r ${selectedProject.gradient} text-white mb-3`}>
+                      {selectedProject.category}
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white">
+                      {selectedProject.title}
+                    </h3>
+                  </div>
+                </div>
+
+                {/* Modal Body */}
+                <div className="p-6 sm:p-8">
+                  {/* Full Description */}
+                  <p className="text-slate-300 text-base sm:text-lg leading-relaxed mb-8">
+                    {selectedProject.description}
+                  </p>
+
+                  {/* Tech Stack */}
+                  <div className="mb-8">
+                    <h4 className="text-sm font-medium text-slate-400 uppercase tracking-wider mb-4">
+                      Tech Stack
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedProject.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-4 py-2 text-sm font-medium bg-slate-800/60 backdrop-blur-sm text-slate-200 rounded-full border border-slate-700/50 hover:border-cyan-500/50 hover:text-cyan-400 transition-all duration-300"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Action Buttons */}
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <a
+                      href={selectedProject.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      <ExternalLink size={18} />
+                      Live Demo
+                    </a>
+                    <a
+                      href={selectedProject.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 px-6 py-3.5 bg-slate-800/50 backdrop-blur-sm text-white font-semibold rounded-xl border border-slate-700/50 hover:border-cyan-500/50 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-0.5 transition-all duration-300"
+                    >
+                      <Github size={18} />
+                      View Source
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

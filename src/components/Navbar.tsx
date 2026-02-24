@@ -12,7 +12,7 @@ const Navbar = () => {
       setIsScrolled(window.scrollY > 50);
       
       // Update active section based on scroll position
-      const sections = ['#home', '#about', '#skills', '#experience', '#projects', '#certifications', '#contact'];
+      const sections = ['#home', '#about', '#skills', '#experience', '#education', '#projects', '#certifications', '#contact'];
       const scrollPosition = window.scrollY + 100;
       
       for (const section of sections) {
@@ -36,6 +36,7 @@ const Navbar = () => {
     { href: '#about', label: 'About' },
     { href: '#skills', label: 'Skills' },
     { href: '#experience', label: 'Experience' },
+    { href: '#education', label: 'Education' },
     { href: '#projects', label: 'Projects' },
     { href: '#certifications', label: 'Certifications' },
     { href: '#contact', label: 'Contact' },
@@ -65,7 +66,7 @@ const Navbar = () => {
         style={{ position: 'fixed', top: 0 }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-center items-center h-20">
+          <div className="flex justify-between items-center h-20">
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-1">
               {navLinks.map((link, index) => (

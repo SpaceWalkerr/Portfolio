@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { Code2, Sparkles, Rocket, Award, Zap, Target } from 'lucide-react';
+import useCountUp from '../hooks/useCountUp';
 
 const About = () => {
   const stats = [
@@ -301,39 +302,42 @@ const About = () => {
         >
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {[
-              { value: '20+', label: 'Projects Built' },
-              { value: '10+', label: 'Technologies Used' },
-              { value: '60+', label: 'Certifications Earned' },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ 
-                  delay: 0.4 + index * 0.15,
-                  duration: 0.6,
-                  ease: [0.25, 0.4, 0.25, 1]
-                }}
-                className="relative group"
-              >
-                {/* Card */}
-                <div className="relative backdrop-blur-xl bg-gradient-to-br from-slate-800/40 via-slate-900/40 to-slate-800/40 rounded-2xl p-6 sm:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500">
-                  {/* Glow effect */}
-                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  <div className="absolute inset-0 rounded-2xl bg-cyan-500/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
-                  
-                  <div className="relative text-center space-y-2">
-                    <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm sm:text-base text-slate-400 font-medium">
-                      {stat.label}
+              { end: 20, suffix: '+', label: 'Projects Built' },
+              { end: 10, suffix: '+', label: 'Technologies Used' },
+              { end: 60, suffix: '+', label: 'Certifications Earned' },
+            ].map((stat, index) => {
+              const { count, ref } = useCountUp(stat.end, 2000);
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ 
+                    delay: 0.4 + index * 0.15,
+                    duration: 0.6,
+                    ease: [0.25, 0.4, 0.25, 1]
+                  }}
+                  className="relative group"
+                >
+                  {/* Card */}
+                  <div ref={ref} className="relative backdrop-blur-xl bg-gradient-to-br from-slate-800/40 via-slate-900/40 to-slate-800/40 rounded-2xl p-6 sm:p-8 border border-slate-700/50 hover:border-cyan-500/50 transition-all duration-500">
+                    {/* Glow effect */}
+                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/10 via-transparent to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-cyan-500/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+                    
+                    <div className="relative text-center space-y-2">
+                      <div className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+                        {count}{stat.suffix}
+                      </div>
+                      <div className="text-sm sm:text-base text-slate-400 font-medium">
+                        {stat.label}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>

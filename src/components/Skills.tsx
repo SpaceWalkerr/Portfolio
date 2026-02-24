@@ -158,7 +158,7 @@ const Skills = () => {
                         {category.icon}
                       </div>
                     </div>
-                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text transition-all duration-500" style={{ backgroundImage: `linear-gradient(to right, ${category.color.replace('from-', 'rgb(59 130 246)').replace('via-', 'rgb(6 182 212)').replace('to-', 'rgb(20 184 166)')})` }}>
+                    <h3 className="text-xl sm:text-2xl font-bold text-white transition-all duration-500">
                       {category.title}
                     </h3>
                   </div>
@@ -179,10 +179,10 @@ const Skills = () => {
                         className="space-y-2 group/skill"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="text-sm font-semibold text-slate-200 group-hover/skill:text-white transition-colors duration-300">
+                          <span className="text-sm font-semibold text-white transition-colors duration-300">
                             {skill.name}
                           </span>
-                          <span className={`text-xs font-bold text-slate-400 group-hover/skill:bg-gradient-to-r group-hover/skill:${category.color} group-hover/skill:bg-clip-text group-hover/skill:text-transparent transition-all duration-300`}>
+                          <span className="text-xs font-bold text-slate-300 transition-all duration-300">
                             {skill.level}%
                           </span>
                         </div>

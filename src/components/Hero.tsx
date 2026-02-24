@@ -176,25 +176,28 @@ const Hero = () => {
               className="flex items-center gap-3 pt-1"
             >
               <a
-                href="https://github.com"
+                href="https://github.com/SpaceWalkerr"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub profile"
                 className="w-11 h-11 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-slate-800/70 hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <Github size={19} />
                 <div className="absolute inset-0 rounded-xl bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </a>
               <a
-                href="https://linkedin.com"
+                href="https://www.linkedin.com/in/surajnandan/"
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn profile"
                 className="w-11 h-11 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-slate-800/70 hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <Linkedin size={19} />
                 <div className="absolute inset-0 rounded-xl bg-cyan-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
               </a>
               <a
-                href="mailto:your.email@example.com"
+                href="mailto:surajnandan78@gmail.com"
+                aria-label="Send email"
                 className="w-11 h-11 rounded-xl bg-slate-800/50 backdrop-blur-sm border border-slate-700/50 flex items-center justify-center text-slate-400 hover:text-cyan-400 hover:border-cyan-500/50 hover:bg-slate-800/70 hover:-translate-y-0.5 transition-all duration-300 group"
               >
                 <Mail size={19} />

@@ -9,12 +9,44 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; message?: string }>({});
+  const [touched, setTouched] = useState<{ name?: boolean; email?: boolean; message?: boolean }>({});
   const [isLoading, setIsLoading] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
 
+  const validateField = (name: string, value: string): string | undefined => {
+    switch (name) {
+      case 'name':
+        if (!value.trim()) return 'Name is required';
+        if (value.trim().length < 2) return 'Name must be at least 2 characters';
+        return undefined;
+      case 'email':
+        if (!value.trim()) return 'Email is required';
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return 'Please enter a valid email address';
+        return undefined;
+      case 'message':
+        if (!value.trim()) return 'Message is required';
+        if (value.trim().length < 10) return 'Message must be at least 10 characters';
+        return undefined;
+      default:
+        return undefined;
+    }
+  };
+
+  const validateAll = (): boolean => {
+    const errors: { name?: string; email?: string; message?: string } = {};
+    errors.name = validateField('name', formData.name);
+    errors.email = validateField('email', formData.email);
+    errors.message = validateField('message', formData.message);
+    setFieldErrors(errors);
+    setTouched({ name: true, email: true, message: true });
+    return !errors.name && !errors.email && !errors.message;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!validateAll()) return;
     setIsLoading(true);
     setShowError(false);
     
@@ -36,6 +68,8 @@ const Contact = () => {
       setIsLoading(false);
       setShowSuccess(true);
       setFormData({ name: '', email: '', message: '' });
+      setFieldErrors({});
+      setTouched({});
       
       // Hide success message after 5 seconds
       setTimeout(() => {
@@ -56,10 +90,19 @@ const Contact = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+    if (touched[name as keyof typeof touched]) {
+      setFieldErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
+    }
+  };
+
+  const handleBlur = (
+    e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    setFieldErrors(prev => ({ ...prev, [name]: validateField(name, value) }));
   };
 
   return (
@@ -316,10 +359,17 @@ const Contact = () => {
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
+                    onBlur={handleBlur}
+                    className={`w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                      fieldErrors.name && touched.name
+                        ? 'border-red-500/60 focus:border-red-400 focus:ring-red-400/20'
+                        : 'border-white/10 focus:border-cyan-400 focus:ring-cyan-400/20'
+                    }`}
                     placeholder="Your name"
                   />
+                  {fieldErrors.name && touched.name && (
+                    <p className="mt-1.5 text-xs text-red-400">{fieldErrors.name}</p>
+                  )}
                 </div>
 
                 <div className="mb-5 sm:mb-6">
@@ -335,10 +385,17 @@ const Contact = () => {
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300"
+                    onBlur={handleBlur}
+                    className={`w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-300 ${
+                      fieldErrors.email && touched.email
+                        ? 'border-red-500/60 focus:border-red-400 focus:ring-red-400/20'
+                        : 'border-white/10 focus:border-cyan-400 focus:ring-cyan-400/20'
+                    }`}
                     placeholder="your.email@example.com"
                   />
+                  {fieldErrors.email && touched.email && (
+                    <p className="mt-1.5 text-xs text-red-400">{fieldErrors.email}</p>
+                  )}
                 </div>
 
                 <div className="mb-6 sm:mb-8">
@@ -353,11 +410,18 @@ const Contact = () => {
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    required
+                    onBlur={handleBlur}
                     rows={5}
-                    className="w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border border-white/10 rounded-xl text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300 resize-none"
+                    className={`w-full px-4 py-3 bg-slate-900/50 backdrop-blur-sm border rounded-xl text-white placeholder-slate-500 focus:outline-none focus:ring-2 transition-all duration-300 resize-none ${
+                      fieldErrors.message && touched.message
+                        ? 'border-red-500/60 focus:border-red-400 focus:ring-red-400/20'
+                        : 'border-white/10 focus:border-cyan-400 focus:ring-cyan-400/20'
+                    }`}
                     placeholder="Tell me about your project..."
                   ></textarea>
+                  {fieldErrors.message && touched.message && (
+                    <p className="mt-1.5 text-xs text-red-400">{fieldErrors.message}</p>
+                  )}
                 </div>
 
                 <motion.button

@@ -19,6 +19,18 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  /* Focus-visible styles for keyboard navigation */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-cyan-400;
+    outline-style: solid;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply ring-2 ring-cyan-400 ring-offset-2 ring-offset-slate-900 rounded-lg;
+    outline: none;
+  }
 }
 
 @layer utilities {

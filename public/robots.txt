@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /assets/
 
-Sitemap: https://surajnandan.com/sitemap.xml
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+Sitemap: https://surajnandan.in/sitemap.xml
+Host: https://surajnandan.in

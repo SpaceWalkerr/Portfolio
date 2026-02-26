@@ -19,7 +19,7 @@ const Projects = () => {
 
   const projects = [
     {
-      title: 'Airline Reservation System',
+      title: '"SkyWings" - Airline Reservation System',
       description:
         'A full-stack airline booking platform featuring dynamic flight search, interactive seat selection, and automated PDF boarding pass generation. Built with a secure backend using PostgreSQL and Supabase, including Row Level Security policies and database triggers to manage booking logic and authentication.',
       tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'REST API', 'PDF Generation'],
@@ -30,7 +30,7 @@ const Projects = () => {
       category: 'Full Stack',
     },
     {
-      title: 'Sutan Legal Corp Platform',
+      title: '"Sutan Legal Corp" - Legal Services Platform',
       description:
         'A scalable legal services platform designed with dynamic attorney directories, logic-based intake forms, and automated appointment scheduling. The system uses a well-structured relational database to manage complex legal data relationships efficiently.',
       tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'REST API', 'Tailwind CSS'],
@@ -41,18 +41,29 @@ const Projects = () => {
       category: 'Full Stack',
     },
     {
-      title: 'Weather Pro',
+      title: '"Luxe" - E-Commerce Platform',
+      description:
+        'A comprehensive full-stack e-commerce solution with product catalog management, secure shopping cart functionality, payment gateway integration, and order tracking. Features an intuitive admin dashboard for inventory management and customer analytics.',
+      tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Stripe', 'REST API', 'Authentication'],
+      liveDemo: 'https://luxe1625.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/E-commerce-platform',
+      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80',
+      gradient: 'from-yellow-500 to-green-600',
+      category: 'Full Stack',
+    },
+    {
+      title: '"Mausam" - Real-Time Weather Application',
       description:
         'A real-time weather application that collects and displays live weather data with accurate forecasts, interactive maps, and location-based weather alerts. Features a clean, responsive interface with dynamic weather visualizations and multi-day forecasts.',
       tags: ['React', 'JavaScript', 'Weather API', 'Geolocation', 'REST API', 'CSS3'],
-      liveDemo: '#',
+      liveDemo: 'https://weather-pro-suraj.vercel.app/weather-dashboard',
       github: 'https://github.com/SpaceWalkerr/WeatherPro',
       image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80',
       gradient: 'from-purple-500 to-pink-600',
       category: 'Web',
     },
     {
-      title: 'Autonomous Vehicles Research',
+      title: '"IntelliRideX" - Autonomous Vehicles Research',
       description:
         'Research project focused on autonomous vehicle navigation using deep neural networks. Implementing advanced computer vision and machine learning algorithms to enable real-time object detection, path planning, and decision-making for self-driving systems.',
       tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'Neural Networks', 'OpenCV'],
@@ -63,37 +74,26 @@ const Projects = () => {
       category: 'AI',
     },
     {
-      title: 'Classic Games Collection',
+      title: '"Classic Games Collection" - Interactive Web Games',
       description:
         'An interactive collection of classic puzzle and strategy games including Sudoku, Tic-Tac-Toe, 2048, and Snake. Built with vanilla JavaScript and modern UI/UX design, featuring smooth animations, score tracking, and responsive gameplay across all devices.',
       tags: ['JavaScript', 'HTML5', 'CSS3', 'Algorithms', 'Game Logic', 'DOM Manipulation'],
-      liveDemo: '#',
+      liveDemo: 'https://games-six-dun.vercel.app/',
       github: 'https://github.com/SpaceWalkerr/GAMES',
       image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&q=80',
       gradient: 'from-red-500 to-orange-600',
       category: 'Web',
     },
     {
-      title: 'City of Noctura',
+      title: '"City of Noctura" - Interactive Storytelling Experience',
       description:
         'An immersive interactive storytelling experience set in the mysterious City of Noctura. Features branching narratives, atmospheric sound design, and dynamic character interactions that respond to player choices, creating a unique story experience with every playthrough.',
       tags: ['JavaScript', 'HTML5', 'CSS3', 'Interactive Design', 'Audio API', 'Story Engine'],
-      liveDemo: '#',
+      liveDemo: 'https://the-city-of-noctura.vercel.app/',
       github: 'https://github.com/SpaceWalkerr/The-City-of-Noctura-',
       image: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=800&q=80',
       gradient: 'from-orange-500 to-yellow-600',
       category: 'Web',
-    },
-    {
-      title: 'E-Commerce Platform',
-      description:
-        'A comprehensive full-stack e-commerce solution with product catalog management, secure shopping cart functionality, payment gateway integration, and order tracking. Features an intuitive admin dashboard for inventory management and customer analytics.',
-      tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Stripe', 'REST API', 'Authentication'],
-      liveDemo: '#',
-      github: 'https://github.com/SpaceWalkerr/E-commerce-platform',
-      image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80',
-      gradient: 'from-yellow-500 to-green-600',
-      category: 'Full Stack',
     },
   ];
 
@@ -275,6 +275,9 @@ const Projects = () => {
                     {/* Primary Button - Live Demo */}
                     <a
                       href={project.liveDemo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="group/btn flex-1 relative flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white text-sm font-semibold rounded-xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-cyan-500/40 active:scale-95 before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-400 before:via-blue-500 before:to-purple-500 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300"
                     >
                       <span className="relative z-10 flex items-center gap-2">
@@ -288,6 +291,9 @@ const Projects = () => {
                     {/* Secondary Button - GitHub */}
                     <a
                       href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
                       className="group/github relative flex items-center justify-center gap-2 px-4 py-3 bg-slate-800/30 backdrop-blur-md text-white text-sm font-semibold rounded-xl border border-slate-700/50 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:bg-slate-800/50 hover:border-cyan-500/50 hover:shadow-xl hover:shadow-cyan-500/20 active:scale-95 before:absolute before:inset-0 before:bg-gradient-to-r before:from-cyan-500/10 before:to-blue-500/10 before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300"
                     >
                       <Github size={16} className="relative z-10 group-hover/github:rotate-12 transition-transform duration-300" />

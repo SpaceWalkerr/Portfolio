@@ -175,7 +175,7 @@ const About = () => {
               delay: 0.3,
               ease: [0.25, 0.4, 0.25, 1]
             }}
-            className="relative"
+            className="relative group"
           >
             <motion.div 
               className="sticky top-8"
@@ -189,16 +189,27 @@ const About = () => {
               }}
             >
               {/* Main Glassmorphism Card */}
-              <div className="relative backdrop-blur-xl bg-gradient-to-br from-slate-800/40 via-slate-900/40 to-slate-800/40 rounded-3xl p-8 border border-slate-700/50 shadow-2xl hover:shadow-cyan-500/10 transition-shadow duration-500">
+              <div className="relative backdrop-blur-xl bg-gradient-to-br from-slate-800/40 via-slate-900/40 to-slate-800/40 group-hover:bg-transparent group-hover:backdrop-blur-none rounded-3xl p-8 border border-slate-700/50 group-hover:border-transparent shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 overflow-hidden flex flex-col items-center justify-center min-h-96">
+                {/* Large Circular Profile Picture - Appears on Hover */}
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                  <div className="w-screen h-screen rounded-full overflow-hidden border-4 border-cyan-500/50 shadow-2xl max-w-2xl max-h-2xl bg-slate-900">
+                    <img 
+                      src="/profile.jpeg" 
+                      alt="Profile" 
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+
                 {/* Inner glow */}
-                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none"></div>
+                <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none group-hover:opacity-0 transition-opacity duration-500"></div>
                 
                 {/* Soft border glow */}
                 <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-500/20 via-transparent to-blue-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500 -z-10"></div>
                 
-                <div className="relative space-y-6">
+                <div className="relative space-y-6 z-10 group-hover:opacity-0 transition-opacity duration-500">
                   {/* Profile Header */}
-                  <div className="space-y-4 pb-6 border-b border-slate-700/50">
+                  <div className="space-y-4 pb-6 border-b border-slate-700/50 group-hover:border-slate-700/30 transition-colors duration-500">
                     <div className="flex items-start justify-between">
                       <div className="space-y-3">
                         <h3 className="text-2xl font-bold text-white">

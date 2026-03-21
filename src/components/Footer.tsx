@@ -1,4 +1,4 @@
-import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp, Braces } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -6,6 +6,7 @@ const Footer = () => {
   const socialLinks = [
     { icon: <Github size={18} />, url: 'https://github.com/SpaceWalkerr', label: 'GitHub' },
     { icon: <Linkedin size={18} />, url: 'https://www.linkedin.com/in/surajnandan/', label: 'LinkedIn' },
+    { icon: <Braces size={18} />, url: 'https://leetcode.com/u/SurajNandan/', label: 'LeetCode' },
     { icon: <Twitter size={18} />, url: 'https://x.com/SurajNandan1625', label: 'Twitter' },
     { icon: <Mail size={18} />, url: 'mailto:surajnandan78@gmail.com', label: 'Email' },
   ];

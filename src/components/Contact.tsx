@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -298,6 +298,26 @@ const Contact = () => {
                     <div className="flex-1">
                       <p className="text-white font-medium text-sm group-hover/link:text-blue-400 transition-colors">LinkedIn</p>
                       <p className="text-slate-500 text-xs">@surajnandan</p>
+                    </div>
+                  </motion.a>
+
+                  {/* LeetCode Link */}
+                  <motion.a
+                    href="https://leetcode.com/u/SurajNandan/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 4 }}
+                    className="flex items-center gap-4 p-3 backdrop-blur-sm bg-white/[0.03] rounded-xl border border-white/10 hover:border-amber-400/50 transition-all duration-300 group/link"
+                  >
+                    <div className="relative flex-shrink-0">
+                      <div className="absolute inset-0 bg-amber-400/20 blur-lg opacity-0 group-hover/link:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+                      <div className="relative p-2 bg-white/5 rounded-lg">
+                        <Braces className="text-slate-400 group-hover/link:text-amber-400 transition-colors" size={20} />
+                      </div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-white font-medium text-sm group-hover/link:text-amber-400 transition-colors">LeetCode</p>
+                      <p className="text-slate-500 text-xs">@SurajNandan</p>
                     </div>
                   </motion.a>
 

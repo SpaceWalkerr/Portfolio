@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Code2, Globe, Server, Database, GraduationCap } from 'lucide-react';
+import { Code2, Globe, Server, Database, GraduationCap, Brain } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -12,6 +12,7 @@ const Skills = () => {
       hoverGlow: 'group-hover:shadow-blue-500/30',
       skills: [
         { name: 'Java', level: 90 },
+        { name: 'TypeScript', level: 88 },
         { name: 'Python', level: 85 },
         { name: 'JavaScript', level: 88 },
       ],
@@ -25,9 +26,11 @@ const Skills = () => {
       hoverGlow: 'group-hover:shadow-violet-500/30',
       skills: [
         { name: 'React.js', level: 90 },
-        { name: 'HTML5', level: 95 },
-        { name: 'CSS3', level: 90 },
+        { name: 'Next.js', level: 85 },
         { name: 'Tailwind CSS', level: 92 },
+        { name: 'Framer Motion', level: 85 },
+        { name: 'Three.js / R3F', level: 78 },
+        { name: 'HTML5 & CSS3', level: 95 },
       ],
     },
     {
@@ -41,6 +44,9 @@ const Skills = () => {
         { name: 'Node.js', level: 85 },
         { name: 'Express.js', level: 88 },
         { name: 'REST API Development', level: 90 },
+        { name: 'Prisma ORM', level: 82 },
+        { name: 'JWT & Auth', level: 85 },
+        { name: 'Stripe / Razorpay', level: 80 },
       ],
     },
     {
@@ -55,7 +61,23 @@ const Skills = () => {
         { name: 'Supabase', level: 88 },
         { name: 'Vercel', level: 90 },
         { name: 'Render', level: 85 },
+        { name: 'Railway', level: 82 },
         { name: 'GoDaddy', level: 80 },
+      ],
+    },
+    {
+      icon: <Brain className="w-6 h-6" />,
+      title: 'AI / Machine Learning',
+      color: 'from-fuchsia-600 via-violet-500 to-indigo-500',
+      borderColor: 'border-fuchsia-500/50',
+      glowColor: 'shadow-fuchsia-500/20',
+      hoverGlow: 'group-hover:shadow-fuchsia-500/30',
+      skills: [
+        { name: 'RAG Pipelines', level: 82 },
+        { name: 'Groq / OpenAI', level: 85 },
+        { name: 'Claude API', level: 83 },
+        { name: 'Prompt Engineering', level: 86 },
+        { name: 'pgvector / Embeddings', level: 78 },
       ],
     },
     {

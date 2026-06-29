@@ -19,6 +19,72 @@ const Projects = () => {
 
   const projects = [
     {
+      title: '"CardBridge" - Card Discount Marketplace',
+      description:
+        'A marketplace that connects requesters who want a specific card discount with cardholders who own that card and fulfill the purchase for a fee. Features escrow-protected transactions, a database-enforced state machine with an immutable event log, KYC verification with tiered transaction limits, dispute resolution, and an admin review panel — all secured with Supabase Row Level Security.',
+      tags: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'Row Level Security', 'Escrow', 'KYC', 'Tailwind CSS'],
+      liveDemo: 'https://card-bridge.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/CardBridge.git',
+      image: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80',
+      gradient: 'from-emerald-500 to-teal-600',
+      category: 'Full Stack',
+    },
+    {
+      title: '"Internal GPT" - College RAG Helpdesk',
+      description:
+        'A full-stack Retrieval-Augmented Generation (RAG) helpdesk for colleges. Admins upload institutional documents that the backend extracts and chunks, while students and staff ask questions answered strictly from the uploaded data with source citations. Powered by Groq/OpenAI for answer generation with a retrieval layer that is upgradeable to pgvector.',
+      tags: ['React', 'Vite', 'Node.js', 'Express', 'Supabase', 'RAG', 'Groq', 'OpenAI', 'Tailwind CSS'],
+      liveDemo: 'https://gpt.srmup.in/',
+      github: 'https://github.com/SpaceWalkerr/Internal-Gpt.git',
+      image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80',
+      gradient: 'from-violet-500 to-fuchsia-600',
+      category: 'AI',
+    },
+    {
+      title: '"Dashboard" - Analytics & Admin Panel',
+      description:
+        'A modern, responsive analytics dashboard for visualizing key metrics and managing data at a glance. Features interactive charts, data tables, real-time stat cards, and a clean component-driven UI with smooth transitions and a fully responsive layout across all devices.',
+      tags: ['React', 'TypeScript', 'Tailwind CSS', 'Charts', 'Dashboard UI', 'Responsive Design'],
+      liveDemo: 'https://dashboard-six-self-74.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/dashboard.git',
+      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80',
+      gradient: 'from-sky-500 to-indigo-600',
+      category: 'Web',
+    },
+    {
+      title: '"GigShield" - Parametric Income Insurance',
+      description:
+        'An AI-powered parametric income protection platform for gig delivery workers. When verified disruptions like heavy rain, hazardous air quality, or platform outages cut into earning hours, GigShield triggers automatic, instant payouts — no forms, no claims processing. Features an immersive 3D landing experience, location-based triggers, and a Supabase-backed Express API.',
+      tags: ['React', 'Three.js', 'React Three Fiber', 'Express', 'Supabase', 'GSAP', 'Framer Motion', 'Leaflet'],
+      liveDemo: 'https://gig-shield-three.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/GigShield.git',
+      image: 'https://images.unsplash.com/photo-1526367790999-0150786686a2?w=800&q=80',
+      gradient: 'from-amber-500 to-orange-600',
+      category: 'Full Stack',
+    },
+    {
+      title: '"InternX" - Internship & Hackathon Hub',
+      description:
+        'An internship and hackathon discovery platform for Indian students. Aggregates curated internship openings and hackathon listings with search and filters, an SEO-optimized blog with JSON-LD schema, full analytics tracking, and a contact/enquiry system. Includes an admin dashboard for CRUD operations and auto-cleanup of expired listings — backed by a Node.js/Express API and Supabase PostgreSQL.',
+      tags: ['React 19', 'Vite', 'Node.js', 'Express', 'Supabase', 'JWT', 'Tailwind CSS', 'SEO'],
+      liveDemo: 'https://intern-x-black.vercel.app',
+      github: 'https://github.com/SpaceWalkerr/InternX.git',
+      image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&q=80',
+      gradient: 'from-indigo-500 to-blue-600',
+      category: 'Full Stack',
+    },
+     {
+      title: '"NestFinder" - Real Estate Platform',
+      description:
+        'A full-stack real estate discovery platform built with Next.js, featuring property listings with interactive Leaflet maps, secure authentication via NextAuth, Stripe-powered payments, PDF generation, and AI-assisted features. Data is managed through Prisma ORM with a relational database for efficient property and user management.',
+      tags: ['Next.js', 'React', 'Prisma', 'NextAuth', 'Stripe', 'Leaflet', 'Claude AI', 'TypeScript'],
+      liveDemo: 'https://nest-finder-topaz.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/NestFinder.git',
+      image: 'https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80',
+      gradient: 'from-teal-500 to-cyan-600',
+      category: 'Full Stack',
+    },
+    {
       title: '"SkyWings" - Airline Reservation System',
       description:
         'A full-stack airline booking platform featuring dynamic flight search, interactive seat selection, and automated PDF boarding pass generation. Built with a secure backend using PostgreSQL and Supabase, including Row Level Security policies and database triggers to manage booking logic and authentication.',
@@ -28,6 +94,17 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=800&q=80',
       gradient: 'from-cyan-500 to-blue-600',
       category: 'Full Stack',
+    },
+    {
+      title: '"IntelliRideX" - Autonomous Vehicles Research',
+      description:
+        'Research project focused on autonomous vehicle navigation using deep neural networks. Implementing advanced computer vision and machine learning algorithms to enable real-time object detection, path planning, and decision-making for self-driving systems.',
+      tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'Neural Networks', 'OpenCV'],
+      liveDemo: 'https://intelli-ride-x.vercel.app/',
+      github: 'https://github.com/SpaceWalkerr/IntelliRideX.git',
+      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
+      gradient: 'from-pink-500 to-red-600',
+      category: 'AI',
     },
     {
       title: '"Sutan Legal Corp" - Legal Services Platform',
@@ -45,10 +122,21 @@ const Projects = () => {
       description:
         'A comprehensive full-stack e-commerce solution with product catalog management, secure shopping cart functionality, payment gateway integration, and order tracking. Features an intuitive admin dashboard for inventory management and customer analytics.',
       tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Stripe', 'REST API', 'Authentication'],
-      liveDemo: 'https://luxe1625.vercel.app/',
+      liveDemo: 'https://e-commerce-platform-eosin-three.vercel.app/',
       github: 'https://github.com/SpaceWalkerr/E-commerce-platform',
       image: 'https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80',
       gradient: 'from-yellow-500 to-green-600',
+      category: 'Full Stack',
+    },
+    {
+      title: '"SoleLux" - Luxury Shoe E-Commerce',
+      description:
+        'A premium luxury shoe e-commerce platform with a cinematic customer storefront and a modern admin/operator dashboard. Includes catalogue search and filters, cart and wishlist, checkout with delivery/pickup and COD/Razorpay/UPI options, order history, product CRUD, and analytics — backed by an Express API and Supabase PostgreSQL/Auth/Storage.',
+      tags: ['React', 'TypeScript', 'Vite', 'Express', 'Supabase', 'Zustand', 'TanStack Query', 'Framer Motion'],
+      liveDemo: 'https://shoes-wesite.vercel.app',
+      github: 'https://github.com/SpaceWalkerr/Shoes-Wesite.git',
+      image: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?w=800&q=80',
+      gradient: 'from-rose-500 to-pink-600',
       category: 'Full Stack',
     },
     {
@@ -61,17 +149,6 @@ const Projects = () => {
       image: 'https://images.unsplash.com/photo-1504608524841-42fe6f032b4b?w=800&q=80',
       gradient: 'from-purple-500 to-pink-600',
       category: 'Web',
-    },
-    {
-      title: '"IntelliRideX" - Autonomous Vehicles Research',
-      description:
-        'Research project focused on autonomous vehicle navigation using deep neural networks. Implementing advanced computer vision and machine learning algorithms to enable real-time object detection, path planning, and decision-making for self-driving systems.',
-      tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'Neural Networks', 'OpenCV'],
-      liveDemo: 'https://intelli-ride-x.vercel.app/',
-      github: 'https://github.com/SpaceWalkerr/IntelliRideX.git',
-      image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80',
-      gradient: 'from-pink-500 to-red-600',
-      category: 'AI',
     },
     {
       title: '"Classic Games Collection" - Interactive Web Games',

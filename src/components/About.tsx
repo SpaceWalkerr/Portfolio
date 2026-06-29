@@ -5,8 +5,8 @@ import useCountUp from '../hooks/useCountUp';
 const About = () => {
   const stats = [
     { label: 'Years Experience', value: '3+' },
-    { label: 'Projects Completed', value: '20' },
-    { label: 'Technologies', value: '10+' },
+    { label: 'Projects Completed', value: '20+' },
+    { label: 'Technologies', value: '20+' },
   ];
 
   const highlights = [
@@ -314,7 +314,7 @@ const About = () => {
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
             {[
               { end: 20, suffix: '+', label: 'Projects Built' },
-              { end: 10, suffix: '+', label: 'Technologies Used' },
+              { end: 20, suffix: '+', label: 'Technologies Used' },
               { end: 60, suffix: '+', label: 'Certifications Earned' },
             ].map((stat, index) => {
               const { count, ref } = useCountUp(stat.end, 2000);

@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { Github, Linkedin, Twitter, Mail, Heart, ArrowUp, Braces } from 'lucide-react';
+import { ResumeModal } from './ResumeModal';
 
 const Footer = () => {
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
@@ -112,14 +115,14 @@ const Footer = () => {
               </li>
             </ul>
             <div className="mt-5">
-              <a
-                href="/Suraj_Resume.pdf"
-                download="Suraj_Nandan_Resume.pdf"
+              <button
+                type="button"
+                onClick={() => setResumeModalOpen(true)}
                 className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold bg-gradient-to-r from-cyan-500/10 to-blue-500/10 text-cyan-400 rounded-lg border border-cyan-500/30 hover:from-cyan-500/20 hover:to-blue-500/20 hover:border-cyan-400/50 transition-all duration-300"
               >
-                Download Resume
+                View Resume
                 <ArrowUp className="w-3 h-3 rotate-45" />
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -136,6 +139,8 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      <ResumeModal isOpen={resumeModalOpen} onClose={() => setResumeModalOpen(false)} />
     </footer>
   );
 };

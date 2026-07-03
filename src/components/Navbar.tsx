@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Code2, Download } from 'lucide-react';
+import { Menu, X, Code2, Eye } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ResumeModal } from './ResumeModal';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
+  const [resumeModalOpen, setResumeModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -188,19 +190,21 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Resume Button */}
-                <motion.a
-                  href="/Suraj_Resume.pdf"
-                  download="Suraj_Nandan_Resume.pdf"
+                <motion.button
+                  type="button"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
                   className="flex items-center justify-center gap-2 w-full px-5 py-3.5 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-600 text-white text-sm font-semibold rounded-lg hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-300 relative overflow-hidden group"
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setResumeModalOpen(true);
+                  }}
                 >
-                  <span className="relative z-10">Download Resume</span>
-                  <Download className="relative z-10 w-4 h-4" />
+                  <span className="relative z-10">View Resume</span>
+                  <Eye className="relative z-10 w-4 h-4" />
                   <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </motion.a>
+                </motion.button>
 
                 {/* Mobile Footer */}
                 <div className="mt-8 pt-6 border-t border-slate-700/50">
@@ -213,6 +217,8 @@ const Navbar = () => {
           </>
         )}
       </AnimatePresence>
+
+      <ResumeModal isOpen={resumeModalOpen} onClose={() => setResumeModalOpen(false)} />
     </>
   );
 };

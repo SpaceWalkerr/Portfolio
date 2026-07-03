@@ -1,7 +1,8 @@
 import { motion, useInView } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
+import { ResumeModal } from '../ResumeModal';
 
 interface WordsPullUpProps {
   text: string;
@@ -110,6 +111,7 @@ interface PrismaHeroProps {
 }
 
 const PrismaHero = ({ showNav = true }: PrismaHeroProps) => {
+  const [resumeOpen, setResumeOpen] = useState(false);
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -199,14 +201,16 @@ const PrismaHero = ({ showNav = true }: PrismaHeroProps) => {
                   </span>
                 </button>
 
-                <a
-                  href="/Suraj_Resume.pdf"
-                  download="Suraj_Nandan_Resume.pdf"
+                <button
+                  type="button"
+                  onClick={() => setResumeOpen(true)}
                   className="inline-flex items-center self-start rounded-full border border-[#E1E0CC]/35 bg-black/30 px-5 py-3 text-sm font-medium text-[#E1E0CC] backdrop-blur-md transition-colors hover:border-[#E1E0CC]/70 hover:bg-black/45 sm:text-base"
                 >
-                  Download Resume
-                </a>
+                  View Resume
+                </button>
               </motion.div>
+
+              <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
 
               <motion.div
                 initial={{ y: 20, opacity: 0 }}

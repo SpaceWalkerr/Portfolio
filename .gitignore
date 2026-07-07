@@ -10,6 +10,8 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.vite
+*.tsbuildinfo
 *.local
 
 # Editor directories and files
@@ -24,3 +26,13 @@ dist-ssr
 *.sw?
 resume
 .claude
+
+# Per-universe copies of the shared résumé/certificate assets — the
+# canonical files live once in /shared and scripts/sync-shared-assets.mjs
+# fans them out into each app's public/ folder (runs automatically via
+# each app's predev/prebuild hook). Without this, git would carry ~130MB
+# of identical certificate scans once per universe (~1GB total).
+/[A-H]/public/certificates
+/[A-H]/public/Suraj_Resume.pdf
+/[A-H]/public/Suraj_Resume_1Page.pdf
+/[A-H]/public/apple-touch-icon.png

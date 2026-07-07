@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-paper text-ink antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-forest;
+    outline-style: solid;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply ring-2 ring-forest ring-offset-2 ring-offset-paper;
+    outline: none;
+  }
+}
+
+@layer base {
+  ::selection {
+    background: #3f5c33;
+    color: #f2ead2;
+  }
+}
+
+@layer utilities {
+  /* Paper grain — a faint fibrous wash over every page */
+  .paper-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.3'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+  }
+}

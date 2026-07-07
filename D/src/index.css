@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-void text-ink antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-neon-cyan-bright;
+    outline-style: solid;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply ring-2 ring-neon-cyan-bright ring-offset-2 ring-offset-void;
+    outline: none;
+  }
+}
+
+@layer base {
+  ::selection {
+    background: #ff5ea8;
+    color: #0b0416;
+  }
+}
+
+@layer utilities {
+  /* CRT scanlines — a fine repeating horizontal grain over every screen */
+  .crt-scanlines {
+    background-image: repeating-linear-gradient(rgba(0, 0, 0, 0.22) 0 1px, transparent 1px 3px);
+  }
+
+  /* Neon signage glow — layered text-shadow, the one place we lean hard into it */
+  .neon-text-glow {
+    text-shadow:
+      0 0 6px rgba(255, 94, 168, 0.55),
+      0 0 18px rgba(255, 94, 168, 0.35),
+      0 0 34px rgba(94, 236, 255, 0.25);
+  }
+
+  @keyframes terminal-caret {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  .animate-terminal-caret {
+    animation: terminal-caret 1s step-end infinite;
+  }
+
+  @keyframes grid-scroll {
+    from { background-position-y: 0; }
+    to { background-position-y: 34px; }
+  }
+  .animate-grid-scroll {
+    animation: grid-scroll 1.1s linear infinite;
+  }
+
+  @keyframes sun-pulse {
+    0%, 100% { opacity: 0.9; }
+    50% { opacity: 1; }
+  }
+  .animate-sun-pulse {
+    animation: sun-pulse 4s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-terminal-caret,
+    .animate-grid-scroll,
+    .animate-sun-pulse {
+      animation: none;
+    }
+  }
+}

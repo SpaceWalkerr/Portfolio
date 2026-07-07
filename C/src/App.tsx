@@ -12,6 +12,7 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import BackToMultiverse from './components/BackToMultiverse';
 
 function App() {
   // "?noload" skips the intro loading screen (handy for dev / screenshots)
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-blueprint">
+      <BackToMultiverse />
       <LoadingScreen isLoading={isLoading} />
       <a
         href="#main-content"

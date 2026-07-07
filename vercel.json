@@ -1,7 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/press", "destination": "/press/index.html" },
-    { "source": "/terminal", "destination": "/terminal/index.html" },
-    { "source": "/blueprint", "destination": "/blueprint/index.html" }
-  ]
-}

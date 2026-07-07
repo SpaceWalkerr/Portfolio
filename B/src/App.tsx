@@ -13,6 +13,7 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import BackToMultiverse from './components/BackToMultiverse';
 
 function App() {
   // "?noload" skips the intro loading screen (handy for dev / screenshots)
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-paper">
+      <BackToMultiverse />
       <MagneticCursor />
       <LoadingScreen isLoading={isLoading} />
       {/* Skip to main content link for keyboard/screen-reader users */}

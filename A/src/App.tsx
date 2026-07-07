@@ -12,6 +12,7 @@ import Experience from './components/Experience';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
+import BackToMultiverse from './components/BackToMultiverse';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900">
+      <BackToMultiverse />
       <LoadingScreen isLoading={isLoading} />
       {/* Skip to main content link for keyboard/screen-reader users */}
       <a

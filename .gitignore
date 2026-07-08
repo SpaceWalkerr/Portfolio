@@ -1,3 +1,10 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.tsbuildinfo
+*.local
+
 # Logs
 logs
 *.log
@@ -6,13 +13,6 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-.vite
-*.tsbuildinfo
-*.local
 
 # Editor directories and files
 .vscode/*
@@ -36,3 +36,7 @@ resume
 /[A-H]/public/Suraj_Resume.pdf
 /[A-H]/public/Suraj_Resume_1Page.pdf
 /[A-H]/public/apple-touch-icon.png
+
+# tsc -b composite artifacts
+vite.config.js
+vite.config.d.ts

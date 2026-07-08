@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-void text-ink antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-gold;
+    outline-style: solid;
+  }
+
+  a:focus-visible,
+  button:focus-visible {
+    @apply ring-2 ring-gold ring-offset-2 ring-offset-void;
+    outline: none;
+  }
+}
+
+@layer base {
+  ::selection {
+    background: #ffcc00;
+    color: #0b0a1c;
+  }
+}
+
+@layer utilities {
+  /* A blocky pixel grid — the cabinet's persistent backdrop */
+  .pixel-grid {
+    background-image: linear-gradient(rgba(238, 240, 251, 0.06) 2px, transparent 2px), linear-gradient(90deg, rgba(238, 240, 251, 0.06) 2px, transparent 2px);
+    background-size: 24px 24px;
+  }
+
+  @keyframes blink-hard {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+  }
+  .animate-blink-hard {
+    animation: blink-hard 1s step-end infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-blink-hard {
+      animation: none;
+    }
+  }
+}

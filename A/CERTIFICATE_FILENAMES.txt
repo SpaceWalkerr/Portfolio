@@ -1,0 +1,82 @@
+CERTIFICATE FILENAMES - RENAME YOUR PDFs WITH THESE NAMES
+=========================================================
+
+Place all 42 PDF files in: /public/certificates/
+
+Copy the exact filenames below and rename your PDFs accordingly:
+
+PROGRAMMING & DEVELOPMENT (7 certificates)
+============================================
+1. alpha-dsa-java.pdf
+2. java-basic-hackerrank.pdf
+3. java-internship-navodita.pdf
+4. python-guvi.pdf
+5. python-basic-hackerrank.pdf
+6. problem-solving-basic.pdf
+7. problem-solving-intermediate.pdf
+
+WEB & FULL STACK (2 certificates)
+==================================
+8. fullstack-web-development.pdf
+9. mongodb-developers-toolkit.pdf
+
+AI & MACHINE LEARNING (6 certificates)
+=======================================
+10. career-essentials-generative-ai.pdf
+11. chatgpt-for-everyone.pdf
+12. aiml-geodata-analysis.pdf
+13. ai-builders-lab-bootcamp.pdf
+14. sawit-ai-learnathon.pdf
+15. bootcamp-big-data-data-science.pdf
+
+CLOUD & DEVOPS (1 certificate)
+===============================
+16. core-cs-interview-preparation.pdf
+
+CERTIFICATIONS & SKILL BADGES (3 certificates)
+===============================================
+17. campus-mantri-ambassador.pdf
+18. human-computer-interaction-nptel-adobe.pdf
+19. human-computer-interaction-iit.pdf
+
+WORKSHOPS & BOOTCAMPS (1 certificate)
+======================================
+20. workshop-ardubotics.pdf
+
+COMPETITIONS & HACKATHONS (15 certificates)
+============================================
+21. brand-revamp-innovate-2024.pdf
+22. burnout-innovate-2024.pdf
+23. meditech-innovation-secured.pdf
+24. meditech-innovation-confirmed.pdf
+25. err-hunt-2-0.pdf
+26. err-hunt.pdf
+27. flipkart-grid-6-0.pdf
+28. folonite-winter-internship-contest.pdf
+29. hackfest-delhi-ncr.pdf
+30. geeks-challenge-1-0-nit-patna.pdf
+31. shaastra-programming-contest.pdf
+32. codewizard-25.pdf
+33. tata-crucible-campus-quiz.pdf
+34. techxninjas-weekly-contest-11.pdf
+
+LEADERSHIP & COMMUNITY (4 certificates)
+========================================
+35. certificate-appreciation-devtown.pdf
+36. certificate-appreciation-volunteering.pdf
+37. viksit-bharat-2047.pdf
+38. global-forum-gender-tech-csi.pdf
+
+NATIONAL PROGRAMS (3 certificates)
+===================================
+39. quiz-national-education-policy.pdf
+40. national-science-day-2025.pdf
+41. wisdom-war-national-science-day.pdf
+
+TOTAL: 42 Certificates
+======================
+
+INSTRUCTIONS:
+1. Rename all your PDF certificate files using the exact names above
+2. Place them in the /public/certificates/ folder
+3. That's it! The "View" button on each certificate will automatically link to the PDF

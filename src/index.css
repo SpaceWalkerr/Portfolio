@@ -1,0 +1,149 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   DESIGN TOKENS — "The Descent"
+   Source of truth lives here as CSS custom properties so every
+   component reaches for var(--accent) / var(--token) and never a
+   hardcoded hex. Tailwind mirrors these for utility ergonomics.
+   ============================================================ */
+:root {
+  /* Water column */
+  --abyss-black: #050910;
+  --deep-navy: #0b1524;
+  --surface-haze: #16283a;
+
+  /* Creature accents */
+  --eel-teal: #35e8b8;
+  --flashlight-pink: #f23fa0;
+  --flashlight-cyan: #3fe0f2;
+  --anglerfish-amber: #ffb347;
+  --jelly-white: #e8f4ff;
+  --firefly-gold: #f2d675;
+  --comb-spectrum: linear-gradient(
+    90deg,
+    #6bc1ff,
+    #7be0a0,
+    #f2d675,
+    #ff8a65,
+    #c77dff
+  );
+
+  /* Text */
+  --text-primary: #eaf2f6;
+  --text-muted: #7c93a3;
+
+  /* Signature-system defaults. Each <section> overrides --accent; the
+     depth gauge and cursor-trail read whatever the active section set. */
+  --accent: var(--jelly-white);
+  --accent-rgb: 232, 244, 255;
+
+  /* Depth scale (metres) used by the gauge readout. */
+  --depth-max: 4000;
+
+  /* Motion */
+  --rise: 12px;
+  --ease-descent: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ------------------------------------------------------------
+   Per-section accent scopes. A section adds one of these classes;
+   everything inside inherits the right accent + its rgb triple
+   (rgb needed for rgba() glows in canvas / box-shadow).
+   ------------------------------------------------------------ */
+.accent-firefly     { --accent: var(--firefly-gold);     --accent-rgb: 242, 214, 117; }
+.accent-lantern     { --accent: var(--flashlight-cyan);  --accent-rgb: 63, 224, 242; }
+.accent-eel         { --accent: var(--eel-teal);         --accent-rgb: 53, 232, 184; }
+.accent-jelly       { --accent: var(--jelly-white);      --accent-rgb: 232, 244, 255; }
+.accent-anglerfish  { --accent: var(--anglerfish-amber); --accent-rgb: 255, 179, 71; }
+.accent-flashlight  { --accent: var(--flashlight-pink);  --accent-rgb: 242, 63, 160; }
+.accent-comb        { --accent: var(--flashlight-cyan);  --accent-rgb: 107, 193, 255; }
+.accent-surface     { --accent: var(--jelly-white);      --accent-rgb: 232, 244, 255; }
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--abyss-black);
+  }
+
+  body {
+    background-color: var(--abyss-black);
+    color: var(--text-primary);
+    font-family: theme("fontFamily.sans");
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    /* Hide the native cursor-less default; the trail is our only playful move,
+       but keep the system cursor for usability. */
+  }
+
+  ::selection {
+    background: rgba(var(--accent-rgb), 0.28);
+    color: var(--text-primary);
+  }
+
+  h1, h2, h3 {
+    font-family: theme("fontFamily.display");
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+}
+
+@layer components {
+  /* Monospace instrument readout used by depth markers, eyebrows, indices. */
+  .readout {
+    font-family: theme("fontFamily.mono");
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  /* Section eyebrow: small accent-lit label above each heading. */
+  .eyebrow {
+    font-family: theme("fontFamily.mono");
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  /* The single "signature element" accent underline (brief §1 rule). */
+  .accent-underline {
+    position: relative;
+  }
+  .accent-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.35em;
+    height: 2px;
+    width: 2.5rem;
+    background: var(--accent);
+    box-shadow: 0 0 18px 1px rgba(var(--accent-rgb), 0.6);
+  }
+}
+
+/* Reduced motion: kill the smooth scroll and let video posters stand in. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

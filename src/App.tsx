@@ -40,7 +40,7 @@ function App() {
     if (!isLoading) return;
     const timer = setTimeout(() => setIsLoading(false), 3000);
     return () => clearTimeout(timer);
-  }, [isLoading]);
+  }, [isLoading, setIsLoading]);
 
   const toggleTheme = () => {
     setTheme((prev) => {
@@ -64,16 +64,16 @@ function App() {
       <ScrollProgress />
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main id="main-content">
-      <Hero introDone={!isLoading} />
-      <About />
-      <GitHubStats />
-      <Skills />
-      <Experience />
-      <Education />
-      <Projects />
-      <Certifications />
-      <Blog />
-      <Contact />
+        <Hero introDone={!isLoading} />
+        <About />
+        <GitHubStats />
+        <Skills />
+        <Experience />
+        <Education />
+        <Projects />
+        <Certifications />
+        <Blog />
+        <Contact />
       </main>
       <Footer />
       <BackToTop />

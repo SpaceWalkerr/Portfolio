@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Eye, Sun, Moon, Lamp } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
+import { Menu, X, Eye, Sun, Moon, Lamp, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ResumeModal } from './ResumeModal';
 import type { Theme } from '../App';
@@ -21,18 +21,37 @@ const themeLabels: Record<Theme, string> = {
   sepia: 'Sepia Edition',
 };
 
+const themeOptions: { key: Theme; label: string; Icon: typeof Sun }[] = [
+  { key: 'day', label: 'Day Edition', Icon: Sun },
+  { key: 'night', label: 'Night Edition', Icon: Moon },
+  { key: 'sepia', label: 'Sepia Edition', Icon: Lamp },
+];
+
 const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const ThemeIcon = themeIcons[theme];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    if (!themeDropdownOpen) return;
+    const handleClick = (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setThemeDropdownOpen(false);
+      }
+    };
+    window.addEventListener('click', handleClick);
+    return () => window.removeEventListener('click', handleClick);
+  }, [themeDropdownOpen]);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = ['#home', '#about', '#skills', '#experience', '#education', '#projects', '#blog', '#certifications', '#contact'];
       const scrollPosition = window.scrollY + 100;
 
@@ -73,6 +92,18 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
     { href: '#contact', label: 'Contact' },
   ];
 
+  const handleThemeSelect = (selectedTheme: Theme) => {
+    // Apply the theme by cycling through to the selected one
+    const order: Theme[] = ['day', 'night', 'sepia'];
+    const currentIndex = order.indexOf(theme);
+    const targetIndex = order.indexOf(selectedTheme);
+    const clicks = (targetIndex - currentIndex + 3) % 3;
+    for (let i = 0; i < clicks; i++) {
+      onToggleTheme();
+    }
+    setThemeDropdownOpen(false);
+  };
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const element = document.querySelector(href);
@@ -97,22 +128,21 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center items-center h-20">
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
+            <div className="hidden lg:flex items-center gap-0.5">
               {navLinks.map((link, index) => (
                 <motion.a
                   key={link.href}
                   href={link.href}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
+                  transition={{ delay: 0.08 * index }}
                   onClick={(e) => scrollToSection(e, link.href)}
-                  className={`relative px-4 py-2 font-monopress text-xs uppercase tracking-[0.14em] transition-all duration-200 group hover:-translate-y-0.5 ${
+                  className={`relative px-2.5 py-2 font-monopress text-[11px] uppercase tracking-[0.14em] transition-all duration-200 group hover:-translate-y-0.5 ${
                     activeSection === link.href ? 'text-oxblood' : 'text-ink hover:text-oxblood'
                   }`}
                 >
                   {link.label}
 
-                  {/* Active indicator underline */}
                   {activeSection === link.href && (
                     <motion.span
                       layoutId="activeUnderline"
@@ -122,23 +152,60 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                     />
                   )}
 
-                  {/* Hover underline */}
                   <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-px bg-ink/40 transition-all duration-200 group-hover:w-full"></span>
                 </motion.a>
               ))}
 
-              {/* Theme toggle — Desktop */}
-              <motion.button
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1 * navLinks.length }}
-                onClick={onToggleTheme}
-                aria-label={`Switch to next theme (current: ${themeLabels[theme]})`}
-                className="ml-3 flex items-center gap-2 border border-ink/30 px-3 py-2 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
-              >
-                <ThemeIcon size={14} />
-                <span className="hidden xl:inline">{themeLabels[theme]}</span>
-              </motion.button>
+              {/* Theme dropdown — Desktop */}
+              <div ref={dropdownRef} className="relative ml-2">
+                <motion.button
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.08 * navLinks.length }}
+                  onClick={() => setThemeDropdownOpen(!themeDropdownOpen)}
+                  aria-label="Select theme"
+                  aria-expanded={themeDropdownOpen}
+                  className="flex items-center gap-1.5 border border-ink/30 px-3 py-2 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+                >
+                  <ThemeIcon size={14} />
+                  <span className="hidden xl:inline">{themeLabels[theme]}</span>
+                  <ChevronDown
+                    size={12}
+                    className={`transition-transform duration-200 ${themeDropdownOpen ? 'rotate-180' : ''}`}
+                  />
+                </motion.button>
+
+                <AnimatePresence>
+                  {themeDropdownOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -8, scale: 0.96 }}
+                      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                      className="absolute right-0 top-full mt-1 w-44 border border-ink bg-paper shadow-lg"
+                    >
+                      {themeOptions.map(({ key, label, Icon }) => (
+                        <button
+                          key={key}
+                          type="button"
+                          onClick={() => handleThemeSelect(key)}
+                          className={`flex w-full items-center gap-3 px-4 py-3 font-monopress text-[10px] uppercase tracking-[0.14em] transition-colors hover:bg-ink/10 ${
+                            theme === key
+                              ? 'bg-ink text-paper hover:bg-ink'
+                              : 'text-ink-mute hover:text-ink'
+                          }`}
+                        >
+                          <Icon size={14} />
+                          <span>{label}</span>
+                          {theme === key && (
+                            <span className="ml-auto h-1.5 w-1.5 rounded-full bg-current" />
+                          )}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
             {/* Mobile Menu Button */}
@@ -160,7 +227,6 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            {/* Backdrop */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -170,7 +236,6 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
               onClick={() => setIsMobileMenuOpen(false)}
             />
 
-            {/* Mobile Menu Panel */}
             <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
@@ -179,7 +244,6 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
               className="fixed top-0 right-0 bottom-0 w-[280px] bg-paper border-l-2 border-ink shadow-2xl z-50 lg:hidden overflow-y-auto"
             >
               <div className="p-6">
-                {/* Mobile Menu Header */}
                 <div className="flex items-center justify-between mb-8 border-b-4 border-double border-ink pb-4">
                   <span className="font-editorial text-lg italic text-ink">The Index</span>
                   <button
@@ -191,7 +255,6 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                   </button>
                 </div>
 
-                {/* Mobile Navigation Links */}
                 <div className="space-y-1 mb-6">
                   {navLinks.map((link, index) => (
                     <motion.a
@@ -218,27 +281,42 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                   ))}
                 </div>
 
-                {/* Mobile Theme Toggle */}
-                <motion.button
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.35 }}
-                  onClick={() => {
-                    onToggleTheme();
-                    setIsMobileMenuOpen(false);
-                  }}
-                  className="flex items-center justify-center gap-2 w-full border border-ink/40 px-5 py-3.5 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink-mute transition-colors duration-300 hover:border-ink hover:text-ink mb-3"
-                >
-                  <ThemeIcon size={16} />
-                  <span>{themeLabels[theme]}</span>
-                </motion.button>
+                {/* Mobile Theme Selection */}
+                <div className="mb-3 space-y-1">
+                  <span className="mb-2 block px-1 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+                    Edition
+                  </span>
+                  {themeOptions.map(({ key, label, Icon }) => (
+                    <motion.button
+                      key={key}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 + 0.06 * themeOptions.findIndex((o) => o.key === key) }}
+                      type="button"
+                      onClick={() => {
+                        handleThemeSelect(key);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className={`flex w-full items-center gap-3 px-3 py-3 font-monopress text-[11px] uppercase tracking-[0.14em] transition-colors ${
+                        theme === key
+                          ? 'bg-ink text-paper'
+                          : 'border border-ink/20 text-ink-mute hover:border-ink hover:text-ink'
+                      }`}
+                    >
+                      <Icon size={16} />
+                      <span>{label}</span>
+                      {theme === key && (
+                        <span className="ml-auto h-1.5 w-1.5 rounded-full bg-current" />
+                      )}
+                    </motion.button>
+                  ))}
+                </div>
 
-                {/* Mobile Resume Button */}
                 <motion.button
                   type="button"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.45 }}
                   className="flex items-center justify-center gap-2 w-full bg-ink px-5 py-3.5 font-monopress text-[11px] uppercase tracking-[0.16em] text-paper transition-colors duration-300 hover:bg-oxblood"
                   onClick={() => {
                     setIsMobileMenuOpen(false);
@@ -249,7 +327,6 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                   <Eye className="w-4 h-4" />
                 </motion.button>
 
-                {/* Mobile Footer */}
                 <div className="mt-8 border-t border-ink/20 pt-6">
                   <p className="text-center font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
                     © 2026 The Nandan Review

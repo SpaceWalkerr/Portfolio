@@ -1,59 +1,58 @@
-import { useState } from "react";
-import { DescentProvider } from "./lib/DescentContext";
-import { ScrollTrigger } from "./lib/gsap";
-import IntroTrailer from "./components/IntroTrailer";
-import CursorTrail from "./components/CursorTrail";
-import DepthGauge from "./components/DepthGauge";
-import Nav from "./components/Nav";
-import Hero from "./sections/Hero";
-import Versions from "./sections/Versions";
-import About from "./sections/About";
-import Skills from "./sections/Skills";
-import Experience from "./sections/Experience";
-import Education from "./sections/Education";
-import Projects from "./sections/Projects";
-import Certifications from "./sections/Certifications";
-import Contact from "./sections/Contact";
-import Footer from "./sections/Footer";
+import { useState, useEffect } from 'react';
+import Navbar from './components/Navbar';
+import ScrollProgress from './components/ScrollProgress';
+import LoadingScreen from './components/LoadingScreen';
+import MagneticCursor from './components/ui/magnetic-cursor';
+import Hero from './components/Hero';
+import About from './components/About';
+import Skills from './components/Skills';
+import Projects from './components/Projects';
+import Certifications from './components/Certifications';
+import Education from './components/Education';
+import Experience from './components/Experience';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
 
-/**
- * "The Descent" — a scroll through the water column. The signature system
- * (design tokens, depth gauge, cursor trail) is wired once here; each section
- * just consumes the active accent via var(--accent). Order matches the depth
- * table in lib/sections.ts so the gauge and IntersectionObserver stay in sync.
- */
-export default function App() {
-  // Plays on every fresh load / refresh (no session gate — by request).
-  const [introDone, setIntroDone] = useState(false);
+function App() {
+  // "?noload" skips the intro loading screen (handy for dev / screenshots)
+  const [isLoading, setIsLoading] = useState(
+    () => !window.location.search.includes('noload')
+  );
 
-  const handleIntroDone = () => {
-    setIntroDone(true);
-    // Recompute every ScrollTrigger now that the overlay released and the real
-    // scroll layout is settled (fonts + posters in).
-    requestAnimationFrame(() => ScrollTrigger.refresh());
-  };
+  useEffect(() => {
+    if (!isLoading) return;
+    const timer = setTimeout(() => setIsLoading(false), 3000);
+    return () => clearTimeout(timer);
+  }, [isLoading]);
 
   return (
-    <DescentProvider>
-      {!introDone && <IntroTrailer onDone={handleIntroDone} />}
-      <CursorTrail />
-      <DepthGauge />
-      <Nav />
-
-      <main className="relative">
-        <Hero />
-        <Versions />
-        <About />
-        <Skills />
-        <Experience />
-        <Education />
-        <Projects />
-        <Certifications />
-        <Contact />
-        
+    <div className="min-h-screen bg-paper">
+      <MagneticCursor />
+      <LoadingScreen isLoading={isLoading} />
+      {/* Skip to main content link for keyboard/screen-reader users */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-6 focus:py-3 focus:bg-ink focus:text-paper focus:font-monopress focus:uppercase focus:tracking-[0.16em] focus:text-xs focus:outline-none"
+      >
+        Skip to main content
+      </a>
+      <ScrollProgress />
+      <Navbar />
+      <main id="main-content">
+      <Hero introDone={!isLoading} />
+      <About />
+      <Skills />
+      <Experience />
+      <Education />
+      <Projects />
+      <Certifications />
+      <Contact />
       </main>
-
       <Footer />
-    </DescentProvider>
+      <BackToTop />
+    </div>
   );
 }
+
+export default App;

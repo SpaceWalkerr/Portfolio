@@ -37,6 +37,11 @@ resume
 /[A-H]/public/Suraj_Resume_1Page.pdf
 /[A-H]/public/apple-touch-icon.png
 
+# Environment variables
+.env
+.env.local
+.env.production.local
+
 # tsc -b composite artifacts
 vite.config.js
 vite.config.d.ts

@@ -1,9 +1,17 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// The bioluminescence videos are large-ish binaries; let Vite serve them as
-// static assets rather than inlining anything.
+// https://vitejs.dev/config/
 export default defineConfig({
+  base: '/',
   plugins: [react()],
-  assetsInclude: ["**/*.mp4", "**/*.webm"],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  optimizeDeps: {
+    exclude: ['lucide-react'],
+  },
 });

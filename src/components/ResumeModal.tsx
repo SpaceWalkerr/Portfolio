@@ -1,82 +1,112 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { useEffect } from "react";
-import { PROFILE } from "../data/content";
+import { motion, AnimatePresence } from 'framer-motion';
+import { X, FileText, ExternalLink } from 'lucide-react';
+import { useEffect } from 'react';
+import { withBase } from '../lib/utils';
 
-/**
- * Lightweight resume modal opened from the Hero CTA. Glass panel over a dimmed
- * abyss; restrained fade — the cursor trail is the only playful move.
- */
-export default function ResumeModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
+interface ResumeModalProps {
+  isOpen: boolean;
   onClose: () => void;
-}) {
+}
+
+const resumes = [
+  {
+    title: '1-Page Résumé',
+    description:
+      'A concise, recruiter-friendly single-page snapshot of my experience, projects, and skills.',
+    href: '/Suraj_Resume_1Page.pdf',
+    badge: 'Quick Read',
+  },
+  {
+    title: 'Detailed Résumé',
+    description:
+      'The full version with expanded experience, all projects, education, achievements, and certifications.',
+    href: '/Suraj_Resume.pdf',
+    badge: 'Full Detail',
+  },
+];
+
+export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
-    if (open) window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+    if (!isOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isOpen, onClose]);
 
   return (
     <AnimatePresence>
-      {open && (
-        <motion.div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          onClick={onClose}
-        >
-          <div className="absolute inset-0 bg-abyss-black/80 backdrop-blur-sm" />
+      {isOpen && (
+        <>
           <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 z-[60] bg-ink/60 backdrop-blur-sm"
+            onClick={onClose}
+          />
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 30 }}
+            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="fixed left-1/2 top-1/2 z-[60] w-[92%] max-w-2xl -translate-x-1/2 -translate-y-1/2"
             role="dialog"
             aria-modal="true"
-            aria-label="Resume"
-            className="relative w-full max-w-lg rounded-2xl border border-white/10 bg-deep-navy/90 p-8 shadow-2xl"
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 12 }}
-            transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-            onClick={(e) => e.stopPropagation()}
+            aria-label="View résumé"
           >
-            <p className="eyebrow mb-3">Resume</p>
-            <h3 className="mb-2 font-display text-2xl font-light text-text-primary">
-              {PROFILE.name}
-            </h3>
-            <p className="mb-6 text-sm leading-relaxed text-text-muted">
-              {PROFILE.role}. Grab whichever résumé suits you, or reach out
-              directly.
-            </p>
-            <div className="flex flex-wrap items-center gap-3">
-              {PROFILE.resumes.map((r, i) => (
-                <a
-                  key={r.href}
-                  href={r.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="rounded-full px-5 py-2.5 text-sm font-medium transition-transform hover:-translate-y-0.5"
-                  style={
-                    i === 0
-                      ? { background: "var(--accent)", color: "var(--abyss-black)" }
-                      : { border: "1px solid rgba(255,255,255,0.15)", color: "var(--text-primary)" }
-                  }
+            <div className="relative border-2 border-ink bg-paper-bright p-6 shadow-2xl sm:p-8">
+              {/* Masthead bar */}
+              <div className="mb-6 flex items-center justify-between border-b-4 border-double border-ink pb-3">
+                <span className="font-editorial text-lg italic">The Résumé</span>
+                <button
+                  onClick={onClose}
+                  aria-label="Close"
+                  className="border border-ink/40 p-1.5 text-ink transition-colors hover:border-oxblood hover:text-oxblood"
                 >
-                  {r.label}
-                </a>
-              ))}
-              <button
-                onClick={onClose}
-                className="ml-auto text-sm text-text-muted hover:text-text-primary"
-              >
-                Close
-              </button>
+                  <X size={16} />
+                </button>
+              </div>
+
+              <p className="mb-6 font-editorial text-sm italic text-ink-mute">
+                Choose a version — it opens in a new tab.
+              </p>
+
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {resumes.map((r) => (
+                  <a
+                    key={r.title}
+                    href={withBase(r.href)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group flex flex-col border border-ink/40 p-5 transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  >
+                    <div className="mb-4 flex items-center justify-between">
+                      <FileText size={22} />
+                      <span className="border border-current px-2.5 py-1 font-monopress text-[10px] uppercase tracking-[0.1em]">
+                        {r.badge}
+                      </span>
+                    </div>
+                    <h4 className="mb-2 font-display text-base font-bold uppercase tracking-[-0.01em]">
+                      {r.title}
+                    </h4>
+                    <p className="mb-4 flex-grow font-editorial text-[13.5px] leading-snug text-ink-mute group-hover:text-paper/75">
+                      {r.description}
+                    </p>
+                    <span className="inline-flex items-center gap-1.5 font-monopress text-[10px] uppercase tracking-[0.12em]">
+                      View PDF
+                      <ExternalLink size={13} />
+                    </span>
+                  </a>
+                ))}
+              </div>
             </div>
           </motion.div>
-        </motion.div>
+        </>
       )}
     </AnimatePresence>
   );
-}
+};

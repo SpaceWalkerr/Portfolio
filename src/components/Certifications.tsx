@@ -2,6 +2,9 @@ import { motion } from 'framer-motion';
 import { ExternalLink } from 'lucide-react';
 import { useState, lazy, Suspense } from 'react';
 import { PressSection, SectionMasthead, PressButton, pressReveal } from './ui/press';
+import { CertificateCard } from './ui/certificate-card';
+import { CertificateModal } from './ui/certificate-modal';
+import type { Certificate } from './ui/certificate-card';
 import { useInViewOnce } from '../hooks/useInViewOnce';
 import { withBase } from '../lib/utils';
 
@@ -91,6 +94,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
 const Certifications = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [showAll, setShowAll] = useState(false);
+  const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
   const seal = useInViewOnce<HTMLDivElement>();
 
   const visibleOther =
@@ -203,7 +207,7 @@ const Certifications = () => {
         </motion.div>
       )}
 
-      {/* Other certifications — tabular archive */}
+      {/* Other certifications — Archive Vault (masonry gallery) */}
       {showOther && (
         <motion.div
           variants={pressReveal}
@@ -215,42 +219,16 @@ const Certifications = () => {
             {activeFilter === 'All' ? 'All Other Entries' : activeFilter}
           </h3>
 
-          <div className="divide-y divide-ink/15 border-y border-ink">
-            {(showAll ? visibleOther : visibleOther.slice(0, 12)).map((cert) =>
-              cert.url ? (
-                <a
-                  key={cert.title}
-                  href={withBase(cert.url)}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid grid-cols-[1fr_auto] items-baseline gap-3 py-3 sm:grid-cols-[2.4fr_1fr_auto]"
-                >
-                  <span className="truncate font-editorial text-[14.5px] text-ink group-hover:text-oxblood">
-                    {cert.title}
-                  </span>
-                  <span className="hidden truncate font-monopress text-[10px] uppercase tracking-[0.08em] text-ink-mute sm:block">
-                    {cert.platform}
-                  </span>
-                  <span className="flex items-center gap-1.5 whitespace-nowrap font-monopress text-[10px] uppercase tracking-[0.1em] text-ink-mute group-hover:text-ink">
-                    {cert.year}
-                    <ExternalLink className="h-3 w-3" />
-                  </span>
-                </a>
-              ) : (
-                <div
-                  key={cert.title}
-                  className="grid grid-cols-[1fr_auto] items-baseline gap-3 py-3 sm:grid-cols-[2.4fr_1fr_auto]"
-                >
-                  <span className="truncate font-editorial text-[14.5px] text-ink-mute">{cert.title}</span>
-                  <span className="hidden truncate font-monopress text-[10px] uppercase tracking-[0.08em] text-ink-faint sm:block">
-                    {cert.platform}
-                  </span>
-                  <span className="whitespace-nowrap font-monopress text-[10px] uppercase tracking-[0.1em] text-ink-faint">
-                    {cert.year}
-                  </span>
-                </div>
-              )
-            )}
+          <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
+            {(showAll ? visibleOther : visibleOther.slice(0, 12)).map((cert, index) => (
+              <div key={cert.title} className="mb-5 break-inside-avoid">
+                <CertificateCard
+                  certificate={cert}
+                  index={index}
+                  onSelect={setSelectedCertificate}
+                />
+              </div>
+            ))}
           </div>
 
           {visibleOther.length > 12 && (
@@ -262,6 +240,14 @@ const Certifications = () => {
           )}
         </motion.div>
       )}
+
+      {/* Certificate detail modal */}
+      <CertificateModal
+        certificate={selectedCertificate}
+        certificates={visibleOther}
+        onClose={() => setSelectedCertificate(null)}
+        onNavigate={setSelectedCertificate}
+      />
     </PressSection>
   );
 };

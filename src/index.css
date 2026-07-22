@@ -2,6 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ══════════════════════════════════════════════════════════════
+   The Press — "Day Edition", "Night Edition" & "Sepia Edition"
+   ══════════════════════════════════════════════════════════════ */
+:root,
+[data-theme='day'] {
+  --color-paper: #e9e4d6;
+  --color-paper-bright: #efebdf;
+  --color-ink: #17171a;
+  --color-ink-mute: #57534a;
+  --color-ink-faint: #847e70;
+  --color-oxblood: #8a2a2a;
+  --color-vermilion: #c6392b;
+  --color-noise: 0, 0, 0;
+}
+
+[data-theme='night'] {
+  --color-paper: #1a1a1e;
+  --color-paper-bright: #222228;
+  --color-ink: #e8e4d9;
+  --color-ink-mute: #a39f96;
+  --color-ink-faint: #7a7770;
+  --color-oxblood: #c94a4a;
+  --color-vermilion: #e8604a;
+  --color-noise: 255, 255, 255;
+}
+
+[data-theme='sepia'] {
+  --color-paper: #f4ecd8;
+  --color-paper-bright: #f8f2e4;
+  --color-ink: #5b4636;
+  --color-ink-mute: #8b7355;
+  --color-ink-faint: #a8987a;
+  --color-oxblood: #8b3a3a;
+  --color-vermilion: #b84a3a;
+  --color-noise: 0, 0, 0;
+}
+
 @layer base {
   * {
     @apply scroll-smooth;
@@ -9,10 +46,13 @@
 
   html {
     @apply scroll-smooth;
+    background-color: var(--color-paper);
   }
 
   body {
-    @apply bg-paper text-ink antialiased;
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    @apply antialiased;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -28,16 +68,18 @@
 
   a:focus-visible,
   button:focus-visible {
-    @apply ring-2 ring-oxblood ring-offset-2 ring-offset-paper;
     outline: none;
+    @apply ring-2 ring-oxblood ring-offset-2;
+    ring-color: var(--color-oxblood);
+    ring-offset-color: var(--color-paper);
   }
 }
 
 @layer base {
   /* The Press — ink-on-paper text selection, site-wide */
   ::selection {
-    background: #8a2a2a;
-    color: #e9e4d6;
+    background: var(--color-oxblood);
+    color: var(--color-paper);
   }
 
   /* Native cursor is replaced by MagneticCursor on fine-pointer devices only */

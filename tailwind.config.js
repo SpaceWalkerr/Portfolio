@@ -4,14 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        // "The Press" design system
-        paper: '#E9E4D6',
-        'paper-bright': '#EFEBDF',
-        ink: '#17171A',
-        'ink-mute': '#57534A',
-        'ink-faint': '#847E70',
-        oxblood: '#8A2A2A',
-        vermilion: '#C6392B',
+        // "The Press" design system — mapped to CSS variables for theme switching
+        paper: 'var(--color-paper)',
+        'paper-bright': 'var(--color-paper-bright)',
+        ink: 'var(--color-ink)',
+        'ink-mute': 'var(--color-ink-mute)',
+        'ink-faint': 'var(--color-ink-faint)',
+        oxblood: 'var(--color-oxblood)',
+        vermilion: 'var(--color-vermilion)',
       },
       fontFamily: {
         display: ['"Archivo Variable"', 'Archivo', 'Arial Black', 'sans-serif'],

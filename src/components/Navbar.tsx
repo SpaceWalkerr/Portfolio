@@ -1,20 +1,39 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Eye } from 'lucide-react';
+import { Menu, X, Eye, Sun, Moon, Lamp } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ResumeModal } from './ResumeModal';
+import type { Theme } from '../App';
 
-const Navbar = () => {
+interface NavbarProps {
+  theme: Theme;
+  onToggleTheme: () => void;
+}
+
+const themeIcons: Record<Theme, typeof Sun> = {
+  day: Sun,
+  night: Moon,
+  sepia: Lamp,
+};
+
+const themeLabels: Record<Theme, string> = {
+  day: 'Day Edition',
+  night: 'Night Edition',
+  sepia: 'Sepia Edition',
+};
+
+const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
+  const ThemeIcon = themeIcons[theme];
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
       // Update active section based on scroll position
-      const sections = ['#home', '#about', '#skills', '#experience', '#education', '#projects', '#certifications', '#contact'];
+      const sections = ['#home', '#about', '#skills', '#experience', '#education', '#projects', '#blog', '#certifications', '#contact'];
       const scrollPosition = window.scrollY + 100;
 
       for (const section of sections) {
@@ -49,6 +68,7 @@ const Navbar = () => {
     { href: '#experience', label: 'Experience' },
     { href: '#education', label: 'Education' },
     { href: '#projects', label: 'Projects' },
+    { href: '#blog', label: 'Blog' },
     { href: '#certifications', label: 'Certifications' },
     { href: '#contact', label: 'Contact' },
   ];
@@ -106,6 +126,19 @@ const Navbar = () => {
                   <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-px bg-ink/40 transition-all duration-200 group-hover:w-full"></span>
                 </motion.a>
               ))}
+
+              {/* Theme toggle — Desktop */}
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.1 * navLinks.length }}
+                onClick={onToggleTheme}
+                aria-label={`Switch to next theme (current: ${themeLabels[theme]})`}
+                className="ml-3 flex items-center gap-2 border border-ink/30 px-3 py-2 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                <ThemeIcon size={14} />
+                <span className="hidden xl:inline">{themeLabels[theme]}</span>
+              </motion.button>
             </div>
 
             {/* Mobile Menu Button */}
@@ -184,6 +217,21 @@ const Navbar = () => {
                     </motion.a>
                   ))}
                 </div>
+
+                {/* Mobile Theme Toggle */}
+                <motion.button
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.35 }}
+                  onClick={() => {
+                    onToggleTheme();
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="flex items-center justify-center gap-2 w-full border border-ink/40 px-5 py-3.5 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink-mute transition-colors duration-300 hover:border-ink hover:text-ink mb-3"
+                >
+                  <ThemeIcon size={16} />
+                  <span>{themeLabels[theme]}</span>
+                </motion.button>
 
                 {/* Mobile Resume Button */}
                 <motion.button

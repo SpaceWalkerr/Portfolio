@@ -1,8 +1,9 @@
 import { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
+import { withBase } from '../lib/utils';
 
 // Three.js is a heavy dependency (~130KB gzipped) — code-split so it's only
 // fetched once someone actually sends a message, not in the main bundle.
@@ -14,6 +15,7 @@ const socialLinks = [
   { icon: Linkedin, label: 'LinkedIn', handle: '@surajnandan', url: 'https://www.linkedin.com/in/surajnandan/' },
   { icon: Braces, label: 'LeetCode', handle: '@SurajNandan', url: 'https://leetcode.com/u/SurajNandan/' },
   { icon: Twitter, label: 'Twitter', handle: '@SurajNandan1625', url: 'https://x.com/SurajNandan1625' },
+  { icon: Coffee, label: 'Ko-fi', handle: 'Buy me a coffee', url: 'https://ko-fi.com/surajnandan' },
 ];
 
 const Contact = () => {
@@ -215,8 +217,11 @@ const Contact = () => {
           viewport={{ once: true, margin: '-60px' }}
           className="border border-ink p-6 sm:p-8"
         >
-          <div className="mb-6 flex items-baseline justify-between border-b border-ink pb-3">
-            <span className="font-editorial text-base italic">To the Editor,</span>
+          <div className="mb-8 flex items-end justify-between border-b border-ink pb-5">
+            <div className="flex items-center gap-6">
+              <img src={withBase('/profile.webp')} alt="Editor Profile" className="h-28 w-24 border border-ink object-cover shadow-sm" />
+              <span className="font-editorial text-3xl italic leading-none tracking-tight">To the Editor,</span>
+            </div>
             <span className="font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute">
               Correspondence Form
             </span>

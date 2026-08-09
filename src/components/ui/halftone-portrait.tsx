@@ -26,6 +26,8 @@ interface Sample {
   ny: number;
   /** 0..1 darkness (1 = solid ink) */
   darkness: number;
+  /** rgb color string */
+  color: string;
 }
 
 const smoothstep = (t: number) => t * t * (3 - 2 * t);
@@ -81,11 +83,15 @@ const HalftonePortrait = ({
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
           const i = (y * cols + x) * 4;
-          const lum = (0.2126 * data[i] + 0.7152 * data[i + 1] + 0.0722 * data[i + 2]) / 255;
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          const lum = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
           samples.push({
             nx: (x + 0.5) / cols,
             ny: (y + 0.5) / rows,
             darkness: 1 - lum,
+            color: `rgb(${r},${g},${b})`
           });
         }
       }
@@ -103,12 +109,7 @@ const HalftonePortrait = ({
       const influenceRadius = Math.max(60, width * 0.22);
       const t = time * 0.0012;
 
-      // All dots share one fillStyle, so batch them into a single path and
-      // a single fill() call instead of one beginPath/arc/fill per dot —
-      // with ~6,000 dots/frame at 84 columns, that's the difference between
-      // ~18,000 canvas calls and 2, and it was the dominant main-thread cost.
-      ctx.beginPath();
-
+      // Render individual colored dots (removed single path batching to support per-dot coloring)
       for (const s of samples) {
         const x = s.nx * width;
         const y = s.ny * height;
@@ -143,11 +144,11 @@ const HalftonePortrait = ({
         }
 
         if (r < 0.28) continue;
-        ctx.moveTo(x + ox + r, y + oy);
+        ctx.beginPath();
+        ctx.fillStyle = s.color;
         ctx.arc(x + ox, y + oy, r, 0, Math.PI * 2);
+        ctx.fill();
       }
-
-      ctx.fill();
     };
 
     const loop = (time: number) => {

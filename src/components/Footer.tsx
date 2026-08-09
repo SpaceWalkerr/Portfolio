@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Github, Linkedin, Twitter, Mail, Braces } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Braces, Coffee } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
 
 const socialLinks = [
@@ -8,6 +8,7 @@ const socialLinks = [
   { icon: <Braces size={16} />, url: 'https://leetcode.com/u/SurajNandan/', label: 'LeetCode' },
   { icon: <Twitter size={16} />, url: 'https://x.com/SurajNandan1625', label: 'Twitter' },
   { icon: <Mail size={16} />, url: 'mailto:surajnandan78@gmail.com', label: 'Email' },
+  { icon: <Coffee size={16} />, url: 'https://ko-fi.com/surajnandan', label: 'Ko-fi' },
 ];
 
 const quickLinks = [

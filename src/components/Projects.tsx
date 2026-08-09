@@ -37,6 +37,15 @@ const projects: Project[] = [
     category: 'AI',
   },
   {
+    title: '"AI Academy" — Premium Resource Platform',
+    description:
+      'An educational platform built with Lovable AI\'s component-based architecture. Features a comprehensive admin dashboard with secure user management and Role-Based Access Control (RBAC). Integrated mock payment flows via Razorpay and PayPal to securely gate premium AI resource packages and startup blueprints behind a verified transaction wall.',
+    tags: ['React', 'Lovable AI', 'Supabase', 'Razorpay', 'PayPal', 'RBAC', 'Tailwind CSS'],
+    liveDemo: 'https://ai-acedemy.vercel.app/',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800&q=80&fm=webp',
+    category: 'Full Stack',
+  },
+  {
     title: '"Dashboard" — Analytics & Admin Panel',
     description:
       'A modern, responsive analytics dashboard for visualizing key metrics and managing data at a glance. Features interactive charts, data tables, real-time stat cards, and a clean component-driven UI with smooth transitions and a fully responsive layout across all devices.',

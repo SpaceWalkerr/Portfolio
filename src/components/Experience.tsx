@@ -4,6 +4,22 @@ import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press
 
 const experiences = [
   {
+    role: 'Artificial Intelligence Intern',
+    company: 'Berry Stenley',
+    companyUrl: 'https://www.berrystenley.com',
+    period: 'Jun 2026 — Aug 2026',
+    description:
+      'Engineered and deployed an intelligent chatbot system utilizing Retrieval-Augmented Generation (RAG) and developed full-stack web applications using Lovable AI.',
+    highlights: [
+      'Engineered and deployed an intelligent chatbot system (gpt.srmup.in) utilizing RAG to fetch and process university-related documentation',
+      'Implemented a robust document embedding pipeline and vector database storage for semantic context retrieval',
+      'Developed full-stack web applications using Lovable AI, customizing frontend components and integrating Supabase',
+      'Built an admin panel featuring Role-Based Access Control (RBAC), user management, and CRUD operations',
+      'Integrated Razorpay and PayPal payment gateways encompassing full checkout flows and webhook event handling',
+    ],
+    technologies: ['React', 'Node.js', 'Lovable AI', 'Supabase', 'RAG', 'Vector Databases', 'Payment Gateways'],
+  },
+  {
     role: 'Full Stack Developer',
     company: 'Wealth Shala',
     companyUrl: 'https://wealthshala.com',

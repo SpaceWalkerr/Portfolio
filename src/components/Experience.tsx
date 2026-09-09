@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, X, FileText } from 'lucide-react';
+import { ExternalLink, X, FileText, Award } from 'lucide-react';
 import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press';
 
 export interface ExperienceData {
@@ -12,6 +12,8 @@ export interface ExperienceData {
   highlights: string[];
   technologies: string[];
   projectsBuilt?: { name: string; url: string }[];
+  /** A verifiable document for this role — e.g. an experience/relieving certificate */
+  credential?: { label: string; url: string };
   details: React.ReactNode;
 }
 
@@ -36,6 +38,10 @@ const experiences: ExperienceData[] = [
       { name: 'AI Berry Stenley', url: 'https://ai.berrystenley.com' },
       { name: 'Puja Path', url: 'https://puja-path.com' },
     ],
+    credential: {
+      label: 'Experience Certificate',
+      url: '/berry-stenley-experience-certificate.pdf',
+    },
     details: (
       <div className="space-y-4">
         <p>
@@ -388,6 +394,24 @@ const ExperienceModal = ({
                 </div>
               )}
 
+              {experience.credential && (
+                <div className="mt-8 border-l-2 border-oxblood/30 pl-4">
+                  <span className="mb-3 block font-monopress text-[10px] uppercase tracking-[0.1em] text-ink-mute">
+                    On the Record
+                  </span>
+                  <a
+                    href={experience.credential.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-2 border border-ink/20 bg-paper px-4 py-2 font-editorial text-[15px] italic text-oxblood transition-colors hover:border-ink hover:bg-ink hover:text-paper"
+                  >
+                    <Award className="h-4 w-4" />
+                    {experience.credential.label}
+                    <ExternalLink className="h-4 w-4 transition-transform group-hover:-translate-y-[1px] group-hover:translate-x-[1px]" />
+                  </a>
+                </div>
+              )}
+
               <div className="mt-8 flex flex-wrap gap-2 pt-6 border-t border-ink/20">
                 {experience.technologies.map((tech) => (
                   <PressTag key={tech}>{tech}</PressTag>
@@ -493,6 +517,22 @@ const Experience = () => {
                       </a>
                     ))}
                   </div>
+                </div>
+              )}
+
+              {exp.credential && (
+                <div className="mt-5">
+                  <a
+                    href={exp.credential.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="group/cred inline-flex items-center gap-1.5 border border-ink/25 px-3 py-1.5 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+                  >
+                    <Award className="h-3.5 w-3.5" />
+                    {exp.credential.label}
+                    <ExternalLink className="h-3 w-3 transition-transform group-hover/cred:-translate-y-[1px] group-hover/cred:translate-x-[1px]" />
+                  </a>
                 </div>
               )}
 

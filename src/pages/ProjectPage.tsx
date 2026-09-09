@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
 import { getProjectBySlug } from '../data/projects';
 import { posts } from '../data/posts';
 import { PressTag, PressButton } from '../components/ui/press';
 import Seo, { SITE_URL } from '../components/Seo';
+import NotFound from './NotFound';
 
 const ProjectPage = () => {
   const { slug = '' } = useParams();
@@ -16,7 +17,7 @@ const ProjectPage = () => {
     setImgSrc(project?.image ?? '');
   }, [slug, project]);
 
-  if (!project) return <Navigate to="/" replace />;
+  if (!project) return <NotFound />;
 
   const relatedPost = posts.find((p) => p.relatedProject === project.name);
   const path = `/projects/${project.slug}`;

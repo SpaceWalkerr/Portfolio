@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import LoadingScreen from './components/LoadingScreen';
@@ -19,6 +19,7 @@ import BackToTop from './components/BackToTop';
 import CommandPalette from './components/CommandPalette';
 import ProjectPage from './pages/ProjectPage';
 import BlogPostPage from './pages/BlogPostPage';
+import NotFound from './pages/NotFound';
 
 export type Theme = 'day' | 'night' | 'sepia';
 
@@ -102,7 +103,7 @@ function App() {
           <Route path="/" element={<Home introDone={!isLoading} />} />
           <Route path="/projects/:slug" element={<ProjectPage />} />
           <Route path="/blog/:slug" element={<BlogPostPage />} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
       <Footer />

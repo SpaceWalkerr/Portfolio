@@ -1,0 +1,103 @@
+/**
+ * Post-build prerender pass.
+ *
+ * `vite build` ships one HTML file with an empty <div id="root">, so every
+ * /projects/:slug and /blog/:slug URL would serve the generic homepage <head>
+ * to crawlers and social scrapers. This script boots the built site, visits
+ * each route with a headless browser, and writes the fully-rendered HTML —
+ * resolved <title>, meta description, canonical, OG/Twitter tags and JSON-LD
+ * from Seo.tsx — to dist/<route>/index.html. Also emits dist/404.html.
+ *
+ * The homepage is left as Vite built it: its static <head> in index.html is
+ * already complete, and re-rendering over prerendered markup would double the
+ * intro loading screen.
+ */
+import { spawn } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import puppeteer from 'puppeteer';
+
+const root = path.resolve(fileURLToPath(import.meta.url), '../..');
+const distDir = path.join(root, 'dist');
+const PORT = 4193;
+const ORIGIN = `http://localhost:${PORT}`;
+
+if (!fs.existsSync(path.join(distDir, 'index.html'))) {
+  console.error('prerender: dist/index.html not found — run `vite build` first.');
+  process.exit(1);
+}
+
+const slugsFrom = (file) =>
+  [...fs.readFileSync(path.join(root, 'src', 'data', file), 'utf8').matchAll(/slug:\s*'([^']+)'/g)].map(
+    (m) => m[1]
+  );
+
+const routes = [
+  ...slugsFrom('projects.ts').map((s) => `/projects/${s}`),
+  ...slugsFrom('posts.ts').map((s) => `/blog/${s}`),
+];
+
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+async function waitForServer() {
+  for (let i = 0; i < 60; i++) {
+    try {
+      const res = await fetch(ORIGIN + '/');
+      if (res.ok) return;
+    } catch {
+      /* not up yet */
+    }
+    await wait(500);
+  }
+  throw new Error('prerender: preview server did not start in time');
+}
+
+// `vite preview` serves dist/ with SPA fallback, so unknown paths render the app.
+const server = spawn('npm', ['run', 'preview', '--', '--port', String(PORT), '--strictPort'], {
+  cwd: root,
+  stdio: 'ignore',
+});
+
+let ok = 0;
+let failed = 0;
+
+try {
+  await waitForServer();
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--no-sandbox'] });
+
+  const snapshot = async (route, outFile) => {
+    const page = await browser.newPage();
+    try {
+      await page.goto(ORIGIN + route, { waitUntil: 'networkidle2', timeout: 45_000 });
+      await page.waitForSelector('#main-content h1', { timeout: 15_000 });
+      await wait(300); // let Seo.tsx flush its <head> writes
+      const html = await page.content();
+      if (!html.includes('<div id="root">') || html.length < 2000) {
+        throw new Error(`suspicious output (${html.length} bytes)`);
+      }
+      fs.mkdirSync(path.dirname(outFile), { recursive: true });
+      fs.writeFileSync(outFile, html);
+      console.log(`  ${route.padEnd(42)} → ${path.relative(root, outFile)}`);
+      ok++;
+    } catch (err) {
+      console.error(`  ${route.padEnd(42)} FAILED — ${err.message}`);
+      failed++;
+    } finally {
+      await page.close();
+    }
+  };
+
+  console.log(`prerender: ${routes.length} routes + 404\n`);
+  for (const route of routes) {
+    await snapshot(route, path.join(distDir, route, 'index.html'));
+  }
+  await snapshot('/this-page-does-not-exist', path.join(distDir, '404.html'));
+
+  await browser.close();
+} finally {
+  server.kill();
+}
+
+console.log(`\nprerender: ${ok} written, ${failed} failed`);
+process.exit(failed ? 1 : 0);

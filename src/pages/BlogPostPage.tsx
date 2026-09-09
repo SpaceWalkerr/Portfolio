@@ -1,11 +1,12 @@
 import { useEffect } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import { getPostBySlug } from '../data/posts';
 import { getProjectBySlug, projects } from '../data/projects';
 import { PressTag } from '../components/ui/press';
 import PostBody from '../components/PostBody';
 import Seo, { SITE_URL } from '../components/Seo';
+import NotFound from './NotFound';
 
 const BlogPostPage = () => {
   const { slug = '' } = useParams();
@@ -15,7 +16,7 @@ const BlogPostPage = () => {
     window.scrollTo(0, 0);
   }, [slug]);
 
-  if (!post) return <Navigate to="/" replace />;
+  if (!post) return <NotFound />;
 
   const path = `/blog/${post.slug}`;
   const related =
@@ -56,6 +57,7 @@ const BlogPostPage = () => {
         title={`${post.title} — Suraj Nandan`}
         description={post.excerpt.slice(0, 200)}
         path={path}
+        type="article"
         jsonLd={jsonLd}
       />
       <article className="relative min-h-screen bg-paper text-ink">

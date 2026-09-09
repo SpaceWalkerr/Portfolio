@@ -112,3 +112,101 @@
     background-repeat: repeat;
   }
 }
+
+/* ══════════════════════════════════════════════════════════════
+   Print edition — "The Nandan Review" as a clean paper document
+   ══════════════════════════════════════════════════════════════ */
+@media print {
+  /* Force the day palette on paper, regardless of the on-screen edition */
+  :root,
+  [data-theme='night'],
+  [data-theme='sepia'] {
+    --color-paper: #ffffff;
+    --color-paper-bright: #ffffff;
+    --color-ink: #000000;
+    --color-ink-mute: #2b2b2b;
+    --color-ink-faint: #555555;
+    --color-oxblood: #6b1f1f;
+    --color-noise: 0, 0, 0;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Drop all fixed chrome: nav, scroll bar, cursor, back-to-top, palette, overlays */
+  .fixed,
+  nav,
+  .noise-overlay {
+    display: none !important;
+  }
+
+  /* Restore the native cursor (MagneticCursor hides it) */
+  .press-cursor-active,
+  .press-cursor-active * {
+    cursor: auto !important;
+  }
+
+  /* Reveal content that framer-motion left mid-animation off-screen */
+  #main-content *,
+  main * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Un-truncate clamped copy so the whole story prints */
+  [class*='line-clamp-'] {
+    -webkit-line-clamp: unset !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+
+  section {
+    padding: 1.5rem 0 !important;
+    overflow: visible !important;
+    break-inside: auto;
+  }
+
+  /* Keep headings with their text, and cards/articles intact across pages */
+  h1,
+  h2,
+  h3,
+  h4 {
+    break-after: avoid-page;
+  }
+
+  article,
+  li,
+  figure,
+  .border-t-2 {
+    break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  /* Spell out link targets in the margin of the printed page */
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.7em;
+    color: #555;
+    word-break: break-all;
+  }
+
+  a[href^='#']::after,
+  a[href^='/']::after,
+  nav a::after {
+    content: '';
+  }
+
+  @page {
+    margin: 16mm 14mm;
+  }
+}

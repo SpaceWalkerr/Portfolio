@@ -261,6 +261,43 @@ const experiences: ExperienceData[] = [
       </div>
     ),
   },
+  {
+    role: 'Freelance Full Stack Developer',
+    company: 'S2VESTIS',
+    companyUrl: 'https://www.s2vestis.in/',
+    period: '',
+    description:
+      'Designed and built a complete apparel e-commerce platform from scratch for a men\'s and women\'s clothing label, delivering a polished storefront alongside a full inventory and catalog management system.',
+    highlights: [
+      'Built a responsive storefront with a rotating hero carousel, filterable product gallery, sorting, and infinite scroll.',
+      'Developed an admin dashboard with inventory metrics, low-stock alerts, and a dynamic colour/size variant builder.',
+      'Implemented JWT authentication over httpOnly cookies with PostgreSQL Row Level Security.',
+      'Engineered guest-cart persistence with automatic account merge on login, plus full-text and trigram product search.',
+    ],
+    technologies: ['React 19', 'TypeScript', 'Redux Toolkit', 'Express 5', 'Supabase', 'PostgreSQL', 'Tailwind CSS'],
+    projectsBuilt: [
+      { name: 'S2VESTIS', url: 'https://www.s2vestis.in/' },
+    ],
+    details: (
+      <div className="space-y-4">
+        <h4 className="font-bold text-oxblood mt-2 border-b border-ink/10 pb-1">Variant-Driven Catalog & Server-Backed Cart</h4>
+        <p>
+          S2VESTIS needed a storefront where a single garment could carry many colour and size combinations without turning catalog management into a chore. I modelled the catalog as a parent-child schema in Supabase PostgreSQL: a parent product held shared data — name, description, pricing, imagery — while a variants table stored each colour/size pair with its own stock count and SKU. The admin panel wraps this in a dynamic variant builder, so adding a new colourway generates the full size run in one step, and low-stock alerts surface on the dashboard the moment a variant crosses its threshold.
+        </p>
+        <p>
+          The cart is server-backed rather than a pure client store. Guests build a cart that persists across sessions, and on login it merges into the account cart instead of overwriting it — quantities are reconciled per variant so nothing is silently lost. All customer-facing tables are protected by Row Level Security, and product discovery runs on Postgres full-text and trigram search so partial and misspelled queries still return sensible results.
+        </p>
+
+        <h4 className="font-bold text-oxblood mt-6 border-b border-ink/10 pb-1">Storefront Experience & Auth</h4>
+        <p>
+          The frontend is a React 19 + Vite + TypeScript app with Redux Toolkit managing cart, wishlist, and auth state, and React Router 7 handling navigation. The product gallery combines filtering, sorting, and infinite scroll, backed by a rotating hero carousel and full product pages with image galleries and colour/size selection. Framer Motion drives the transitions so the storefront feels considered rather than templated.
+        </p>
+        <p>
+          Authentication uses JWTs delivered as httpOnly cookies rather than tokens kept in local storage, keeping sessions out of reach of client-side scripts. The Express 5 API handles image uploads through Multer with optional Cloudinary offloading, and the checkout flow is wired end to end as a demo — order capture and confirmation without live payment processing.
+        </p>
+      </div>
+    ),
+  },
 ];
 
 const ExperienceModal = ({

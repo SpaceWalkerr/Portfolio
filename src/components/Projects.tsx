@@ -17,6 +17,26 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: '"Knot.ai" — Adaptive AI Interview Panel',
+    description:
+      'A spoken interview platform where a panel of five AI personas holds real-time voice conversations that adapt to every answer, hand off between rounds without repeating themselves, and produce an evidence-grounded report that can only quote statements verified against the transcript. Interview flow is driven by deterministic proxy state machines rather than prompt instructions alone, with a streak-based difficulty ladder, shared context digests between rounds, fuzzy-matched evidence verification, and interruptible barge-in voice at roughly 160ms.',
+    tags: ['React', 'Vite', 'Zustand', 'Fastify', 'TypeScript', 'SQLite', 'Agora Voice AI', 'Claude API'],
+    liveDemo: 'https://knot-ai.onrender.com/',
+    github: 'https://github.com/SpaceWalkerr/Knot.ai.git',
+    image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=800&q=80&fm=webp',
+    category: 'AI',
+  },
+  {
+    title: '"Hospitality.ai" — Insurance-Aware Care Navigator',
+    description:
+      'An insurance-aware hospital and treatment navigation system built for the GE HealthCare Precision Care Challenge 2026. It parses health-insurance policy documents into normalized structures, explains coverage in plain language with source-traceable citations tagged exact, fuzzy, or unverified, ranks hospitals and room categories against policy terms using a deterministic weighted score with a full audit trail, and guides users through admission, investigation, procedure, and recovery with policy-grounded assistance. Runs offline in a demo mode with pre-authored extractions when no API key is set.',
+    tags: ['Next.js', 'TypeScript', 'Claude API', 'Zod', 'unpdf', 'PostCSS', 'RAG'],
+    liveDemo: 'https://hospitality-ai-virid.vercel.app/',
+    github: 'https://github.com/SpaceWalkerr/Hospitality.ai.git',
+    image: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80&fm=webp',
+    category: 'AI',
+  },
+  {
     title: '"CardBridge" — Card Discount Marketplace',
     description:
       'A marketplace that connects requesters who want a specific card discount with cardholders who own that card and fulfill the purchase for a fee. Features escrow-protected transactions, a database-enforced state machine with an immutable event log, KYC verification with tiered transaction limits, dispute resolution, and an admin review panel — all secured with Supabase Row Level Security.',

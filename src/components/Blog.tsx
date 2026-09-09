@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calendar, Clock, X } from 'lucide-react';
+import { Calendar, Clock, X, FileText } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press';
 import { posts, postCategories } from '../data/posts';
 import type { Post } from '../data/posts';
+import PostBody from './PostBody';
 
 const Blog = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -25,6 +27,12 @@ const Blog = () => {
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [selectedPost]);
+
+  const handleCardClick = (e: React.MouseEvent, post: Post) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
+    e.preventDefault();
+    setSelectedPost(post);
+  };
 
   return (
     <PressSection id="blog" className="bg-paper-bright">
@@ -66,19 +74,17 @@ const Blog = () => {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
-            onClick={() => setSelectedPost(post)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                setSelectedPost(post);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={`Read article: ${post.title}`}
-            className="group flex cursor-pointer flex-col border-t-2 border-ink pt-4"
-            data-cursor="hover"
+            className="group relative flex cursor-pointer flex-col border-t-2 border-ink pt-4"
           >
+            {/* Stretched link — real URL, opens the modal on a plain click */}
+            <Link
+              to={`/blog/${post.slug}`}
+              onClick={(e) => handleCardClick(e, post)}
+              data-cursor="hover"
+              aria-label={`Read article: ${post.title}`}
+              className="absolute inset-0 z-20"
+            />
+
             {/* Meta row */}
             <div className="mb-3 flex items-center gap-3 font-monopress text-[9px] uppercase tracking-[0.14em] text-ink-mute">
               <span className="flex items-center gap-1">
@@ -200,65 +206,22 @@ const Blog = () => {
                     {selectedPost.excerpt}
                   </p>
 
+                  {/* Open full page */}
+                  <div className="mt-4">
+                    <Link
+                      to={`/blog/${selectedPost.slug}`}
+                      className="inline-flex items-center gap-2 font-monopress text-[10px] uppercase tracking-[0.16em] text-ink-mute underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
+                    >
+                      <FileText size={13} />
+                      Open full page — surajnandan.in/blog/{selectedPost.slug}
+                    </Link>
+                  </div>
+
                   {/* Divider */}
                   <div className="my-8 border-t-2 border-ink/20" />
 
-                  {/* Content — rendered with simple markdown-like formatting */}
-                  <div className="prose-custom font-editorial text-[16px] leading-relaxed text-ink">
-                    {selectedPost.content.split('\n').map((line, i) => {
-                      // Headings
-                      if (line.startsWith('### ')) {
-                        return (
-                          <h3 key={i} className="mt-8 mb-3 font-display text-lg font-bold uppercase tracking-[-0.01em]">
-                            {line.replace('### ', '')}
-                          </h3>
-                        );
-                      }
-                      if (line.startsWith('## ')) {
-                        return (
-                          <h2 key={i} className="mt-10 mb-4 font-display text-xl font-black uppercase tracking-[-0.01em]">
-                            {line.replace('## ', '')}
-                          </h2>
-                        );
-                      }
-                      // Bullet points
-                      if (line.startsWith('- **')) {
-                        const match = line.match(/- \*\*(.+?)\*\*: (.+)/);
-                        if (match) {
-                          return (
-                            <li key={i} className="ml-5 mb-2 list-disc font-editorial text-[15px] leading-relaxed">
-                              <strong className="font-bold text-ink">{match[1]}:</strong>{' '}
-                              <span className="text-ink-mute">{match[2]}</span>
-                            </li>
-                          );
-                        }
-                      }
-                      if (line.startsWith('- ')) {
-                        return (
-                          <li key={i} className="ml-5 mb-1.5 list-disc font-editorial text-[15px] leading-relaxed text-ink-mute">
-                            {line.replace('- ', '')}
-                          </li>
-                        );
-                      }
-                      if (line.match(/^\d+\./)) {
-                        return (
-                          <li key={i} className="ml-5 mb-1.5 list-decimal font-editorial text-[15px] leading-relaxed text-ink-mute">
-                            {line.replace(/^\d+\.\s*/, '')}
-                          </li>
-                        );
-                      }
-                      // Empty line = paragraph break
-                      if (line.trim() === '') {
-                        return <div key={i} className="h-4" />;
-                      }
-                      // Regular paragraph
-                      return (
-                        <p key={i} className="mb-4 font-editorial text-[15px] leading-relaxed text-ink last:mb-0">
-                          {line}
-                        </p>
-                      );
-                    })}
-                  </div>
+                  {/* Content */}
+                  <PostBody content={selectedPost.content} />
 
                   {/* Tags */}
                   <div className="mt-10 border-t border-ink/20 pt-6">
@@ -282,4 +245,3 @@ const Blog = () => {
 };
 
 export default Blog;
-

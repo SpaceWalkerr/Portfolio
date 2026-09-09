@@ -63,6 +63,7 @@ const experiences: ExperienceData[] = [
           I also implemented background workers to synchronize payment statuses during gateway delays, preventing the frontend from displaying incorrect states. Utilizing Supabase Realtime, users received instant booking confirmations without refreshing, resulting in a production-grade, highly reliable user experience.
         </p>
       </div>
+      
     ),
   },
   {

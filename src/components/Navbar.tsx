@@ -1,12 +1,14 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Eye, Sun, Moon, Lamp, ChevronDown } from 'lucide-react';
+import { Menu, X, Eye, Sun, Moon, Lamp, ChevronDown, Search } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { ResumeModal } from './ResumeModal';
+import { openCommandPalette } from './CommandPalette';
 import type { Theme } from '../App';
 
 interface NavbarProps {
   theme: Theme;
-  onToggleTheme: () => void;
+  onSetTheme: (theme: Theme) => void;
 }
 
 const themeIcons: Record<Theme, typeof Sun> = {
@@ -27,7 +29,9 @@ const themeOptions: { key: Theme; label: string; Icon: typeof Sun }[] = [
   { key: 'sepia', label: 'Sepia Edition', Icon: Lamp },
 ];
 
-const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
+const Navbar = ({ theme, onSetTheme }: NavbarProps) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('#home');
@@ -93,23 +97,24 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
   ];
 
   const handleThemeSelect = (selectedTheme: Theme) => {
-    // Apply the theme by cycling through to the selected one
-    const order: Theme[] = ['day', 'night', 'sepia'];
-    const currentIndex = order.indexOf(theme);
-    const targetIndex = order.indexOf(selectedTheme);
-    const clicks = (targetIndex - currentIndex + 3) % 3;
-    for (let i = 0; i < clicks; i++) {
-      onToggleTheme();
-    }
+    onSetTheme(selectedTheme);
     setThemeDropdownOpen(false);
   };
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
+    setIsMobileMenuOpen(false);
+
+    // On a sub-page (e.g. /projects/...), route home first — Home scrolls to the hash on mount
+    if (location.pathname !== '/') {
+      navigate(`/${href}`);
+      setActiveSection(href);
+      return;
+    }
+
     const element = document.querySelector(href);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      setIsMobileMenuOpen(false);
       setActiveSection(href);
     }
   };
@@ -155,6 +160,19 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                   <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-px bg-ink/40 transition-all duration-200 group-hover:w-full"></span>
                 </motion.a>
               ))}
+
+              {/* Command palette trigger — Desktop */}
+              <motion.button
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.08 * navLinks.length }}
+                onClick={openCommandPalette}
+                aria-label="Open command palette"
+                className="ml-2 flex items-center gap-1.5 border border-ink/30 px-3 py-2 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                <Search size={13} />
+                <kbd className="hidden xl:inline">⌘K</kbd>
+              </motion.button>
 
               {/* Theme dropdown — Desktop */}
               <div ref={dropdownRef} className="relative ml-2">
@@ -311,6 +329,21 @@ const Navbar = ({ theme, onToggleTheme }: NavbarProps) => {
                     </motion.button>
                   ))}
                 </div>
+
+                <motion.button
+                  type="button"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="mb-2 flex w-full items-center justify-center gap-2 border border-ink/30 px-5 py-3 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    openCommandPalette();
+                  }}
+                >
+                  <Search className="h-4 w-4" />
+                  <span>Command Palette</span>
+                </motion.button>
 
                 <motion.button
                   type="button"

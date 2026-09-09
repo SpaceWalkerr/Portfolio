@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "prebuild": "node generate-sitemap.js",
+    "shots": "node scripts/screenshots.mjs",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
@@ -16,10 +17,12 @@
     "@fontsource-variable/archivo": "^5.2.8",
     "@fontsource-variable/newsreader": "^5.2.10",
     "@fontsource/space-mono": "^5.2.9",
+    "cmdk": "^1.1.1",
     "framer-motion": "^12.29.2",
     "lucide-react": "^0.344.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^7.18.3",
     "three": "^0.185.1"
   },
   "devDependencies": {
@@ -34,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.11",
     "globals": "^15.9.0",
     "postcss": "^8.4.35",
+    "puppeteer": "^25.10.0",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.3.0",

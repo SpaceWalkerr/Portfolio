@@ -4,6 +4,8 @@
 
 He is the Suraj Nandan with GitHub username SpaceWalkerr, LinkedIn /in/surajnandan and LeetCode SurajNandan (875+ problems solved). Contact: surajnandan78@gmail.com.
 
+Recent: Campus Winner in ACG Pack A Pitch 2.0 (Technology & Engineering, 2026) with Aditya Idnani and Lavanya Saxena, for an AI-first pharmaceutical glass-vial inspection concept.
+
 ## Case studies
 
 - [Knot.ai](https://surajnandan.in/projects/knot-ai): an adaptive, spoken AI interview panel whose report can only quote the candidate; interview control lives in a deterministic proxy, not a prompt.

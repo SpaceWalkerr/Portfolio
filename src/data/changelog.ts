@@ -17,6 +17,13 @@ export interface Correction {
 
 export const editions: Edition[] = [
   {
+    date: '2026-09-25',
+    headline: 'Campus Winner, ACG Pack A Pitch 2.0',
+    items: [
+      'Added to Notable Achievements: Campus Winner in the Technology & Engineering category, for an AI-first pharmaceutical glass-vial inspection concept built with Aditya Idnani and Lavanya Saxena.',
+    ],
+  },
+  {
     date: '2026-09-24',
     headline: 'One name, one identity',
     items: [

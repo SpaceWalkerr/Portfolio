@@ -4,7 +4,7 @@ export const SITE_URL = 'https://surajnandan.in';
 // Keep in sync with index.html — these are restored when leaving a sub-page
 const DEFAULT_TITLE = 'Suraj Nandan — Full-Stack & AI Engineer';
 const DEFAULT_DESCRIPTION =
-  'Suraj Nandan is a full-stack and AI engineer from India building reliable web products and grounded AI systems with React, Node.js, TypeScript and PostgreSQL. Case studies, projects and writing.';
+  'Suraj Nandan is a full-stack & AI engineer from India building reliable web products and grounded AI systems. Case studies, projects and writing.';
 
 const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
@@ -38,7 +38,17 @@ function setMeta(selector: string, attr: 'name' | 'property', key: string, conte
  * home page keeps its statically-rendered metadata. The build's prerender pass
  * captures the resolved <head> into per-route static HTML.
  */
-const Seo = ({ title, description, path, image, type = 'website', noindex = false, jsonLd = [] }: SeoProps) => {
+/** Search engines show ~155–160 characters; longer descriptions get cut or flagged. */
+const MAX_DESCRIPTION = 158;
+const clampDescription = (text: string) => {
+  const clean = text.replace(/\s+/g, ' ').trim();
+  if (clean.length <= MAX_DESCRIPTION) return clean;
+  const cut = clean.slice(0, MAX_DESCRIPTION - 1);
+  return `${cut.slice(0, cut.lastIndexOf(' ')).replace(/[\s,;:—–-]+$/, '')}…`;
+};
+
+const Seo = ({ title, description: rawDescription, path, image, type = 'website', noindex = false, jsonLd = [] }: SeoProps) => {
+  const description = clampDescription(rawDescription);
   useEffect(() => {
     const url = `${SITE_URL}${path}`;
     const ogImage = image

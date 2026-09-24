@@ -2,8 +2,8 @@
 export const education = [
   {
     degree: 'B.Tech in Computer Science & Engineering',
-    institution: 'SRM Institute of Science and Technology',
-    location: 'Chennai, India',
+    institution: 'SRM Institute of Science and Technology, Delhi NCR Campus',
+    location: 'Ghaziabad, India',
     period: '2023 — 2027',
     status: 'Currently Pursuing',
     cgpa: '9.50 / 10.0 CGPA',

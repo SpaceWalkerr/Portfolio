@@ -45,7 +45,7 @@ More projects, articles and a live Ask-the-Editor assistant at **[surajnandan.in
 
 ## By the numbers
 
-**875+** LeetCode problems solved · **33** public repositories · **B.Tech CSE**, SRM Institute of Science and Technology ('27)
+**875+** LeetCode problems solved · **33** public repositories · **B.Tech CSE**, SRM Institute of Science and Technology, Delhi NCR Campus ('27)
 
 <div align="center">
 

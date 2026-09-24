@@ -22,7 +22,7 @@ Every profile below should read like the same person and link back to **surajnan
 > Full-stack & AI engineer. Reliable web products and grounded AI systems, built end to end. React · Node · TypeScript · PostgreSQL. surajnandan.in
 
 **LinkedIn headline** (≤220):
-> Full-Stack & AI Engineer · Building reliable web products and grounded AI systems end to end · React, Node.js, TypeScript, PostgreSQL · B.Tech CSE, SRM IST '27
+> Full-Stack & AI Engineer · Building reliable web products and grounded AI systems end to end · React, Node.js, TypeScript, PostgreSQL · B.Tech CSE, SRM IST Delhi NCR '27
 
 **LinkedIn About** (paste as-is):
 > I'm a full-stack and AI engineer who likes to own a problem from end to end — the data model, the API, the interface, and the small details in between. What I care about most is building software people can trust: it behaves the same way every time, explains itself, and fails honestly when it has to.

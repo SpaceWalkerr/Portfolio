@@ -1,6 +1,6 @@
 # Suraj Nandan
 
-> Suraj Nandan is a full-stack and AI engineer from Kishanganj, India. He builds reliable web products and grounded AI systems end to end with React, Node.js, TypeScript and PostgreSQL, and studies Computer Science at SRM Institute of Science and Technology (class of 2027). His portfolio is surajnandan.in, published as "The Nandan Review".
+> Suraj Nandan is a full-stack and AI engineer from Kishanganj, India. He builds reliable web products and grounded AI systems end to end with React, Node.js, TypeScript and PostgreSQL, and studies Computer Science at SRM Institute of Science and Technology, Delhi NCR Campus (class of 2027). His portfolio is surajnandan.in, published as "The Nandan Review".
 
 He is the Suraj Nandan with GitHub username SpaceWalkerr, LinkedIn /in/surajnandan and LeetCode SurajNandan (875+ problems solved). Contact: surajnandan78@gmail.com.
 

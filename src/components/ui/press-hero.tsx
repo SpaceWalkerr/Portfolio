@@ -28,6 +28,28 @@ const tickerItems = [
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
 
+const ROMAN: [number, string][] = [[10, 'X'], [9, 'IX'], [5, 'V'], [4, 'IV'], [1, 'I']];
+const toRoman = (n: number) =>
+  ROMAN.reduce((out, [v, r]) => {
+    while (n >= v) {
+      out += r;
+      n -= v;
+    }
+    return out;
+  }, '');
+
+/** Today's edition: the real date, volume = years since the press started, number = day of the year. */
+const todaysEdition = () => {
+  const now = new Date();
+  const start = Date.UTC(now.getFullYear(), 0, 0);
+  const day = Math.floor((Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()) - start) / 86_400_000);
+  return {
+    long: now.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }),
+    short: now.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }),
+    folio: `Vol. ${toRoman(Math.max(1, now.getFullYear() - CAREER_START_YEAR + 1))} — No. ${day}`,
+  };
+};
+
 const lineReveal = {
   hidden: { y: '115%' },
   visible: (i: number) => ({
@@ -49,6 +71,7 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
   const [resumeOpen, setResumeOpen] = useState(false);
   const state = introDone ? 'visible' : 'hidden';
   const tilt = useTilt3D({ max: 6 });
+  const [edition] = useState(todaysEdition);
 
   const scrollToProjects = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -86,13 +109,14 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
           animate={state}
           className="grid grid-cols-2 border-b border-ink font-monopress text-[9px] uppercase tracking-[0.18em] text-ink-mute sm:grid-cols-3 sm:text-[10px]"
         >
-          <span className="py-2 pr-3">Vol. 01 — No. 01</span>
+          <time className="py-2 pr-3" dateTime={new Date().toISOString().slice(0, 10)}>
+            <span className="sm:hidden">{edition.short}</span>
+            <span className="hidden sm:inline">{edition.long}</span>
+          </time>
           <span className="hidden border-l border-ink/20 py-2 px-3 text-center sm:block">
             {CITY} · India
           </span>
-          <span className="border-l border-ink/20 py-2 pl-3 text-right">
-            Full-Stack Developer
-          </span>
+          <span className="border-l border-ink/20 py-2 pl-3 text-right">{edition.folio}</span>
         </motion.div>
 
         {/* ===== Front page ===== */}

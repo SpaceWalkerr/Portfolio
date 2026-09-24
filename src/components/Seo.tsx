@@ -63,9 +63,10 @@ const Seo = ({ title, description, path, image, type = 'website', noindex = fals
     setMeta('meta[property="og:url"]', 'property', 'og:url', url);
     setMeta('meta[property="og:image"]', 'property', 'og:image', ogImage);
     setMeta('meta[property="og:type"]', 'property', 'og:type', type);
-    // Project screenshots are 1280x800; the default og-image.png is 1200x630
-    setMeta('meta[property="og:image:width"]', 'property', 'og:image:width', image ? '1280' : '1200');
-    setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', image ? '800' : '630');
+    // Project screenshots are 1280x800; generated /og/* cards and the default og-image.png are 1200x630
+    const isScreenshot = Boolean(image) && !image!.startsWith('/og/');
+    setMeta('meta[property="og:image:width"]', 'property', 'og:image:width', isScreenshot ? '1280' : '1200');
+    setMeta('meta[property="og:image:height"]', 'property', 'og:image:height', isScreenshot ? '800' : '630');
     setMeta('meta[name="twitter:title"]', 'name', 'twitter:title', title);
     setMeta('meta[name="twitter:description"]', 'name', 'twitter:description', description);
     setMeta('meta[name="twitter:image"]', 'name', 'twitter:image', ogImage);

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Github, Linkedin, Twitter, Mail, Braces, Coffee } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
 import { sections, LOCATION } from '../data/site';
 import { useSectionNav } from '../hooks/useSectionNav';
@@ -91,13 +91,28 @@ const Footer = () => {
               </li>
               <li className="text-ink-mute">{LOCATION}</li>
             </ul>
-            <button
-              type="button"
-              onClick={() => setResumeModalOpen(true)}
-              className="mt-4 border border-ink px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper"
-            >
-              The Résumé
-            </button>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => setResumeModalOpen(true)}
+                className="border border-ink px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper"
+              >
+                The Résumé
+              </button>
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="inline-flex items-center gap-1.5 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                <Printer size={13} /> Print this edition
+              </button>
+              <a
+                href="/rss.xml"
+                className="inline-flex items-center gap-1.5 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                <Rss size={13} /> RSS
+              </a>
+            </div>
           </div>
         </div>
 

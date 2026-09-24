@@ -68,5 +68,26 @@
       "fork": false
     }
   ],
-  "totalStars": 0
+  "totalStars": 0,
+  "leetcode": {
+    "username": "SurajNandan",
+    "solved": {
+      "all": 875,
+      "easy": 286,
+      "medium": 430,
+      "hard": 159
+    },
+    "available": {
+      "all": 4060,
+      "easy": 966,
+      "medium": 2117,
+      "hard": 977
+    },
+    "ranking": 52578,
+    "contest": {
+      "rating": 1492,
+      "attended": 6,
+      "topPercentage": 47.1
+    }
+  }
 }

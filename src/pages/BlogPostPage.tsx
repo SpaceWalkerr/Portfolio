@@ -1,12 +1,56 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock } from 'lucide-react';
-import { getPostBySlug } from '../data/posts';
+import { ArrowLeft, ArrowRight, Calendar, Clock, Link2, Check, Linkedin, Twitter, Rss } from 'lucide-react';
+import { getPostBySlug, posts } from '../data/posts';
 import { getProjectBySlug, projects } from '../data/projects';
 import { PressTag } from '../components/ui/press';
 import PostBody from '../components/PostBody';
 import Seo, { SITE_URL } from '../components/Seo';
 import NotFound from './NotFound';
+
+/** Share row — plain links, no third-party scripts or trackers. */
+const ShareRow = ({ url, title }: { url: string; title: string }) => {
+  const [copied, setCopied] = useState(false);
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* clipboard blocked — the other options still work */
+    }
+  };
+  const link =
+    'inline-flex items-center gap-1.5 border border-ink/30 px-3 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink';
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <span className="mr-1 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">Pass it on</span>
+      <button type="button" onClick={copy} className={link}>
+        {copied ? <Check size={13} /> : <Link2 size={13} />}
+        {copied ? 'Copied' : 'Copy link'}
+      </button>
+      <a
+        className={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`}
+      >
+        <Linkedin size={13} /> LinkedIn
+      </a>
+      <a
+        className={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        href={`https://x.com/intent/post?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}&via=SurajNandan1625`}
+      >
+        <Twitter size={13} /> Post
+      </a>
+      <a className={link} href="/rss.xml" title="Subscribe via RSS">
+        <Rss size={13} /> RSS
+      </a>
+    </div>
+  );
+};
 
 const BlogPostPage = () => {
   const { slug = '' } = useParams();
@@ -19,6 +63,10 @@ const BlogPostPage = () => {
   if (!post) return <NotFound />;
 
   const path = `/blog/${post.slug}`;
+  // posts are filed newest-first
+  const index = posts.findIndex((p) => p.slug === post.slug);
+  const newer = index > 0 ? posts[index - 1] : undefined;
+  const older = index < posts.length - 1 ? posts[index + 1] : undefined;
   const related =
     (post.relatedProject &&
       (getProjectBySlug(post.relatedProject) ||
@@ -57,6 +105,7 @@ const BlogPostPage = () => {
         title={`${post.title} — Suraj Nandan`}
         description={post.excerpt.slice(0, 200)}
         path={path}
+        image={`/og/blog/${post.slug}.png`}
         type="article"
         jsonLd={jsonLd}
       />
@@ -97,6 +146,10 @@ const BlogPostPage = () => {
             {post.excerpt}
           </p>
 
+          <div className="mt-6">
+            <ShareRow url={`${SITE_URL}${path}`} title={post.title} />
+          </div>
+
           <div className="my-8 border-t-2 border-ink/20" />
 
           <PostBody content={post.content} />
@@ -124,7 +177,36 @@ const BlogPostPage = () => {
             </div>
           )}
 
-          <div className="mt-14">
+          {(newer || older) && (
+            <nav aria-label="More articles" className="mt-14 grid grid-cols-2 border-y-2 border-ink">
+              {older ? (
+                <Link to={`/blog/${older.slug}`} className="group border-r border-ink py-5 pr-4 transition-colors hover:text-oxblood">
+                  <span className="flex items-center gap-1.5 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+                    <ArrowLeft size={12} className="transition-transform group-hover:-translate-x-0.5" /> Earlier
+                  </span>
+                  <span className="mt-1.5 line-clamp-2 block font-display text-sm font-black uppercase leading-tight sm:text-base">
+                    {older.title}
+                  </span>
+                </Link>
+              ) : (
+                <span className="border-r border-ink" />
+              )}
+              {newer ? (
+                <Link to={`/blog/${newer.slug}`} className="group py-5 pl-4 text-right transition-colors hover:text-oxblood">
+                  <span className="flex items-center justify-end gap-1.5 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+                    Later <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                  <span className="mt-1.5 line-clamp-2 block font-display text-sm font-black uppercase leading-tight sm:text-base">
+                    {newer.title}
+                  </span>
+                </Link>
+              ) : (
+                <span />
+              )}
+            </nav>
+          )}
+
+          <div className="mt-10">
             <Link
               to="/#blog"
               className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink hover:text-oxblood"

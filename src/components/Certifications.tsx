@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { ExternalLink, Search, X } from 'lucide-react';
 import { useState, lazy, Suspense } from 'react';
 import { PressSection, SectionMasthead, PressButton, pressReveal } from './ui/press';
 import { CertificateCard } from './ui/certificate-card';
@@ -22,15 +22,22 @@ const Certifications = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [showAll, setShowAll] = useState(false);
   const [selectedCertificate, setSelectedCertificate] = useState<Certificate | null>(null);
+  const [query, setQuery] = useState('');
   const seal = useInViewOnce<HTMLDivElement>();
 
-  const visibleOther =
-    activeFilter === 'All' || activeFilter === 'Featured'
+  const q = query.trim().toLowerCase();
+  const matches = (c: Certificate) =>
+    [c.title, c.platform, c.category, c.year, c.score ?? ''].some((f) => f.toLowerCase().includes(q));
+
+  // A search looks across the whole archive, featured entries included
+  const visibleOther = q
+    ? certifications.filter(matches)
+    : activeFilter === 'All' || activeFilter === 'Featured'
       ? otherCerts
       : otherCerts.filter((c) => c.category === activeFilter);
 
-  const showFeatured = activeFilter === 'All' || activeFilter === 'Featured';
-  const showOther = activeFilter !== 'Featured' && visibleOther.length > 0;
+  const showFeatured = !q && (activeFilter === 'All' || activeFilter === 'Featured');
+  const showOther = (q || activeFilter !== 'Featured') && visibleOther.length > 0;
 
   return (
     <PressSection id="certifications" className="bg-paper-bright">
@@ -41,8 +48,34 @@ const Certifications = () => {
         standfirst="Validated skills and milestones, indexed by category — a record of continuous learning."
       />
 
+      {/* Search the archive */}
+      <div className="mb-4 flex items-center gap-3 border border-ink/40 bg-paper px-4 focus-within:border-ink">
+        <Search size={16} className="shrink-0 text-ink-mute" />
+        <label htmlFor="cert-search" className="sr-only">
+          Search certifications
+        </label>
+        <input
+          id="cert-search"
+          type="search"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder={`Search ${certifications.length} entries — e.g. "Java", "NPTEL", "hackathon"`}
+          className="w-full bg-transparent py-3 font-editorial text-[15px] text-ink placeholder:text-ink-faint focus:outline-none [&::-webkit-search-cancel-button]:hidden"
+        />
+        {query && (
+          <button
+            type="button"
+            onClick={() => setQuery('')}
+            aria-label="Clear search"
+            className="shrink-0 p-1 text-ink-mute hover:text-ink"
+          >
+            <X size={15} />
+          </button>
+        )}
+      </div>
+
       {/* Filter — index tabs */}
-      <div className="mb-10 flex flex-wrap gap-2 border-y border-ink py-4">
+      <div className={`mb-10 flex flex-wrap gap-2 border-y border-ink py-4 ${q ? 'pointer-events-none opacity-40' : ''}`}>
         {certificationCategories.map((category) => (
           <button
             key={category}
@@ -143,11 +176,15 @@ const Certifications = () => {
           viewport={{ once: true, margin: '-40px' }}
         >
           <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-[-0.01em]">
-            {activeFilter === 'All' ? 'All Other Entries' : activeFilter}
+            {q
+              ? `${visibleOther.length} ${visibleOther.length === 1 ? 'entry' : 'entries'} for “${query.trim()}”`
+              : activeFilter === 'All'
+                ? 'All Other Entries'
+                : activeFilter}
           </h3>
 
           <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-            {(showAll ? visibleOther : visibleOther.slice(0, 12)).map((cert, index) => (
+            {(showAll || q ? visibleOther : visibleOther.slice(0, 12)).map((cert, index) => (
               <div key={cert.title} className="mb-5 break-inside-avoid">
                 <CertificateCard
                   certificate={cert}
@@ -158,7 +195,7 @@ const Certifications = () => {
             ))}
           </div>
 
-          {visibleOther.length > 12 && (
+          {!q && visibleOther.length > 12 && (
             <div className="mt-8 flex justify-center">
               <PressButton variant="outline" onClick={() => setShowAll(!showAll)}>
                 {showAll ? 'Show Less' : `View All (${visibleOther.length})`}
@@ -166,6 +203,12 @@ const Certifications = () => {
             </div>
           )}
         </motion.div>
+      )}
+
+      {q && visibleOther.length === 0 && (
+        <p className="border-y border-ink/30 py-8 text-center font-editorial text-[15px] italic text-ink-mute">
+          Nothing on file for “{query.trim()}”.
+        </p>
       )}
 
       {/* Certificate detail modal */}

@@ -17,6 +17,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
+import { loadData } from './load-data.mjs';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../..');
 const distDir = path.join(root, 'dist');
@@ -87,6 +88,41 @@ try {
       await page.close();
     }
   };
+
+  // Social cards for articles — 1200x630, set in the site's own type
+  const { posts } = await loadData();
+  const css = fs.readdirSync(path.join(distDir, 'assets')).find((f) => /^index-.*\.css$/.test(f));
+  const esc = (t) => t.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+  const ogDir = path.join(distDir, 'og', 'blog');
+  fs.mkdirSync(ogDir, { recursive: true });
+  const card = await browser.newPage();
+  await card.setViewport({ width: 1200, height: 630 });
+  for (const post of posts) {
+    await card.setContent(
+      `<!doctype html><html><head><link rel="stylesheet" href="${ORIGIN}/assets/${css}"></head>
+      <body style="margin:0">
+        <div style="width:1200px;height:630px;box-sizing:border-box;padding:56px 64px;background:#e9e4d6;color:#17171a;display:flex;flex-direction:column">
+          <div style="border-top:6px double #17171a;padding-top:14px;display:flex;justify-content:space-between;font:400 15px 'Space Mono';letter-spacing:.24em;text-transform:uppercase">
+            <span style="color:#8a2a2a">The Op-Ed</span><span style="color:#57534a">${esc(post.category)} · ${post.readTime} read</span>
+          </div>
+          <div style="border-top:1px solid #17171a;margin-top:14px"></div>
+          <div style="flex:1;display:flex;align-items:center">
+            <h1 style="margin:0;font:900 ${post.title.length > 60 ? 58 : 70}px/0.95 'Archivo Variable';letter-spacing:-.02em;text-transform:uppercase">${esc(post.title)}</h1>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:flex-end;border-top:1px solid #17171a;padding-top:16px">
+            <span style="font:italic 400 34px 'Newsreader Variable'">The Nandan Review</span>
+            <span style="font:400 15px 'Space Mono';letter-spacing:.16em;text-transform:uppercase;color:#57534a">surajnandan.in</span>
+          </div>
+          <div style="height:10px;background:#c6392b;margin:18px -64px -56px"></div>
+        </div>
+      </body></html>`,
+      { waitUntil: 'load', timeout: 20_000 }
+    );
+    await card.evaluate(() => document.fonts.ready);
+    await card.screenshot({ path: path.join(ogDir, `${post.slug}.png`) });
+  }
+  await card.close();
+  console.log(`prerender: ${posts.length} article cards → dist/og/blog/`);
 
   console.log(`prerender: ${routes.length} routes + 404\n`);
   for (const route of routes) {

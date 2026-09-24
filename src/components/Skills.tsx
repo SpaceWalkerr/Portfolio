@@ -1,75 +1,10 @@
-import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { X, ArrowUpRight } from 'lucide-react';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
-
-const skillCategories = [
-  {
-    ref: 'I',
-    title: 'Programming Languages',
-    skills: [
-      { name: 'Java', level: 90 },
-      { name: 'TypeScript', level: 88 },
-      { name: 'Python', level: 85 },
-      { name: 'JavaScript', level: 88 },
-    ],
-  },
-  {
-    ref: 'II',
-    title: 'Frontend Development',
-    skills: [
-      { name: 'React.js', level: 90 },
-      { name: 'Next.js', level: 85 },
-      { name: 'Tailwind CSS', level: 92 },
-      { name: 'Framer Motion', level: 85 },
-      { name: 'Three.js / R3F', level: 78 },
-      { name: 'HTML5 & CSS3', level: 95 },
-    ],
-  },
-  {
-    ref: 'III',
-    title: 'Backend Development',
-    skills: [
-      { name: 'Node.js', level: 85 },
-      { name: 'Express.js', level: 88 },
-      { name: 'REST API Development', level: 90 },
-      { name: 'Prisma ORM', level: 82 },
-      { name: 'JWT & Auth', level: 85 },
-      { name: 'Stripe / Razorpay', level: 80 },
-    ],
-  },
-  {
-    ref: 'IV',
-    title: 'Databases & Deployment',
-    skills: [
-      { name: 'PostgreSQL', level: 85 },
-      { name: 'Supabase', level: 88 },
-      { name: 'Vercel', level: 90 },
-      { name: 'Render', level: 85 },
-      { name: 'Railway', level: 82 },
-      { name: 'GoDaddy', level: 80 },
-    ],
-  },
-  {
-    ref: 'V',
-    title: 'AI / Machine Learning',
-    skills: [
-      { name: 'RAG Pipelines', level: 82 },
-      { name: 'Groq / OpenAI', level: 85 },
-      { name: 'Claude API', level: 83 },
-      { name: 'Prompt Engineering', level: 86 },
-      { name: 'pgvector / Embeddings', level: 78 },
-    ],
-  },
-  {
-    ref: 'VI',
-    title: 'Core Computer Science',
-    skills: [
-      { name: 'Data Structures & Algorithms', level: 90 },
-      { name: 'Operating Systems', level: 85 },
-      { name: 'Computer Networks', level: 85 },
-      { name: 'Object Oriented Programming', level: 92 },
-    ],
-  },
-];
+import { skillCategories } from '../data/skills';
+import { usageFor } from '../lib/skillIndex';
 
 /**
  * Percentages invite the wrong question ("why only 88%?"). Group by how the
@@ -95,7 +30,95 @@ const TierMarks = ({ level }: { level: number }) => {
   );
 };
 
+/** "Filed under React" — every project, role and article that used the chosen skill. */
+const SkillDossier = ({ skill, onClose }: { skill: string; onClose: () => void }) => {
+  const usage = usageFor(skill);
+  const group = (label: string, items: { key: string; title: string; to?: string; href?: string; meta?: string }[]) =>
+    items.length > 0 && (
+      <div>
+        <span className="font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+          {label} · {items.length}
+        </span>
+        <ul className="mt-2 divide-y divide-ink/15 border-t border-ink/30">
+          {items.map((item) => (
+            <li key={item.key}>
+              {item.to ? (
+                <Link
+                  to={item.to}
+                  className="group flex items-baseline justify-between gap-3 py-2.5 font-editorial text-[15px] text-ink hover:text-oxblood"
+                >
+                  <span>{item.title}</span>
+                  <span className="shrink-0 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-faint group-hover:text-oxblood">
+                    {item.meta ?? 'Read'} →
+                  </span>
+                </Link>
+              ) : (
+                <div className="flex items-baseline justify-between gap-3 py-2.5 font-editorial text-[15px] text-ink">
+                  <span>{item.title}</span>
+                  {item.meta && (
+                    <span className="shrink-0 font-monopress text-[9px] uppercase tracking-[0.12em] text-ink-faint">
+                      {item.meta}
+                    </span>
+                  )}
+                </div>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -8 }}
+      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+      className="mt-12 border-2 border-ink bg-paper p-5 sm:p-7"
+      aria-live="polite"
+    >
+      <div className="flex items-start justify-between gap-4 border-b-4 border-double border-ink pb-3">
+        <div>
+          <span className="font-monopress text-[10px] uppercase tracking-[0.2em] text-oxblood">Filed under</span>
+          <h3 className="mt-1 font-display text-2xl font-black uppercase tracking-[-0.01em] sm:text-3xl">{skill}</h3>
+        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Close"
+          className="border border-ink/40 p-1.5 text-ink transition-colors hover:border-oxblood hover:text-oxblood"
+        >
+          <X size={16} />
+        </button>
+      </div>
+      <div className="mt-5 grid gap-8 lg:grid-cols-3">
+        {group(
+          'Projects',
+          usage.projects.map((p) => ({ key: p.slug, title: p.name, to: `/projects/${p.slug}`, meta: p.category }))
+        )}
+        {group(
+          'In the field',
+          usage.roles.map((r) => ({ key: r.company, title: `${r.role} — ${r.company}`, meta: r.period || 'Freelance' }))
+        )}
+        {group(
+          'Articles',
+          usage.posts.map((p) => ({ key: p.slug, title: p.title, to: `/blog/${p.slug}`, meta: p.readTime }))
+        )}
+      </div>
+    </motion.div>
+  );
+};
+
 const Skills = () => {
+  const [selected, setSelected] = useState<string | null>(null);
+  const dossierRef = useRef<HTMLDivElement>(null);
+
+  const choose = (skill: string) => {
+    setSelected((cur) => (cur === skill ? null : skill));
+    // Bring the dossier into view once it has rendered
+    requestAnimationFrame(() => dossierRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }));
+  };
+
   return (
     <PressSection id="skills" className="bg-paper-bright">
       <SectionMasthead
@@ -137,9 +160,26 @@ const Skills = () => {
             <ul className="space-y-2.5">
               {[...category.skills]
                 .sort((a, b) => b.level - a.level)
-                .map((skill) => (
+                .map((skill) => {
+                  const uses = usageFor(skill.name).total;
+                  return (
                   <li key={skill.name} className="flex items-baseline gap-2">
-                    <span className="font-editorial text-[14.5px] text-ink">{skill.name}</span>
+                    {uses > 0 ? (
+                      <button
+                        type="button"
+                        onClick={() => choose(skill.name)}
+                        aria-pressed={selected === skill.name}
+                        title={`See where ${skill.name} was used`}
+                        className={`group/skill flex items-baseline gap-1.5 text-left font-editorial text-[14.5px] underline decoration-dotted decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood ${
+                          selected === skill.name ? 'text-oxblood decoration-oxblood' : 'text-ink'
+                        }`}
+                      >
+                        {skill.name}
+                        <sup className="font-monopress text-[8.5px] not-italic text-ink-faint group-hover/skill:text-oxblood">{uses}</sup>
+                      </button>
+                    ) : (
+                      <span className="font-editorial text-[14.5px] text-ink">{skill.name}</span>
+                    )}
                     {/* dot leader, like a classified listing */}
                     <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-ink/35" />
                     <span className="flex items-center gap-2">
@@ -149,10 +189,22 @@ const Skills = () => {
                       <TierMarks level={skill.level} />
                     </span>
                   </li>
-                ))}
+                  );
+                })}
             </ul>
           </motion.div>
         ))}
+      </div>
+
+      <p className="mt-10 font-editorial text-[13.5px] italic text-ink-mute">
+        <ArrowUpRight size={13} className="mr-1 inline" />
+        Underlined skills are cross-referenced — pick one to see every project, role and article that used it.
+      </p>
+
+      <div ref={dossierRef} className="scroll-mt-24">
+        <AnimatePresence mode="wait">
+          {selected && <SkillDossier key={selected} skill={selected} onClose={() => setSelected(null)} />}
+        </AnimatePresence>
       </div>
     </PressSection>
   );

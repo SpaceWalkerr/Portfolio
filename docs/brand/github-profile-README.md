@@ -1,10 +1,10 @@
 <div align="center">
 
-<img width="100%" src="https://capsule-render.vercel.app/api?type=waving&height=260&section=header&color=0:17171a,60:17171a,100:8a2a2a&text=Suraj%20Nandan&fontSize=72&fontColor=e9e4d6&fontAlignY=38&desc=Full-Stack%20%26%20AI%20Engineer&descSize=20&descAlignY=58" alt="Suraj Nandan — Full-Stack & AI Engineer" />
+<img width="100%" src="./assets/banner.png" alt="Suraj Nandan — Full-Stack & AI Engineer" />
 
 ### Reliable web products and grounded AI systems, built end to end.
 
-[**surajnandan.in**](https://surajnandan.in) · [LinkedIn](https://www.linkedin.com/in/surajnandan/) · [LeetCode](https://leetcode.com/u/SurajNandan/) · [Email](mailto:surajnandan78@gmail.com)
+[**surajnandan.in**](https://surajnandan.in) · [LinkedIn](https://www.linkedin.com/in/surajnandan/) · [LeetCode](https://leetcode.com/u/SurajNandan/) · [Instagram](https://instagram.com/surajnandan_) · [Email](mailto:surajnandan78@gmail.com)
 
 </div>
 
@@ -45,7 +45,7 @@ More projects, articles and a live Ask-the-Editor assistant at **[surajnandan.in
 
 ## By the numbers
 
-**875+** LeetCode problems solved · **33** public repositories · **B.Tech CSE**, SRM Institute of Science and Technology, Delhi NCR Campus ('27)
+**875+** LeetCode problems solved · **30+** public repositories · **B.Tech CSE**, SRM Institute of Science and Technology, Delhi NCR Campus ('27)
 
 <div align="center">
 

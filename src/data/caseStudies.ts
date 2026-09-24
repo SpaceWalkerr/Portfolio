@@ -30,7 +30,7 @@ export interface CaseStudy {
 
 export const caseStudies: Record<string, CaseStudy> = {
   'knot-ai': {
-    published: false,
+    published: true,
     role: 'Solo — design, voice pipeline, interview engine, report grounding',
     context: 'Hackathon build (Echo Sphere × Agora) · Aug–Sep 2026',
     thesis: 'Instruction is not control. The model supplies judgement and phrasing; the server decides what happens.',
@@ -95,7 +95,7 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
 
   cardbridge: {
-    published: false,
+    published: true,
     role: 'Solo — schema, Row Level Security, state machine, React front end',
     context: 'Personal project · Jun–Aug 2026',
     thesis: 'When money moves, the rules belong in the database — not in whichever client happens to call it.',
@@ -156,7 +156,7 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
 
   'hospitality-ai': {
-    published: false,
+    published: true,
     role: 'Solo — product, design system, AI services, matching engine, tests',
     context: 'GE HealthCare Precision Care Challenge 2026 · Aug–Sep 2026',
     thesis: 'Let the model read the policy. Never let it do the arithmetic on somebody’s hospital bill.',
@@ -207,7 +207,7 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
 
   'job-scheduler': {
-    published: false,
+    published: true,
     role: 'Solo — backend, scheduling algorithms, dashboard, tests',
     context: 'Personal project · Jul–Sep 2026',
     thesis: 'The most important line of code is a carefully worded `FOR UPDATE SKIP LOCKED`.',
@@ -257,8 +257,8 @@ export const caseStudies: Record<string, CaseStudy> = {
   },
 
   gigshield: {
-    published: false,
-    role: 'Team of three — I built the trigger engine, payout flow and its backend, the worker dashboard, admin and fraud-review screens, role-based routing, and the 3D landing',
+    published: true,
+    role: 'Team of three — I built the trigger engine, payout lifecycle and receipts, the rider dashboard, admin and fraud-review screens, role-based routing and the 3D landing; the liveness check with Rishabh',
     context: 'Team hackathon build · Mar–Jun 2026',
     thesis: 'For a worker paid weekly, a claim that settles next month is no claim at all.',
     problem: [
@@ -267,12 +267,12 @@ export const caseStudies: Record<string, CaseStudy> = {
     ],
     approach: [
       'Riders pick a weekly plan (Basic ₹79, Standard ₹129, Pro ₹179) with a daily payout cap and covered hours. A trigger engine watches for disruptions — heavy rain, heatwave, AQI spikes, platform outages, curfews, strikes and zone closures — and scores each with a confidence value built from a per-trigger base, weather-source reliability and the rider’s risk level.',
-      'Weather is read from Open-Meteo with an automatic fallback to wttr.in, and confidence rises when more sources agree. Cooldown and de-duplication windows stop one event from firing repeatedly, every trigger is written to an audit trail synced to the backend, and claims move through a visible lifecycle — pending verification → verified → processing → settled — with fraud checks and selfie verification on risky sessions.',
+      'Weather is read from Open-Meteo with an automatic fallback to wttr.in, and confidence rises when more sources agree. Cooldown and de-duplication windows stop one event from firing repeatedly, every trigger is written to an audit trail synced to the backend, and claims move through a visible lifecycle — pending verification → verified → processing → settled — with fraud checks and a liveness check on risky sessions. That check asks for a random hand gesture, which MediaPipe’s hand-landmark model classifies right in the browser.',
     ],
     flow: [
       { label: 'Weather & status', detail: 'Open-Meteo, wttr.in fallback' },
       { label: 'Trigger engine', detail: 'confidence, cooldown, de-dup' },
-      { label: 'Fraud checks', detail: 'anomaly, location, selfie' },
+      { label: 'Fraud checks', detail: 'anomaly review, liveness gesture' },
       { label: 'Payout lifecycle', detail: 'pending → settled' },
       { label: 'Dashboards', detail: 'rider + admin views' },
     ],

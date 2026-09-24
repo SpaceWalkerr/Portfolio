@@ -7,7 +7,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { KNOWLEDGE } from './_knowledge.js';
 
-const MODEL = 'claude-opus-5';
+const MODEL = 'claude-haiku-4-5';
 const MAX_TURNS = 12; // messages kept from the conversation
 const MAX_CHARS = 1500; // per visitor message
 const RATE_LIMIT = 20; // requests …
@@ -40,10 +40,10 @@ const json = (status: number, error: string) =>
   new Response(JSON.stringify({ error }), { status, headers: { 'Content-Type': 'application/json' } });
 
 /** Accept only a well-formed, bounded, alternating user/assistant history ending on a user turn. */
-const parseMessages = (body: unknown): Anthropic.Beta.BetaMessageParam[] | null => {
+const parseMessages = (body: unknown): Anthropic.MessageParam[] | null => {
   const raw = (body as { messages?: unknown })?.messages;
   if (!Array.isArray(raw) || raw.length === 0) return null;
-  const messages: Anthropic.Beta.BetaMessageParam[] = [];
+  const messages: Anthropic.MessageParam[] = [];
   for (const m of raw.slice(-MAX_TURNS)) {
     const role = (m as { role?: unknown })?.role;
     const content = (m as { content?: unknown })?.content;
@@ -86,12 +86,9 @@ export async function POST(request: Request): Promise<Response> {
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
       try {
-        const response = client.beta.messages.stream({
+        const response = client.messages.stream({
           model: MODEL,
-          max_tokens: 4096,
-          betas: ['server-side-fallback-2026-07-01'],
-          fallbacks: 'default',
-          output_config: { effort: 'low' },
+          max_tokens: 2048,
           // The dossier is identical on every request — cache it
           system: [{ type: 'text', text: SYSTEM, cache_control: { type: 'ephemeral' } }],
           messages,

@@ -1,9 +1,25 @@
 {
   "redirects": [
     {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.surajnandan.in" }],
-      "destination": "https://surajnandan.in/:path*",
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.surajnandan.in"
+        }
+      ],
+      "destination": "https://surajnandan.in/",
+      "permanent": true
+    },
+    {
+      "source": "/:path+",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.surajnandan.in"
+        }
+      ],
+      "destination": "https://surajnandan.in/:path+",
       "permanent": true
     }
   ],

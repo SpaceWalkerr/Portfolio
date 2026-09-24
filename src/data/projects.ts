@@ -70,6 +70,19 @@ export const projects: Project[] = [
     category: 'Full Stack',
   },
   {
+    slug: 'hr-workflow-designer',
+    name: 'HR Workflow Designer',
+    title: '"HR Workflow Designer" — Visual Workflow Builder',
+    description:
+      'A drag-and-drop workflow builder built as a Tredence Analytics case study, where HR admins compose processes like onboarding, leave approval, and document verification from Start, Task, Approval, Automated Step, and End nodes on a React Flow canvas. Workflows are validated live — missing start or end nodes, disconnected steps, cycles, and required fields — with click-to-jump errors, and a simulation sandbox walks through the flow step by step along Approved, Rejected, or Needs-correction branches with per-step owners and timings. Includes labelled edges, undo/redo, auto-layout, mini-map, JSON import/export, autosave, node version history, and ready-made templates, with the API layer isolated behind endpoint-style mock contracts and validation rules covered by Vitest.',
+    tags: ['React', 'TypeScript', 'Vite', 'React Flow', 'Vitest', 'Graph Validation', 'Workflow Simulation'],
+    liveDemo: 'https://tredence-analytics-case-study.vercel.app/',
+    github: 'https://github.com/SpaceWalkerr/Tredence-Analytics-Case-Study-.git',
+    image: '/shots/hr-workflow-designer.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1512758017271-d7b84c2113f1?w=800&q=80&fm=webp',
+    category: 'Web',
+  },
+  {
     slug: 'internal-gpt',
     name: 'Internal GPT',
     title: '"Internal GPT" — College RAG Helpdesk',

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Pause, Play } from 'lucide-react';
 import { getProjectBySlug, projects } from '../data/projects';
 import { posts } from '../data/posts';
 import { PressTag, PressButton } from '../components/ui/press';
@@ -8,6 +8,7 @@ import Seo, { SITE_URL } from '../components/Seo';
 import NotFound from './NotFound';
 import CaseStudy from '../components/CaseStudy';
 import { getCaseStudy } from '../data/caseStudies';
+import { clipFor, prefersReducedMotion } from '../lib/clips';
 
 const ProjectPage = () => {
   const { slug = '' } = useParams();
@@ -16,6 +17,21 @@ const ProjectPage = () => {
   const preview = new URLSearchParams(search).has('preview');
   const study = getCaseStudy(slug);
   const showStudy = Boolean(study && (study.published || preview));
+  const clip = clipFor(slug);
+  const [motionOk] = useState(() => !prefersReducedMotion());
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [paused, setPaused] = useState(false);
+  const togglePlayback = () => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (v.paused) {
+      v.play().catch(() => {});
+      setPaused(false);
+    } else {
+      v.pause();
+      setPaused(true);
+    }
+  };
   const [imgSrc, setImgSrc] = useState(project?.image ?? '');
 
   useEffect(() => {
@@ -88,18 +104,49 @@ const ProjectPage = () => {
             {project.title}
           </h1>
 
-          <div className="mt-8 overflow-hidden border-2 border-ink">
-            <img
-              src={imgSrc}
-              onError={() => {
-                if (imgSrc !== project.fallbackImage) setImgSrc(project.fallbackImage);
-              }}
-              alt={`Screenshot of ${project.name}`}
-              width={1280}
-              height={800}
-              className="aspect-[16/10] w-full object-cover"
-            />
-          </div>
+          <figure className="relative mt-8 overflow-hidden border-2 border-ink">
+            {clip && motionOk ? (
+              <>
+                <video
+                  key={clip}
+                  ref={videoRef}
+                  src={clip}
+                  poster={imgSrc}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  aria-label={`Scroll-through of the live ${project.name} site`}
+                  className="aspect-[16/10] w-full object-cover object-top"
+                />
+                <button
+                  type="button"
+                  onClick={togglePlayback}
+                  aria-label={paused ? 'Play clip' : 'Pause clip'}
+                  className="absolute bottom-3 right-3 flex items-center gap-1.5 border border-ink bg-paper/90 px-2.5 py-1.5 font-monopress text-[9px] uppercase tracking-[0.14em] text-ink transition-colors hover:bg-ink hover:text-paper"
+                >
+                  {paused ? <Play size={12} /> : <Pause size={12} />}
+                  {paused ? 'Play' : 'Pause'}
+                </button>
+              </>
+            ) : (
+              <img
+                src={imgSrc}
+                onError={() => {
+                  if (imgSrc !== project.fallbackImage) setImgSrc(project.fallbackImage);
+                }}
+                alt={`Screenshot of ${project.name}`}
+                width={1280}
+                height={800}
+                className="aspect-[16/10] w-full object-cover"
+              />
+            )}
+            {clip && motionOk && (
+              <figcaption className="absolute left-0 top-0 bg-ink px-2 py-1 font-monopress text-[9px] uppercase tracking-[0.14em] text-paper">
+                Live capture
+              </figcaption>
+            )}
+          </figure>
 
           <p className="mt-8 max-w-3xl font-editorial text-lg leading-relaxed text-ink">
             {project.description}

@@ -5,6 +5,7 @@ import { getProjectBySlug, projects } from '../data/projects';
 import { posts } from '../data/posts';
 import { PressTag, PressButton } from '../components/ui/press';
 import Seo, { SITE_URL } from '../components/Seo';
+import { PERSON, WEBSITE_REF } from '../lib/schema';
 import NotFound from './NotFound';
 import CaseStudy from '../components/CaseStudy';
 import { getCaseStudy } from '../data/caseStudies';
@@ -57,8 +58,10 @@ const ProjectPage = () => {
       description: project.description,
       url: `${SITE_URL}${path}`,
       image: `${SITE_URL}${project.image}`,
-      author: { '@type': 'Person', name: 'Suraj Nandan', url: SITE_URL },
+      author: PERSON,
+      isPartOf: WEBSITE_REF,
       keywords: project.tags.join(', '),
+      ...(study?.published ? { abstract: study.thesis, creativeWorkStatus: 'Published' } : {}),
       ...(repo ? { codeRepository: repo } : {}),
       sameAs: [project.liveDemo, ...(repo ? [repo] : [])],
     },

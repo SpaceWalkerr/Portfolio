@@ -3,101 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suraj Nandan | Full Stack Developer & Software Engineer Portfolio</title>
-    <meta name="description" content="Suraj Nandan — Full Stack Developer & Software Engineer. Expert in React, Node.js, TypeScript, Python, Java, AI & Machine Learning. View projects, experience, skills, and certifications. Based in India." />
+    <title>Suraj Nandan — Full-Stack &amp; AI Engineer</title>
+    <meta name="description" content="Suraj Nandan is a full-stack and AI engineer from India building reliable web products and grounded AI systems with React, Node.js, TypeScript and PostgreSQL. Case studies, projects and writing." />
     <meta name="author" content="Suraj Nandan" />
-    <meta name="keywords" content="Suraj Nandan, Suraj Nandan portfolio, Suraj Nandan developer, Suraj Nandan software engineer, Suraj Nandan full stack, Suraj Nandan SRM, Full Stack Developer, Software Engineer, React Developer, Node.js Developer, TypeScript, JavaScript, Python, Java, Web Developer, AI Developer, Machine Learning Engineer, Frontend Developer, Backend Developer, surajnandan.in" />
     <link rel="canonical" href="https://surajnandan.in/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#E9E4D6" />
-    
+
     <!-- The hero portrait is the LCP image — start fetching it with the HTML -->
     <link rel="preload" as="image" href="/profile.webp" type="image/webp" />
-    
-    <!-- JSON-LD Structured Data: Person -->
+
+    <!-- Structured data: one Person, referenced by @id from the WebSite and ProfilePage, so search
+         engines tie every page (and every profile in sameAs) to the same Suraj Nandan -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Suraj Nandan",
-      "givenName": "Suraj",
-      "familyName": "Nandan",
-      "url": "https://surajnandan.in",
-      "image": "https://surajnandan.in/og-image.png",
-      "jobTitle": "Full Stack Developer",
-      "description": "Suraj Nandan is a Full Stack Developer & Software Engineer specializing in React, Node.js, TypeScript, Python, Java, and AI-powered systems. Currently pursuing B.Tech in Computer Science at SRM Institute of Science and Technology.",
-      "email": "surajnandan78@gmail.com",
-      "telephone": "+916203484989",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Kishanganj",
-        "addressCountry": "IN"
-      },
-      "alumniOf": {
-        "@type": "EducationalOrganization",
-        "name": "SRM Institute of Science and Technology",
-        "url": "https://www.srmist.edu.in"
-      },
-      "worksFor": {
-        "@type": "Organization",
-        "name": "Xtin Capital",
-        "url": "https://xtincapital.com"
-      },
-      "sameAs": [
-        "https://github.com/SpaceWalkerr",
-        "https://www.linkedin.com/in/surajnandan/",
-        "https://x.com/SurajNandan1625"
-      ],
-      "knowsAbout": ["React", "Next.js", "Node.js", "TypeScript", "JavaScript", "Python", "Java", "PostgreSQL", "Prisma", "REST APIs", "AI", "Machine Learning", "RAG", "Retrieval-Augmented Generation", "Prompt Engineering", "Tailwind CSS", "Framer Motion", "Three.js", "Express.js", "Supabase", "Stripe", "Full Stack Development", "Web Development"],
-      "hasCredential": [
+      "@graph": [
         {
-          "@type": "EducationalOccupationalCredential",
-          "name": "Human Computer Interaction - Gold Medal",
-          "credentialCategory": "certificate",
-          "recognizedBy": {
+          "@type": "Person",
+          "@id": "https://surajnandan.in/#person",
+          "name": "Suraj Nandan",
+          "givenName": "Suraj",
+          "familyName": "Nandan",
+          "url": "https://surajnandan.in/",
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://surajnandan.in/profile.webp",
+            "width": 960,
+            "height": 960,
+            "caption": "Suraj Nandan"
+          },
+          "jobTitle": "Full-Stack & AI Engineer",
+          "description": "Suraj Nandan is a full-stack and AI engineer from Kishanganj, India, who builds reliable web products and grounded AI systems with React, Node.js, TypeScript and PostgreSQL.",
+          "email": "mailto:surajnandan78@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kishanganj",
+            "addressCountry": "IN"
+          },
+          "nationality": { "@type": "Country", "name": "India" },
+          "alumniOf": {
+            "@type": "CollegeOrUniversity",
+            "name": "SRM Institute of Science and Technology",
+            "url": "https://www.srmist.edu.in"
+          },
+          "worksFor": {
             "@type": "Organization",
-            "name": "NPTEL / IIT Delhi"
-          }
+            "name": "Xtin Capital",
+            "url": "https://xtincapital.com"
+          },
+          "sameAs": [
+            "https://github.com/SpaceWalkerr",
+            "https://www.linkedin.com/in/surajnandan/",
+            "https://leetcode.com/u/SurajNandan/",
+            "https://x.com/SurajNandan1625"
+          ],
+          "knowsAbout": ["Full-stack development", "React", "Node.js", "TypeScript", "PostgreSQL", "Supabase", "Retrieval-augmented generation", "LLM applications", "System design", "Data structures and algorithms"],
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "name": "Human Computer Interaction — NPTEL Gold Medal",
+              "credentialCategory": "certificate",
+              "recognizedBy": { "@type": "Organization", "name": "NPTEL / IIT Delhi" }
+            },
+            {
+              "@type": "EducationalOccupationalCredential",
+              "name": "Campus Mantri (Campus Ambassador)",
+              "credentialCategory": "certificate",
+              "recognizedBy": { "@type": "Organization", "name": "GeeksforGeeks" }
+            }
+          ]
         },
         {
-          "@type": "EducationalOccupationalCredential",
-          "name": "Campus Mantri (Campus Ambassador)",
-          "credentialCategory": "certificate",
-          "recognizedBy": {
-            "@type": "Organization",
-            "name": "GeeksforGeeks"
-          }
+          "@type": "WebSite",
+          "@id": "https://surajnandan.in/#website",
+          "url": "https://surajnandan.in/",
+          "name": "Suraj Nandan",
+          "alternateName": ["The Nandan Review", "surajnandan.in"],
+          "publisher": { "@id": "https://surajnandan.in/#person" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "ProfilePage",
+          "@id": "https://surajnandan.in/#profile",
+          "url": "https://surajnandan.in/",
+          "name": "Suraj Nandan — Full-Stack & AI Engineer",
+          "isPartOf": { "@id": "https://surajnandan.in/#website" },
+          "mainEntity": { "@id": "https://surajnandan.in/#person" },
+          "inLanguage": "en"
         }
       ]
-    }
-    </script>
-
-    <!-- JSON-LD Structured Data: WebSite (enables sitelinks search box) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": "Suraj Nandan Portfolio",
-      "alternateName": ["Suraj Nandan", "Suraj Nandan Developer"],
-      "url": "https://surajnandan.in"
-    }
-    </script>
-
-    <!-- JSON-LD Structured Data: ProfilePage -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "ProfilePage",
-      "mainEntity": {
-        "@type": "Person",
-        "name": "Suraj Nandan",
-        "url": "https://surajnandan.in"
-      },
-      "name": "Suraj Nandan — Full Stack Developer & Software Engineer",
-      "description": "Official portfolio of Suraj Nandan. View projects, skills, experience, certifications, and contact information.",
-      "url": "https://surajnandan.in",
-      "inLanguage": "en"
     }
     </script>
 
@@ -106,27 +101,56 @@
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="alternate" type="application/rss+xml" title="The Op-Ed — Suraj Nandan" href="/rss.xml" />
 
-    <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="Suraj Nandan | Full Stack Developer & Software Engineer" />
-    <meta property="og:description" content="Suraj Nandan — Full Stack Developer & Software Engineer. Expert in React, Node.js, TypeScript, Python, Java, AI & ML. View projects, experience, and certifications." />
-    <meta property="og:type" content="website" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="Suraj Nandan — Full-Stack &amp; AI Engineer" />
+    <meta property="og:description" content="Reliable web products and grounded AI systems, built end to end. Case studies, projects and writing by Suraj Nandan." />
+    <meta property="og:type" content="profile" />
+    <meta property="profile:first_name" content="Suraj" />
+    <meta property="profile:last_name" content="Nandan" />
     <meta property="og:url" content="https://surajnandan.in/" />
     <meta property="og:image" content="https://surajnandan.in/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:site_name" content="Suraj Nandan Portfolio" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:image:alt" content="Suraj Nandan — Full-Stack &amp; AI Engineer" />
+    <meta property="og:site_name" content="Suraj Nandan" />
+    <meta property="og:locale" content="en_IN" />
 
-    <!-- Twitter Meta Tags -->
+    <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@SurajNandan1625" />
     <meta name="twitter:creator" content="@SurajNandan1625" />
-    <meta name="twitter:title" content="Suraj Nandan | Full Stack Developer & Software Engineer" />
-    <meta name="twitter:description" content="Suraj Nandan — Full Stack Developer & Software Engineer. Expert in React, Node.js, TypeScript, Python, Java, AI & ML. View projects, experience, and certifications." />
+    <meta name="twitter:title" content="Suraj Nandan — Full-Stack &amp; AI Engineer" />
+    <meta name="twitter:description" content="Reliable web products and grounded AI systems, built end to end. Case studies, projects and writing by Suraj Nandan." />
     <meta name="twitter:image" content="https://surajnandan.in/og-image.png" />
   </head>
   <body>
     <div id="root"></div>
+    <!-- A plain-text summary for crawlers that don't run JavaScript; people with JS never see it -->
+    <noscript>
+      <main>
+        <h1>Suraj Nandan — Full-Stack &amp; AI Engineer</h1>
+        <p>
+          Suraj Nandan is a full-stack and AI engineer from Kishanganj, India. He builds reliable web products and
+          grounded AI systems end to end with React, Node.js, TypeScript and PostgreSQL, and studies Computer Science
+          at SRM Institute of Science and Technology.
+        </p>
+        <h2>Case studies</h2>
+        <ul>
+          <li><a href="/projects/knot-ai">Knot.ai — an adaptive AI interview panel with evidence-grounded reports</a></li>
+          <li><a href="/projects/hospitality-ai">Hospitality.ai — an insurance-aware hospital and treatment navigator</a></li>
+          <li><a href="/projects/cardbridge">CardBridge — a card-discount marketplace with a database-enforced escrow state machine</a></li>
+          <li><a href="/projects/job-scheduler">Job Scheduler — a distributed job scheduler on PostgreSQL</a></li>
+          <li><a href="/projects/gigshield">GigShield — parametric income protection for delivery riders</a></li>
+        </ul>
+        <p>
+          <a href="/rss.xml">Articles (RSS)</a> ·
+          <a href="https://github.com/SpaceWalkerr">GitHub</a> ·
+          <a href="https://www.linkedin.com/in/surajnandan/">LinkedIn</a> ·
+          <a href="https://leetcode.com/u/SurajNandan/">LeetCode</a> ·
+          <a href="mailto:surajnandan78@gmail.com">surajnandan78@gmail.com</a>
+        </p>
+      </main>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

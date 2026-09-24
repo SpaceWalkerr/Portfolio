@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Suraj Nandan — Full-Stack &amp; AI Engineer</title>
-    <meta name="description" content="Suraj Nandan is a full-stack and AI engineer from India building reliable web products and grounded AI systems with React, Node.js, TypeScript and PostgreSQL. Case studies, projects and writing." />
+    <meta name="description" content="Suraj Nandan is a full-stack &amp; AI engineer from India building reliable web products and grounded AI systems. Case studies, projects and writing." />
     <meta name="author" content="Suraj Nandan" />
     <link rel="canonical" href="https://surajnandan.in/" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
@@ -57,6 +57,10 @@
             "https://www.linkedin.com/in/surajnandan/",
             "https://leetcode.com/u/SurajNandan/",
             "https://x.com/SurajNandan1625"
+          ],
+          "award": [
+            "Campus Winner, ACG Pack A Pitch 2.0 — Technology & Engineering (2026)",
+            "NPTEL Gold Medal — Human Computer Interaction (IIT Delhi)"
           ],
           "knowsAbout": ["Full-stack development", "React", "Node.js", "TypeScript", "PostgreSQL", "Supabase", "Retrieval-augmented generation", "LLM applications", "System design", "Data structures and algorithms"],
           "hasCredential": [
@@ -124,11 +128,19 @@
     <meta name="twitter:image" content="https://surajnandan.in/og-image.png" />
   </head>
   <body>
-    <div id="root"></div>
+    <!-- Static first paint: a real top-level heading for crawlers that read the raw HTML, shown until the
+         app mounts (React replaces #root's contents on first render) -->
+    <div id="root">
+      <div style="min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:24px;text-align:center;background:var(--color-paper,#e9e4d6);color:var(--color-ink,#17171a)">
+        <p style="margin:0;font:400 10px 'Space Mono',ui-monospace,monospace;letter-spacing:.4em;text-transform:uppercase;color:var(--color-oxblood,#8a2a2a)">The Nandan Review</p>
+        <h1 style="margin:0;font:italic 400 clamp(30px,5vw,40px)/1.1 'Newsreader Variable',Georgia,serif">Suraj Nandan</h1>
+        <p style="margin:0;font:400 10px 'Space Mono',ui-monospace,monospace;letter-spacing:.24em;text-transform:uppercase;color:var(--color-ink-mute,#57534a)">Full-Stack &amp; AI Engineer</p>
+      </div>
+    </div>
     <!-- A plain-text summary for crawlers that don't run JavaScript; people with JS never see it -->
     <noscript>
       <main>
-        <h1>Suraj Nandan — Full-Stack &amp; AI Engineer</h1>
+        <p><strong>Suraj Nandan — Full-Stack &amp; AI Engineer</strong></p>
         <p>
           Suraj Nandan is a full-stack and AI engineer from Kishanganj, India. He builds reliable web products and
           grounded AI systems end to end with React, Node.js, TypeScript and PostgreSQL, and studies Computer Science

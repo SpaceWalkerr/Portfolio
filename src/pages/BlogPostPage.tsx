@@ -106,7 +106,7 @@ const BlogPostPage = () => {
     <>
       <Seo
         title={`${post.title} — Suraj Nandan`}
-        description={post.excerpt.slice(0, 200)}
+        description={post.excerpt}
         path={path}
         image={`/og/blog/${post.slug}.png`}
         type="article"

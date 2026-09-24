@@ -38,6 +38,7 @@ export const certifications: Certificate[] = [
   { title: 'Two Days Workshop on ArduBotics', platform: 'SRM Institute of Science & Technology', year: 'February 2024', category: 'Workshops', url: '/certificates/ArduBotics%20Workshop.jpg' },
 
   // Competitions & Hackathons (rest)
+  { title: 'ACG Pack A Pitch 2.0 — Campus Winner (Technology & Engineering)', platform: 'ACG World', year: 'Sep 2026', category: 'Competitions', url: undefined, score: 'Campus Winner · Grand Finale' },
   { title: 'Burnout (Innovate 2024) — Participation', platform: 'SRM Institute of Science & Technology', year: 'April 2024', category: 'Competitions', url: '/certificates/BurnOut.jpg' },
   { title: 'Meditech Innovation (Innovate 2024) — III Position', platform: 'SRM IST', year: 'April 2024', category: 'Competitions', url: '/certificates/Meditech.jpg' },
   { title: 'Err Hunt 2.0', platform: 'Computer Society of India (SRMIST)', year: 'August 2024', category: 'Competitions', url: '/certificates/err-hunt-2-0.pdf' },
@@ -63,12 +64,12 @@ export const certifications: Certificate[] = [
 ];
 
 export const notableAchievements = [
+  { title: 'ACG Pack A Pitch 2.0 — Campus Winner', description: 'Technology & Engineering category — an AI-first concept for pharmaceutical glass-vial inspection, with Aditya Idnani and Lavanya Saxena; through to the Grand Finale' },
   { title: 'NPTEL Gold Medal', description: 'Secured 90/100 score in Human Computer Interaction' },
   { title: 'Campus Mantri', description: 'GeeksforGeeks Campus Ambassador — completed 1 year' },
   { title: 'Lead Coordinator', description: 'International Conference on Viksit Bharat 2047' },
   { title: 'Innovate Winner', description: 'Won Brand Revamp Competition at Innovate X SRM 2024' },
   { title: 'AI/ML Specialist', description: 'Specialized training from IIRS-ISRO in Geodata Analysis' },
-  { title: 'Big Data Bootcamp', description: 'Bootcamp on Big Data & Data Science — C-DAC, NOIDA' },
 ];
 
 export const certificationCategories = ['All', 'Featured', 'Programming', 'Web Development', 'AI/ML', 'Cloud/DevOps', 'Certifications', 'Workshops', 'Competitions', 'Leadership', 'National Programs'];

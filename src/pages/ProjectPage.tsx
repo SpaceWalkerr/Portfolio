@@ -80,7 +80,7 @@ const ProjectPage = () => {
     <>
       <Seo
         title={`${project.name} — Suraj Nandan`}
-        description={project.description.slice(0, 200)}
+        description={project.description}
         path={path}
         image={project.image}
         jsonLd={jsonLd}

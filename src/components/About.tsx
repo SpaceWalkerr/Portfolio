@@ -1,26 +1,28 @@
 import { motion } from 'framer-motion';
 import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press';
 import useCountUp from '../hooks/useCountUp';
+import { certifications } from '../data/certifications';
+import { yearsBuilding } from '../data/site';
 
 const traits = ['Problem Solver', 'Fast Learner', 'Team Player', 'AI Enthusiast'];
 
 const marginalia = [
-  { title: 'Clean Code', description: 'Maintainable & scalable, set in a firm hand.' },
-  { title: 'Innovation', description: 'Cutting-edge tech, adopted early and used well.' },
-  { title: 'Performance', description: 'Fast & efficient — every millisecond accounted for.' },
+  { title: 'Grounded AI', description: 'Answers cite their sources — retrieval first, generation second.' },
+  { title: 'Correct by Construction', description: 'Transactions, state machines and RLS enforce the rules, not good intentions.' },
+  { title: 'Fast by Default', description: 'Code-split, cached, measured — every millisecond accounted for.' },
 ];
 
 const About = () => {
-  const years = useCountUp(3, 1600);
+  const years = useCountUp(yearsBuilding(), 1600);
   const projects = useCountUp(20, 2000);
   const technologies = useCountUp(20, 2000);
-  const certifications = useCountUp(60, 2400);
+  const credentials = useCountUp(certifications.length, 2400);
 
   const figures = [
-    { hook: years, suffix: '+', label: 'Years Writing Software' },
+    { hook: years, suffix: '+', label: 'Years Building Software' },
     { hook: projects, suffix: '+', label: 'Projects Shipped' },
     { hook: technologies, suffix: '+', label: 'Technologies In Use' },
-    { hook: certifications, suffix: '+', label: 'Credentials On File' },
+    { hook: credentials, suffix: '', label: 'Credentials On File' },
   ];
 
   return (
@@ -46,14 +48,17 @@ const About = () => {
               <span className="float-left pr-2 pt-1 font-editorial text-[3.4rem] font-bold leading-[0.65] text-oxblood">
                 I
               </span>
-              'm a full-stack developer who loves turning complex challenges into elegant,
-              user-focused solutions. My work bridges modern web technologies and AI, creating
-              applications that are both powerful and intuitive.
+              'm a full-stack developer who builds products end to end — from the database
+              schema to the last animation frame. Most of my recent work sits where the web
+              meets AI: retrieval-augmented assistants, voice interfaces, and tools that turn
+              messy documents into answers you can trust.
             </p>
             <p>
-              Problem-solving is at the heart of what I do. Whether it's optimizing performance,
-              architecting scalable systems, or implementing cutting-edge features, I approach
-              each challenge with curiosity and a commitment to clean, maintainable code.
+              At Berry Stenley I shipped RAG chatbots on pgvector with HNSW search and a
+              reranking step that kept answers grounded in their sources. At Xtin Capital I built
+              the platform's APIs from scratch — 10,000+ requests a day — and led a team of three
+              through sprint delivery. Along the way I've wired up Razorpay and PayPal with
+              idempotent webhooks, because payments are where “mostly works” isn't good enough.
             </p>
 
             {/* Pull quote */}
@@ -67,9 +72,9 @@ const About = () => {
             </blockquote>
 
             <p>
-              I believe in continuous learning and staying ahead of the curve. Beyond writing
-              code, I contribute to open-source projects and engage with the developer community,
-              always seeking to grow and share knowledge along the way.
+              I'm in my final year of B.Tech CSE at SRM Institute of Science and Technology
+              (9.5 CGPA), and I write up what I learn in the Op-Ed below — case studies of the
+              systems I've built, and the mistakes that shaped them.
             </p>
           </div>
 
@@ -96,7 +101,7 @@ const About = () => {
             </span>
             <span className="flex items-center gap-2 font-monopress text-[10px] uppercase tracking-[0.16em] text-oxblood">
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-oxblood" />
-              Available — Remote
+              Open to Work
             </span>
           </div>
 

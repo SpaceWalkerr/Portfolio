@@ -40,7 +40,7 @@ const education = [
   {
     degree: 'Secondary (Class X), CBSE',
     institution: 'Bal Mandir Sr. Sec. School',
-    location: 'New Delhi, India',
+    location: 'Kishanganj, India',
     period: '2019 — 2020',
     status: 'Completed',
     cgpa: '93.6%',

@@ -12,8 +12,8 @@
     <meta name="googlebot" content="index, follow" />
     <meta name="theme-color" content="#E9E4D6" />
     
-    <!-- Preconnect to external image sources to improve LCP/SEO -->
-    <link rel="preconnect" href="https://images.unsplash.com" />
+    <!-- The hero portrait is the LCP image — start fetching it with the HTML -->
+    <link rel="preload" as="image" href="/profile.webp" type="image/webp" />
     
     <!-- JSON-LD Structured Data: Person -->
     <script type="application/ld+json">
@@ -32,7 +32,6 @@
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Kishanganj",
-        "addressRegion": "Bihar",
         "addressCountry": "IN"
       },
       "alumniOf": {
@@ -40,18 +39,11 @@
         "name": "SRM Institute of Science and Technology",
         "url": "https://www.srmist.edu.in"
       },
-      "worksFor": [
-        {
-          "@type": "Organization",
-          "name": "Wealth Shala",
-          "url": "https://wealthshala.com"
-        },
-        {
-          "@type": "Organization",
-          "name": "Xtin Capital",
-          "url": "https://xtincapital.com"
-        }
-      ],
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Xtin Capital",
+        "url": "https://xtincapital.com"
+      },
       "sameAs": [
         "https://github.com/SpaceWalkerr",
         "https://www.linkedin.com/in/surajnandan/",

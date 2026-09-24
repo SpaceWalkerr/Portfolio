@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PressSection, SectionMasthead, PressTag, PressButton, pressReveal } from './ui/press';
 import { useTilt3D } from '../hooks/useTilt3D';
+import { useDialog } from '../hooks/useDialog';
 import { projects, projectCategories, type Project } from '../data/projects';
 
 interface ProjectCardProps {
@@ -62,12 +63,12 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
           onError={() => {
             if (imgSrc !== project.fallbackImage) setImgSrc(project.fallbackImage);
           }}
-          alt={project.title}
+          alt={`Screenshot of ${project.name}`}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
+          className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105 [@media(hover:hover)]:grayscale [@media(hover:hover)]:group-hover:grayscale-0"
         />
-        <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
+        <div className="absolute inset-0 mix-blend-multiply [@media(hover:hover)]:bg-ink/10" />
         <span className="absolute left-0 top-0 bg-ink px-2 py-1 font-monopress text-[9px] uppercase tracking-[0.14em] text-paper">
           {project.category}
         </span>
@@ -96,15 +97,10 @@ const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [modalImg, setModalImg] = useState('');
+  const dialogRef = useDialog(!!selectedProject, () => setSelectedProject(null));
 
   useEffect(() => {
-    if (!selectedProject) return;
-    setModalImg(selectedProject.image);
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedProject(null);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
+    if (selectedProject) setModalImg(selectedProject.image);
   }, [selectedProject]);
 
   const filteredProjects =
@@ -171,11 +167,13 @@ const Projects = () => {
               onClick={() => setSelectedProject(null)}
             />
             <motion.div
+              ref={dialogRef}
+              tabIndex={-1}
               initial={{ opacity: 0, scale: 0.96, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 30 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-4 z-50 overflow-y-auto border-2 border-ink bg-paper-bright shadow-2xl sm:inset-8 md:inset-16 lg:inset-x-[12%] lg:inset-y-12"
+              className="fixed inset-4 z-50 overflow-y-auto overscroll-contain focus:outline-none border-2 border-ink bg-paper-bright shadow-2xl sm:inset-8 md:inset-16 lg:inset-x-[12%] lg:inset-y-12"
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -199,9 +197,9 @@ const Projects = () => {
                   onError={() => {
                     if (modalImg !== selectedProject.fallbackImage) setModalImg(selectedProject.fallbackImage);
                   }}
-                  alt={selectedProject.title}
+                  alt={`Screenshot of ${selectedProject.name}`}
                   decoding="async"
-                  className="h-full w-full object-cover grayscale"
+                  className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/10 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-8">

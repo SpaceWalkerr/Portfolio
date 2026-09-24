@@ -5,13 +5,14 @@ export interface Post {
   content: string;
   date: string;
   category: string;
+  /** Derived from the word count — see withReadTime below */
   readTime: string;
   tags: string[];
   /** Slug of the related project, if any */
   relatedProject?: string;
 }
 
-export const posts: Post[] = [
+const rawPosts: Omit<Post, 'readTime'>[] = [
   {
     slug: 'building-cardbridge',
     title: 'Building CardBridge: An Escrow-Powered Card Discount Marketplace',
@@ -30,7 +31,6 @@ I also built a dispute resolution system with an admin review panel. If somethin
 Building CardBridge taught me the absolute importance of thorough state machine design. Every possible edge case, from a cardholder backing out after funds are deposited to a requester claiming they never received the product, had to be anticipated and encoded in the database logic. I spent as much time writing tests for the state machine as I did building the rest of the application, and that investment paid off when I found several race conditions that would have been catastrophic in production. The lesson is clear: when money is involved, your data layer needs to be mathematically provable.`,
     date: '2025-06-15',
     category: 'Full Stack',
-    readTime: '12 min',
     tags: ['React', 'TypeScript', 'Supabase', 'PostgreSQL', 'RLS', 'Escrow'],
     relatedProject: 'CardBridge',
   },
@@ -52,7 +52,6 @@ One of the trickiest aspects was handling document formats. PDFs, Word documents
 Building this system taught me that production RAG is as much about retrieval quality as it is about generation quality. A perfect language model is useless if it is searching through bad data. I spent significant effort on chunking strategies, overlap sizes, and embedding model selection. The difference between a good retrieval system and a great one is the difference between answers that are merely relevant and answers that are precisely correct.`,
     date: '2025-05-20',
     category: 'AI',
-    readTime: '14 min',
     tags: ['React', 'Node.js', 'RAG', 'Groq', 'OpenAI', 'Supabase', 'AI'],
     relatedProject: 'Internal GPT',
   },
@@ -74,7 +73,6 @@ The backend uses Express with Supabase for data storage, and location-based trig
 Building GigShield taught me about the intersection of fintech, insurtech, and social impact. Technology can create safety nets for workers who fall through the cracks of traditional systems. The parametric model is not just more efficient, it is fundamentally more fair because it eliminates the human bias and administrative friction that often prevents legitimate claims from being paid. I believe this approach could be extended to many other domains where vulnerable workers need protection.`,
     date: '2025-04-10',
     category: 'Full Stack',
-    readTime: '13 min',
     tags: ['React', 'Three.js', 'R3F', 'Express', 'Supabase', 'AI', 'Leaflet'],
     relatedProject: 'GigShield',
   },
@@ -98,7 +96,6 @@ Building InternX taught me about the challenges of maintaining data quality in a
 I also learned a great deal about SEO optimization for dynamic content. Each listing page needs unique meta tags, Open Graph images, and structured data. I built a dynamic SEO metadata generator that constructs appropriate tags based on the listing type, location, and other attributes. The result is that InternX listings consistently rank well in search results for relevant queries.`,
     date: '2025-03-01',
     category: 'Full Stack',
-    readTime: '13 min',
     tags: ['React 19', 'Vite', 'Node.js', 'Express', 'Supabase', 'SEO', 'JWT'],
     relatedProject: 'InternX',
   },
@@ -122,7 +119,6 @@ Prisma ORM manages the database schema and provides type-safe database access. T
 One of the biggest challenges was optimizing map performance. Loading hundreds of property markers simultaneously caused significant frame drops. I solved this by implementing viewport-based loading, where only properties visible in the current map view are fetched and rendered. As the user pans or zooms, new data is fetched dynamically with debouncing to prevent excessive API calls.`,
     date: '2025-02-15',
     category: 'Full Stack',
-    readTime: '14 min',
     tags: ['Next.js', 'React', 'Prisma', 'NextAuth', 'Stripe', 'Leaflet', 'Claude AI'],
     relatedProject: 'NestFinder',
   },
@@ -144,7 +140,6 @@ The flight search functionality required careful indexing and query optimization
 Building SkyWings taught me about the importance of transactional integrity in a system where money and customer experience are at stake. A booking system cannot afford to be eventually consistent. It must be strongly consistent, because the cost of a double-booking error is not just a technical bug but a real customer who shows up at the airport with no seat. I implemented comprehensive integration tests that simulate concurrent booking attempts and verify that the system maintains correctness under load. These tests caught several subtle race conditions that would have been extremely difficult to debug in production.`,
     date: '2025-01-20',
     category: 'Full Stack',
-    readTime: '13 min',
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'Supabase', 'PDF Generation'],
     relatedProject: 'SkyWings',
   },
@@ -166,7 +161,6 @@ Real-time processing is the dominant constraint in autonomous vehicle systems. T
 This project is ongoing, and I have several directions for future work. I plan to implement sensor fusion that combines camera data with LiDAR and radar inputs, which should improve detection accuracy in adverse weather conditions. I also want to test the system on physical scale models, which would provide more realistic validation than simulation alone. The gap between simulation and reality is one of the fundamental challenges in autonomous vehicle research, and closing that gap requires real-world testing.`,
     date: '2024-12-10',
     category: 'AI',
-    readTime: '15 min',
     tags: ['Python', 'TensorFlow', 'Deep Learning', 'Computer Vision', 'OpenCV'],
     relatedProject: 'IntelliRideX',
   },
@@ -190,7 +184,6 @@ Building SoleLux taught me about the importance of handling payment webhooks cor
 The analytics dashboard provides insights into sales trends, popular products, customer demographics, and conversion rates. I built this using materialized views in PostgreSQL that are refreshed periodically, providing fast queries even over large datasets without impacting the performance of the transactional database.`,
     date: '2024-11-05',
     category: 'Full Stack',
-    readTime: '14 min',
     tags: ['React', 'TypeScript', 'Vite', 'Express', 'Supabase', 'Zustand', 'TanStack Query'],
     relatedProject: 'SoleLux',
   },
@@ -216,7 +209,6 @@ Working with multiple weather APIs taught me important lessons about data normal
 The responsive design was particularly important for this application because weather is inherently a mobile use case. People check the weather on their phones throughout the day. I designed the layout mobile-first, with the desktop version adding additional columns and larger visualizations when screen real estate allows.`,
     date: '2024-10-01',
     category: 'Web',
-    readTime: '12 min',
     tags: ['React', 'JavaScript', 'Weather API', 'Geolocation', 'REST API'],
     relatedProject: 'Mausam',
   },
@@ -242,10 +234,19 @@ I chose a newspaper theme for this portfolio because a developer portfolio is fu
 Building "The Press" taught me that a design system is not just a collection of components but a coherent philosophy expressed through consistent decisions. Every color, every spacing unit, every animation curve was chosen deliberately and documented explicitly. The result is a portfolio that feels complete and intentional, not assembled from disparate pieces.`,
     date: '2025-06-01',
     category: 'Design',
-    readTime: '11 min',
     tags: ['Design System', 'CSS', 'Tailwind', 'Typography', 'Framer Motion'],
   },
 ];
+
+/** ~220 words a minute — a typical adult reading speed for technical prose. */
+const WORDS_PER_MINUTE = 220;
+
+const withReadTime = (post: Omit<Post, 'readTime'>): Post => {
+  const words = post.content.trim().split(/\s+/).length;
+  return { ...post, readTime: `${Math.max(1, Math.round(words / WORDS_PER_MINUTE))} min` };
+};
+
+export const posts: Post[] = rawPosts.map(withReadTime);
 
 export const postCategories = [
   'All',

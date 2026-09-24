@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, X, FileText, Award } from 'lucide-react';
+import { ExternalLink, X, FileText, Award, ArrowRight } from 'lucide-react';
 import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press';
+import { useDialog } from '../hooks/useDialog';
 
 export interface ExperienceData {
   role: string;
@@ -76,7 +77,7 @@ const experiences: ExperienceData[] = [
     role: 'Full Stack Developer',
     company: 'Wealth Shala',
     companyUrl: 'https://wealthshala.com',
-    period: '2025 — Present',
+    period: '2025 — Jan 2026',
     description:
       'Architected and developed a responsive financial literacy platform using React and TypeScript, integrating modern UI libraries and smooth animations. Successfully launched the platform to active users while maintaining high reliability and uptime through optimized deployment practices.',
     highlights: [
@@ -192,7 +193,7 @@ const experiences: ExperienceData[] = [
     role: 'Freelance Full Stack Developer',
     company: 'OrderKaaro',
     companyUrl: 'https://www.orderkaaro.in/',
-    period: '',
+    period: 'Completed Aug 2026',
     description:
       'Engineered and launched a comprehensive e-commerce platform from the ground up, handling everything from frontend user experience to backend processing.',
     highlights: [
@@ -314,14 +315,7 @@ const ExperienceModal = ({
   experience: ExperienceData | null;
   onClose: () => void;
 }) => {
-  useEffect(() => {
-    if (!experience) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [experience, onClose]);
+  const dialogRef = useDialog(!!experience, onClose);
 
   return (
     <AnimatePresence>
@@ -337,14 +331,16 @@ const ExperienceModal = ({
           />
 
           <motion.div
+            ref={dialogRef}
+            tabIndex={-1}
             initial={{ opacity: 0, scale: 0.95, x: "-50%", y: "-40%" }}
             animate={{ opacity: 1, scale: 1, x: "-50%", y: "-50%" }}
             exit={{ opacity: 0, scale: 0.95, x: "-50%", y: "-40%" }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed left-1/2 top-1/2 z-[60] w-[92%] max-h-[90vh] overflow-y-auto max-w-3xl"
+            className="fixed left-1/2 top-1/2 z-[60] w-[92%] max-h-[90vh] overflow-y-auto overscroll-contain max-w-3xl focus:outline-none"
             role="dialog"
             aria-modal="true"
-            aria-label="View experience details"
+            aria-label={`${experience.role} at ${experience.company} — full report`}
           >
             <div className="relative border-2 border-ink bg-paper-bright p-6 shadow-2xl sm:p-8">
               {/* Masthead bar */}
@@ -451,7 +447,7 @@ const Experience = () => {
           >
             {/* Dateline column */}
             <div className="font-monopress text-[10px] uppercase tracking-[0.18em] text-ink-mute">
-              <div className="text-oxblood">{exp.period}</div>
+              <div className="text-oxblood">{exp.period || 'Freelance'}</div>
               <div className="mt-1">Dispatch {String(index + 1).padStart(2, '0')}</div>
             </div>
 
@@ -479,7 +475,7 @@ const Experience = () => {
                     )}
                   </div>
                 </div>
-                <div className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full border border-ink/20 bg-paper-bright text-ink/40 transition-colors group-hover:border-oxblood group-hover:bg-oxblood group-hover:text-paper">
+                <div aria-hidden="true" className="hidden sm:flex h-8 w-8 items-center justify-center rounded-full border border-ink/20 bg-paper-bright text-ink/40 transition-colors group-hover:border-oxblood group-hover:bg-oxblood group-hover:text-paper">
                   <FileText className="h-4 w-4" />
                 </div>
               </div>
@@ -541,6 +537,19 @@ const Experience = () => {
                   <PressTag key={tech}>{tech}</PressTag>
                 ))}
               </div>
+
+              {/* Keyboard- and screen-reader-reachable way into the full report */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedExperience(exp);
+                }}
+                className="mt-6 inline-flex items-center gap-2 font-monopress text-[10px] uppercase tracking-[0.16em] text-oxblood underline decoration-oxblood/30 underline-offset-4 transition-colors hover:decoration-oxblood"
+              >
+                Read the full report
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </button>
             </div>
           </motion.article>
         ))}

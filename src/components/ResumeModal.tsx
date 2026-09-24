@@ -1,7 +1,7 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, FileText, ExternalLink } from 'lucide-react';
-import { useEffect } from 'react';
 import { withBase } from '../lib/utils';
+import { useDialog } from '../hooks/useDialog';
 
 interface ResumeModalProps {
   isOpen: boolean;
@@ -26,14 +26,7 @@ const resumes = [
 ];
 
 export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
-  useEffect(() => {
-    if (!isOpen) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [isOpen, onClose]);
+  const dialogRef = useDialog(isOpen, onClose);
 
   return (
     <AnimatePresence>
@@ -49,6 +42,7 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
           />
 
           <motion.div
+            ref={dialogRef}
             initial={{ opacity: 0, scale: 0.95, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 30 }}

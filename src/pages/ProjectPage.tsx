@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, ExternalLink, Github } from 'lucide-react';
-import { getProjectBySlug } from '../data/projects';
+import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react';
+import { getProjectBySlug, projects } from '../data/projects';
 import { posts } from '../data/posts';
 import { PressTag, PressButton } from '../components/ui/press';
 import Seo, { SITE_URL } from '../components/Seo';
@@ -20,6 +20,9 @@ const ProjectPage = () => {
   if (!project) return <NotFound />;
 
   const relatedPost = posts.find((p) => p.relatedProject === project.name);
+  const index = projects.findIndex((p) => p.slug === project.slug);
+  const prev = projects[(index - 1 + projects.length) % projects.length];
+  const next = projects[(index + 1) % projects.length];
   const path = `/projects/${project.slug}`;
   const repo = project.github?.replace(/\.git$/, '');
 
@@ -85,7 +88,9 @@ const ProjectPage = () => {
               onError={() => {
                 if (imgSrc !== project.fallbackImage) setImgSrc(project.fallbackImage);
               }}
-              alt={project.name}
+              alt={`Screenshot of ${project.name}`}
+              width={1280}
+              height={800}
               className="aspect-[16/10] w-full object-cover"
             />
           </div>
@@ -128,7 +133,33 @@ const ProjectPage = () => {
             </div>
           )}
 
-          <div className="mt-14">
+          {/* Keep reading — the next story in the edition */}
+          <nav aria-label="More projects" className="mt-14 grid grid-cols-2 border-y-2 border-ink">
+            <Link
+              to={`/projects/${prev.slug}`}
+              className="group border-r border-ink py-5 pr-4 transition-colors hover:text-oxblood"
+            >
+              <span className="flex items-center gap-1.5 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+                <ArrowLeft size={12} className="transition-transform group-hover:-translate-x-0.5" /> Previous
+              </span>
+              <span className="mt-1.5 block font-display text-base font-black uppercase leading-tight sm:text-lg">
+                {prev.name}
+              </span>
+            </Link>
+            <Link
+              to={`/projects/${next.slug}`}
+              className="group py-5 pl-4 text-right transition-colors hover:text-oxblood"
+            >
+              <span className="flex items-center justify-end gap-1.5 font-monopress text-[9px] uppercase tracking-[0.2em] text-ink-mute">
+                Next <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5" />
+              </span>
+              <span className="mt-1.5 block font-display text-base font-black uppercase leading-tight sm:text-lg">
+                {next.name}
+              </span>
+            </Link>
+          </nav>
+
+          <div className="mt-10">
             <Link
               to="/#projects"
               className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink hover:text-oxblood"

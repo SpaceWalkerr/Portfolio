@@ -37,7 +37,7 @@ export const projects: Project[] = [
     description:
       'An insurance-aware hospital and treatment navigation system built for the GE HealthCare Precision Care Challenge 2026. It parses health-insurance policy documents into normalized structures, explains coverage in plain language with source-traceable citations tagged exact, fuzzy, or unverified, ranks hospitals and room categories against policy terms using a deterministic weighted score with a full audit trail, and guides users through admission, investigation, procedure, and recovery with policy-grounded assistance. Runs offline in a demo mode with pre-authored extractions when no API key is set.',
     tags: ['Next.js', 'TypeScript', 'Claude API', 'Zod', 'unpdf', 'PostCSS', 'RAG'],
-    liveDemo: 'https://hospitality-ai-virid.vercel.app/',
+    liveDemo: 'https://hospitality-ai-orcin.vercel.app/',
     github: 'https://github.com/SpaceWalkerr/Hospitality.ai.git',
     image: '/shots/hospitality-ai.jpg',
     fallbackImage: 'https://images.unsplash.com/photo-1505751172876-fa1923c5c528?w=800&q=80&fm=webp',
@@ -54,6 +54,19 @@ export const projects: Project[] = [
     github: 'https://github.com/SpaceWalkerr/CardBridge.git',
     image: '/shots/cardbridge.jpg',
     fallbackImage: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80&fm=webp',
+    category: 'Full Stack',
+  },
+  {
+    slug: 'job-scheduler',
+    name: 'Job Scheduler',
+    title: '"Job Scheduler" — Distributed Background Job Platform',
+    description:
+      'A distributed job scheduling platform that runs background jobs across a worker cluster with priorities, per-queue concurrency limits, retries with backoff, a dead-letter queue, cron-based recurring jobs, and a live WebSocket dashboard. Atomic claiming with FOR UPDATE SKIP LOCKED guarantees no job ever runs twice, and advisory-lock leader election keeps exactly one scheduler active with automatic failover. Six hand-rolled data structures power the scheduling layer — a binary min-heap for priority dispatch, Kahn\'s algorithm for DAG execution plans, three-colour DFS for cycle rejection, union-find for independent job clusters, a retry delay queue, and Deficit Round Robin for fair queuing — covered by 156 unit tests and CI.',
+    tags: ['Node.js', 'TypeScript', 'Express', 'PostgreSQL', 'WebSockets', 'React', 'Vite', 'DAG Scheduling', 'CI'],
+    liveDemo: 'https://job-scheduler-fawn.vercel.app/',
+    github: 'https://github.com/SpaceWalkerr/Job-Scheduler.git',
+    image: '/shots/job-scheduler.jpg',
+    fallbackImage: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80&fm=webp',
     category: 'Full Stack',
   },
   {

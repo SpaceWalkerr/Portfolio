@@ -5,6 +5,7 @@ import { ResumeModal } from '../ResumeModal';
 import HalftonePortrait from './halftone-portrait';
 import { useTilt3D } from '../../hooks/useTilt3D';
 import { withBase } from '../../lib/utils';
+import { CITY, CAREER_START_YEAR } from '../../data/site';
 
 /**
  * PressHero — "The Press" front page.
@@ -21,7 +22,8 @@ const tickerItems = [
   'Full-Stack Developer',
   'React · Node · TypeScript',
   'AI-Driven Products',
-  'New Delhi — MMXXVI',
+  `${CITY}, India`,
+  'Class of 2027 — SRM IST',
 ];
 
 const easeOutExpo = [0.16, 1, 0.3, 1] as const;
@@ -46,7 +48,7 @@ const fadeUp = {
 const PressHero = ({ introDone = true }: PressHeroProps) => {
   const [resumeOpen, setResumeOpen] = useState(false);
   const state = introDone ? 'visible' : 'hidden';
-  const tilt = useTilt3D({ max: 4 });
+  const tilt = useTilt3D({ max: 6 });
 
   const scrollToProjects = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -60,18 +62,8 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
       {/* print grain over the whole page */}
       <div className="noise-overlay pointer-events-none absolute inset-0 z-10 opacity-[0.05] mix-blend-multiply" />
 
-      {/* The front page tilts in 3D like a held broadsheet — perspective wrapper */}
-      <div
-        ref={tilt.ref}
-        onMouseMove={tilt.onMouseMove}
-        onMouseLeave={tilt.onMouseLeave}
-        className="flex flex-1 flex-col"
-        style={{ perspective: 1600 }}
-      >
-        <motion.div
-          style={{ rotateX: tilt.rotateX, rotateY: tilt.rotateY, transformStyle: 'preserve-3d' }}
-          className="flex w-full flex-1 flex-col px-5 pt-20 sm:px-8 lg:px-12"
-        >
+      <div className="flex flex-1 flex-col">
+        <div className="flex w-full flex-1 flex-col px-5 pt-20 sm:px-8 lg:px-12">
         {/* ===== Masthead ===== */}
         <motion.header
           variants={fadeUp}
@@ -96,7 +88,7 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
         >
           <span className="py-2 pr-3">Vol. 01 — No. 01</span>
           <span className="hidden border-l border-ink/20 py-2 px-3 text-center sm:block">
-            New Delhi · MMXXVI
+            {CITY} · India
           </span>
           <span className="border-l border-ink/20 py-2 pl-3 text-right">
             Full-Stack Developer
@@ -114,7 +106,7 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
               animate={state}
               className="mb-4 font-monopress text-[10px] uppercase tracking-[0.3em] text-oxblood sm:mb-6 sm:text-[11px]"
             >
-              Late Edition — Est. 2023
+              Late Edition — Est. {CAREER_START_YEAR}
             </motion.p>
 
             <h1
@@ -167,13 +159,13 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
                   B
                 </span>
                 uilding fast, reliable web applications and AI-driven products — with the
-                polish of a design studio and the rigour of an engineer. Twenty projects
+                polish of a design studio and the rigour of an engineer. Twenty-plus projects
                 shipped and counting, across React, Node and TypeScript.
               </p>
               <p className="mt-4 text-justify sm:mt-0">
-                This is a portfolio composed like a newspaper and finished like a fashion
-                magazine: colossal type, a hard grid, ink on paper — and every headline
-                typesets itself as you arrive.
+                Lately that means RAG pipelines and AI assistants in production, APIs
+                serving 10,000+ requests a day, and payment flows that never double-charge.
+                B.Tech CSE at SRM, class of 2027 — open to internships and full-time roles.
               </p>
             </motion.div>
 
@@ -211,8 +203,19 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
             animate={state}
             className="flex flex-col justify-center gap-3 lg:border-l lg:border-ink lg:pl-10"
           >
-            <div className="relative aspect-[4/3.4] border border-ink bg-paper-bright sm:aspect-[1/1.02]">
-              <HalftonePortrait src={withBase('/profile.webp')} className="absolute inset-0 h-full w-full" />
+            {/* The plate tilts in 3D like a held print — only the plate, so the type stays still */}
+            <div
+              ref={tilt.ref}
+              onMouseMove={tilt.onMouseMove}
+              onMouseLeave={tilt.onMouseLeave}
+              style={{ perspective: 1200 }}
+            >
+              <motion.div
+                style={{ rotateX: tilt.rotateX, rotateY: tilt.rotateY }}
+                className="relative aspect-[4/3.4] border border-ink bg-paper-bright sm:aspect-[1/1.02]"
+              >
+                <HalftonePortrait src={withBase('/profile.webp')} className="absolute inset-0 h-full w-full" />
+              </motion.div>
             </div>
             <div className="flex items-baseline justify-between font-monopress text-[9px] uppercase tracking-[0.18em] text-ink-mute sm:text-[10px]">
               <span>Fig. 1</span>
@@ -223,7 +226,7 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
             </p>
           </motion.aside>
         </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* ===== Running-headline ticker ===== */}

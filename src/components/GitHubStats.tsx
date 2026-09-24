@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, GitFork, Users, BookOpen, ExternalLink, Code2, ChevronDown } from 'lucide-react';
 import { PressButton, pressReveal } from './ui/press';
 import useCountUp from '../hooks/useCountUp';
+import snapshot from '../data/github-snapshot.json';
 
 interface GitHubUser {
   public_repos: number;
@@ -23,49 +24,86 @@ interface GitHubRepo {
 }
 
 const GITHUB_USERNAME = 'SpaceWalkerr';
+const CACHE_KEY = 'press-github-v1';
+
+interface GitHubData {
+  user: GitHubUser;
+  repos: GitHubRepo[];
+  totalStars: number;
+}
+
+const topRepos = (repos: GitHubRepo[]) =>
+  repos
+    .filter((r) => !r.fork)
+    .sort((a, b) => b.stargazers_count - a.stargazers_count)
+    .slice(0, 6);
+
+/** Build-time snapshot — shown instantly, and kept if the live API is rate-limited (60 req/hr). */
+const fallback: GitHubData = {
+  user: snapshot.user,
+  repos: snapshot.repos as GitHubRepo[],
+  totalStars: snapshot.totalStars,
+};
+
+const readCache = (): GitHubData | null => {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    return raw ? (JSON.parse(raw) as GitHubData) : null;
+  } catch {
+    return null;
+  }
+};
 
 const GitHubStats = () => {
-  const [user, setUser] = useState<GitHubUser | null>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [data, setData] = useState<GitHubData>(() => readCache() ?? fallback);
+  const [isLive, setIsLive] = useState(() => readCache() !== null);
+  const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const { user, repos } = data;
 
-  const starsCount = useCountUp(repos.reduce((sum, r) => sum + r.stargazers_count, 0), 1800);
-  const reposCount = useCountUp(user?.public_repos ?? 0, 1800);
-  const followersCount = useCountUp(user?.followers ?? 0, 1800);
+  const starsCount = useCountUp(data.totalStars, 1800);
+  const reposCount = useCountUp(user.public_repos, 1800);
+  const followersCount = useCountUp(user.followers, 1800);
 
+  // Only hit the API once someone opens the supplement, and once per session
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [userRes, reposRes] = await Promise.all([
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
-          fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`),
-        ]);
+    if (!isOpen || isLive) return;
+    let cancelled = false;
+    setLoading(true);
 
+    Promise.all([
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}`),
+      fetch(`https://api.github.com/users/${GITHUB_USERNAME}/repos?sort=updated&per_page=100`),
+    ])
+      .then(async ([userRes, reposRes]) => {
         if (!userRes.ok || !reposRes.ok) throw new Error('GitHub API error');
-
         const userData: GitHubUser = await userRes.json();
         const reposData: GitHubRepo[] = await reposRes.json();
+        const next: GitHubData = {
+          user: userData,
+          repos: topRepos(reposData),
+          totalStars: reposData.filter((r) => !r.fork).reduce((sum, r) => sum + r.stargazers_count, 0),
+        };
+        if (cancelled) return;
+        setData(next);
+        setIsLive(true);
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify(next));
+        } catch {
+          /* storage unavailable */
+        }
+      })
+      .catch(() => {
+        /* rate-limited or offline — the snapshot stays on the page */
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
 
-        setUser(userData);
-        const sorted = reposData
-          .filter((r) => !r.fork)
-          .sort((a, b) => b.stargazers_count - a.stargazers_count)
-          .slice(0, 6);
-        setRepos(sorted);
-    } catch {
-        setError(true);
-      } finally {
-        setLoading(false);
-      }
+    return () => {
+      cancelled = true;
     };
-
-    fetchData();
-  }, []);
-
-  if (error) return null;
+  }, [isOpen, isLive]);
 
   return (
     <div id="github" className="relative overflow-hidden bg-paper text-ink">
@@ -90,7 +128,9 @@ const GitHubStats = () => {
               GitHub Activity
             </h2>
             <p className="mt-2 max-w-2xl font-editorial text-sm italic text-ink-mute sm:text-base">
-              Live data from the open-source record — repositories, stars, and contributions.
+              {isLive
+                ? 'Live data from the open-source record — repositories, stars, and contributions.'
+                : `From the open-source record — repositories, stars, and contributions (as of ${snapshot.capturedAt}).`}
             </p>
           </div>
           <motion.div
@@ -114,7 +154,7 @@ const GitHubStats = () => {
               className="overflow-hidden"
             >
               <div className="pt-10">
-                {loading ? (
+                {loading && repos.length === 0 ? (
                   <div className="flex items-center justify-center py-12">
                     <div className="flex items-center gap-3">
                       <motion.span
@@ -137,7 +177,7 @@ const GitHubStats = () => {
                       viewport={{ once: true, margin: '-40px' }}
                       className="mb-10 grid grid-cols-2 gap-4 sm:grid-cols-4"
                     >
-                      <div className="border-2 border-ink p-5" ref={reposCount.ref as React.RefObject<HTMLDivElement>}>
+                      <div className="border-2 border-ink p-5" ref={reposCount.ref}>
                         <BookOpen size={20} className="mb-2 text-ink-mute" />
                         <div className="font-display text-3xl font-black tracking-[-0.02em] sm:text-4xl">
                           {reposCount.count}
@@ -147,7 +187,7 @@ const GitHubStats = () => {
                         </div>
                       </div>
 
-                      <div className="border-2 border-ink p-5" ref={starsCount.ref as React.RefObject<HTMLDivElement>}>
+                      <div className="border-2 border-ink p-5" ref={starsCount.ref}>
                         <Star size={20} className="mb-2 text-ink-mute" />
                         <div className="font-display text-3xl font-black tracking-[-0.02em] sm:text-4xl">
                           {starsCount.count}
@@ -157,7 +197,7 @@ const GitHubStats = () => {
                         </div>
                       </div>
 
-                      <div className="border-2 border-ink p-5" ref={followersCount.ref as React.RefObject<HTMLDivElement>}>
+                      <div className="border-2 border-ink p-5" ref={followersCount.ref}>
                         <Users size={20} className="mb-2 text-ink-mute" />
                         <div className="font-display text-3xl font-black tracking-[-0.02em] sm:text-4xl">
                           {followersCount.count}
@@ -170,7 +210,7 @@ const GitHubStats = () => {
                       <div className="border-2 border-ink p-5">
                         <Code2 size={20} className="mb-2 text-ink-mute" />
                         <div className="font-display text-3xl font-black tracking-[-0.02em] sm:text-4xl">
-                          {user?.following ?? 0}
+                          {user.following}
                         </div>
                         <div className="mt-1 font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute">
                           Following

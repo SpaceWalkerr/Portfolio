@@ -24,26 +24,30 @@ import {
 import type { Theme } from '../App';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
-
-export const OPEN_COMMAND_PALETTE = 'open-command-palette';
-export const openCommandPalette = () => window.dispatchEvent(new CustomEvent(OPEN_COMMAND_PALETTE));
+import { sections as siteSections, type SectionId } from '../data/site';
+import { OPEN_COMMAND_PALETTE } from '../lib/commandPalette';
+import { useSectionNav } from '../hooks/useSectionNav';
 
 interface CommandPaletteProps {
   theme: Theme;
   onSetTheme: (t: Theme) => void;
+  /** Open immediately on mount (the launcher mounts it in response to ⌘K) */
+  defaultOpen?: boolean;
 }
 
-const sections = [
-  { id: '#home', label: 'Home', Icon: Home },
-  { id: '#about', label: 'About', Icon: User },
-  { id: '#skills', label: 'Skills', Icon: Wrench },
-  { id: '#experience', label: 'Experience', Icon: Briefcase },
-  { id: '#education', label: 'Education', Icon: GraduationCap },
-  { id: '#projects', label: 'Projects', Icon: Newspaper },
-  { id: '#certifications', label: 'Certifications', Icon: Award },
-  { id: '#blog', label: 'Blog', Icon: Newspaper },
-  { id: '#contact', label: 'Contact', Icon: Mail },
-];
+const sectionIcons: Record<SectionId, typeof Home> = {
+  home: Home,
+  about: User,
+  skills: Wrench,
+  experience: Briefcase,
+  education: GraduationCap,
+  projects: Newspaper,
+  certifications: Award,
+  blog: FileText,
+  contact: Mail,
+};
+
+const sections = siteSections.map((s) => ({ id: `#${s.id}`, label: s.label, Icon: sectionIcons[s.id] }));
 
 const themes: { key: Theme; label: string; Icon: typeof Sun }[] = [
   { key: 'day', label: 'Day Edition', Icon: Sun },
@@ -51,9 +55,10 @@ const themes: { key: Theme; label: string; Icon: typeof Sun }[] = [
   { key: 'sepia', label: 'Sepia Edition', Icon: Lamp },
 ];
 
-const CommandPalette = ({ theme, onSetTheme }: CommandPaletteProps) => {
-  const [open, setOpen] = useState(false);
+const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPaletteProps) => {
+  const [open, setOpen] = useState(defaultOpen);
   const navigate = useNavigate();
+  const goToSection = useSectionNav();
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -87,15 +92,7 @@ const CommandPalette = ({ theme, onSetTheme }: CommandPaletteProps) => {
     setTimeout(fn, 0);
   }, []);
 
-  const goSection = (id: string) =>
-    run(() => {
-      if (window.location.pathname !== '/') {
-        navigate(`/${id}`);
-      } else {
-        document.querySelector(id)?.scrollIntoView({ behavior: 'smooth' });
-        history.replaceState(null, '', `/${id}`);
-      }
-    });
+  const goSection = (id: string) => run(() => goToSection(id));
 
   return createPortal(
     <AnimatePresence>

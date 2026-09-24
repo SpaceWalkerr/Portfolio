@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Calendar, Clock, X, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -6,6 +6,7 @@ import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press
 import { posts, postCategories } from '../data/posts';
 import type { Post } from '../data/posts';
 import PostBody from './PostBody';
+import { useDialog } from '../hooks/useDialog';
 
 const Blog = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -19,14 +20,7 @@ const Blog = () => {
 
   const visiblePosts = filteredPosts.slice(0, visibleCount);
 
-  useEffect(() => {
-    if (!selectedPost) return;
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') setSelectedPost(null);
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, [selectedPost]);
+  const dialogRef = useDialog(!!selectedPost, () => setSelectedPost(null));
 
   const handleCardClick = (e: React.MouseEvent, post: Post) => {
     if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button === 1) return;
@@ -153,11 +147,13 @@ const Blog = () => {
               onClick={() => setSelectedPost(null)}
             />
             <motion.div
+              ref={dialogRef}
+              tabIndex={-1}
               initial={{ opacity: 0, scale: 0.96, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.96, y: 30 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="fixed inset-4 z-50 flex flex-col border-2 border-ink bg-paper shadow-2xl sm:inset-8 md:inset-12 lg:inset-x-[10%] lg:inset-y-10"
+              className="fixed inset-4 z-50 flex flex-col focus:outline-none border-2 border-ink bg-paper shadow-2xl sm:inset-8 md:inset-12 lg:inset-x-[10%] lg:inset-y-10"
               onClick={(e) => e.stopPropagation()}
               role="dialog"
               aria-modal="true"
@@ -176,7 +172,7 @@ const Blog = () => {
               </div>
 
               {/* Scrollable content */}
-              <div className="flex-1 overflow-y-auto">
+              <div className="flex-1 overflow-y-auto overscroll-contain">
                 <div className="max-w-3xl mx-auto px-5 py-8 sm:px-8 sm:py-10">
                   {/* Meta */}
                   <div className="mb-6 flex flex-wrap items-center gap-4 font-monopress text-[9px] uppercase tracking-[0.14em] text-ink-mute">

@@ -3,6 +3,7 @@ import { X, ExternalLink, ChevronLeft, ChevronRight, FileText } from 'lucide-rea
 import { useEffect, useCallback } from 'react';
 import type { Certificate } from './certificate-card';
 import { withBase } from '../../lib/utils';
+import { useDialog } from '../../hooks/useDialog';
 
 interface CertificateModalProps {
   certificate: Certificate | null;
@@ -36,13 +37,13 @@ export const CertificateModal = ({
     }
   }, [currentIndex, certificates, onNavigate]);
 
+  // Escape, focus trap and scroll lock come from useDialog; arrows page through the archive
+  const dialogRef = useDialog(!!certificate, onClose);
+
   useEffect(() => {
     if (!certificate) return;
     const onKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
-        case 'Escape':
-          onClose();
-          break;
         case 'ArrowLeft':
           goPrev();
           break;
@@ -53,7 +54,7 @@ export const CertificateModal = ({
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [certificate, onClose, goPrev, goNext]);
+  }, [certificate, goPrev, goNext]);
 
   if (!certificate) return null;
 
@@ -73,11 +74,13 @@ export const CertificateModal = ({
       />
 
       <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-4 z-50 flex flex-col border-2 border-ink bg-paper shadow-2xl sm:inset-8 md:inset-12 lg:inset-x-[8%] lg:inset-y-8"
+        className="fixed inset-4 z-50 flex flex-col focus:outline-none border-2 border-ink bg-paper shadow-2xl sm:inset-8 md:inset-12 lg:inset-x-[8%] lg:inset-y-8"
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"

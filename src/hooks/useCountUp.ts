@@ -1,23 +1,27 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
+/**
+ * Counts from 0 to `end` once the element scrolls into view.
+ * `ref` is a callback ref, so it also works for elements that mount later
+ * (e.g. inside a collapsed section that opens after first render).
+ */
 const useCountUp = (end: number, duration: number = 2000) => {
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [el, setEl] = useState<HTMLElement | null>(null);
+  const ref = useCallback((node: HTMLElement | null) => setEl(node), []);
 
   useEffect(() => {
+    if (!el || hasStarted) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasStarted) {
-          setHasStarted(true);
-        }
+        if (entry.isIntersecting) setHasStarted(true);
       },
       { threshold: 0.3 }
     );
-
-    if (ref.current) observer.observe(ref.current);
+    observer.observe(el);
     return () => observer.disconnect();
-  }, [hasStarted]);
+  }, [el, hasStarted]);
 
   useEffect(() => {
     if (!hasStarted) return;

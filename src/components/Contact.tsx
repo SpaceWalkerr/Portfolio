@@ -4,6 +4,7 @@ import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee } 
 import emailjs from '@emailjs/browser';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
 import { withBase } from '../lib/utils';
+import { LOCATION } from '../data/site';
 
 // Three.js is a heavy dependency (~130KB gzipped) — code-split so it's only
 // fetched once someone actually sends a message, not in the main bundle.
@@ -173,7 +174,7 @@ const Contact = () => {
                     <MapPin className="h-3.5 w-3.5" /> Location
                   </span>
                 </dt>
-                <dd className="font-editorial text-[15px] text-ink">Teghariya Road, Kishanganj 855107</dd>
+                <dd className="font-editorial text-[15px] text-ink">{LOCATION}</dd>
               </div>
             </dl>
           </div>
@@ -219,7 +220,7 @@ const Contact = () => {
         >
           <div className="mb-8 flex items-end justify-between border-b border-ink pb-5">
             <div className="flex items-center gap-6">
-              <img src={withBase('/profile.webp')} alt="Editor Profile" className="h-28 w-24 border border-ink object-cover shadow-sm" />
+              <img src={withBase('/profile.webp')} alt="Suraj Nandan" width={96} height={112} loading="lazy" decoding="async" className="h-28 w-24 border border-ink object-cover shadow-sm" />
               <span className="font-editorial text-3xl italic leading-none tracking-tight">To the Editor,</span>
             </div>
             <span className="font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute">

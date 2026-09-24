@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Github, Linkedin, Twitter, Mail, Braces, Coffee } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
+import { sections, LOCATION } from '../data/site';
+import { useSectionNav } from '../hooks/useSectionNav';
 
 const socialLinks = [
   { icon: <Github size={16} />, url: 'https://github.com/SpaceWalkerr', label: 'GitHub' },
@@ -11,25 +13,17 @@ const socialLinks = [
   { icon: <Coffee size={16} />, url: 'https://ko-fi.com/surajnandan', label: 'Ko-fi' },
 ];
 
-const quickLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#about', label: 'About' },
-  { href: '#skills', label: 'Skills' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#education', label: 'Education' },
-  { href: '#projects', label: 'Projects' },
-  { href: '#blog', label: 'Blog' },
-  { href: '#contact', label: 'Contact' },
-];
 
 const Footer = () => {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
   const currentYear = new Date().getFullYear();
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const goToSection = useSectionNav();
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
     e.preventDefault();
-    const element = document.querySelector(href);
-    if (element) element.scrollIntoView({ behavior: 'smooth' });
+    goToSection(id);
   };
 
   return (
@@ -64,12 +58,12 @@ const Footer = () => {
             <span className="font-monopress text-[10px] uppercase tracking-[0.2em] text-ink-mute">
               The Index
             </span>
-            <ul className="mt-4 space-y-2">
-              {quickLinks.map((link) => (
-                <li key={link.label}>
+            <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2">
+              {sections.map((link) => (
+                <li key={link.id}>
                   <a
-                    href={link.href}
-                    onClick={(e) => scrollToSection(e, link.href)}
+                    href={`/#${link.id}`}
+                    onClick={(e) => scrollToSection(e, link.id)}
                     className="font-editorial text-[15px] italic text-ink hover:text-oxblood"
                   >
                     {link.label}
@@ -95,7 +89,7 @@ const Footer = () => {
                   +91 6203484989
                 </a>
               </li>
-              <li className="text-ink-mute">Kishanganj, Bihar, India</li>
+              <li className="text-ink-mute">{LOCATION}</li>
             </ul>
             <button
               type="button"

@@ -71,6 +71,30 @@ const skillCategories = [
   },
 ];
 
+/**
+ * Percentages invite the wrong question ("why only 88%?"). Group by how the
+ * tool is actually used instead — the levels above only decide the tier.
+ */
+const tiers = [
+  { key: 'fluent', label: 'Fluent', note: 'Daily driver — shipped to production', min: 88 },
+  { key: 'proficient', label: 'Proficient', note: 'Built real features with it', min: 82 },
+  { key: 'familiar', label: 'Familiar', note: 'Working knowledge, growing', min: 0 },
+] as const;
+
+const tierFor = (level: number) => tiers.find((t) => level >= t.min) ?? tiers[tiers.length - 1];
+
+/** Filled marks for the tier — a printer's rating, not a progress bar. */
+const TierMarks = ({ level }: { level: number }) => {
+  const filled = 3 - tiers.indexOf(tierFor(level));
+  return (
+    <span aria-hidden="true" className="flex gap-[3px]">
+      {[0, 1, 2].map((i) => (
+        <span key={i} className={`h-[7px] w-[7px] ${i < filled ? 'bg-ink' : 'border border-ink/35'}`} />
+      ))}
+    </span>
+  );
+};
+
 const Skills = () => {
   return (
     <PressSection id="skills" className="bg-paper-bright">
@@ -78,15 +102,26 @@ const Skills = () => {
         section="Section B"
         name="Classified"
         headline="Skills &amp; Technologies"
-        standfirst="A tabulated listing of tools, languages, and disciplines — filed by category, rated by proficiency."
+        standfirst="A tabulated listing of tools, languages, and disciplines — filed by category, graded by how they're used."
       />
+
+      {/* Key to the ratings */}
+      <dl className="mb-10 flex flex-wrap gap-x-8 gap-y-3 border-y border-ink py-4">
+        {tiers.map((t) => (
+          <div key={t.key} className="flex items-center gap-3">
+            <TierMarks level={t.min} />
+            <dt className="font-monopress text-[10px] uppercase tracking-[0.16em] text-ink">{t.label}</dt>
+            <dd className="font-editorial text-[13px] italic text-ink-mute">{t.note}</dd>
+          </div>
+        ))}
+      </dl>
 
       <div className="grid grid-cols-1 gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
         {skillCategories.map((category, index) => (
           <motion.div
             key={category.title}
             variants={pressReveal}
-            custom={index}
+            custom={index % 3}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-40px' }}
@@ -99,33 +134,23 @@ const Skills = () => {
               </h3>
             </div>
 
-            <div className="space-y-3">
-              {category.skills.map((skill) => (
-                <div key={skill.name}>
-                  <div className="flex items-baseline justify-between gap-2">
+            <ul className="space-y-2.5">
+              {[...category.skills]
+                .sort((a, b) => b.level - a.level)
+                .map((skill) => (
+                  <li key={skill.name} className="flex items-baseline gap-2">
                     <span className="font-editorial text-[14.5px] text-ink">{skill.name}</span>
-                    <span className="font-monopress text-[10px] text-ink-mute">{skill.level}%</span>
-                  </div>
-                  {/* Ledger fill bar — an embossed ink block, not a flat glowing gradient */}
-                  <div
-                    className="mt-2 h-[6px] w-full bg-ink/10"
-                    style={{ boxShadow: 'inset 0 1px 2px rgba(23,23,26,0.14)' }}
-                  >
-                    <motion.div
-                      initial={{ width: 0 }}
-                      whileInView={{ width: `${skill.level}%` }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                      className="h-full bg-ink"
-                      style={{
-                        boxShadow:
-                          '0 2px 2px rgba(23,23,26,0.35), inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -1px 0 rgba(0,0,0,0.25)',
-                      }}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+                    {/* dot leader, like a classified listing */}
+                    <span aria-hidden="true" className="min-w-4 flex-1 translate-y-[-3px] border-b border-dotted border-ink/35" />
+                    <span className="flex items-center gap-2">
+                      <span className="font-monopress text-[9px] uppercase tracking-[0.14em] text-ink-mute">
+                        {tierFor(skill.level).label}
+                      </span>
+                      <TierMarks level={skill.level} />
+                    </span>
+                  </li>
+                ))}
+            </ul>
           </motion.div>
         ))}
       </div>

@@ -4,6 +4,8 @@ import { useIdle } from '../hooks/useIdle';
 
 interface LoadingScreenProps {
   isLoading: boolean;
+  /** Called when the visitor clicks or presses a key to skip the intro */
+  onSkip?: () => void;
 }
 
 // Three.js is a heavy dependency (~130KB gzipped) — code-split AND deferred
@@ -34,7 +36,7 @@ const SceneFallback = ({ progress, w, h }: { progress: number; w: number; h: num
 );
 
 /** "Now Printing" — the press startup sequence for The Nandan Review. */
-const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
+const LoadingScreen = ({ isLoading, onSkip }: LoadingScreenProps) => {
   const [progress, setProgress] = useState(0);
   const [{ w: sceneW, h: sceneH }] = useState(sceneSize);
   // Wait past the masthead's own entrance animation (settles ~0.85s in) so
@@ -63,6 +65,17 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
     return () => cancelAnimationFrame(raf);
   }, [isLoading]);
 
+  // Any key skips the intro — nobody should have to sit through it
+  useEffect(() => {
+    if (!isLoading || !onSkip) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      onSkip();
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [isLoading, onSkip]);
+
   return (
     <AnimatePresence>
       {isLoading && (
@@ -70,7 +83,8 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="fixed inset-0 z-[200] flex select-none flex-col items-center justify-center overflow-hidden bg-paper text-ink"
+          onClick={onSkip}
+          className="fixed inset-0 z-[200] flex cursor-pointer select-none flex-col items-center justify-center overflow-hidden bg-paper text-ink"
         >
           <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply" />
 
@@ -126,6 +140,19 @@ const LoadingScreen = ({ isLoading }: LoadingScreenProps) => {
               >
                 Setting Type…
               </motion.div>
+            )}
+
+            {onSkip && (
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onSkip();
+                }}
+                className="mt-8 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.2em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                Skip intro <span className="hidden sm:inline">— or press any key</span>
+              </button>
             )}
           </div>
         </motion.div>

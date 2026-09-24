@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, ExternalLink, Github } from 'lucide-react';
 import { getProjectBySlug, projects } from '../data/projects';
 import { posts } from '../data/posts';
 import { PressTag, PressButton } from '../components/ui/press';
 import Seo, { SITE_URL } from '../components/Seo';
 import NotFound from './NotFound';
+import CaseStudy from '../components/CaseStudy';
+import { getCaseStudy } from '../data/caseStudies';
 
 const ProjectPage = () => {
   const { slug = '' } = useParams();
   const project = getProjectBySlug(slug);
+  const { search } = useLocation();
+  const preview = new URLSearchParams(search).has('preview');
+  const study = getCaseStudy(slug);
+  const showStudy = Boolean(study && (study.published || preview));
   const [imgSrc, setImgSrc] = useState(project?.image ?? '');
 
   useEffect(() => {
@@ -118,6 +124,8 @@ const ProjectPage = () => {
               </PressButton>
             )}
           </div>
+
+          {showStudy && study && <CaseStudy study={study} preview={preview} />}
 
           {relatedPost && (
             <div className="mt-12 border-t border-ink/20 pt-6">

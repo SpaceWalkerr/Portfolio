@@ -4,16 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node generate-sitemap.js",
+    "prebuild": "node generate-sitemap.js && node scripts/build-knowledge.mjs && node scripts/build-feeds.mjs",
     "shots": "node scripts/screenshots.mjs",
     "prerender": "node scripts/prerender.mjs",
     "dev": "vite",
     "build": "vite build && node scripts/prerender.mjs",
     "lint": "eslint .",
     "preview": "vite preview",
-    "typecheck": "tsc --noEmit -p tsconfig.app.json"
+    "typecheck": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.api.json"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
     "@emailjs/browser": "^4.4.1",
     "@fontsource-variable/archivo": "^5.2.8",
     "@fontsource-variable/newsreader": "^5.2.10",

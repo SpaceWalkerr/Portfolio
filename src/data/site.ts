@@ -15,6 +15,7 @@ export const yearsBuilding = () => new Date().getFullYear() - CAREER_START_YEAR;
 export const sections = [
   { id: 'home', label: 'Home' },
   { id: 'about', label: 'About' },
+  { id: 'github', label: 'Stats' },
   { id: 'skills', label: 'Skills' },
   { id: 'experience', label: 'Experience' },
   { id: 'education', label: 'Education' },

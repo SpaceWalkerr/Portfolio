@@ -8,12 +8,13 @@ import Hero from './components/Hero';
 import Footer from './components/Footer';
 import BackToTop from './components/BackToTop';
 import CommandPaletteLauncher from './components/CommandPaletteLauncher';
+import { useIdle } from './hooks/useIdle';
 
 // Everything below the hero is code-split: the first paint only needs the
 // masthead, and the long-form copy (experience reports, articles, the
 // certificate archive) streams in right behind it.
 const About = lazy(() => import('./components/About'));
-const GitHubStats = lazy(() => import('./components/GitHubStats'));
+const Scoreboard = lazy(() => import('./components/Scoreboard'));
 const Skills = lazy(() => import('./components/Skills'));
 const Experience = lazy(() => import('./components/Experience'));
 const Education = lazy(() => import('./components/Education'));
@@ -24,6 +25,7 @@ const Contact = lazy(() => import('./components/Contact'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const AskEditor = lazy(() => import('./components/AskEditor'));
 
 const INTRO_SEEN_KEY = 'press-intro-seen';
 
@@ -55,7 +57,7 @@ const Home = ({ introDone }: { introDone: boolean }) => {
       <Hero introDone={introDone} />
       <Suspense fallback={<SectionFallback />}>
         <About />
-        <GitHubStats />
+        <Scoreboard />
         <Skills />
         <Experience />
         <Education />
@@ -119,6 +121,8 @@ function App() {
   }, [isLoading, finishIntro]);
 
   const setTheme = (next: Theme) => setThemeState(next);
+  // The Letters Desk isn't needed for first paint — load it once the page settles
+  const idle = useIdle(2500);
 
   return (
     <div className="min-h-screen bg-paper">
@@ -146,6 +150,11 @@ function App() {
       </main>
       <Footer />
       <BackToTop />
+      {idle && !isLoading && (
+        <Suspense fallback={null}>
+          <AskEditor />
+        </Suspense>
+      )}
     </div>
   );
 }

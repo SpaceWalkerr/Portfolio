@@ -5,6 +5,7 @@ import { Command } from 'cmdk';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Home,
+  BarChart3,
   User,
   Wrench,
   Briefcase,
@@ -20,6 +21,7 @@ import {
   Lamp,
   ArrowUpRight,
   CornerDownLeft,
+  Printer,
 } from 'lucide-react';
 import type { Theme } from '../App';
 import { projects } from '../data/projects';
@@ -38,6 +40,7 @@ interface CommandPaletteProps {
 const sectionIcons: Record<SectionId, typeof Home> = {
   home: Home,
   about: User,
+  github: BarChart3,
   skills: Wrench,
   experience: Briefcase,
   education: GraduationCap,
@@ -187,6 +190,9 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                 </Command.Group>
 
                 <Command.Group heading="Elsewhere">
+                  <Item value="print this edition pdf" onSelect={() => run(() => window.print())}>
+                    <Printer size={14} /> Print this edition
+                  </Item>
                   <Item onSelect={() => run(() => window.open('/Suraj_Resume.pdf', '_blank'))}>
                     <FileText size={14} /> Résumé (full) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
                   </Item>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
 import { sections, LOCATION } from '../data/site';
@@ -118,7 +119,12 @@ const Footer = () => {
 
         {/* Masthead bottom bar */}
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-ink pt-6 font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute sm:flex-row">
-          <p>© {currentYear} The Nandan Review — All Rights Reserved</p>
+          <p>
+            © {currentYear} The Nandan Review —{' '}
+            <Link to="/changelog" className="underline decoration-ink/30 underline-offset-4 hover:text-oxblood">
+              Corrections &amp; Amendments
+            </Link>
+          </p>
           <p>Set in Archivo, Newsreader &amp; Space Mono</p>
         </div>
       </div>

@@ -1,11 +1,12 @@
 import { motion, AnimatePresence, useMotionTemplate } from 'framer-motion';
 import { ExternalLink, Github, X, FileText } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { PressSection, SectionMasthead, PressTag, PressButton, pressReveal } from './ui/press';
 import { useTilt3D } from '../hooks/useTilt3D';
 import { useDialog } from '../hooks/useDialog';
 import { projects, projectCategories, type Project } from '../data/projects';
+import { clipFor, prefersReducedMotion } from '../lib/clips';
 
 interface ProjectCardProps {
   project: Project;
@@ -17,6 +18,22 @@ interface ProjectCardProps {
 const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
   const tilt = useTilt3D({ max: 6, glare: true });
   const [imgSrc, setImgSrc] = useState(project.image);
+  // Hover plays a clip of the live site; the video isn't fetched until the first hover
+  const clip = clipFor(project.slug);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [clipArmed, setClipArmed] = useState(false);
+  const [clipPlaying, setClipPlaying] = useState(false);
+
+  const startClip = () => {
+    if (!clip || prefersReducedMotion() || !window.matchMedia('(hover: hover)').matches) return;
+    // First hover mounts the video with autoPlay; later hovers resume it
+    if (clipArmed) videoRef.current?.play().catch(() => {});
+    else setClipArmed(true);
+  };
+  const stopClip = () => {
+    videoRef.current?.pause();
+    setClipPlaying(false);
+  };
 
   const handleCardClick = (e: React.MouseEvent) => {
     // Let new-tab / new-window intents fall through to a real navigation
@@ -34,7 +51,11 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
       whileInView="visible"
       viewport={{ once: true, margin: '-40px' }}
       onMouseMove={tilt.onMouseMove}
-      onMouseLeave={tilt.onMouseLeave}
+      onMouseEnter={startClip}
+      onMouseLeave={() => {
+        tilt.onMouseLeave();
+        stopClip();
+      }}
       style={{ transformPerspective: 1000, rotateX: tilt.rotateX, rotateY: tilt.rotateY }}
       className="group relative flex flex-col border-t-2 border-ink pt-4"
     >
@@ -68,6 +89,26 @@ const ProjectCard = ({ project, index, onSelect }: ProjectCardProps) => {
           decoding="async"
           className="absolute inset-0 h-full w-full object-cover transition-all duration-500 group-hover:scale-105 [@media(hover:hover)]:grayscale [@media(hover:hover)]:group-hover:grayscale-0"
         />
+        {clipArmed && clip && (
+          <video
+            ref={videoRef}
+            src={clip}
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+            onPlaying={() => setClipPlaying(true)}
+            className={`absolute inset-0 h-full w-full object-cover object-top transition-opacity duration-300 ${
+              clipPlaying ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        )}
+        {clip && (
+          <span className="absolute bottom-0 right-0 hidden bg-paper/90 px-2 py-1 font-monopress text-[8.5px] uppercase tracking-[0.14em] text-ink [@media(hover:hover)]:block">
+            {clipPlaying ? '● Live capture' : 'Hover to play'}
+          </span>
+        )}
         <div className="absolute inset-0 mix-blend-multiply [@media(hover:hover)]:bg-ink/10" />
         <span className="absolute left-0 top-0 bg-ink px-2 py-1 font-monopress text-[9px] uppercase tracking-[0.14em] text-paper">
           {project.category}

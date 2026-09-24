@@ -15,6 +15,7 @@ const postSlugs = slugsFrom('posts.ts');
 
 const urls = [
   { loc: `${SITE}/`, changefreq: 'weekly', priority: '1.0' },
+  { loc: `${SITE}/changelog`, changefreq: 'monthly', priority: '0.4' },
   ...projectSlugs.map((s) => ({
     loc: `${SITE}/projects/${s}`,
     changefreq: 'monthly',

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
 import LoadingScreen from './components/LoadingScreen';
@@ -25,6 +26,9 @@ const Contact = lazy(() => import('./components/Contact'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+const ChangelogPage = lazy(() => import('./pages/ChangelogPage'));
+const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
+const EasterEggs = lazy(() => import('./components/EasterEggs'));
 const AskEditor = lazy(() => import('./components/AskEditor'));
 
 const INTRO_SEEN_KEY = 'press-intro-seen';
@@ -144,15 +148,20 @@ function App() {
             <Route path="/" element={<Home introDone={!isLoading} />} />
             <Route path="/projects/:slug" element={<ProjectPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/changelog" element={<ChangelogPage />} />
+            <Route path="/puzzle" element={<PuzzlePage />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
       <Footer />
       <BackToTop />
+      {/* Vercel Web Analytics — cookieless page views; route changes are tracked automatically */}
+      <Analytics />
       {idle && !isLoading && (
         <Suspense fallback={null}>
           <AskEditor />
+          <EasterEggs />
         </Suspense>
       )}
     </div>

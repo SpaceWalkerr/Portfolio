@@ -48,23 +48,23 @@ const About = () => {
               <span className="float-left pr-2 pt-1 font-editorial text-[3.4rem] font-bold leading-[0.65] text-oxblood">
                 I
               </span>
-              'm a full-stack developer who builds products end to end — from the database
-              schema to the last animation frame. Most of my recent work sits where the web
-              meets AI: retrieval-augmented assistants, voice interfaces, and tools that turn
-              messy documents into answers you can trust.
+              'm a developer who likes to own a problem from end to end — the data model, the
+              API, the interface, and all the small details in between. What I care about most is
+              building software people can trust: it behaves the same way every time, explains
+              itself, and fails honestly when it has to.
             </p>
             <p>
-              At Berry Stenley I shipped RAG chatbots on pgvector with HNSW search and a
-              reranking step that kept answers grounded in their sources. At Xtin Capital I built
-              the platform's APIs from scratch — 10,000+ requests a day — and led a team of three
-              through sprint delivery. Along the way I've wired up Razorpay and PayPal with
-              idempotent webhooks, because payments are where “mostly works” isn't good enough.
+              I'm drawn to the hard parts. The rule that has to hold when two requests arrive at
+              the same moment. The AI answer that has to point back to its source. The screen that
+              should still feel calm when someone is stressed and in a hurry. I'd rather make one
+              thing correct than ten things impressive, so I keep the model's job small and put
+              the guarantees in code.
             </p>
 
             {/* Pull quote */}
             <blockquote className="border-l-2 border-oxblood py-1 pl-6">
               <p className="font-editorial text-xl italic leading-snug text-ink sm:text-2xl">
-                “Passionate about building intelligent systems that solve real-world problems.”
+                “Make it correct, make it clear — then make it beautiful.”
               </p>
               <cite className="mt-3 block font-monopress text-[10px] uppercase not-italic tracking-[0.2em] text-ink-mute">
                 — The Author
@@ -72,9 +72,10 @@ const About = () => {
             </blockquote>
 
             <p>
-              I'm in my final year of B.Tech CSE at SRM Institute of Science and Technology
-              (9.5 CGPA), and I write up what I learn in the Op-Ed below — case studies of the
-              systems I've built, and the mistakes that shaped them.
+              I keep my fundamentals sharp with a steady problem-solving habit — 875 LeetCode
+              problems and counting — and I design as carefully as I code. When I finish
+              something, I write it up in the Op-Ed below, mistakes included, because explaining a
+              system clearly is the best test of whether I really understand it.
             </p>
           </div>
 

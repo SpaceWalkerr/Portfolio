@@ -35,6 +35,7 @@ const slugsFrom = (file) =>
   );
 
 const routes = [
+  '/changelog',
   ...slugsFrom('projects.ts').map((s) => `/projects/${s}`),
   ...slugsFrom('posts.ts').map((s) => `/blog/${s}`),
 ];

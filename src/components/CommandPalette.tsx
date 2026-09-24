@@ -190,6 +190,12 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                 </Command.Group>
 
                 <Command.Group heading="Elsewhere">
+                  <Item value="changelog corrections amendments updates" onSelect={() => run(() => navigate('/changelog'))}>
+                    <FileText size={14} /> Corrections &amp; Amendments
+                  </Item>
+                  <Item value="crossword puzzle daily mini game" onSelect={() => run(() => navigate('/puzzle'))}>
+                    <Wrench size={14} /> The Daily Mini (crossword)
+                  </Item>
                   <Item value="print this edition pdf" onSelect={() => run(() => window.print())}>
                     <Printer size={14} /> Print this edition
                   </Item>

@@ -1,9 +1,11 @@
 import { useEffect } from 'react';
 
 export const SITE_URL = 'https://surajnandan.in';
-const DEFAULT_TITLE = 'Suraj Nandan | Full Stack Developer & Software Engineer Portfolio';
+// Keep in sync with index.html — these are restored when leaving a sub-page
+const DEFAULT_TITLE = 'Suraj Nandan — Full-Stack & AI Engineer';
 const DEFAULT_DESCRIPTION =
-  'Suraj Nandan — Full Stack Developer & Software Engineer. Expert in React, Node.js, TypeScript, Python, Java, AI & Machine Learning. View projects, experience, skills, and certifications. Based in India.';
+  'Suraj Nandan is a full-stack and AI engineer from India building reliable web products and grounded AI systems with React, Node.js, TypeScript and PostgreSQL. Case studies, projects and writing.';
+
 const DEFAULT_ROBOTS = 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
 
 interface SeoProps {

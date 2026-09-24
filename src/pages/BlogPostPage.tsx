@@ -6,6 +6,7 @@ import { getProjectBySlug, projects } from '../data/projects';
 import { PressTag } from '../components/ui/press';
 import PostBody from '../components/PostBody';
 import Seo, { SITE_URL } from '../components/Seo';
+import { PERSON, WEBSITE_REF } from '../lib/schema';
 import NotFound from './NotFound';
 
 /** Share row — plain links, no third-party scripts or trackers. */
@@ -82,8 +83,10 @@ const BlogPostPage = () => {
       url: `${SITE_URL}${path}`,
       datePublished: post.date,
       dateModified: post.date,
-      author: { '@type': 'Person', name: 'Suraj Nandan', url: SITE_URL },
-      publisher: { '@type': 'Person', name: 'Suraj Nandan', url: SITE_URL },
+      author: PERSON,
+      publisher: PERSON,
+      isPartOf: WEBSITE_REF,
+      image: `${SITE_URL}/og/blog/${post.slug}.png`,
       mainEntityOfPage: `${SITE_URL}${path}`,
       keywords: post.tags.join(', '),
       articleSection: post.category,

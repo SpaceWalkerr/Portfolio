@@ -18,6 +18,15 @@ export interface Correction {
 export const editions: Edition[] = [
   {
     date: '2026-09-24',
+    headline: 'One name, one identity',
+    items: [
+      'A single headline everywhere — Suraj Nandan, Full-Stack & AI Engineer — and a new share card to match.',
+      'Structured data that ties every page and profile to the same person.',
+      'A plain-text summary for crawlers that don’t run JavaScript, and an llms.txt for AI assistants.',
+    ],
+  },
+  {
+    date: '2026-09-24',
     headline: 'Live captures, a few hidden extras, and this page',
     items: [
       'Fourteen projects now play a short scroll-through of the live site — hover a card, or open its page.',

@@ -19,7 +19,7 @@ interface PressHeroProps {
 
 const tickerItems = [
   'Available for Work',
-  'Full-Stack Developer',
+  'Full-Stack & AI Engineer',
   'React · Node · TypeScript',
   'AI-Driven Products',
   `${CITY}, India`,

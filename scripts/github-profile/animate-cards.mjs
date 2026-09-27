@@ -10,22 +10,25 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { root } from '../load-data.mjs';
+import { THEMES } from './theme.mjs';
 
 const dir = path.resolve(process.argv[2] ?? path.join(root, 'docs/brand/cards'));
 const boxes = JSON.parse(fs.readFileSync(path.join(dir, 'boxes.json'), 'utf8'));
 const FPS = 12;
 const SCALE = 1; // the cards render at 2x; GIFs are 1x to stay light (a README shows them at ~415px anyway)
 
+for (const theme of THEMES)
 for (const [slug, b] of Object.entries(boxes)) {
+  const name = theme === 'dark' ? `${slug}-dark` : slug;
   const clip = path.join(root, 'public', 'clips', `${slug}.mp4`);
   if (!fs.existsSync(clip)) continue;
   // Inside the 2px border
   const x = Math.round((b.x + 2) * SCALE), y = Math.round((b.y + 2) * SCALE);
   const w = Math.round((b.width - 4) * SCALE), h = Math.round((b.height - 4) * SCALE);
-  const out = path.join(dir, `${slug}.gif`);
+  const out = path.join(dir, `${name}.gif`);
   execFileSync('ffmpeg', [
     '-y', '-loglevel', 'error',
-    '-loop', '1', '-i', path.join(dir, `${slug}.png`),
+    '-loop', '1', '-i', path.join(dir, `${name}.png`),
     '-i', clip,
     '-filter_complex', [
       `[0:v]scale=${600 * SCALE}:-1,format=rgb24[card]`,
@@ -36,5 +39,5 @@ for (const [slug, b] of Object.entries(boxes)) {
     ].join(';'),
     '-loop', '0', out,
   ]);
-  console.log(`animated: ${slug}.gif (${Math.round(fs.statSync(out).size / 1024)} KB)`);
+  console.log(`animated: ${name}.gif (${Math.round(fs.statSync(out).size / 1024)} KB)`);
 }

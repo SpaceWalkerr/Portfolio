@@ -14,6 +14,7 @@ import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import puppeteer from 'puppeteer';
+import { THEMES, paint, suffixed } from './theme.mjs';
 
 const root = path.resolve(fileURLToPath(import.meta.url), '../../..');
 const out = path.resolve(process.argv[2] ?? path.join(root, 'docs/brand/github-hero.gif'));
@@ -72,28 +73,30 @@ h1 { margin: 0; font: 900 96px/0.9 Archivo; letter-spacing: -.035em; white-space
   <div class="ticker"><div class="track">${tick}</div></div>
 </div></body></html>`;
 
-const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gh-hero-'));
-fs.writeFileSync(path.join(tmp, 'page.html'), html);
-const browser = await puppeteer.launch({ headless: 'new', args: ['--allow-file-access-from-files'] });
-const page = await browser.newPage();
-await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
-await page.goto(`file://${path.join(tmp, 'page.html')}`, { waitUntil: 'load' });
-await page.evaluate(() => document.fonts.ready);
-await page.evaluate(() => document.getAnimations().forEach((a) => a.pause()));
+for (const theme of THEMES) {
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'gh-hero-'));
+  fs.writeFileSync(path.join(tmp, 'page.html'), paint(html, theme));
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--allow-file-access-from-files'] });
+  const page = await browser.newPage();
+  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
+  await page.goto(`file://${path.join(tmp, 'page.html')}`, { waitUntil: 'load' });
+  await page.evaluate(() => document.fonts.ready);
+  await page.evaluate(() => document.getAnimations().forEach((a) => a.pause()));
 
-const frames = Math.round(DURATION * FPS);
-for (let f = 0; f < frames; f++) {
-  const ms = (f / FPS) * 1000;
-  await page.evaluate((t) => document.getAnimations().forEach((a) => (a.currentTime = t)), ms);
-  await page.screenshot({ path: path.join(tmp, `f${String(f).padStart(4, '0')}.png`) });
+  const frames = Math.round(DURATION * FPS);
+  for (let f = 0; f < frames; f++) {
+    const ms = (f / FPS) * 1000;
+    await page.evaluate((t) => document.getAnimations().forEach((a) => (a.currentTime = t)), ms);
+    await page.screenshot({ path: path.join(tmp, `f${String(f).padStart(4, '0')}.png`) });
+  }
+  // Hold on the finished front page before the loop restarts (identical frames cost almost nothing in a GIF)
+  const last = path.join(tmp, `f${String(frames - 1).padStart(4, '0')}.png`);
+  for (let h = 0; h < HOLD * FPS; h++) fs.copyFileSync(last, path.join(tmp, `f${String(frames + h).padStart(4, '0')}.png`));
+  await browser.close();
+
+  execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(tmp, 'f%04d.png'),
+    '-vf', 'split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle',
+    '-loop', '0', suffixed(out, theme)]);
+  fs.rmSync(tmp, { recursive: true, force: true });
+  console.log(`hero (${theme}): ${Math.round(fs.statSync(suffixed(out, theme)).size / 1024)} KB`);
 }
-// Hold on the finished front page before the loop restarts (identical frames cost almost nothing in a GIF)
-const last = path.join(tmp, `f${String(frames - 1).padStart(4, '0')}.png`);
-for (let h = 0; h < HOLD * FPS; h++) fs.copyFileSync(last, path.join(tmp, `f${String(frames + h).padStart(4, '0')}.png`));
-await browser.close();
-
-execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-framerate', String(FPS), '-i', path.join(tmp, 'f%04d.png'),
-  '-vf', 'split[a][b];[a]palettegen=max_colors=96:stats_mode=diff[p];[b][p]paletteuse=dither=none:diff_mode=rectangle',
-  '-loop', '0', out]);
-fs.rmSync(tmp, { recursive: true, force: true });
-console.log(`hero: ${Math.round(fs.statSync(out).size / 1024)} KB → ${out}`);

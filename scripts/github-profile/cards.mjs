@@ -9,6 +9,7 @@ import os from 'node:os';
 import path from 'node:path';
 import puppeteer from 'puppeteer';
 import { loadData, root } from '../load-data.mjs';
+import { THEMES, paint } from './theme.mjs';
 
 const outDir = path.resolve(process.argv[2] ?? path.join(root, 'docs/brand/cards'));
 fs.mkdirSync(outDir, { recursive: true });
@@ -60,6 +61,7 @@ const page = await browser.newPage();
 await page.setViewport({ width: 600, height: 470, deviceScaleFactor: 2 });
 
 const boxes = {};
+for (const theme of THEMES)
 for (const c of cards) {
   const html = `<!doctype html><html><head><style>
 @font-face { font-family: Archivo; src: url(${font('@fontsource-variable/archivo/files/archivo-latin-wght-normal.woff2')}); font-weight: 100 900; }
@@ -75,22 +77,23 @@ for (const c of cards) {
   </div>
   <div style="border-top:1px solid #17171a"></div>
   ${c.code
-    ? `<pre style="margin:14px 0 0;height:222px;border:2px solid #17171a;background:#17171a;color:#e9e4d6;padding:16px 18px;font:400 12.5px/1.55 'Space Mono';overflow:hidden;white-space:pre">${c.code.replace(/<b>/g, '<b style="color:#e8604a;font-weight:400">').replace(/<i>/g, '<i style="color:#d8c9a3;font-style:normal">')}</pre>`
+    ? `<pre style="margin:14px 0 0;height:222px;border:2px solid #17171a;background:#0f0f11;color:#ece7da;padding:16px 18px;font:400 12.5px/1.55 'Space Mono';overflow:hidden;white-space:pre">${c.code.replace(/<b>/g, '<b style="color:#e8604a;font-weight:400">').replace(/<i>/g, '<i style="color:#d8c9a3;font-style:normal">')}</pre>`
     : `<div id="shot" style="margin-top:14px;height:222px;border:2px solid #17171a;background:#17171a url('${c.image}') top center/cover;filter:grayscale(1) contrast(1.06)"></div>`}
   <h2 style="margin:14px 0 0;font:900 38px/0.95 Archivo;letter-spacing:-.025em;text-transform:uppercase">${esc(c.name)}</h2>
   <p style="margin:8px 0 0;font:italic 400 18px/1.3 Newsreader;color:#3d3a34">“${esc(c.line)}”</p>
   <div style="margin-top:auto;display:flex;gap:8px;flex-wrap:wrap">${c.tags.map((t) => `<span class="mono" style="font-size:9.5px;border:1px solid rgba(23,23,26,.35);padding:3px 7px;color:#57534a">${esc(t)}</span>`).join('')}</div>
   <div style="position:absolute;left:0;right:0;bottom:0;height:6px;background:#c6392b"></div>
 </div></body></html>`;
-  const file = path.join(tmp, `${c.file}.html`);
-  fs.writeFileSync(file, html);
+  const file = path.join(tmp, `${c.file}-${theme}.html`);
+  fs.writeFileSync(file, paint(html, theme));
+  const name = theme === 'dark' ? `${c.file}-dark` : c.file;
   await page.goto(`file://${file}`, { waitUntil: 'load' });
   await page.evaluate(() => document.fonts.ready);
-  await page.screenshot({ path: path.join(outDir, `${c.file}.png`) });
+  await page.screenshot({ path: path.join(outDir, `${name}.png`) });
   // Where the screenshot sits (CSS px), so animate-cards.mjs can overlay the live clip there
   const box = await page.$eval('#shot', (el) => el.getBoundingClientRect().toJSON()).catch(() => null);
   if (box) boxes[c.file] = { x: box.x, y: box.y, width: box.width, height: box.height };
-  console.log(`card: ${c.file}.png`);
+  console.log(`card: ${name}.png`);
 }
 await browser.close();
 fs.rmSync(tmp, { recursive: true, force: true });

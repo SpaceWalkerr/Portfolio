@@ -9,6 +9,7 @@ import os from 'node:os';
 import path from 'node:path';
 import puppeteer from 'puppeteer';
 import { root } from '../load-data.mjs';
+import { THEMES, paint, suffixed } from './theme.mjs';
 
 const out = path.resolve(process.argv[2] ?? path.join(root, 'docs/brand/honours.png'));
 const font = (p) => `file://${path.join(root, 'node_modules', p)}`;
@@ -55,15 +56,17 @@ const html = `<!doctype html><html><head><style>
   <div style="height:6px;background:#c6392b;margin:30px -30px -30px"></div>
 </div></body></html>`;
 
-const tmp = path.join(os.tmpdir(), `honours-${Date.now()}.html`);
-fs.writeFileSync(tmp, html);
-const browser = await puppeteer.launch({ headless: 'new', args: ['--allow-file-access-from-files'] });
-const page = await browser.newPage();
-await page.setViewport({ width: 1200, height: 400, deviceScaleFactor: 2 });
-await page.goto(`file://${tmp}`, { waitUntil: 'load' });
-await page.evaluate(() => document.fonts.ready);
-const el = await page.$('body > div');
-await el.screenshot({ path: out });
-await browser.close();
-fs.rmSync(tmp);
-console.log(`honours: ${Math.round(fs.statSync(out).size / 1024)} KB → ${out}`);
+for (const theme of THEMES) {
+  const tmp = path.join(os.tmpdir(), `honours-${theme}-${Date.now()}.html`);
+  fs.writeFileSync(tmp, paint(html, theme));
+  const browser = await puppeteer.launch({ headless: 'new', args: ['--allow-file-access-from-files'] });
+  const page = await browser.newPage();
+  await page.setViewport({ width: 1200, height: 400, deviceScaleFactor: 2 });
+  await page.goto(`file://${tmp}`, { waitUntil: 'load' });
+  await page.evaluate(() => document.fonts.ready);
+  const el = await page.$('body > div');
+  await el.screenshot({ path: suffixed(out, theme) });
+  await browser.close();
+  fs.rmSync(tmp);
+  console.log(`honours (${theme}): ${Math.round(fs.statSync(suffixed(out, theme)).size / 1024)} KB`);
+}

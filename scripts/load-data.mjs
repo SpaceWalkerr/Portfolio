@@ -17,6 +17,7 @@ export async function loadData() {
     export { skillCategories } from './src/data/skills';
     export { certifications, notableAchievements } from './src/data/certifications';
     export { LOCATION } from './src/data/site';
+    export { caseStudies } from './src/data/caseStudies';
   `;
   const out = await build({
     stdin: { contents: entry, resolveDir: root, loader: 'ts' },

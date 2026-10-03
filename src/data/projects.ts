@@ -6,7 +6,8 @@ export interface Project {
   title: string;
   description: string;
   tags: string[];
-  liveDemo: string;
+  /** Omitted when the project has no public deployment */
+  liveDemo?: string;
   /** Omitted when the repo is private */
   github?: string;
   /** Primary card image — an auto-generated screenshot under /shots when available */
@@ -17,6 +18,30 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'whiteboard-ai',
+    name: 'Whiteboard.ai',
+    title: '"Whiteboard.ai" — Collaborative System-Design Whiteboard',
+    description:
+      'A real-time collaborative whiteboard for system design where an AI reviews your architecture diagram like a senior engineer — for interview practice, live interviews and team design reviews. Boards are Yjs documents synced over a custom WebSocket server, persisted to Postgres within ~50 ms and editable offline. The canvas is converted into a typed graph that a deterministic rules engine checks before Claude writes a structured review with findings pinned to shapes. Includes email/OAuth sign-in, role-based sharing with an audit log, end-to-end encrypted private rooms, multi-instance sync over Redis, Row Level Security on every table, and a CI pipeline with load tests and secret scanning.',
+    tags: ['React', 'TypeScript', 'Yjs', 'Fastify', 'WebSockets', 'PostgreSQL', 'Supabase', 'Redis', 'Claude API', 'Turborepo'],
+    github: 'https://github.com/SpaceWalkerr/Whiteboard-ai.git',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&fm=webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80&fm=webp',
+    category: 'AI',
+  },
+  {
+    slug: 'doctor-consultation-site',
+    name: 'Doctor Consultation Site',
+    title: '"Doctor Consultation Site" — Telemedicine Booking Platform',
+    description:
+      'A production-shaped website for a solo general physician\'s online practice in India: marketing pages, a slot-based booking flow with Razorpay payment, WhatsApp as the consultation channel, and a private admin view of upcoming bookings. The server generates slots on a 15-minute grid, holds them for 15 minutes during payment, verifies payment signatures with HMAC-SHA256 and re-checks the slot before confirming so two patients can never double-book. Published in four languages with automatic language detection, a translation-completeness checker, and server-authoritative pricing, with Postgres storage and a JSON-file fallback for local development.',
+    tags: ['React', 'Vite', 'Tailwind CSS', 'Node.js', 'Express', 'Razorpay', 'PostgreSQL', 'i18n'],
+    github: 'https://github.com/SpaceWalkerr/Didi-Website-.git',
+    image: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&fm=webp',
+    fallbackImage: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80&fm=webp',
+    category: 'Full Stack',
+  },
   {
     slug: 'knot-ai',
     name: 'Knot.ai',

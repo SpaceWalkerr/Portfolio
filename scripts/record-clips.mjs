@@ -24,7 +24,7 @@ const SCROLL_MS = 6_000;
 
 const only = process.argv.slice(2);
 const src = fs.readFileSync(path.join(root, 'src', 'data', 'projects.ts'), 'utf8');
-const entries = [...src.matchAll(/slug:\s*'([^']+)'[\s\S]*?liveDemo:\s*'([^']+)'/g)]
+const entries = [...src.matchAll(/slug:\s*'([^']+)'(?:(?!slug:)[\s\S])*?liveDemo:\s*'([^']+)'/g)]
   .map((m) => ({ slug: m[1], url: m[2] }))
   .filter((e) => (only.length ? only.includes(e.slug) : true));
 

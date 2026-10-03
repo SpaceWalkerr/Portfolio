@@ -273,10 +273,12 @@ const Projects = () => {
                 </div>
 
                 <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-                  <PressButton href={selectedProject.liveDemo} className="flex-1">
-                    <ExternalLink size={15} />
-                    Live Demo
-                  </PressButton>
+                  {selectedProject.liveDemo && (
+                    <PressButton href={selectedProject.liveDemo} className="flex-1">
+                      <ExternalLink size={15} />
+                      Live Demo
+                    </PressButton>
+                  )}
                   {selectedProject.github ? (
                     <PressButton href={selectedProject.github} variant="outline" className="flex-1">
                       <Github size={15} />

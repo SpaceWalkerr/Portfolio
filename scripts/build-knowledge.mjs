@@ -38,7 +38,7 @@ ${strip(e.details)}`
       .map(
         (p) => `## ${p.name} [${p.category}] — page: surajnandan.in/projects/${p.slug}
 ${p.description}
-Stack: ${p.tags.join(', ')} · Live: ${p.liveDemo}${p.github ? ` · Source: ${p.github.replace(/\.git$/, '')}` : ' · Source: private'}`
+Stack: ${p.tags.join(', ')} · Live: ${p.liveDemo ?? 'none (source only)'}${p.github ? ` · Source: ${p.github.replace(/\.git$/, '')}` : ' · Source: private'}`
       )
       .join('\n\n'),
 

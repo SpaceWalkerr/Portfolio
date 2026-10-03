@@ -17,6 +17,14 @@ export interface Correction {
 
 export const editions: Edition[] = [
   {
+    date: '2026-10-04',
+    headline: 'Two new projects on the shelf',
+    items: [
+      'Added Whiteboard.ai — a collaborative system-design whiteboard with AI architecture review — and a telemedicine booking site for a solo physician, both source-only for now.',
+      'Projects may now omit a live demo; their pages show the source link alone.',
+    ],
+  },
+  {
     date: '2026-09-25',
     headline: 'Campus Winner, ACG Pack A Pitch 2.0',
     items: [

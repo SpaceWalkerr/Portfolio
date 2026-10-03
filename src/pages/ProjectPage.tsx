@@ -63,7 +63,7 @@ const ProjectPage = () => {
       keywords: project.tags.join(', '),
       ...(study?.published ? { abstract: study.thesis, creativeWorkStatus: 'Published' } : {}),
       ...(repo ? { codeRepository: repo } : {}),
-      sameAs: [project.liveDemo, ...(repo ? [repo] : [])],
+      sameAs: [...(project.liveDemo ? [project.liveDemo] : []), ...(repo ? [repo] : [])],
     },
     {
       '@context': 'https://schema.org',
@@ -165,9 +165,11 @@ const ProjectPage = () => {
           </div>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <PressButton href={project.liveDemo} className="flex-1">
-              <ExternalLink size={15} /> Live Demo
-            </PressButton>
+            {project.liveDemo && (
+              <PressButton href={project.liveDemo} className="flex-1">
+                <ExternalLink size={15} /> Live Demo
+              </PressButton>
+            )}
             {project.github && (
               <PressButton href={project.github} variant="outline" className="flex-1">
                 <Github size={15} /> View Source

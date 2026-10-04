@@ -305,6 +305,97 @@ export const caseStudies: Record<string, CaseStudy> = {
       'Trigger cooldown and de-duplication state lives in the browser’s storage, not on the server.',
     ],
   },
+
+  'whiteboard-ai': {
+    published: true,
+    role: 'Solo — product spec, architecture and every phase’s review; built with Claude Code under written engineering rules and a plan-then-approve loop',
+    context: 'Personal product build · Sep–Oct 2026 · 14 commits across 13 phases',
+    thesis: 'Every guarantee has a sentence and a test that tries to break it: “Saved” means committed, a viewer cannot write, a candidate cannot see the notes, and the server cannot read a private board.',
+    problem: [
+      'System-design interviews are practised on tools that were never built for them. A generic whiteboard has no idea that a box labelled “Postgres” is a single point of failure, so feedback depends on finding a human who will read your diagram closely. Interviewers running a live round juggle a canvas, a timer, a question and private notes in four different places.',
+      'Building it properly is mostly not the canvas. It is real-time sync that survives a crashed server, permissions that hold on the WebSocket as well as the REST API, an AI reviewer whose bill and prompt-injection exposure are bounded, and a private mode where the server genuinely cannot read the board.',
+    ],
+    approach: [
+      'The board is a Yjs document: shapes (rectangle, ellipse, text, sticky, freehand, arrows that bind to shapes, plus twelve typed system-design components) live in a `Y.Map`, every read and write is zod-validated, and the UI only ever talks to a `BoardStore`. A hand-written sync server — Fastify and `ws` on one port, not Hocuspocus or a hosted service — keeps one in-memory room per board, writes every update to a Postgres write-ahead log within 50 ms, and tells the client “Saved” only after the batch commits. Two or more instances share rooms over Redis pub/sub, with a Redis lease choosing the one writer per room.',
+      'The review pipeline never sends a picture. The canvas is converted to a typed graph, nine deterministic rules (database single point of failure, client talking straight to a database, synchronous cycles, queue without a dead-letter queue and so on) run in the browser in about 17 ms for a 2,000-shape board, and only then does Claude write a structured review — scores on five dimensions, findings pinned to shape IDs — that is validated and repaired server-side before it reaches the canvas. On top sit sharing with a role model and audit log, a Team-plan interview mode with a server-held timer, notes, scorecards and session replay, end-to-end encrypted private rooms, and Razorpay billing whose plan limits are enforced on the server.',
+    ],
+    flow: [
+      { label: 'Canvas', detail: 'react-konva over a Yjs doc, offline in IndexedDB' },
+      { label: 'Sync server', detail: 'ws rooms, ticket auth, role checks per frame' },
+      { label: 'Postgres', detail: 'write-ahead log, snapshots, RLS on every table' },
+      { label: 'Redis', detail: 'room pub/sub, writer lease, rate limits' },
+      { label: 'Rules → Claude', detail: 'typed graph, then validated findings' },
+    ],
+    decisions: [
+      {
+        title: 'Own the sync server',
+        body: 'Rooms, backpressure, persistence and revocation are the product, so I wrote them: 8 MB message cap with token buckets, slow-consumer close, awareness bound to the connection that claimed it, and a 5-minute room ticket carried in the WebSocket subprotocol — never the URL — and re-checked against the database on every upgrade.',
+      },
+      {
+        title: '“Saved” is a promise',
+        body: 'Live updates are broadcast immediately; only the durability acknowledgement waits for the commit, and it carries the exact state vector that is now in Postgres. An edit that shows Saved survives `kill -9`; one that does not lives in the browser and re-sends on reconnect.',
+      },
+      {
+        title: 'One writer, safe if it is wrong',
+        body: 'A Redis lease picks the instance that persists a room, so each edit is written once. But sequence numbers are allocated by the database in a single-statement append and Yjs updates are idempotent, so a split brain or a Redis outage produces duplicate rows, never a corrupted board. It fails open rather than risk nobody writing.',
+      },
+      {
+        title: 'Private data never touches the shared channel',
+        body: 'Interview state is not in the Y.Doc, because the candidate is an editor and could rewrite it. Only a field-by-field public state goes over the socket; notes, hidden hints and scorecards exist only behind role-checked REST routes. A test records every frame a candidate’s socket receives and asserts no secret appears.',
+      },
+      {
+        title: 'Claude sees data, with no tools',
+        body: 'Structured outputs instead of a forced tool call, so there are no tools to hijack. The graph goes in compact JSON inside an untrusted-data block with NFKC-normalised, escaped labels, and refs are mapped back to real shape IDs afterwards — anything the model invents is dropped rather than paid for twice.',
+      },
+      {
+        title: 'Spend is bounded in code',
+        body: 'Quota is checked and a reservation written in one transaction under a per-user advisory lock, so two parallel requests at quota − 1 yield one 200 and one 402. Every call writes a row with tokens and cost in micro-USD, an unknown model throws instead of bypassing the pricing table, and a daily spend kill-switch sits in front of it all.',
+      },
+      {
+        title: 'Zero-knowledge private rooms',
+        body: 'A 256-bit AES-GCM key is generated in the browser and lives in the URL fragment; the server stores and relays ciphertext, with a per-kind additional-authenticated-data string binding each envelope to its board. The tests assert that nothing stored in any table contains a label, name or Yjs structure, in UTF-8, UTF-16 or base64.',
+      },
+      {
+        title: 'Never trust the webhook body',
+        body: 'On every Razorpay event the server verifies the HMAC, inserts the event ID in the same transaction (a duplicate stops there), then fetches the subscription from Razorpay and applies that. The same event replayed five times produces byte-identical state, emails and audit rows. Downgrades lock the least recently edited boards read-only; nothing is ever deleted.',
+      },
+    ],
+    lessons: [
+      {
+        broke: 'Viewers sat on “Saving…” forever. The store stamped a schema version into the doc at construction, an update the server rightly drops for viewers.',
+        fix: 'The version is stamped with the first local edit, so viewers never write and editors no longer write on every open.',
+      },
+      {
+        broke: 'A removed member’s browser still held the board in IndexedDB and could open it offline.',
+        fix: 'Revocation now wipes the local copy and cached details, not just the live socket.',
+      },
+      {
+        broke: 'Under the 2,000-connection test the Supabase pooler cap (2 × 10 connections against 15) rejected upgrades, and persistence writes starved reads — boards took tens of seconds to open.',
+        fix: 'Pool of 6 per instance, sync writes limited to half the pool, and the four-round-trip append collapsed to one: “Saved” p50 went from 842 to 312 ms.',
+      },
+      {
+        broke: 'PostHog recorded full URLs including the fragment — a private board’s encryption key would have leaked to analytics for anyone who accepted cookies.',
+        fix: 'A `before_send` hook strips fragments from every URL-like value in every event, with a test.',
+      },
+      {
+        broke: 'A candidate who opened the board by share link had no interview role and saw nothing — found by the browser test, since candidates normally join by link.',
+        fix: 'Link visitors are recorded after the ticket route authorizes them and resolve to the candidate view; default is still deny.',
+      },
+    ],
+    figures: [
+      { value: '3 ms', label: 'p50 edit propagation, 50 editors (p95 9)' },
+      { value: '2,000', label: 'sockets, 0 dropped, p95 8 ms (2 instances)' },
+      { value: '200/200', label: 'acknowledged edits kept after kill -9' },
+      { value: '720+', label: 'unit and integration tests, plus 24 E2E' },
+    ],
+    limits: [
+      'Not deployed: it runs locally against a dev Supabase project, so there is no live demo. Load numbers come from one Mac with the database 76 ms away and have not been re-measured on Render staging.',
+      'Razorpay checkout has been tested with a scripted provider and a mocked browser flow, not yet against real Razorpay test mode. Tax invoicing needs an accountant’s sign-off before launch.',
+      'The AI review eval — 15 fixture boards with 16 planted flaws, with a 12/15 pass bar — is written and graded deterministically but has not been run against a real API key, so the prompt’s catch rate is unmeasured.',
+      'Private boards cannot rotate keys: a removed member stops syncing but may keep the key and old content, and losing every copy of the link loses the board. Metadata (who, when, sizes) is visible to the server.',
+      'The design check only understands palette shapes; boards drawn with plain rectangles get few findings. Canvas shapes are not exposed to screen readers individually.',
+    ],
+  },
 };
 
 export const getCaseStudy = (slug: string) => caseStudies[slug];

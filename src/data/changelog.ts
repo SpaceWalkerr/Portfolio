@@ -21,6 +21,7 @@ export const editions: Edition[] = [
     headline: 'Two new projects on the shelf',
     items: [
       'Added Whiteboard.ai — a collaborative system-design whiteboard with AI architecture review — and a telemedicine booking site for a solo physician, both source-only for now.',
+      'Published a full case study for Whiteboard.ai — sync, durability, the AI review pipeline, private rooms, billing, and what is still unverified.',
       'Projects may now omit a live demo; their pages show the source link alone.',
     ],
   },

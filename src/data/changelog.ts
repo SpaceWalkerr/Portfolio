@@ -17,6 +17,13 @@ export interface Correction {
 
 export const editions: Edition[] = [
   {
+    date: '2026-10-07',
+    headline: 'A penguin joins the staff',
+    items: [
+      'Scroll down the page and a small penguin perches on the back-to-top button. It watches your cursor, and reacts if you poke it.',
+    ],
+  },
+  {
     date: '2026-10-04',
     headline: 'Two new projects on the shelf',
     items: [

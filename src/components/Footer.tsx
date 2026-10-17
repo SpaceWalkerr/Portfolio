@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss, Newspaper } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
 import { sections, LOCATION } from '../data/site';
 import { useSectionNav } from '../hooks/useSectionNav';
@@ -112,6 +112,14 @@ const Footer = () => {
                 className="inline-flex items-center gap-1.5 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
               >
                 <Rss size={13} /> RSS
+              </a>
+              <a
+                href="https://surajnandan.gumroad.com/l/press-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
+              >
+                <Newspaper size={13} /> Get this template
               </a>
             </div>
           </div>

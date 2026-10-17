@@ -65,6 +65,7 @@ export const CertificateModal = ({
   return (
     <AnimatePresence>
       <motion.div
+        key="backdrop"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -74,6 +75,7 @@ export const CertificateModal = ({
       />
 
       <motion.div
+        key="dialog"
         ref={dialogRef}
         tabIndex={-1}
         initial={{ opacity: 0, scale: 0.95 }}

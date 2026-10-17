@@ -56,18 +56,25 @@ export const CertificateCard = ({ certificate, index, onSelect }: CertificateCar
         rotateX: tilt.rotateX,
         rotateY: tilt.rotateY,
       }}
-      onClick={() => onSelect(certificate)}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          onSelect(certificate);
-        }
-      }}
-      role="button"
-      tabIndex={0}
-      aria-label={`View certificate: ${certificate.title}`}
-      className="group relative cursor-pointer break-inside-avoid border border-ink/30 bg-paper transition-colors hover:border-ink"
-      data-cursor="hover"
+      // Credentials listed without a file (no `url`) are shown but not openable
+      {...(certificate.url
+        ? {
+            onClick: () => onSelect(certificate),
+            onKeyDown: (e: React.KeyboardEvent) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onSelect(certificate);
+              }
+            },
+            role: 'button',
+            tabIndex: 0,
+            'aria-label': `View certificate: ${certificate.title}`,
+            'data-cursor': 'hover',
+          }
+        : {})}
+      className={`group relative break-inside-avoid border border-ink/30 bg-paper transition-colors ${
+        certificate.url ? 'cursor-pointer hover:border-ink' : ''
+      }`}
     >
       {/* Preview area */}
       <div className="relative aspect-[4/3] overflow-hidden border-b border-ink/20 bg-paper-bright">

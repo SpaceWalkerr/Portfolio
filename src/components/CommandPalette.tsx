@@ -68,6 +68,8 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setOpen((o) => !o);
+      } else if (e.key === 'Escape') {
+        setOpen(false);
       }
     };
     const onOpen = () => setOpen(true);

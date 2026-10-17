@@ -136,12 +136,12 @@ const Certifications = () => {
 
           {/* Featured certificate row */}
           <div className="mt-10 divide-y divide-ink/20 border-y border-ink">
-            {featuredCerts.map((cert) => (
-              <a
+            {featuredCerts.map((cert) => {
+              const Row = (cert.url ? 'a' : 'div') as 'a';
+              return (
+              <Row
                 key={cert.title}
-                href={withBase(cert.url!)}
-                target="_blank"
-                rel="noopener noreferrer"
+                {...(cert.url ? { href: withBase(cert.url), target: '_blank', rel: 'noopener noreferrer' } : {})}
                 className="group flex flex-col gap-1 py-3.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4"
               >
                 <div className="min-w-0">
@@ -159,10 +159,11 @@ const Certifications = () => {
                 </div>
                 <span className="flex flex-shrink-0 items-center gap-1.5 font-monopress text-[10px] uppercase tracking-[0.14em] text-ink-mute group-hover:text-ink">
                   {cert.year}
-                  <ExternalLink className="h-3 w-3" />
+                  {cert.url && <ExternalLink className="h-3 w-3" />}
                 </span>
-              </a>
-            ))}
+              </Row>
+              );
+            })}
           </div>
         </motion.div>
       )}
@@ -214,7 +215,7 @@ const Certifications = () => {
       {/* Certificate detail modal */}
       <CertificateModal
         certificate={selectedCertificate}
-        certificates={visibleOther}
+        certificates={visibleOther.filter((c) => c.url)}
         onClose={() => setSelectedCertificate(null)}
         onNavigate={setSelectedCertificate}
       />

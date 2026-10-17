@@ -14,6 +14,13 @@ const socialLinks = [
   { icon: <Coffee size={16} />, url: 'https://ko-fi.com/surajnandan', label: 'Ko-fi' },
 ];
 
+const resources = [
+  { label: 'Deploy checklist', url: 'https://surajnandan.gumroad.com/l/ship-it-deploy-checklist' },
+  { label: 'Git cheat sheet', url: 'https://surajnandan.gumroad.com/l/git-github-cheat-sheet' },
+  { label: 'Interview checklist', url: 'https://surajnandan.gumroad.com/l/fresher-developer-interview-checklist' },
+  { label: 'Resume pack', url: 'https://surajnandan.gumroad.com/l/resume-cover-letter-pack' },
+  { label: 'Freelance tracker', url: 'https://surajnandan.gumroad.com/l/freelance-tracker-spreadsheet' },
+];
 
 const Footer = () => {
   const [resumeModalOpen, setResumeModalOpen] = useState(false);
@@ -125,8 +132,24 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Resources — guides and tools on Gumroad */}
+        <div className="mt-10 flex flex-wrap items-baseline gap-x-5 gap-y-2 border-t border-ink/30 pt-5">
+          <span className="font-monopress text-[10px] uppercase tracking-[0.2em] text-ink-mute">Resources</span>
+          {resources.map((r) => (
+            <a
+              key={r.url}
+              href={r.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-editorial text-[14px] italic text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
+            >
+              {r.label}
+            </a>
+          ))}
+        </div>
+
         {/* Masthead bottom bar */}
-        <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-ink pt-6 font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute sm:flex-row">
+        <div className="mt-6 flex flex-col items-center justify-between gap-3 border-t border-ink pt-6 font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-mute sm:flex-row">
           <p>
             © {currentYear} The Nandan Review —{' '}
             <Link to="/changelog" className="underline decoration-ink/30 underline-offset-4 hover:text-oxblood">

@@ -11,6 +11,7 @@ import {
   Briefcase,
   GraduationCap,
   Newspaper,
+  ShoppingBag,
   Award,
   Mail,
   FileText,
@@ -40,6 +41,7 @@ interface CommandPaletteProps {
 const sectionIcons: Record<SectionId, typeof Home> = {
   home: Home,
   about: User,
+  guides: ShoppingBag,
   github: BarChart3,
   skills: Wrench,
   experience: Briefcase,

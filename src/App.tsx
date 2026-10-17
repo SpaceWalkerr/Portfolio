@@ -15,6 +15,7 @@ import { useIdle } from './hooks/useIdle';
 // masthead, and the long-form copy (experience reports, articles, the
 // certificate archive) streams in right behind it.
 const About = lazy(() => import('./components/About'));
+const Guides = lazy(() => import('./components/Guides'));
 const Scoreboard = lazy(() => import('./components/Scoreboard'));
 const Skills = lazy(() => import('./components/Skills'));
 const Experience = lazy(() => import('./components/Experience'));
@@ -61,6 +62,7 @@ const Home = ({ introDone }: { introDone: boolean }) => {
       <Hero introDone={introDone} />
       <Suspense fallback={<SectionFallback />}>
         <About />
+        <Guides />
         <Scoreboard />
         <Skills />
         <Experience />

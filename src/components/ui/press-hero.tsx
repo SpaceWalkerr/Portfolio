@@ -216,6 +216,18 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
               >
                 The Résumé
               </button>
+              <a
+                href="#guides"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#guides')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="group inline-flex items-center gap-2 border-b-2 border-oxblood py-1 font-monopress text-[11px] uppercase tracking-[0.16em] text-oxblood transition-colors hover:text-ink"
+              >
+                <span className="bg-oxblood px-1.5 py-0.5 text-[9px] tracking-[0.14em] text-paper">New</span>
+                5 practical dev guides
+                <ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              </a>
             </motion.div>
           </div>
 

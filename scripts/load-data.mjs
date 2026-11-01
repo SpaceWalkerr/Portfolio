@@ -16,7 +16,12 @@ export async function loadData() {
     export { education } from './src/data/education';
     export { skillCategories } from './src/data/skills';
     export { certifications, notableAchievements } from './src/data/certifications';
-    export { LOCATION } from './src/data/site';
+    export { LOCATION, PROFILES, ROLES } from './src/data/site';
+    export { default as youtube } from './src/data/youtube.json';
+    export { book } from './src/data/book';
+    export { services } from './src/data/services';
+    export { guides } from './src/data/guides';
+    export { default as devto } from './src/data/devto.json';
     export { caseStudies } from './src/data/caseStudies';
   `;
   const out = await build({

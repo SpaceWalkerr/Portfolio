@@ -15,12 +15,16 @@ import { useIdle } from './hooks/useIdle';
 // masthead, and the long-form copy (experience reports, articles, the
 // certificate archive) streams in right behind it.
 const About = lazy(() => import('./components/About'));
+const Book = lazy(() => import('./components/Book'));
+const DevDesk = lazy(() => import('./components/DevDesk'));
+const Videos = lazy(() => import('./components/Videos'));
 const Guides = lazy(() => import('./components/Guides'));
 const Scoreboard = lazy(() => import('./components/Scoreboard'));
 const Skills = lazy(() => import('./components/Skills'));
 const Experience = lazy(() => import('./components/Experience'));
 const Education = lazy(() => import('./components/Education'));
 const Projects = lazy(() => import('./components/Projects'));
+const Services = lazy(() => import('./components/Services'));
 const Certifications = lazy(() => import('./components/Certifications'));
 const Blog = lazy(() => import('./components/Blog'));
 const Contact = lazy(() => import('./components/Contact'));
@@ -62,12 +66,16 @@ const Home = ({ introDone }: { introDone: boolean }) => {
       <Hero introDone={introDone} />
       <Suspense fallback={<SectionFallback />}>
         <About />
+        <Book />
+        <DevDesk />
+        <Videos />
         <Guides />
         <Scoreboard />
         <Skills />
         <Experience />
         <Education />
         <Projects />
+        <Services />
         <Certifications />
         <Blog />
         <Contact />

@@ -22,6 +22,7 @@ const suggestions = [
   'Summarise his professional experience',
   'Which project best shows his backend skills?',
   'Is he open to internships?',
+  'What is his book about?',
 ];
 
 const loadHistory = (): Message[] => {

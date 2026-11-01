@@ -16,6 +16,30 @@ export interface ExperienceData {
 
 export const experiences: ExperienceData[] = [
   {
+    role: 'AI Training Contractor',
+    company: 'Mercor',
+    companyUrl: 'https://mercor.com',
+    period: 'Oct 2026 — Present',
+    description:
+      'Independent contractor helping train AI systems: designing realistic professional tasks, carrying them out on screen with step-by-step narration, and meeting strict written quality standards so models can learn from worked examples.',
+    highlights: [
+      'Design original, realistic multi-step tasks and demonstrate them in real software, narrating what I do, where, and why',
+      'Work to detailed written guidelines, with every submission passing automated checks and human quality review',
+      'Prepare clean inputs and documentation for each task, and explain the approach and how the result was verified',
+      'Tasks approved through quality review and delivered as training data',
+    ],
+    technologies: ['AI Training', 'Task Design', 'Quality Assurance', 'Technical Narration'],
+    details: `I work as an independent contractor for Mercor, a company that pays contractors to help train AI systems. The work is producing training data: I design a realistic professional task, carry it out in real software, and narrate every step, what I am doing, where, and why, so a model can learn from a worked example instead of a description.
+
+### How the work is judged
+
+Every submission is held to a written quality guideline and goes through automated checks followed by human review before it is approved. Tasks have to be original and realistic, so much of the craft is in the planning: choosing a problem that is genuinely multi-step, preparing clean inputs, and being able to explain how I know the result is right.
+
+### What it adds to my engineering
+
+Writing precise task descriptions and checking work against explicit criteria is the same muscle as writing specs and tests. It also gives me a first-hand view of how training data for AI is made, which shapes how I build grounded AI features of my own.`,
+  },
+  {
     role: 'Artificial Intelligence Intern',
     company: 'Berry Stenley',
     companyUrl: 'https://www.berrystenley.com',

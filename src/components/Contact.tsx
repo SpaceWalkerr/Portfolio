@@ -1,10 +1,10 @@
 import { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee, PenLine, Briefcase, ShoppingBag, Youtube, Instagram } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
 import { withBase } from '../lib/utils';
-import { LOCATION } from '../data/site';
+import { LOCATION, PROFILES } from '../data/site';
 
 // Three.js is a heavy dependency (~130KB gzipped) — code-split so it's only
 // fetched once someone actually sends a message, not in the main bundle.
@@ -17,6 +17,11 @@ const socialLinks = [
   { icon: Braces, label: 'LeetCode', handle: '@SurajNandan', url: 'https://leetcode.com/u/SurajNandan/' },
   { icon: Twitter, label: 'Twitter', handle: '@SurajNandan1625', url: 'https://x.com/SurajNandan1625' },
   { icon: Coffee, label: 'Ko-fi', handle: 'Buy me a coffee', url: 'https://ko-fi.com/surajnandan' },
+  { icon: PenLine, label: 'DEV', handle: '@suraj_nandan', url: PROFILES.devto },
+  { icon: Youtube, label: 'YouTube', handle: '@surajnandan8283', url: PROFILES.youtube },
+  { icon: Instagram, label: 'Instagram', handle: '@pencil_in_a_box_', url: PROFILES.instagram },
+  { icon: Briefcase, label: 'Fiverr', handle: '@surajnandan7', url: PROFILES.fiverr },
+  { icon: ShoppingBag, label: 'Gumroad', handle: 'Guides & tools', url: PROFILES.gumroad },
 ];
 
 const Contact = () => {

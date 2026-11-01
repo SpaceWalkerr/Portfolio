@@ -14,6 +14,18 @@ Recent: Campus Winner in ACG Pack A Pitch 2.0 (Technology & Engineering, 2026) w
 - [Job Scheduler](https://surajnandan.in/projects/job-scheduler): a distributed job scheduler on PostgreSQL with SKIP LOCKED claiming and six hand-built scheduling data structures.
 - [GigShield](https://surajnandan.in/projects/gigshield): parametric income protection for delivery riders, built by a team of three.
 
+## Book, writing and work
+
+- [Unscrolled](https://surajnandan.in/#book): "Reclaim Your Focus, Time and Ambition in a World Built to Distract You", a self-help book by Suraj Nandan about taking your attention back (coming soon).
+- [DEV articles](https://dev.to/suraj_nandan): honest notes from a student learning to build software, and "The Wire", a daily tech and security news desk written with AI and labelled as such.
+- [Fiverr](https://www.fiverr.com/surajnandan7): freelance full-stack web apps, RAG chatbots, e-commerce stores and bug fixes.
+- [Gumroad](https://surajnandan.gumroad.com): short practical guides and tools for developers (deploy checklist, Git cheat sheet, interview checklist, resume pack, freelance tracker).
+- [YouTube](https://www.youtube.com/@surajnandan8283): short Hindi videos on festivals, rituals and the stories behind them.
+- [Instagram](https://www.instagram.com/pencil_in_a_box_/): AI devotional art in 4K, shared as short reels.
+- Contract AI trainer at Mercor since October 2026.
+
+Roles: developer, programmer, AI engineer, writer, book author, creator.
+
 ## More
 
 - [Articles (RSS)](https://surajnandan.in/rss.xml): case studies and technical write-ups.

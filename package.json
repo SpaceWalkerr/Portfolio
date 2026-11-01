@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "prebuild": "node generate-sitemap.js && node scripts/build-knowledge.mjs && node scripts/build-feeds.mjs",
+    "prebuild": "node scripts/fetch-devto.mjs && node scripts/fetch-youtube.mjs && node generate-sitemap.js && node scripts/build-knowledge.mjs && node scripts/build-feeds.mjs",
     "shots": "node scripts/screenshots.mjs",
     "prerender": "node scripts/prerender.mjs",
     "dev": "vite",

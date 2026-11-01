@@ -1,0 +1,292 @@
+{
+  "username": "suraj_nandan",
+  "fetchedAt": "2026-11-01T10:20:36.266Z",
+  "total": 19,
+  "articles": [
+    {
+      "id": 4865566,
+      "title": "Day 15 of 30: the halfway map, fourteen ideas worth keeping",
+      "url": "https://dev.to/suraj_nandan/day-15-of-30-what-writing-daily-has-taught-me-so-far-36ff",
+      "date": "2026-11-01T03:30:00Z",
+      "tags": [
+        "writing",
+        "career",
+        "learning",
+        "discuss"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fyxzaq5et4jachlizv3y8.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4949291,
+      "title": "A fake \"official\" Claude Code update planted SSH backdoors through Cursor's marketplace",
+      "url": "https://dev.to/suraj_nandan/a-fake-official-claude-code-update-planted-ssh-backdoors-through-cursors-marketplace-2o19",
+      "date": "2026-10-31T18:30:00Z",
+      "tags": [
+        "security",
+        "ai",
+        "vscode",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fdt3g143h0thwmpmfg9z0.png",
+      "readingTime": 6,
+      "reactions": 0
+    },
+    {
+      "id": 4865565,
+      "title": "Honest talk: motivation is unreliable, so I stopped depending on it",
+      "url": "https://dev.to/suraj_nandan/honest-talk-motivation-is-unreliable-so-i-stopped-depending-on-it-39lo",
+      "date": "2026-10-31T03:30:00Z",
+      "tags": [
+        "motivation",
+        "productivity",
+        "mentalhealth",
+        "career"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fy29r5ong4y2snfebjlef.png",
+      "readingTime": 4,
+      "reactions": 1
+    },
+    {
+      "id": 4949246,
+      "title": "Binance's $6.3B breach started on one DevOps laptop: what developers should take from it",
+      "url": "https://dev.to/suraj_nandan/binances-63b-breach-started-on-one-devops-laptop-what-developers-should-take-from-it-4073",
+      "date": "2026-10-30T19:39:35Z",
+      "tags": [
+        "security",
+        "cryptocurrency",
+        "devops",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fur2vfoueumvgogg9wtqe.png",
+      "readingTime": 6,
+      "reactions": 0
+    },
+    {
+      "id": 4865563,
+      "title": "My debugging routine, written down so I stop skipping steps",
+      "url": "https://dev.to/suraj_nandan/my-debugging-routine-written-down-so-i-stop-skipping-steps-14a7",
+      "date": "2026-10-30T03:30:00Z",
+      "tags": [
+        "debugging",
+        "programming",
+        "beginners",
+        "productivity"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fe2j1ulg3jslkd44wks3j.png",
+      "readingTime": 5,
+      "reactions": 2
+    },
+    {
+      "id": 4865562,
+      "title": "Why I built a whiteboard for practising system design",
+      "url": "https://dev.to/suraj_nandan/why-i-built-a-whiteboard-for-practising-system-design-1ek3",
+      "date": "2026-10-29T03:30:00Z",
+      "tags": [
+        "systemdesign",
+        "webdev",
+        "react",
+        "career"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F6fkatyt6tcwtoe3ln0uo.png",
+      "readingTime": 6,
+      "reactions": 2
+    },
+    {
+      "id": 4865560,
+      "title": "RAG in plain English: how my college helpdesk answers from documents only",
+      "url": "https://dev.to/suraj_nandan/rag-in-plain-english-how-my-college-helpdesk-answers-from-documents-only-439c",
+      "date": "2026-10-28T03:30:00Z",
+      "tags": [
+        "ai",
+        "rag",
+        "node",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fp9zrkwa9kwg518ndy0e9.png",
+      "readingTime": 6,
+      "reactions": 1
+    },
+    {
+      "id": 4865559,
+      "title": "Seven small habits that made my side projects actually finish",
+      "url": "https://dev.to/suraj_nandan/seven-small-habits-that-made-my-side-projects-actually-finish-36pe",
+      "date": "2026-10-27T03:30:00Z",
+      "tags": [
+        "productivity",
+        "programming",
+        "beginners",
+        "webdev"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fvx53z97fzjbuguk5x82x.png",
+      "readingTime": 5,
+      "reactions": 2
+    },
+    {
+      "id": 4865557,
+      "title": "What I'm not good at yet (a student's honest list)",
+      "url": "https://dev.to/suraj_nandan/what-im-not-good-at-yet-a-students-honest-list-1529",
+      "date": "2026-10-26T03:30:00Z",
+      "tags": [
+        "career",
+        "beginners",
+        "discuss",
+        "learning"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fnmpdt39n6mk85jo0klem.png",
+      "readingTime": 5,
+      "reactions": 4
+    },
+    {
+      "id": 4865555,
+      "title": "Team projects: what I try to do, from building GigShield with two teammates",
+      "url": "https://dev.to/suraj_nandan/team-projects-what-i-try-to-do-from-building-gigshield-with-two-teammates-3eej",
+      "date": "2026-10-25T03:30:00Z",
+      "tags": [
+        "teamwork",
+        "hackathon",
+        "career",
+        "webdev"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fa1i7rzgdizqqv8kl0x39.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865551,
+      "title": "Tutorial hell is real, and the way out is boring",
+      "url": "https://dev.to/suraj_nandan/tutorial-hell-is-real-and-the-way-out-is-boring-28o8",
+      "date": "2026-10-24T03:30:00Z",
+      "tags": [
+        "beginners",
+        "learning",
+        "career",
+        "motivation"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fiwhde9bs152wkr5b1q3o.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865550,
+      "title": "Why my portfolio looks like a newspaper (and what that taught me about design systems)",
+      "url": "https://dev.to/suraj_nandan/why-my-portfolio-looks-like-a-newspaper-and-what-that-taught-me-about-design-systems-46m9",
+      "date": "2026-10-23T03:30:00Z",
+      "tags": [
+        "design",
+        "css",
+        "react",
+        "webdev"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fmzop265qx25vddvaiety.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865549,
+      "title": "How I use AI coding tools without letting them think for me",
+      "url": "https://dev.to/suraj_nandan/how-i-use-ai-coding-tools-without-letting-them-think-for-me-28i6",
+      "date": "2026-10-22T03:30:00Z",
+      "tags": [
+        "ai",
+        "productivity",
+        "beginners",
+        "programming"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fvqqw256prw7lkgvpjcfx.png",
+      "readingTime": 6,
+      "reactions": 0
+    },
+    {
+      "id": 4865547,
+      "title": "I tried to figure out how a student earns online. Here's what I ruled out and why",
+      "url": "https://dev.to/suraj_nandan/i-tried-to-figure-out-how-a-student-earns-online-heres-what-i-ruled-out-and-why-1ecd",
+      "date": "2026-10-21T03:30:00Z",
+      "tags": [
+        "career",
+        "freelance",
+        "productivity",
+        "discuss"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fi5isrxnxvaw1wkacw3ep.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865546,
+      "title": "My site's deploys silently failed for two weeks. I didn't notice",
+      "url": "https://dev.to/suraj_nandan/my-sites-deploys-silently-failed-for-two-weeks-i-didnt-notice-2o3f",
+      "date": "2026-10-20T03:30:00Z",
+      "tags": [
+        "vercel",
+        "devops",
+        "webdev",
+        "debugging"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fldhs5e5r69g5vehnv3pr.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865543,
+      "title": "I put my business rules in the database instead of React, here's what it bought me",
+      "url": "https://dev.to/suraj_nandan/i-put-my-business-rules-in-the-database-instead-of-react-heres-what-it-bought-me-3492",
+      "date": "2026-10-19T03:30:00Z",
+      "tags": [
+        "postgres",
+        "supabase",
+        "architecture",
+        "webdev"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fvhtk5cby9upfptq4pg9t.png",
+      "readingTime": 6,
+      "reactions": 0
+    },
+    {
+      "id": 4865541,
+      "title": "I'm a B.Tech student in a small Indian city, and I'm going to write honestly for 30 days",
+      "url": "https://dev.to/suraj_nandan/im-a-btech-student-in-a-small-indian-city-and-im-going-to-write-honestly-for-30-days-3pba",
+      "date": "2026-10-18T03:30:00Z",
+      "tags": [
+        "career",
+        "webdev",
+        "beginners",
+        "learning"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F6t7bx6r7agfkzple93pr.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865503,
+      "title": "How I built a live halftone portrait in React with just Canvas 2D",
+      "url": "https://dev.to/suraj_nandan/how-i-built-a-live-halftone-portrait-in-react-with-just-canvas-2d-5ejg",
+      "date": "2026-10-17T04:12:03Z",
+      "tags": [
+        "webdev",
+        "react",
+        "javascript",
+        "tutorial"
+      ],
+      "cover": null,
+      "readingTime": 4,
+      "reactions": 0
+    },
+    {
+      "id": 3449741,
+      "title": "Building GigShield: Instant Protection for Gig Workers with a First Risk Engine",
+      "url": "https://dev.to/suraj_nandan/building-gigshield-instant-protection-for-gig-workers-with-a-first-risk-engine-2a3e",
+      "date": "2026-04-03T12:15:06Z",
+      "tags": [
+        "guildwire",
+        "ai",
+        "webdev",
+        "opensource"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fuploads%2Farticles%2Fszmrijju68fmcjnx2ll8.png",
+      "readingTime": 2,
+      "reactions": 0
+    }
+  ]
+}

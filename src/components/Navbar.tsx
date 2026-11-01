@@ -23,7 +23,7 @@ const themeOptions: { key: Theme; label: string; Icon: typeof Sun }[] = [
 
 const sectionIds = sections.map((s) => s.id);
 // The masthead name doubles as "Home", so the link row starts at About
-const navLinks = sections.filter((s) => s.id !== 'home');
+const navLinks = sections.filter((s) => s.id !== 'home' && !('inNav' in s && s.inNav === false));
 
 const Navbar = ({ theme, onSetTheme }: NavbarProps) => {
   const { pathname } = useLocation();
@@ -109,19 +109,19 @@ const Navbar = ({ theme, onSetTheme }: NavbarProps) => {
                 href={`/#${link.id}`}
                 onClick={(e) => handleNav(e, link.id)}
                 aria-current={isActive(link.id) ? 'true' : undefined}
-                className={`group relative px-2.5 py-2 font-monopress text-[11px] uppercase tracking-[0.14em] transition-colors duration-200 ${
+                className={`group relative whitespace-nowrap px-1.5 py-2 font-monopress text-[11px] uppercase tracking-[0.1em] transition-colors duration-200 2xl:px-2.5 2xl:tracking-[0.14em] ${
                   isActive(link.id) ? 'text-oxblood' : 'text-ink hover:text-oxblood'
                 }`}
               >
-                {link.label}
+                {'navLabel' in link ? link.navLabel : link.label}
                 {isActive(link.id) ? (
                   <motion.span
                     layoutId="activeUnderline"
-                    className="absolute -bottom-0.5 left-2.5 right-2.5 h-0.5 bg-oxblood"
+                    className="absolute -bottom-0.5 left-1.5 right-1.5 h-0.5 bg-oxblood 2xl:left-2.5 2xl:right-2.5"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 ) : (
-                  <span className="absolute -bottom-0.5 left-1/2 h-px w-0 -translate-x-1/2 bg-ink/40 transition-all duration-200 group-hover:w-[calc(100%-1.25rem)]" />
+                  <span className="absolute -bottom-0.5 left-1/2 h-px w-0 -translate-x-1/2 bg-ink/40 transition-all duration-200 group-hover:w-[calc(100%-0.75rem)] 2xl:group-hover:w-[calc(100%-1.25rem)]" />
                 )}
               </a>
             ))}

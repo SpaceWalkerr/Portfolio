@@ -17,6 +17,18 @@ export interface Correction {
 
 export const editions: Edition[] = [
   {
+    date: '2026-11-01',
+    headline: 'The author files more than code',
+    items: [
+      'A new Book section for Unscrolled, a book on taking your attention back — cover, back-cover copy and what is inside. It reads “coming soon” until the listing is live.',
+      'A Hire Me section with the four services offered on Fiverr, priced by tier.',
+      'A DEV section right below the book: the dev.to/suraj_nandan numbers, the latest piece as the lead story, and the two running series, refreshed live.',
+      'Role tags under the name — Developer, Programmer, AI Engineer, Writer, Book Author, Creator — each linking to the section that proves it, and a new On Screen section with the YouTube channel and Instagram.',
+      'Mercor added to the Experience record, and DEV, Fiverr and Gumroad added to the footer, contact page and command palette.',
+      'The Ask-the-Editor assistant now knows about the book, the services, the guides and the DEV articles.',
+    ],
+  },
+  {
     date: '2026-10-07',
     headline: 'A penguin joins the staff',
     items: [

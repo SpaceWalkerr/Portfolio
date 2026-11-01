@@ -23,11 +23,17 @@ import {
   ArrowUpRight,
   CornerDownLeft,
   Printer,
+  BookOpen,
+  Handshake,
+  PenLine,
+  Clapperboard,
+  Youtube,
+  Instagram,
 } from 'lucide-react';
 import type { Theme } from '../App';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
-import { sections as siteSections, type SectionId } from '../data/site';
+import { sections as siteSections, PROFILES, type SectionId } from '../data/site';
 import { OPEN_COMMAND_PALETTE } from '../lib/commandPalette';
 import { useSectionNav } from '../hooks/useSectionNav';
 
@@ -41,12 +47,16 @@ interface CommandPaletteProps {
 const sectionIcons: Record<SectionId, typeof Home> = {
   home: Home,
   about: User,
+  book: BookOpen,
+  dev: PenLine,
+  videos: Clapperboard,
   guides: ShoppingBag,
   github: BarChart3,
   skills: Wrench,
   experience: Briefcase,
   education: GraduationCap,
   projects: Newspaper,
+  services: Handshake,
   certifications: Award,
   blog: FileText,
   contact: Mail,
@@ -220,6 +230,36 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                     onSelect={() => run(() => window.open('https://www.linkedin.com/in/surajnandan/', '_blank'))}
                   >
                     <Linkedin size={14} /> LinkedIn <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                  </Item>
+                  <Item
+                    value="dev.to articles the wire writing blog"
+                    onSelect={() => run(() => window.open(PROFILES.devto, '_blank'))}
+                  >
+                    <PenLine size={14} /> DEV (articles) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                  </Item>
+                  <Item
+                    value="youtube videos shorts channel creator"
+                    onSelect={() => run(() => window.open(PROFILES.youtube, '_blank'))}
+                  >
+                    <Youtube size={14} /> YouTube <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                  </Item>
+                  <Item
+                    value="instagram reels art creator"
+                    onSelect={() => run(() => window.open(PROFILES.instagram, '_blank'))}
+                  >
+                    <Instagram size={14} /> Instagram <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                  </Item>
+                  <Item
+                    value="fiverr hire freelance gigs"
+                    onSelect={() => run(() => window.open(PROFILES.fiverr, '_blank'))}
+                  >
+                    <Handshake size={14} /> Fiverr (hire me) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                  </Item>
+                  <Item
+                    value="gumroad guides shop store"
+                    onSelect={() => run(() => window.open(PROFILES.gumroad, '_blank'))}
+                  >
+                    <ShoppingBag size={14} /> Gumroad (guides) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
                   </Item>
                   <Item
                     value="email contact"

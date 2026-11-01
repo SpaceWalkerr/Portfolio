@@ -5,7 +5,7 @@ import { ResumeModal } from '../ResumeModal';
 import HalftonePortrait from './halftone-portrait';
 import { useTilt3D } from '../../hooks/useTilt3D';
 import { withBase } from '../../lib/utils';
-import { CITY, CAREER_START_YEAR } from '../../data/site';
+import { CITY, CAREER_START_YEAR, ROLES } from '../../data/site';
 
 /**
  * PressHero — "The Press" front page.
@@ -22,6 +22,9 @@ const tickerItems = [
   'Full-Stack & AI Engineer',
   'React · Node · TypeScript',
   'AI-Driven Products',
+  'Author of Unscrolled',
+  'Writing daily on DEV',
+  'Creator on YouTube & Instagram',
   `${CITY}, India`,
   'Class of 2027 — SRM IST',
 ];
@@ -170,6 +173,31 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
               </span>
             </h1>
 
+            {/* Role tags — each links to the section that backs it up */}
+            <motion.ul
+              variants={fadeUp}
+              custom={1.5}
+              initial="hidden"
+              animate={state}
+              aria-label="Roles"
+              className="mt-5 flex flex-wrap gap-2 lg:mt-6"
+            >
+              {ROLES.map((role) => (
+                <li key={role.label}>
+                  <a
+                    href={`#${role.to}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.querySelector(`#${role.to}`)?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="inline-block border border-ink px-3 py-1.5 font-monopress text-[10px] uppercase tracking-[0.16em] text-ink transition-colors hover:border-ink hover:bg-ink hover:text-paper sm:text-[11px]"
+                  >
+                    {role.label}
+                  </a>
+                </li>
+              ))}
+            </motion.ul>
+
             {/* Deck — editorial two-column standfirst */}
             <motion.div
               variants={fadeUp}
@@ -189,7 +217,7 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
               <p className="mt-4 text-justify sm:mt-0">
                 Lately that means RAG pipelines and AI assistants in production, APIs
                 serving 10,000+ requests a day, and payment flows that never double-charge.
-                B.Tech CSE at SRM, class of 2027 — open to internships and full-time roles.
+                B.Tech CSE at SRM, class of 2027 — open to internships, full-time roles and freelance work.
               </p>
             </motion.div>
 
@@ -217,14 +245,25 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
                 The Résumé
               </button>
               <a
+                href="#book"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#book')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="group inline-flex items-center gap-2 border-b-2 border-oxblood py-1 font-monopress text-[11px] uppercase tracking-[0.16em] text-oxblood transition-colors hover:text-ink"
+              >
+                <span className="bg-oxblood px-1.5 py-0.5 text-[9px] tracking-[0.14em] text-paper">New</span>
+                Unscrolled — the book
+                <ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
+              </a>
+              <a
                 href="#guides"
                 onClick={(e) => {
                   e.preventDefault();
                   document.querySelector('#guides')?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="group inline-flex items-center gap-2 border-b-2 border-oxblood py-1 font-monopress text-[11px] uppercase tracking-[0.16em] text-oxblood transition-colors hover:text-ink"
+                className="group inline-flex items-center gap-2 border-b-2 border-ink/40 py-1 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink transition-colors hover:border-oxblood hover:text-oxblood"
               >
-                <span className="bg-oxblood px-1.5 py-0.5 text-[9px] tracking-[0.14em] text-paper">New</span>
                 5 practical dev guides
                 <ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </a>

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss, Newspaper } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss, Newspaper, PenLine, Briefcase, ShoppingBag, Youtube, Instagram } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
-import { sections, LOCATION } from '../data/site';
+import { sections, LOCATION, PROFILES } from '../data/site';
 import { useSectionNav } from '../hooks/useSectionNav';
 
 const socialLinks = [
@@ -12,6 +12,11 @@ const socialLinks = [
   { icon: <Twitter size={16} />, url: 'https://x.com/SurajNandan1625', label: 'Twitter' },
   { icon: <Mail size={16} />, url: 'mailto:surajnandan78@gmail.com', label: 'Email' },
   { icon: <Coffee size={16} />, url: 'https://ko-fi.com/surajnandan', label: 'Ko-fi' },
+  { icon: <PenLine size={16} />, url: PROFILES.devto, label: 'DEV' },
+  { icon: <Youtube size={16} />, url: PROFILES.youtube, label: 'YouTube' },
+  { icon: <Instagram size={16} />, url: PROFILES.instagram, label: 'Instagram' },
+  { icon: <Briefcase size={16} />, url: PROFILES.fiverr, label: 'Fiverr' },
+  { icon: <ShoppingBag size={16} />, url: PROFILES.gumroad, label: 'Gumroad' },
 ];
 
 const resources = [
@@ -45,7 +50,7 @@ const Footer = () => {
               Full-Stack Developer passionate about building high-performance web applications,
               AI-powered systems, and user-focused platforms.
             </p>
-            <div className="mt-5 flex items-center gap-2">
+            <div className="mt-5 flex flex-wrap items-center gap-2">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}

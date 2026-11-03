@@ -23,13 +23,16 @@ export function useJourneyProgress(count: number) {
 
   const trackTop = () => (trackRef.current?.getBoundingClientRect().top ?? 0) + window.scrollY;
   const chapterHeight = () => window.innerHeight * SCREENS_PER_CHAPTER;
+  /** Scrollable distance of the track — progress hits 1 when its bottom meets the viewport's, one screen short of the full height. */
+  const scrollSpan = () => chapterHeight() * count - window.innerHeight;
 
   const goTo = useCallback(
     (index: number) => {
       const i = Math.max(0, Math.min(count - 1, index));
       // +1px keeps the target inside chapter i rather than on the boundary with i-1
-      window.scrollTo({ top: trackTop() + i * chapterHeight() + 1, behavior: 'smooth' });
+      window.scrollTo({ top: trackTop() + (i / count) * scrollSpan() + 1, behavior: 'smooth' });
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [count]
   );
 
@@ -42,7 +45,7 @@ export function useJourneyProgress(count: number) {
     const tick = (now: number) => {
       const dt = (now - last) / 1000;
       last = now;
-      const end = trackTop() + chapterHeight() * count - window.innerHeight;
+      const end = trackTop() + scrollSpan();
       if (window.scrollY >= end - 2) {
         setPlaying(false);
         return;
@@ -58,6 +61,7 @@ export function useJourneyProgress(count: number) {
       window.removeEventListener('wheel', stop);
       window.removeEventListener('touchstart', stop);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playing, count]);
 
   return {

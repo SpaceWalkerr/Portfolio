@@ -11,12 +11,15 @@ export interface JourneyChapter {
   kicker: string;
   title: string;
   line: string;
+  /** Types the title out like the typewriter intro instead of fading it in */
+  typeTitle?: boolean;
 }
 
 export const journeyChapters: JourneyChapter[] = [
   {
     id: 'open',
     kicker: 'Prologue',
+    typeTitle: true,
     title: 'Suraj Nandan',
     line: 'A developer, writer and builder from Kishanganj. Scroll to watch how it happened.',
   },

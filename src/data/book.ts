@@ -27,7 +27,7 @@ export const book: Book = {
   author: 'Suraj Nandan',
   genre: 'Self-help · Personal growth',
   cover: '/book/unscrolled-cover.jpg',
-  format: 'Paperback',
+  format: 'Kindle edition',
   paperback: '/book/unscrolled-paperback.jpg',
   tagline: 'You are not lazy. You are outgunned.',
   blurb: [
@@ -42,6 +42,7 @@ export const book: Book = {
     'How to stop escaping your life and build one you want to stay in',
   ],
   features: ['A simple exercise at the end of every chapter', 'A 30-day plan to tie it all together'],
+  buyUrl: 'https://www.amazon.in/dp/B0HQ61YYC4',
   authorNote:
     'Suraj Nandan is a full-stack and AI engineer from Kishanganj, India, and an NPTEL gold medallist in Human–Computer Interaction. He has shipped more than twenty web and AI products and knows how software is built to hold attention.',
 };

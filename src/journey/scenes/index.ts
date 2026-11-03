@@ -5,4 +5,6 @@ import type { Scene } from './types';
 export const scenes: Record<string, Scene> = {
   'first-line': lazy(() => import('./FirstLineScene')),
   'in-public': lazy(() => import('./InPublicScene')),
+  built: lazy(() => import('./BuiltScene')),
+  work: lazy(() => import('./WorkScene')),
 };

@@ -71,7 +71,7 @@ const ChapterScene = ({ chapter, index, count, progress }: Props) => {
       <p className="mt-5 max-w-xl font-editorial text-lg italic text-[#f3ede1]/70 sm:text-xl">{chapter.line}</p>
 
       {Art && (
-        <div className="absolute inset-x-0 bottom-[9vh] h-[36vh] min-h-[250px]">
+        <div className={`absolute inset-x-0 bottom-[8vh] ${chapter.tall ? 'h-[48vh] min-h-[300px]' : 'h-[36vh] min-h-[250px]'}`}>
           <Suspense fallback={null}>
             <Art local={local} />
           </Suspense>

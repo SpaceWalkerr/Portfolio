@@ -13,6 +13,8 @@ export interface JourneyChapter {
   line: string;
   /** Types the title out like the typewriter intro instead of fading it in */
   typeTitle?: boolean;
+  /** Scene needs more room than the default band — gives it half the screen */
+  tall?: boolean;
 }
 
 export const journeyChapters: JourneyChapter[] = [
@@ -38,12 +40,14 @@ export const journeyChapters: JourneyChapter[] = [
   {
     id: 'built',
     kicker: 'Things I built',
+    tall: true,
     title: 'From idea to running system',
     line: 'Watch the pieces of real projects click together.',
   },
   {
     id: 'work',
     kicker: 'Work',
+    tall: true,
     title: 'Where it got real',
     line: 'Teams, deadlines, production traffic and the lessons that came with them.',
   },

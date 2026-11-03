@@ -3,6 +3,7 @@ import { motion, useTransform, type MotionValue } from 'framer-motion';
 import type { JourneyChapter } from '../data/journey';
 import { scenes } from './scenes';
 import { useScrubbedCount } from './useScrubbedCount';
+import { sound } from './sound';
 
 interface Props {
   chapter: JourneyChapter;
@@ -24,6 +25,9 @@ const TypedTitle = ({ text, local }: { text: string; local: MotionValue<number> 
     return () => clearTimeout(t);
   }, [auto, text.length]);
   const n = Math.max(auto, scrubbed);
+  useEffect(() => {
+    if (n > 0 && n <= text.length) sound.tick();
+  }, [n, text.length]);
   return (
     <h2 aria-label={text} className={`${TITLE_CLASS} text-5xl sm:text-7xl lg:text-8xl`}>
       <span aria-hidden="true">

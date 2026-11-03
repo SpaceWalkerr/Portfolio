@@ -1,6 +1,8 @@
 import { motion, useTransform } from 'framer-motion';
 import { CAREER_START_YEAR } from '../../data/site';
+import { useEffect } from 'react';
 import { useScrubbedCount } from '../useScrubbedCount';
+import { sound } from '../sound';
 import type { SceneProps } from './types';
 
 const LINES = [
@@ -34,6 +36,9 @@ const Milestone = ({ local, index, year, label }: SceneProps & { index: number; 
 /** A terminal that types itself as you scroll, then the career timeline draws underneath. */
 const FirstLineScene = ({ local }: SceneProps) => {
   const typed = useScrubbedCount(local, 0.08, 0.5, TOTAL);
+  useEffect(() => {
+    if (typed > 0 && typed < TOTAL) sound.tick();
+  }, [typed]);
   const spine = useTransform(local, [0.52, 0.9], ['0%', '100%']);
   let remaining = typed;
 

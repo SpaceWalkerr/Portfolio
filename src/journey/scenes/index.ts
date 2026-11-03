@@ -7,4 +7,5 @@ export const scenes: Record<string, Scene> = {
   'in-public': lazy(() => import('./InPublicScene')),
   built: lazy(() => import('./BuiltScene')),
   work: lazy(() => import('./WorkScene')),
+  next: lazy(() => import('./NextScene')),
 };

@@ -1,9 +1,13 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Pause, Play } from 'lucide-react';
+import { useReducedMotion } from 'framer-motion';
+import { ArrowLeft, Pause, Play, Volume2, VolumeX } from 'lucide-react';
+import Seo from '../components/Seo';
 import { journeyChapters } from '../data/journey';
 import ChapterScene from './ChapterScene';
 import ProgressRail from './ProgressRail';
+import StaticJourney from './StaticJourney';
+import { sound } from './sound';
 import { SCREENS_PER_CHAPTER, useJourneyProgress } from './useJourneyProgress';
 
 const count = journeyChapters.length;
@@ -12,19 +16,25 @@ const count = journeyChapters.length;
  * The Journey film: a tall scroll track with a pinned full-screen stage. Scrolling
  * scrubs the master progress; each chapter fades through its slice of it.
  */
-const Journey = () => {
+const Film = () => {
   const navigate = useNavigate();
   const { trackRef, progress, active, goTo, playing, setPlaying } = useJourneyProgress(count);
   const exit = () => navigate('/');
 
+  const [soundOn, setSoundOn] = useState(sound.isOn);
+  const toggleSound = () => {
+    sound.set(!soundOn);
+    setSoundOn(!soundOn);
+  };
+
   useEffect(() => {
     window.scrollTo(0, 0);
-    const prevTitle = document.title;
-    document.title = 'The Journey — Suraj Nandan';
-    return () => {
-      document.title = prevTitle;
-    };
   }, []);
+
+  // A soft chime as each new chapter takes the stage (skips the initial render)
+  useEffect(() => {
+    if (active > 0) sound.chime();
+  }, [active]);
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
@@ -66,15 +76,26 @@ const Journey = () => {
             >
               <ArrowLeft className="h-3.5 w-3.5" /> Skip to site
             </button>
-            <button
-              type="button"
-              onClick={() => setPlaying((p) => !p)}
-              aria-pressed={playing}
-              className="pointer-events-auto inline-flex items-center gap-2 border border-[#f3ede1]/40 px-3 py-2 font-monopress text-[11px] uppercase tracking-[0.18em] transition-colors hover:border-vermilion hover:text-vermilion"
-            >
-              {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
-              {playing ? 'Pause' : 'Auto-play'}
-            </button>
+            <div className="pointer-events-auto flex items-center gap-2">
+              <button
+                type="button"
+                onClick={toggleSound}
+                aria-pressed={soundOn}
+                aria-label={soundOn ? 'Turn sound off' : 'Turn sound on'}
+                className="inline-flex items-center border border-[#f3ede1]/40 px-2.5 py-2 transition-colors hover:border-vermilion hover:text-vermilion"
+              >
+                {soundOn ? <Volume2 className="h-3.5 w-3.5" /> : <VolumeX className="h-3.5 w-3.5" />}
+              </button>
+              <button
+                type="button"
+                onClick={() => setPlaying((p) => !p)}
+                aria-pressed={playing}
+                className="inline-flex items-center gap-2 border border-[#f3ede1]/40 px-3 py-2 font-monopress text-[11px] uppercase tracking-[0.18em] transition-colors hover:border-vermilion hover:text-vermilion"
+              >
+                {playing ? <Pause className="h-3.5 w-3.5" /> : <Play className="h-3.5 w-3.5" />}
+                {playing ? 'Pause' : 'Auto-play'}
+              </button>
+            </div>
           </header>
 
           <ProgressRail chapters={journeyChapters} active={active} progress={progress} onGo={goTo} />
@@ -85,6 +106,20 @@ const Journey = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const Journey = () => {
+  const reduced = useReducedMotion();
+  return (
+    <>
+      <Seo
+        title="The Journey — Suraj Nandan"
+        description="A scroll-through film of Suraj Nandan's journey: first line of code, writing in public, the projects built and the work that followed."
+        path="/journey"
+      />
+      {reduced ? <StaticJourney /> : <Film />}
+    </>
   );
 };
 

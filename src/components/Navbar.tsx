@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import { Menu, X, Eye, Sun, Moon, Lamp, ChevronDown, Search } from 'lucide-react';
+import { Menu, X, Eye, Sun, Moon, Lamp, ChevronDown, Search, Play } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ResumeModal } from './ResumeModal';
 import { openCommandPalette } from '../lib/commandPalette';
 import { sections } from '../data/site';
@@ -248,6 +248,13 @@ const Navbar = ({ theme, onSetTheme }: NavbarProps) => {
                   </button>
                 </div>
 
+                <Link
+                  to="/journey"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="mb-4 flex items-center justify-between bg-oxblood px-3 py-3 font-monopress text-xs uppercase tracking-[0.16em] text-paper"
+                >
+                  Watch the Journey <Play size={14} />
+                </Link>
                 <div className="mb-6 space-y-1">
                   {sections.map((link, index) => (
                     <motion.a

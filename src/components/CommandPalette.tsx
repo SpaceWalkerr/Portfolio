@@ -23,6 +23,7 @@ import {
   ArrowUpRight,
   CornerDownLeft,
   Printer,
+  Play,
   BookOpen,
   Handshake,
   PenLine,
@@ -204,6 +205,9 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                 </Command.Group>
 
                 <Command.Group heading="Elsewhere">
+                  <Item value="journey film story watch cinematic animation" onSelect={() => run(() => navigate('/journey'))}>
+                    <Play size={14} /> Watch the Journey
+                  </Item>
                   <Item value="changelog corrections amendments updates" onSelect={() => run(() => navigate('/changelog'))}>
                     <FileText size={14} /> Corrections &amp; Amendments
                   </Item>

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
-import { ArrowDownRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowDownRight, Play } from 'lucide-react';
 import { ResumeModal } from '../ResumeModal';
 import HalftonePortrait from './halftone-portrait';
 import { useTilt3D } from '../../hooks/useTilt3D';
@@ -267,6 +268,13 @@ const PressHero = ({ introDone = true }: PressHeroProps) => {
                 5 practical dev guides
                 <ArrowDownRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:translate-y-0.5" />
               </a>
+              <Link
+                to="/journey"
+                className="group inline-flex items-center gap-2 bg-oxblood px-4 py-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-paper transition-colors hover:bg-ink"
+              >
+                <Play className="h-3.5 w-3.5" aria-hidden="true" />
+                Watch the Journey
+              </Link>
             </motion.div>
           </div>
 

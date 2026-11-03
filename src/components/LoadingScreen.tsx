@@ -1,6 +1,5 @@
 import { motion, AnimatePresence } from 'framer-motion';
-import { useEffect, useState, lazy, Suspense } from 'react';
-import { useIdle } from '../hooks/useIdle';
+import { useEffect, useState } from 'react';
 
 interface LoadingScreenProps {
   isLoading: boolean;
@@ -8,61 +7,78 @@ interface LoadingScreenProps {
   onSkip?: () => void;
 }
 
-// Three.js is a heavy dependency (~130KB gzipped) — code-split AND deferred
-// until the browser reports idle time (see useIdle below). React.lazy alone
-// triggers its import() on first render, which competes with the critical
-// initial paint/script window for main-thread time; waiting for idle keeps
-// that window clear at the cost of the 3D scene appearing a beat later.
-const TypewriterScene = lazy(() => import('./ui/typewriter-loading-scene'));
+const ROLES = ['Developer', 'Coder', 'Writer', 'Creator'];
+/** Two laps through the roles, each frame shorter than the last — it accelerates. */
+const HOLDS = [480, 400, 340, 290, 230, 200, 175, 160];
+const SEQUENCE = HOLDS.map((ms, i) => ({ word: ROLES[i % ROLES.length], ms }));
+/** Black screen + the line drawing, before the window opens */
+const LINE_MS = 550;
+export const INTRO_TOTAL_MS = LINE_MS + HOLDS.reduce((a, b) => a + b, 0);
 
-/** The typewriter is the centerpiece — scale it to the viewport, not a thumbnail. */
-const sceneSize = () => {
-  if (typeof window === 'undefined') return { w: 560, h: 336 };
-  const w = Math.min(600, Math.round(window.innerWidth * 0.9));
-  return { w, h: Math.round(w * 0.6) };
+const EASE = [0.76, 0, 0.24, 1] as const;
+
+/** The whole scene. It is rendered twice (top half / bottom half) so the exit can split it open. */
+const Stage = ({ step }: { step: number }) => {
+  const inLine = step < 0;
+  const dark = !inLine && step % 2 === 1;
+  const pct = inLine ? 0 : Math.round(((step + 1) / SEQUENCE.length) * 100);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-ink">
+      {/* 1. a single line draws across the black */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: 1 }}
+        transition={{ duration: LINE_MS / 1000 - 0.05, ease: EASE }}
+        className="absolute left-0 right-0 top-1/2 h-px origin-left bg-oxblood"
+      />
+
+      {/* 2. the line opens into a window — the roles strobe inside it */}
+      <motion.div
+        initial={{ clipPath: 'inset(50% 0% 50% 0%)' }}
+        animate={{ clipPath: inLine ? 'inset(50% 0% 50% 0%)' : 'inset(0% 0% 0% 0%)' }}
+        transition={{ duration: 0.55, ease: EASE }}
+        className={`absolute inset-0 flex items-center justify-center ${
+          dark ? 'bg-ink text-paper' : 'bg-paper text-ink'
+        }`}
+      >
+        <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply" />
+
+        {!inLine && (
+          <div className="px-4 text-[clamp(2.5rem,11.5vw,11rem)] leading-none">
+            <span className="font-display font-black uppercase tracking-tighter">
+              {SEQUENCE[step].word}
+              <span className={dark ? 'text-paper' : 'text-oxblood'}>.</span>
+            </span>
+          </div>
+        )}
+
+        <div
+          className={`absolute inset-x-6 top-6 flex items-center justify-between font-monopress text-[10px] uppercase tracking-[0.3em] opacity-70 sm:inset-x-10`}
+        >
+          <span>The Nandan Review</span>
+          <span className="tabular-nums">{String(pct).padStart(3, '0')}</span>
+        </div>
+      </motion.div>
+    </div>
+  );
 };
 
-/** Same footprint as the 3D scene, so swapping between them causes no layout shift. */
-const SceneFallback = ({ progress, w, h }: { progress: number; w: number; h: number }) => (
-  <div style={{ width: w, height: h }} className="flex items-center">
-    <div className="relative h-[3px] w-full overflow-hidden bg-ink/10">
-      <motion.div
-        className="absolute inset-y-0 left-0 bg-ink"
-        animate={{ width: `${progress}%` }}
-        transition={{ ease: 'linear', duration: 0.1 }}
-      />
-    </div>
-  </div>
-);
-
-/** "Now Printing" — the press startup sequence for The Nandan Review. */
+/** Black line → opening window → role strobe → screen splits apart to the page. */
 const LoadingScreen = ({ isLoading, onSkip }: LoadingScreenProps) => {
-  const [progress, setProgress] = useState(0);
-  const [{ w: sceneW, h: sceneH }] = useState(sceneSize);
-  // Wait past the masthead's own entrance animation (settles ~0.85s in) so
-  // the 3D chunk's fetch/parse/WebGL-init doesn't contend with — and delay —
-  // that paint. Confirmed via Lighthouse: without this, the loading screen's
-  // own "The Nandan Review" text (its LCP candidate) was the one taking the hit.
-  const idle = useIdle(900);
-  const reducedMotion =
-    typeof window !== 'undefined' &&
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // -1 = the line, 0..SEQUENCE.length-1 = role frames
+  const [step, setStep] = useState(-1);
 
   useEffect(() => {
     if (!isLoading) return;
-    setProgress(0);
-    const start = performance.now();
-    const duration = 2600;
-    let raf = 0;
-
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const eased = 1 - Math.pow(1 - Math.min(elapsed / duration, 1), 3);
-      setProgress(Math.round(eased * 100));
-      if (elapsed < duration) raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    setStep(-1);
+    let t = LINE_MS;
+    const timers = [setTimeout(() => setStep(0), t)];
+    SEQUENCE.forEach(({ ms }, i) => {
+      t += ms;
+      if (i < SEQUENCE.length - 1) timers.push(setTimeout(() => setStep(i + 1), t));
+    });
+    return () => timers.forEach(clearTimeout);
   }, [isLoading]);
 
   // Any key skips the intro — nobody should have to sit through it
@@ -76,85 +92,52 @@ const LoadingScreen = ({ isLoading, onSkip }: LoadingScreenProps) => {
     return () => window.removeEventListener('keydown', onKeyDown);
   }, [isLoading, onSkip]);
 
+  const half = { duration: 0.95, ease: EASE };
+
   return (
     <AnimatePresence>
       {isLoading && (
         <motion.div
-          initial={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          initial="in"
+          animate="in"
+          exit="out"
           onClick={onSkip}
-          className="fixed inset-0 z-[200] flex cursor-pointer select-none flex-col items-center justify-center overflow-hidden bg-paper text-ink"
+          role="status"
+          aria-label="Loading — Suraj Nandan, developer, coder, writer, creator"
+          className="fixed inset-0 z-[200] cursor-pointer select-none overflow-hidden"
         >
-          <div className="noise-overlay pointer-events-none absolute inset-0 opacity-[0.05] mix-blend-multiply" />
+          {/* the same scene twice: each copy clipped to one half, then pulled apart on exit */}
+          <motion.div
+            aria-hidden="true"
+            variants={{ in: { y: 0 }, out: { y: '-50%' } }}
+            transition={half}
+            style={{ clipPath: 'inset(0 0 50% 0)' }}
+            className="absolute inset-0"
+          >
+            <Stage step={step} />
+          </motion.div>
+          <motion.div
+            aria-hidden="true"
+            variants={{ in: { y: 0 }, out: { y: '50%' } }}
+            transition={half}
+            style={{ clipPath: 'inset(50% 0 0 0)' }}
+            className="absolute inset-0"
+          >
+            <Stage step={step} />
+          </motion.div>
 
-          <div className="flex w-full max-w-2xl flex-col items-center px-6 text-center">
-            <motion.span
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="font-monopress text-[10px] uppercase tracking-[0.4em] text-oxblood"
+          {onSkip && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                onSkip();
+              }}
+              className="absolute bottom-8 left-1/2 -translate-x-1/2 font-monopress text-[10px] uppercase tracking-[0.2em] text-ink-mute transition-colors hover:text-ink"
             >
-              Now Printing
-            </motion.span>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="mt-4 font-editorial text-3xl italic sm:text-4xl"
-            >
-              The Nandan Review
-            </motion.h1>
-
-            {/* A typewriter, typing — the sheet reveals one more line as real load progress advances */}
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.25 }}
-              className="mt-7"
-            >
-              {idle ? (
-                <Suspense fallback={<SceneFallback progress={progress} w={sceneW} h={sceneH} />}>
-                  <TypewriterScene width={sceneW} height={sceneH} progress={progress} />
-                </Suspense>
-              ) : (
-                <SceneFallback progress={progress} w={sceneW} h={sceneH} />
-              )}
-            </motion.div>
-
-            <div
-              style={{ width: sceneW }}
-              className="mt-1 flex items-baseline justify-between font-monopress text-[10px] uppercase tracking-[0.18em] text-ink-mute"
-            >
-              <span>Press Run</span>
-              <span className="tabular-nums text-ink">{progress}%</span>
-            </div>
-
-            {!reducedMotion && (
-              <motion.div
-                aria-hidden="true"
-                animate={{ opacity: [0.35, 1, 0.35] }}
-                transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-                className="mt-6 font-monopress text-[10px] uppercase tracking-[0.24em] text-ink-faint"
-              >
-                Setting Type…
-              </motion.div>
-            )}
-
-            {onSkip && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onSkip();
-                }}
-                className="mt-8 border border-ink/30 px-4 py-2 font-monopress text-[10px] uppercase tracking-[0.2em] text-ink-mute transition-colors hover:border-ink hover:text-ink"
-              >
-                Skip intro <span className="hidden sm:inline">— or press any key</span>
-              </button>
-            )}
-          </div>
+              Skip intro <span className="hidden sm:inline">— or press any key</span>
+            </button>
+          )}
         </motion.div>
       )}
     </AnimatePresence>

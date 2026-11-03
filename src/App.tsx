@@ -3,7 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Analytics } from '@vercel/analytics/react';
 import Navbar from './components/Navbar';
 import ScrollProgress from './components/ScrollProgress';
-import LoadingScreen from './components/LoadingScreen';
+import LoadingScreen, { INTRO_TOTAL_MS } from './components/LoadingScreen';
 import MagneticCursor from './components/ui/magnetic-cursor';
 import Hero from './components/Hero';
 import Footer from './components/Footer';
@@ -30,13 +30,13 @@ const Blog = lazy(() => import('./components/Blog'));
 const Contact = lazy(() => import('./components/Contact'));
 const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
+const Journey = lazy(() => import('./journey/Journey'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const ChangelogPage = lazy(() => import('./pages/ChangelogPage'));
 const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
 const EasterEggs = lazy(() => import('./components/EasterEggs'));
 const AskEditor = lazy(() => import('./components/AskEditor'));
 
-const INTRO_SEEN_KEY = 'press-intro-seen';
 
 /** Placeholder that holds roughly a section's height while its chunk loads. */
 const SectionFallback = () => <div className="min-h-screen bg-paper" aria-hidden="true" />;
@@ -87,26 +87,16 @@ const Home = ({ introDone }: { introDone: boolean }) => {
 function App() {
   const { pathname } = useLocation();
   const isHome = pathname === '/';
+  // The Journey film is a full-screen experience — it brings its own controls instead of the site chrome
+  const isJourney = pathname === '/journey';
 
-  // The intro plays once per browser session, only when arriving on the home
-  // page. "?noload" skips it (handy for dev / screenshots).
-  const [isLoading, setIsLoading] = useState(() => {
-    if (!isHome || window.location.search.includes('noload')) return false;
-    try {
-      return sessionStorage.getItem(INTRO_SEEN_KEY) !== '1';
-    } catch {
-      return true;
-    }
-  });
+  // The intro plays on every load/refresh of the home page. "?noload" skips it
+  // (handy for dev / screenshots).
+  const [isLoading, setIsLoading] = useState(
+    () => isHome && !window.location.search.includes('noload'),
+  );
 
-  const finishIntro = useCallback(() => {
-    setIsLoading(false);
-    try {
-      sessionStorage.setItem(INTRO_SEEN_KEY, '1');
-    } catch {
-      /* storage unavailable — the intro simply plays again next time */
-    }
-  }, []);
+  const finishIntro = useCallback(() => setIsLoading(false), []);
 
   const [theme, setThemeState] = useState<Theme>(() => {
     try {
@@ -130,7 +120,7 @@ function App() {
 
   useEffect(() => {
     if (!isLoading) return;
-    const timer = setTimeout(finishIntro, 3000);
+    const timer = setTimeout(finishIntro, INTRO_TOTAL_MS);
     return () => clearTimeout(timer);
   }, [isLoading, finishIntro]);
 
@@ -140,7 +130,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-paper">
-      <MagneticCursor />
+      {!isJourney && <MagneticCursor />}
       {isHome && <LoadingScreen isLoading={isLoading} onSkip={finishIntro} />}
       {/* Skip to main content link for keyboard/screen-reader users */}
       <a
@@ -149,9 +139,13 @@ function App() {
       >
         Skip to main content
       </a>
-      <ScrollProgress />
-      <Navbar theme={theme} onSetTheme={setTheme} />
-      <CommandPaletteLauncher theme={theme} onSetTheme={setTheme} />
+      {!isJourney && (
+        <>
+          <ScrollProgress />
+          <Navbar theme={theme} onSetTheme={setTheme} />
+          <CommandPaletteLauncher theme={theme} onSetTheme={setTheme} />
+        </>
+      )}
       <main id="main-content">
         <Suspense fallback={<PageFallback />}>
           <Routes>
@@ -160,15 +154,20 @@ function App() {
             <Route path="/blog/:slug" element={<BlogPostPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/puzzle" element={<PuzzlePage />} />
+            <Route path="/journey" element={<Journey />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
-      <Footer />
-      <BackToTop />
+      {!isJourney && (
+        <>
+          <Footer />
+          <BackToTop />
+        </>
+      )}
       {/* Vercel Web Analytics — cookieless page views; route changes are tracked automatically */}
       <Analytics />
-      {idle && !isLoading && (
+      {idle && !isLoading && !isJourney && (
         <Suspense fallback={null}>
           <AskEditor />
           <EasterEggs />

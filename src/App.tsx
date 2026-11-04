@@ -32,6 +32,7 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'));
 const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const ChangelogPage = lazy(() => import('./pages/ChangelogPage'));
+const BookPage = lazy(() => import('./pages/BookPage'));
 const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
 const EasterEggs = lazy(() => import('./components/EasterEggs'));
 const AskEditor = lazy(() => import('./components/AskEditor'));
@@ -158,6 +159,7 @@ function App() {
             <Route path="/" element={<Home introDone={!isLoading} />} />
             <Route path="/projects/:slug" element={<ProjectPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
+            <Route path="/book" element={<BookPage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/puzzle" element={<PuzzlePage />} />
             <Route path="*" element={<NotFound />} />

@@ -36,7 +36,7 @@ ${strip(e.details)}`
   `# Book
 "${d.book.title}: ${d.book.subtitle}" is a ${d.book.genre.toLowerCase()} book by ${d.book.author}. ${
     d.book.buyUrl ? `Buy it: ${d.book.buyUrl}` : 'It is not on sale yet; the site shows it as "coming soon".'
-  } Page: surajnandan.in/#book
+  } Page: surajnandan.in/book
 Back cover: "${d.book.tagline}" ${d.book.blurb.join(' ')}
 You will learn: ${d.book.learn.join('; ')}. Also: ${d.book.features.join('; ')}.`,
 

@@ -1,8 +1,98 @@
 {
   "username": "suraj_nandan",
-  "fetchedAt": "2026-11-01T10:20:36.266Z",
-  "total": 19,
+  "fetchedAt": "2026-11-04T03:42:25.534Z",
+  "total": 25,
   "articles": [
+    {
+      "id": 4865572,
+      "title": "What I think a student portfolio should (and shouldn't) contain",
+      "url": "https://dev.to/suraj_nandan/what-i-think-a-student-portfolio-should-and-shouldnt-contain-37mf",
+      "date": "2026-11-04T03:30:00Z",
+      "tags": [
+        "portfolio",
+        "career",
+        "webdev",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fpqx6hw1i2qm274g96yzd.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4949298,
+      "title": "Node2Shell: one Brotli decoder bug, three runtimes to patch (Node.js, Bun, Python)",
+      "url": "https://dev.to/suraj_nandan/node2shell-one-brotli-decoder-bug-three-runtimes-to-patch-nodejs-bun-python-3fi6",
+      "date": "2026-11-03T18:30:00Z",
+      "tags": [
+        "node",
+        "javascript",
+        "security",
+        "python"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Ft4qtxb9ffdv8czxb9ox8.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4865571,
+      "title": "Row Level Security explained with one tiny example",
+      "url": "https://dev.to/suraj_nandan/row-level-security-explained-with-one-tiny-example-3f83",
+      "date": "2026-11-03T03:30:00Z",
+      "tags": [
+        "security",
+        "postgres",
+        "supabase",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fnu0qzi90gh2b6ve46zp6.png",
+      "readingTime": 6,
+      "reactions": 1
+    },
+    {
+      "id": 4949297,
+      "title": "AI models now find, exploit and patch bugs: what Gemini 4 Carbon means for defenders",
+      "url": "https://dev.to/suraj_nandan/ai-models-now-find-exploit-and-patch-bugs-what-gemini-4-carbon-means-for-defenders-h5i",
+      "date": "2026-11-02T18:30:00Z",
+      "tags": [
+        "ai",
+        "security",
+        "machinelearning",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fmze5p0xkxt1tihh55xst.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4865569,
+      "title": "I added a Three.js typewriter intro to my site, and then I made it skippable",
+      "url": "https://dev.to/suraj_nandan/i-added-a-threejs-typewriter-intro-to-my-site-and-then-i-made-it-skippable-38fk",
+      "date": "2026-11-02T03:30:00Z",
+      "tags": [
+        "threejs",
+        "webdev",
+        "ux",
+        "react"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Feg2kua3rt8kx9bxidisk.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4949293,
+      "title": "PHP2Shell explained: the PHP core bugs attackers hit four days before the patch",
+      "url": "https://dev.to/suraj_nandan/php2shell-explained-the-php-core-bugs-attackers-hit-four-days-before-the-patch-2deh",
+      "date": "2026-11-02T00:00:00Z",
+      "tags": [
+        "php",
+        "security",
+        "webdev",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fm8z5313pijmvjasahg50.png",
+      "readingTime": 7,
+      "reactions": 1
+    },
     {
       "id": 4865566,
       "title": "Day 15 of 30: the halfway map, fourteen ideas worth keeping",
@@ -45,7 +135,7 @@
         "career"
       ],
       "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fy29r5ong4y2snfebjlef.png",
-      "readingTime": 4,
+      "readingTime": 5,
       "reactions": 1
     },
     {
@@ -180,7 +270,7 @@
         "webdev"
       ],
       "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fmzop265qx25vddvaiety.png",
-      "readingTime": 5,
+      "readingTime": 6,
       "reactions": 0
     },
     {

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { PressSection, SectionMasthead, PressTag, pressReveal } from './ui/press';
 import { book } from '../data/book';
@@ -124,6 +125,12 @@ const Book = () => (
               Coming soon
             </span>
           )}
+          <Link
+            to="/book"
+            className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
+          >
+            About the book
+          </Link>
           <a
             href={`mailto:surajnandan78@gmail.com?subject=${encodeURIComponent(`About ${book.title}`)}`}
             className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-oxblood underline decoration-oxblood/30 underline-offset-4 transition-colors hover:decoration-oxblood"

@@ -36,6 +36,7 @@ const slugsFrom = (file) =>
 
 const routes = [
   '/book',
+  '/hire',
   '/changelog',
   ...slugsFrom('projects.ts').map((s) => `/projects/${s}`),
   ...slugsFrom('posts.ts').map((s) => `/blog/${s}`),

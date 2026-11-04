@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, Mail } from 'lucide-react';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
 import { services, tierNames } from '../data/services';
@@ -70,6 +71,12 @@ const Services = () => (
         Prefer to talk first? Tell me what you need and I'll say honestly whether I'm the right person for it.
       </p>
       <div className="flex flex-wrap items-center gap-3">
+        <Link
+          to="/hire"
+          className="font-monopress text-[10px] uppercase tracking-[0.16em] text-ink underline decoration-ink/30 underline-offset-4 hover:text-oxblood"
+        >
+          Full price list
+        </Link>
         <a
           href="mailto:surajnandan78@gmail.com?subject=Project%20enquiry"
           className="inline-flex items-center gap-2 border border-ink px-5 py-3 font-monopress text-[10px] uppercase tracking-[0.16em] text-ink transition-colors hover:bg-ink hover:text-paper"

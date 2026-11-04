@@ -18,6 +18,7 @@ Recent: Campus Winner in ACG Pack A Pitch 2.0 (Technology & Engineering, 2026) w
 
 - [Unscrolled](https://surajnandan.in/book): "Reclaim Your Focus, Time and Ambition in a World Built to Distract You", a self-help book by Suraj Nandan about taking your attention back, now on Amazon (https://www.amazon.in/dp/B0HQ61YYC4).
 - [DEV articles](https://dev.to/suraj_nandan): honest notes from a student learning to build software, and "The Wire", a daily tech and security news desk written with AI and labelled as such.
+- [Hire Suraj](https://surajnandan.in/hire): fixed-scope freelance services with prices.
 - [Fiverr](https://www.fiverr.com/surajnandan7): freelance full-stack web apps, RAG chatbots, e-commerce stores and bug fixes.
 - [Gumroad](https://surajnandan.gumroad.com): short practical guides and tools for developers (deploy checklist, Git cheat sheet, interview checklist, resume pack, freelance tracker).
 - [YouTube](https://www.youtube.com/@surajnandan8283): short Hindi videos on festivals, rituals and the stories behind them.

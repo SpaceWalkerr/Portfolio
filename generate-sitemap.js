@@ -38,7 +38,7 @@ const urls = [
     lastmod: lastModified('src/data/book.ts', 'src/pages/BookPage.tsx'),
     changefreq: 'monthly',
     priority: '0.9',
-    images: ['/book/unscrolled-cover.jpg', '/book/unscrolled-paperback.jpg'],
+    images: ['/book/unscrolled-cover.jpg', '/book/unscrolled-paperback.webp'],
   },
   { loc: `${SITE}/hire`, lastmod: lastModified('src/data/services.ts', 'src/pages/HirePage.tsx'), changefreq: 'monthly', priority: '0.8' },
   { loc: `${SITE}/changelog`, lastmod: lastModified('src/data/changelog.ts'), changefreq: 'monthly', priority: '0.4' },

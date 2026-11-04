@@ -28,7 +28,7 @@ export const book: Book = {
   genre: 'Self-help · Personal growth',
   cover: '/book/unscrolled-cover.jpg',
   format: 'Kindle edition',
-  paperback: '/book/unscrolled-paperback.jpg',
+  paperback: '/book/unscrolled-paperback.webp',
   tagline: 'You are not lazy. You are outgunned.',
   blurb: [
     'Every day, some of the most powerful companies on earth compete for the same scarce resource: your attention. They are very good at winning. The result is a life lived in fragments — mornings lost to the feed, evenings that vanish into reels, and work that never quite gets your full mind.',

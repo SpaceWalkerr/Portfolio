@@ -14,11 +14,11 @@
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image><image:loc>https://surajnandan.in/book/unscrolled-cover.jpg</image:loc></image:image>
-    <image:image><image:loc>https://surajnandan.in/book/unscrolled-paperback.jpg</image:loc></image:image>
+    <image:image><image:loc>https://surajnandan.in/book/unscrolled-paperback.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://surajnandan.in/hire</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

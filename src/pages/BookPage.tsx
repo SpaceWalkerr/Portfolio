@@ -8,6 +8,30 @@ import { book } from '../data/book';
 import { withBase } from '../lib/utils';
 
 const PATH = '/book';
+
+/** Answers are drawn only from the book's own copy (src/data/book.ts) — nothing is claimed beyond it. */
+const faqs = [
+  {
+    q: `What is ${book.title} about?`,
+    a: `${book.title} is a practical, compassionate guide to taking your attention back from the phone, without throwing it in a river. It explains why your phone is so hard to put down and why willpower alone keeps failing, then shows how to redesign it and train deep focus.`,
+  },
+  {
+    q: `Who is ${book.title} for?`,
+    a: 'Anyone whose mornings disappear into the feed and whose evenings vanish into reels, and who wants their focus, time and ambition back, whether they are students, professionals or makers.',
+  },
+  {
+    q: `Who wrote ${book.title}?`,
+    a: book.authorNote,
+  },
+  {
+    q: 'Is there a plan or are there exercises?',
+    a: `Yes. ${book.features.join(', and ')}.`,
+  },
+  {
+    q: `Where can I buy ${book.title}?`,
+    a: `${book.title} is available as a Kindle edition on Amazon: ${book.buyUrl}`,
+  },
+];
 const ASIN = 'B0HQ61YYC4';
 
 /** /book — the book's own indexable page: a real URL for search engines, Amazon's listing as the offer. */
@@ -51,6 +75,15 @@ const BookPage = () => {
           seller: { '@type': 'Organization', name: 'Amazon' },
         },
       },
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqs.map((f) => ({
+        '@type': 'Question',
+        name: f.q,
+        acceptedAnswer: { '@type': 'Answer', text: f.a },
+      })),
     },
     {
       '@context': 'https://schema.org',
@@ -164,6 +197,20 @@ const BookPage = () => {
                 <PressTag key={f}>{f}</PressTag>
               ))}
             </div>
+          </section>
+
+          <section className="mt-14 max-w-2xl" aria-labelledby="book-faq">
+            <h2 id="book-faq" className="border-b-4 border-double border-ink pb-2 font-editorial text-2xl italic">
+              Questions about the book
+            </h2>
+            <dl className="mt-4 divide-y divide-ink/15">
+              {faqs.map((f) => (
+                <div key={f.q} className="py-4">
+                  <dt className="font-display text-sm font-bold uppercase tracking-[0.02em]">{f.q}</dt>
+                  <dd className="mt-1.5 font-editorial text-[15px] leading-relaxed text-ink-mute">{f.a}</dd>
+                </div>
+              ))}
+            </dl>
           </section>
 
           <section className="mt-14 max-w-2xl" aria-labelledby="book-author">

@@ -125,6 +125,17 @@ const Book = () => (
               Coming soon
             </span>
           )}
+          {book.editions?.map((e) => (
+            <a
+              key={e.label}
+              href={e.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 border border-ink px-5 py-3.5 font-monopress text-[11px] uppercase tracking-[0.18em] text-ink transition-colors hover:bg-ink hover:text-paper"
+            >
+              {e.label} <ArrowUpRight size={14} />
+            </a>
+          ))}
           <Link
             to="/book"
             className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"

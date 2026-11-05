@@ -19,6 +19,8 @@ export interface Book {
   authorNote: string;
   /** Set to the store link once the listing is live — the section then shows a buy button instead of "Coming soon". */
   buyUrl?: string;
+  /** Other editions on Amazon.com */
+  editions?: { label: string; url: string }[];
 }
 
 export const book: Book = {
@@ -43,6 +45,10 @@ export const book: Book = {
   ],
   features: ['A simple exercise at the end of every chapter', 'A 30-day plan to tie it all together'],
   buyUrl: 'https://www.amazon.in/dp/B0HQ61YYC4',
+  editions: [
+    { label: 'Paperback', url: 'https://www.amazon.com/dp/B0HQ78LZQZ' },
+    { label: 'Hardcover', url: 'https://www.amazon.com/dp/B0HQGV36NW' },
+  ],
   authorNote:
     'Suraj Nandan is a full-stack and AI engineer from Kishanganj, India, and an NPTEL gold medallist in Human–Computer Interaction. He has shipped more than twenty web and AI products and knows how software is built to hold attention.',
 };

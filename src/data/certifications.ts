@@ -2,6 +2,8 @@ import type { Certificate } from '../components/ui/certificate-card';
 
 export const certifications: Certificate[] = [
   // Featured/Priority Certificates
+  { title: 'Natural Language Processing', platform: 'NPTEL', year: 'Jan–Apr 2026', category: 'AI/ML', url: '/certificates/natural-language-processing-nptel.pdf', featured: true, score: '66/100 — 12-week course' },
+  { title: 'Ideathon 3.0 — II Position', platform: 'Faculty of Management, SRM IST Delhi-NCR', year: 'April 2026', category: 'Competitions', url: '/certificates/ideathon-3-0-second-position.pdf', featured: true, score: 'Runner-up' },
   { title: 'Human Computer Interaction', platform: 'NPTEL / IIT Delhi', year: 'Jan–Apr 2025', category: 'Certifications', url: '/certificates/human-computer-interaction-iit.pdf', featured: true, score: '90/100 — Gold Medal' },
   { title: 'Bootcamp on Big Data & Data Science', platform: 'C-DAC, NOIDA & SRM IST', year: 'Jan 2025', category: 'AI/ML', url: '/certificates/bootcamp-big-data-data-science.pdf', featured: true },
   { title: 'Campus Mantri (Campus Ambassador)', platform: 'GeeksforGeeks', year: '2024–2025', category: 'Certifications', url: '/certificates/campus-mantri-ambassador.pdf', featured: true, score: 'Completed 1 Year' },
@@ -18,6 +20,7 @@ export const certifications: Certificate[] = [
   { title: 'Python (Basic)', platform: 'HackerRank', year: 'Sep 2024', category: 'Programming', url: '/certificates/python-basic-hackerrank.pdf' },
   { title: 'Problem Solving (Basic)', platform: 'HackerRank', year: 'Oct 2024', category: 'Programming', url: '/certificates/problem-solving-basic.pdf' },
   { title: 'Problem Solving (Intermediate)', platform: 'HackerRank', year: 'Oct 2024', category: 'Programming', url: '/certificates/problem-solving-intermediate.pdf' },
+  { title: 'The Complete SQL Bootcamp: Go from Zero to Hero', platform: 'Udemy (Jose Portilla, Pierian Training)', year: 'Aug 2026', category: 'Programming', url: '/certificates/complete-sql-bootcamp-udemy.pdf', score: '9 hours' },
 
   // Web & Full Stack
   { title: 'Full Stack Web Development', platform: 'freeCodeCamp', year: '2023', category: 'Web Development', url: undefined },
@@ -27,6 +30,15 @@ export const certifications: Certificate[] = [
   { title: 'ChatGPT for Everyone', platform: 'Learn Prompting', year: 'Feb 2024', category: 'AI/ML', url: '/certificates/chatgpt-for-everyone.pdf' },
   { title: 'AI Builders Lab (Bootcamp)', platform: 'Google for Developers and Hack2skill', year: '2024', category: 'AI/ML', url: '/certificates/ai-builders-lab-bootcamp.pdf' },
   { title: 'SAWIT.AI Learnathon (Generative AI)', platform: 'GUVI / Google for Developers', year: 'Oct 2024', category: 'AI/ML', url: '/certificates/sawit-ai-learnathon.pdf' },
+  { title: 'Speech Recognition with Python', platform: 'Udemy (365 Careers)', year: 'Oct 2026', category: 'AI/ML', url: '/certificates/speech-recognition-python-udemy.pdf', score: '3.5 hours' },
+  { title: 'Enterprise Ontology Engineering with Protégé, RDF, OWL', platform: 'Udemy (Suchismita Sahu)', year: 'Nov 2026', category: 'AI/ML', url: '/certificates/enterprise-ontology-engineering-udemy.pdf', score: '12 hours' },
+  { title: 'Career Essentials in Generative AI', platform: 'Microsoft & LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/career-essentials-generative-ai.pdf', score: 'Learning path' },
+  { title: 'What Is Generative AI?', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/what-is-generative-ai.pdf' },
+  { title: 'Ethics in the Age of Generative AI', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/ethics-age-of-generative-ai.pdf' },
+  { title: 'Introduction to Artificial Intelligence', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/introduction-to-artificial-intelligence.pdf' },
+  { title: 'Generative AI: The Evolution of Thoughtful Online Search', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/generative-ai-thoughtful-online-search.pdf' },
+  { title: 'Learning Microsoft 365 Copilot', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/learning-microsoft-365-copilot.pdf' },
+  { title: 'Streamlining Your Work with Microsoft Copilot', platform: 'LinkedIn Learning', year: 'Nov 2024', category: 'AI/ML', url: '/certificates/streamlining-work-microsoft-copilot.pdf' },
 
   // Cloud & DevOps
   { title: 'Core Computer Science Subject for Interview Preparation', platform: 'GeeksforGeeks', year: '2024', category: 'Cloud/DevOps', url: undefined },
@@ -36,9 +48,11 @@ export const certifications: Certificate[] = [
 
   // Workshops & Bootcamps
   { title: 'Two Days Workshop on ArduBotics', platform: 'SRM Institute of Science & Technology', year: 'February 2024', category: 'Workshops', url: '/certificates/ArduBotics%20Workshop.jpg' },
+  { title: 'Nestlé E-learning 2026 — Resilience', platform: 'Nestlé Nesternship', year: '2026', category: 'Workshops', url: '/certificates/nestle-elearning-resilience-2026.pdf' },
 
   // Competitions & Hackathons (rest)
   { title: 'ACG Pack A Pitch 2.0 — Campus Winner (Technology & Engineering)', platform: 'ACG World', year: 'Sep 2026', category: 'Competitions', url: undefined, score: 'Campus Winner · Grand Finale' },
+  { title: 'Bharatiya Antariksh Hackathon 2026 — Idea Submission', platform: 'ISRO & Hack2skill', year: '2026', category: 'Competitions', url: '/certificates/bharatiya-antariksh-hackathon-2026.pdf' },
   { title: 'Burnout (Innovate 2024) — Participation', platform: 'SRM Institute of Science & Technology', year: 'April 2024', category: 'Competitions', url: '/certificates/BurnOut.jpg' },
   { title: 'Meditech Innovation (Innovate 2024) — III Position', platform: 'SRM IST', year: 'April 2024', category: 'Competitions', url: '/certificates/Meditech.jpg' },
   { title: 'Err Hunt 2.0', platform: 'Computer Society of India (SRMIST)', year: 'August 2024', category: 'Competitions', url: '/certificates/err-hunt-2-0.pdf' },

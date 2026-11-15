@@ -168,7 +168,7 @@ const Certifications = () => {
         </motion.div>
       )}
 
-      {/* Other certifications — Archive Vault (masonry gallery) */}
+      {/* Other certifications — a compact grid of archive entries */}
       {showOther && (
         <motion.div
           variants={pressReveal}
@@ -176,7 +176,7 @@ const Certifications = () => {
           whileInView="visible"
           viewport={{ once: true, margin: '-40px' }}
         >
-          <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-[-0.01em]">
+          <h3 className="mb-4 font-display text-2xl font-black uppercase tracking-[-0.01em]">
             {q
               ? `${visibleOther.length} ${visibleOther.length === 1 ? 'entry' : 'entries'} for “${query.trim()}”`
               : activeFilter === 'All'
@@ -184,19 +184,13 @@ const Certifications = () => {
                 : activeFilter}
           </h3>
 
-          <div className="columns-1 gap-5 sm:columns-2 lg:columns-3">
-            {(showAll || q ? visibleOther : visibleOther.slice(0, 12)).map((cert, index) => (
-              <div key={cert.title} className="mb-5 break-inside-avoid">
-                <CertificateCard
-                  certificate={cert}
-                  index={index}
-                  onSelect={setSelectedCertificate}
-                />
-              </div>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {(showAll || q ? visibleOther : visibleOther.slice(0, 18)).map((cert, index) => (
+              <CertificateCard key={cert.title} certificate={cert} index={index} onSelect={setSelectedCertificate} />
             ))}
           </div>
 
-          {!q && visibleOther.length > 12 && (
+          {!q && visibleOther.length > 18 && (
             <div className="mt-8 flex justify-center">
               <PressButton variant="outline" onClick={() => setShowAll(!showAll)}>
                 {showAll ? 'Show Less' : `View All (${visibleOther.length})`}

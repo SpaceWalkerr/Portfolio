@@ -10,18 +10,10 @@ interface ResumeModalProps {
 
 const resumes = [
   {
-    title: '1-Page Résumé',
-    description:
-      'A concise, recruiter-friendly single-page snapshot of my experience, projects, and skills.',
-    href: '/Suraj_Resume_1Page.pdf',
-    badge: 'Quick Read',
-  },
-  {
-    title: 'Detailed Résumé',
-    description:
-      'The full version with expanded experience, all projects, education, achievements, and certifications.',
+    title: 'Résumé',
+    description: 'One page: experience, projects, skills and education.',
     href: '/Suraj_Resume.pdf',
-    badge: 'Full Detail',
+    badge: 'PDF',
   },
 ];
 
@@ -66,10 +58,10 @@ export const ResumeModal = ({ isOpen, onClose }: ResumeModalProps) => {
               </div>
 
               <p className="mb-6 font-editorial text-sm italic text-ink-mute">
-                Choose a version — it opens in a new tab.
+                It opens in a new tab.
               </p>
 
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-4">
                 {resumes.map((r) => (
                   <a
                     key={r.title}

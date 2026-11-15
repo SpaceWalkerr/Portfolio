@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/Suraj_Resume_1Page.pdf", "destination": "/Suraj_Resume.pdf", "permanent": true },
     {
       "source": "/",
       "has": [

@@ -19,7 +19,7 @@ const sections = [
   `# Suraj Nandan — profile
 Full-stack developer (React, Node.js, TypeScript, Python, Java) building web products and AI systems. Based in ${d.LOCATION}. B.Tech CSE at SRM Institute of Science and Technology, class of 2027. Open to internships, full-time roles and freelance work. Author of the book "${d.book.title}". Works as an AI training contractor at Mercor. Roles he goes by: ${d.ROLES.map((r) => r.label.toLowerCase()).join(', ')}.
 Contact: surajnandan78@gmail.com · GitHub github.com/SpaceWalkerr · LinkedIn linkedin.com/in/surajnandan · LeetCode leetcode.com/u/SurajNandan · DEV ${d.PROFILES.devto.replace('https://', '')} · Fiverr ${d.PROFILES.fiverr.replace('https://www.', '')} · Gumroad ${d.PROFILES.gumroad.replace('https://', '')} · Site surajnandan.in
-Résumé: surajnandan.in/Suraj_Resume_1Page.pdf (one page), surajnandan.in/Suraj_Resume.pdf (full).`,
+Résumé (one page): surajnandan.in/Suraj_Resume.pdf`,
 
   `# Experience\n` +
     d.experiences

@@ -18,6 +18,16 @@ export interface Correction {
 export const editions: Edition[] = [
   {
     date: '2026-11-15',
+    headline: 'Two projects updated, fourteen certificates filed',
+    items: [
+      'richarani.in, the online clinic built for Dr. Richa Rani, is live: the project now links to it, with a fresh screenshot and the clinic dashboard, patient accounts, WhatsApp updates and Vercel hosting in its write-up.',
+      'Whiteboard.ai’s write-up now covers interview mode with session replay, Razorpay plans and the security hardening.',
+      'New in the archive: NPTEL Natural Language Processing, Ideathon 3.0 (II position), the ISRO Bharatiya Antariksh Hackathon, three Udemy courses (SQL Bootcamp, Speech Recognition with Python, Enterprise Ontology Engineering), Nestlé’s Resilience course and seven LinkedIn Learning AI courses.',
+      'The archive’s other entries are now compact tiles, so three times as many fit on screen, and there is a single one-page résumé.',
+    ],
+  },
+  {
+    date: '2026-11-15',
     headline: 'A novel on the shelf, and a column on Medium',
     items: [
       'The Shelf now carries two books: Above the Clouds, a horror thriller that began as a dream, leads with its cover, back-cover copy and the paperback laid flat; Unscrolled follows.',

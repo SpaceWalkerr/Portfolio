@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { FileText } from 'lucide-react';
-import { useTilt3D } from '../../hooks/useTilt3D';
+import { FileText, Image as ImageIcon } from 'lucide-react';
 import { pressReveal } from './press';
 
 export interface Certificate {
@@ -36,26 +35,22 @@ const categoryColors: Record<string, string> = {
   'National Programs': 'bg-ink text-paper',
 };
 
+/**
+ * A compact archive entry: icon, title, issuer and year on two short lines.
+ * Clicking an entry with a file opens it in the certificate modal.
+ */
 export const CertificateCard = ({ certificate, index, onSelect }: CertificateCardProps) => {
-  const tilt = useTilt3D({ max: 5, glare: false });
-  const isJpg = isJpgUrl(certificate.url);
+  const isImage = isJpgUrl(certificate.url);
   const catColor = categoryColors[certificate.category] || 'bg-ink text-paper';
+  const Icon = isImage ? ImageIcon : FileText;
 
   return (
     <motion.div
-      ref={tilt.ref}
       variants={pressReveal}
       custom={index % 4}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: '-40px' }}
-      onMouseMove={tilt.onMouseMove}
-      onMouseLeave={tilt.onMouseLeave}
-      style={{
-        transformPerspective: 1000,
-        rotateX: tilt.rotateX,
-        rotateY: tilt.rotateY,
-      }}
+      viewport={{ once: true, margin: '-20px' }}
       // Credentials listed without a file (no `url`) are shown but not openable
       {...(certificate.url
         ? {
@@ -72,81 +67,37 @@ export const CertificateCard = ({ certificate, index, onSelect }: CertificateCar
             'data-cursor': 'hover',
           }
         : {})}
-      className={`group relative break-inside-avoid border border-ink/30 bg-paper transition-colors ${
-        certificate.url ? 'cursor-pointer hover:border-ink' : ''
+      className={`group flex h-full items-start gap-3 border border-ink/25 bg-paper px-3 py-2.5 transition-colors ${
+        certificate.url ? 'cursor-pointer hover:border-ink hover:bg-paper-bright' : ''
       }`}
     >
-      {/* Preview area */}
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-ink/20 bg-paper-bright">
-        {isJpg ? (
-          <>
-            <img
-              src={certificate.url!}
-              alt={certificate.title}
-              loading="lazy"
-              decoding="async"
-              className="absolute inset-0 h-full w-full object-cover grayscale transition-all duration-500 group-hover:scale-105 group-hover:grayscale-0"
-            />
-            <div className="absolute inset-0 bg-ink/10 mix-blend-multiply" />
-          </>
-        ) : (
-          /* PDF / generic document cover */
-          <div className="flex h-full flex-col items-center justify-center gap-3 bg-paper-bright p-6 transition-colors group-hover:bg-ink/5">
-            <FileText
-              size={48}
-              className="text-ink-mute transition-colors group-hover:text-oxblood"
-              strokeWidth={1.2}
-            />
-            <span className="text-center font-monopress text-[9px] uppercase tracking-[0.16em] text-ink-faint">
-              PDF Document
-            </span>
-            {/* Decorative lines to suggest a document */}
-            <div className="mt-2 w-3/4 space-y-1.5 opacity-40">
-              <div className="h-[2px] w-full bg-ink-mute" />
-              <div className="h-[2px] w-2/3 bg-ink-mute" />
-              <div className="h-[2px] w-5/6 bg-ink-mute" />
-              <div className="h-[2px] w-1/2 bg-ink-mute" />
-            </div>
-          </div>
-        )}
-
-        {/* Category badge */}
-        <span
-          className={`absolute right-2 top-2 px-2 py-0.5 font-monopress text-[8px] uppercase tracking-[0.12em] ${catColor}`}
-        >
-          {certificate.category}
-        </span>
-
-        {/* Score badge */}
-        {certificate.score && (
-          <span className="absolute bottom-2 left-2 bg-paper/90 px-2 py-0.5 font-monopress text-[8px] uppercase tracking-[0.08em] text-ink shadow-sm">
-            {certificate.score}
-          </span>
-        )}
-
-        {/* Hover overlay indicator */}
-        <div className="absolute inset-0 flex items-center justify-center bg-ink/0 transition-colors group-hover:bg-ink/20">
-          <span className="translate-y-2 border border-paper bg-ink px-3 py-1.5 font-monopress text-[9px] uppercase tracking-[0.14em] text-paper opacity-0 shadow-lg transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            View Document →
-          </span>
-        </div>
-      </div>
-
-      {/* Metadata */}
-      <div className="p-3.5">
-        <h4 className="font-display text-sm font-bold uppercase leading-[1.1] tracking-[-0.01em] text-ink group-hover:text-oxblood">
+      <Icon
+        size={16}
+        strokeWidth={1.5}
+        aria-hidden="true"
+        className={`mt-0.5 shrink-0 transition-colors ${certificate.url ? 'text-ink-mute group-hover:text-oxblood' : 'text-ink-faint'}`}
+      />
+      <div className="min-w-0 flex-1">
+        <h4 className="font-display text-[12.5px] font-bold uppercase leading-[1.15] tracking-[-0.005em] text-ink group-hover:text-oxblood">
           {certificate.title}
         </h4>
-        <div className="mt-1.5 flex items-baseline justify-between gap-2">
-          <span className="truncate font-editorial text-[12px] italic text-ink-mute">
-            {certificate.platform}
-          </span>
-          <span className="shrink-0 font-monopress text-[9px] uppercase tracking-[0.1em] text-ink-faint">
+        <div className="mt-1 flex items-baseline gap-2">
+          <span className="min-w-0 truncate font-editorial text-[12px] italic text-ink-mute">{certificate.platform}</span>
+          <span className="ml-auto shrink-0 font-monopress text-[9px] uppercase tracking-[0.1em] text-ink-faint">
             {certificate.year}
           </span>
         </div>
+        {(certificate.score || certificate.category) && (
+          <div className="mt-1.5 flex flex-wrap items-center gap-1.5">
+            <span className={`px-1.5 py-px font-monopress text-[7.5px] uppercase tracking-[0.12em] ${catColor}`}>
+              {certificate.category}
+            </span>
+            {certificate.score && (
+              <span className="font-monopress text-[8.5px] uppercase tracking-[0.08em] text-oxblood">{certificate.score}</span>
+            )}
+          </div>
+        )}
       </div>
     </motion.div>
   );
 };
-

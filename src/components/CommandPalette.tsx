@@ -213,10 +213,7 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                     <Printer size={14} /> Print this edition
                   </Item>
                   <Item onSelect={() => run(() => window.open('/Suraj_Resume.pdf', '_blank'))}>
-                    <FileText size={14} /> Résumé (full) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
-                  </Item>
-                  <Item onSelect={() => run(() => window.open('/Suraj_Resume_1Page.pdf', '_blank'))}>
-                    <FileText size={14} /> Résumé (one page) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                    <FileText size={14} /> Résumé <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
                   </Item>
                   <Item
                     value="github source code"

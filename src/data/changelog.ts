@@ -18,6 +18,11 @@ export interface Correction {
 export const editions: Edition[] = [
   {
     date: '2026-11-15',
+    headline: 'Above the Clouds is on sale',
+    items: ['The novel’s “Get the book” button now opens the Kindle edition on Amazon, with the paperback and hardcover beside it.'],
+  },
+  {
+    date: '2026-11-15',
     headline: 'Two projects updated, fourteen certificates filed',
     items: [
       'richarani.in, the online clinic built for Dr. Richa Rani, is live: the project now links to it, with a fresh screenshot and the clinic dashboard, patient accounts, WhatsApp updates and Vercel hosting in its write-up.',

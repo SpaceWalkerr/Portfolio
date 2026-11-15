@@ -65,7 +65,7 @@ export const novel: Book = {
   author: 'Suraj Nandan',
   genre: 'Fiction · Horror thriller',
   cover: '/book/above-the-clouds-cover.jpg',
-  format: 'Paperback',
+  format: 'Kindle & print',
   paperback: '/book/above-the-clouds-paperback.jpg',
   tagline: 'I was doing my homework when Delhi ended.',
   blurb: [
@@ -73,7 +73,11 @@ export const novel: Book = {
     'The cloud is rolling east across the plains at sixteen kilometres an hour. Papa has a full tank, a Tata Sierra and one rule: it’s heavy, it can’t climb, so go up. Mumma has packed the pressure cooker. And Suraj has a secret on the inside of his wrist that he is hiding from both of them.',
     'Above the clouds, nothing can happen to them. That’s what Papa says. But the cloud is rising.',
   ],
-  published: true,
+  buyUrl: 'https://www.amazon.in/dp/B0HRRRJFYS',
+  editions: [
+    { label: 'Paperback', url: 'https://www.amazon.com/dp/B0HRRW5ZNQ' },
+    { label: 'Hardcover', url: 'https://www.amazon.com/dp/B0HRS3N5T6' },
+  ],
   features: ['30 chapters in three parts', 'Delhi to Kishanganj to Darjeeling', 'Began as a dream'],
   authorNote:
     'Above the Clouds is Suraj Nandan’s first novel. It began as a dream: a gas over Delhi, a train home to Kishanganj, and a father driving his family up into the mountains because above the clouds, nothing would happen to them.',

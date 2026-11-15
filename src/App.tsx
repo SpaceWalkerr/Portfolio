@@ -14,6 +14,7 @@ import { useIdle } from './hooks/useIdle';
 // Everything below the hero is code-split: the first paint only needs the
 // masthead, and the long-form copy (experience reports, articles, the
 // certificate archive) streams in right behind it.
+import { book, novel } from './data/book';
 const About = lazy(() => import('./components/About'));
 const Book = lazy(() => import('./components/Book'));
 const DevDesk = lazy(() => import('./components/DevDesk'));
@@ -33,6 +34,7 @@ const BlogPostPage = lazy(() => import('./pages/BlogPostPage'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 const ChangelogPage = lazy(() => import('./pages/ChangelogPage'));
 const BookPage = lazy(() => import('./pages/BookPage'));
+const BooksPage = lazy(() => import('./pages/BooksPage'));
 const HirePage = lazy(() => import('./pages/HirePage'));
 const PuzzlePage = lazy(() => import('./pages/PuzzlePage'));
 const EasterEggs = lazy(() => import('./components/EasterEggs'));
@@ -160,7 +162,9 @@ function App() {
             <Route path="/" element={<Home introDone={!isLoading} />} />
             <Route path="/projects/:slug" element={<ProjectPage />} />
             <Route path="/blog/:slug" element={<BlogPostPage />} />
-            <Route path="/book" element={<BookPage />} />
+            <Route path="/book" element={<BookPage b={book} />} />
+            <Route path="/books" element={<BooksPage />} />
+            <Route path="/books/above-the-clouds" element={<BookPage b={novel} />} />
             <Route path="/hire" element={<HirePage />} />
             <Route path="/changelog" element={<ChangelogPage />} />
             <Route path="/puzzle" element={<PuzzlePage />} />

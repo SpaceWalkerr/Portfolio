@@ -18,6 +18,14 @@ export interface Correction {
 export const editions: Edition[] = [
   {
     date: '2026-11-15',
+    headline: 'Every book gets its own page',
+    items: [
+      'A new Books page lists everything Suraj has written, and Above the Clouds has its own page with the back-cover copy, every edition and its ISBN, and answers to common questions.',
+      'Both book pages and the front page now tell search engines, in structured data generated from one source, which books Suraj wrote and where each edition is sold.',
+    ],
+  },
+  {
+    date: '2026-11-15',
     headline: 'Above the Clouds is on sale',
     items: ['The novel’s “Get the book” button now opens the Kindle edition on Amazon, with the paperback and hardcover beside it.'],
   },

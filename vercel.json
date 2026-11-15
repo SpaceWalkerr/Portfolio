@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/Suraj_Resume_1Page.pdf", "destination": "/Suraj_Resume.pdf", "permanent": true },
+    { "source": "/books/unscrolled", "destination": "/book", "permanent": true },
     {
       "source": "/",
       "has": [
@@ -50,6 +51,8 @@
   "rewrites": [
     { "source": "/puzzle", "destination": "/index.html" },
     { "source": "/book", "destination": "/index.html" },
+    { "source": "/books", "destination": "/index.html" },
+    { "source": "/books/:slug", "destination": "/index.html" },
     { "source": "/hire", "destination": "/index.html" },
     { "source": "/changelog", "destination": "/index.html" },
     { "source": "/projects/:slug", "destination": "/index.html" },

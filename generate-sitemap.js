@@ -32,7 +32,27 @@ const postSlugs = slugsFrom('posts.ts');
 
 const home = lastModified('index.html', 'src/components', 'src/data');
 const urls = [
-  { loc: `${SITE}/`, lastmod: home, changefreq: 'weekly', priority: '1.0', images: ['/profile.webp', '/book/unscrolled-cover.jpg'] },
+  {
+    loc: `${SITE}/`,
+    lastmod: home,
+    changefreq: 'weekly',
+    priority: '1.0',
+    images: ['/profile.webp', '/book/above-the-clouds-cover.jpg', '/book/unscrolled-cover.jpg'],
+  },
+  {
+    loc: `${SITE}/books`,
+    lastmod: lastModified('src/data/book.ts', 'src/pages/BooksPage.tsx'),
+    changefreq: 'monthly',
+    priority: '0.9',
+    images: ['/book/above-the-clouds-cover.jpg', '/book/unscrolled-cover.jpg'],
+  },
+  {
+    loc: `${SITE}/books/above-the-clouds`,
+    lastmod: lastModified('src/data/book.ts', 'src/pages/BookPage.tsx'),
+    changefreq: 'monthly',
+    priority: '0.9',
+    images: ['/book/above-the-clouds-cover.jpg', '/book/above-the-clouds-paperback.jpg'],
+  },
   {
     loc: `${SITE}/book`,
     lastmod: lastModified('src/data/book.ts', 'src/pages/BookPage.tsx'),

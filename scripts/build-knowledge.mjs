@@ -43,7 +43,7 @@ You will learn: ${d.book.learn.join('; ')}. Also: ${d.book.features.join('; ')}.
   `# Novel
 "${d.novel.title}" is a ${d.novel.genre.toLowerCase()} novel by ${d.novel.author}, his first, published in 2026. ${
     d.novel.buyUrl ? `Buy it: ${d.novel.buyUrl}` : 'It is on sale on Amazon (search for the title and author).'
-  }${d.novel.editions?.length ? ` Other editions: ${d.novel.editions.map((e) => `${e.label} ${e.url}`).join(', ')}.` : ''} Section on the site: surajnandan.in/#book
+  }${d.novel.editions?.length ? ` Other editions: ${d.novel.editions.map((e) => `${e.label} ${e.url}`).join(', ')}.` : ''} Page: surajnandan.in${d.novel.path}. All books: surajnandan.in/books
 First line: "${d.novel.tagline}" ${d.novel.blurb.join(' ')}
 ${d.novel.authorNote}`,
 

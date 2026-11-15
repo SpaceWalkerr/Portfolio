@@ -18,7 +18,8 @@ export async function loadData() {
     export { certifications, notableAchievements } from './src/data/certifications';
     export { LOCATION, PROFILES, ROLES } from './src/data/site';
     export { default as medium } from './src/data/medium.json';
-    export { book, novel } from './src/data/book';
+    export { book, novel, books } from './src/data/book';
+    export { bookJsonLd } from './src/lib/schema';
     export { services } from './src/data/services';
     export { guides } from './src/data/guides';
     export { default as devto } from './src/data/devto.json';

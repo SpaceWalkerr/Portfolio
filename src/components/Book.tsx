@@ -178,6 +178,12 @@ const Novel = () => (
 
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <BuyButtons b={novel} />
+          <Link
+            to={novel.path}
+            className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
+          >
+            About the book
+          </Link>
           <AskLink b={novel} />
         </div>
 
@@ -273,7 +279,7 @@ const Book = () => (
           <div className="mt-8 flex flex-wrap items-center gap-4">
             <BuyButtons b={book} />
             <Link
-              to="/book"
+              to={book.path}
               className="inline-flex items-center gap-2 font-monopress text-[11px] uppercase tracking-[0.16em] text-ink underline decoration-ink/30 underline-offset-4 transition-colors hover:text-oxblood hover:decoration-oxblood"
             >
               About the book

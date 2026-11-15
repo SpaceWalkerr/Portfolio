@@ -159,6 +159,10 @@ const Footer = () => {
             © {currentYear} The Nandan Review —{' '}
             <Link to="/changelog" className="underline decoration-ink/30 underline-offset-4 hover:text-oxblood">
               Corrections &amp; Amendments
+            </Link>{' '}
+            ·{' '}
+            <Link to="/books" className="underline decoration-ink/30 underline-offset-4 hover:text-oxblood">
+              Books by Suraj Nandan
             </Link>
           </p>
           <p>Set in Archivo, Newsreader &amp; Space Mono</p>

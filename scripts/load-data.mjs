@@ -17,8 +17,8 @@ export async function loadData() {
     export { skillCategories } from './src/data/skills';
     export { certifications, notableAchievements } from './src/data/certifications';
     export { LOCATION, PROFILES, ROLES } from './src/data/site';
-    export { default as youtube } from './src/data/youtube.json';
-    export { book } from './src/data/book';
+    export { default as medium } from './src/data/medium.json';
+    export { book, novel } from './src/data/book';
     export { services } from './src/data/services';
     export { guides } from './src/data/guides';
     export { default as devto } from './src/data/devto.json';

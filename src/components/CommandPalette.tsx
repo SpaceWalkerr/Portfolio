@@ -26,10 +26,9 @@ import {
   BookOpen,
   Handshake,
   PenLine,
-  Clapperboard,
-  Youtube,
-  Instagram,
+  Feather,
 } from 'lucide-react';
+import MediumIcon from './ui/medium-icon';
 import type { Theme } from '../App';
 import { projects } from '../data/projects';
 import { posts } from '../data/posts';
@@ -49,7 +48,7 @@ const sectionIcons: Record<SectionId, typeof Home> = {
   about: User,
   book: BookOpen,
   dev: PenLine,
-  videos: Clapperboard,
+  medium: Feather,
   guides: ShoppingBag,
   github: BarChart3,
   skills: Wrench,
@@ -238,16 +237,10 @@ const CommandPalette = ({ theme, onSetTheme, defaultOpen = false }: CommandPalet
                     <PenLine size={14} /> DEV (articles) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
                   </Item>
                   <Item
-                    value="youtube videos shorts channel creator"
-                    onSelect={() => run(() => window.open(PROFILES.youtube, '_blank'))}
+                    value="medium essays stories articles column writing"
+                    onSelect={() => run(() => window.open(PROFILES.medium, '_blank'))}
                   >
-                    <Youtube size={14} /> YouTube <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
-                  </Item>
-                  <Item
-                    value="instagram reels art creator"
-                    onSelect={() => run(() => window.open(PROFILES.instagram, '_blank'))}
-                  >
-                    <Instagram size={14} /> Instagram <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
+                    <MediumIcon size={14} /> Medium (essays) <ArrowUpRight size={12} className="ml-auto text-ink-faint" />
                   </Item>
                   <Item
                     value="fiverr hire freelance gigs"

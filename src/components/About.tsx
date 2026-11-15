@@ -76,8 +76,9 @@ const About = () => {
               problems and counting — and I design as carefully as I code. When I finish
               something, I write it up in the Op-Ed below, mistakes included, because explaining a
               system clearly is the best test of whether I really understand it. I also write
-              about attention, in my book <em>Unscrolled</em>, and train AI systems as a
-              contractor at Mercor.
+              about attention, in my book <em>Unscrolled</em>, wrote a horror novel,{' '}
+              <em>Above the Clouds</em>, that began as a dream, and train AI systems as a contractor
+              at Mercor.
             </p>
           </div>
 

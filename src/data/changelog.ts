@@ -17,6 +17,15 @@ export interface Correction {
 
 export const editions: Edition[] = [
   {
+    date: '2026-11-15',
+    headline: 'A novel on the shelf, and a column on Medium',
+    items: [
+      'The Shelf now carries two books: Above the Clouds, a horror thriller that began as a dream, leads with its cover, back-cover copy and the paperback laid flat; Unscrolled follows.',
+      'A new Column section with the latest Medium essays — the newest as the lead story, every other one as a card with its cover and snippet — in place of the YouTube and Instagram section.',
+      'Medium replaces YouTube and Instagram in the footer, contact page, command palette and structured data.',
+    ],
+  },
+  {
     date: '2026-11-01',
     headline: 'The author files more than code',
     items: [

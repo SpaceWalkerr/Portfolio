@@ -16,8 +16,7 @@ export const PROFILES = {
   devto: 'https://dev.to/suraj_nandan',
   fiverr: 'https://www.fiverr.com/surajnandan7',
   gumroad: 'https://surajnandan.gumroad.com',
-  youtube: 'https://www.youtube.com/@surajnandan8283',
-  instagram: 'https://www.instagram.com/pencil_in_a_box_/',
+  medium: 'https://medium.com/@suraj-nandan',
 } as const;
 export const DEVTO_USERNAME = 'suraj_nandan';
 
@@ -31,7 +30,7 @@ export const ROLES = [
   { label: 'AI Engineer', to: 'experience' },
   { label: 'Writer', to: 'dev' },
   { label: 'Book Author', to: 'book' },
-  { label: 'Creator', to: 'videos' },
+  { label: 'Essayist', to: 'medium' },
 ] as const;
 
 /** Home-page sections, in the order they appear on the page. */
@@ -41,7 +40,7 @@ export const sections = [
   { id: 'book', label: 'Book' },
   { id: 'dev', label: 'DEV' },
   // `inNav: false` keeps a section out of the (full) desktop nav row; the menu, footer and palette still list it
-  { id: 'videos', label: 'Videos', inNav: false },
+  { id: 'medium', label: 'Medium', inNav: false },
   { id: 'guides', label: 'Guides' },
   { id: 'github', label: 'Stats' },
   { id: 'skills', label: 'Skills' },

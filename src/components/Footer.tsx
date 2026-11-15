@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss, Newspaper, PenLine, Briefcase, ShoppingBag, Youtube, Instagram } from 'lucide-react';
+import { Github, Linkedin, Twitter, Mail, Braces, Coffee, Printer, Rss, Newspaper, PenLine, Briefcase, ShoppingBag } from 'lucide-react';
 import { ResumeModal } from './ResumeModal';
+import MediumIcon from './ui/medium-icon';
 import { sections, LOCATION, PROFILES } from '../data/site';
 import { useSectionNav } from '../hooks/useSectionNav';
 
@@ -13,8 +14,7 @@ const socialLinks = [
   { icon: <Mail size={16} />, url: 'mailto:surajnandan78@gmail.com', label: 'Email' },
   { icon: <Coffee size={16} />, url: 'https://ko-fi.com/surajnandan', label: 'Ko-fi' },
   { icon: <PenLine size={16} />, url: PROFILES.devto, label: 'DEV' },
-  { icon: <Youtube size={16} />, url: PROFILES.youtube, label: 'YouTube' },
-  { icon: <Instagram size={16} />, url: PROFILES.instagram, label: 'Instagram' },
+  { icon: <MediumIcon size={16} />, url: PROFILES.medium, label: 'Medium' },
   { icon: <Briefcase size={16} />, url: PROFILES.fiverr, label: 'Fiverr' },
   { icon: <ShoppingBag size={16} />, url: PROFILES.gumroad, label: 'Gumroad' },
 ];

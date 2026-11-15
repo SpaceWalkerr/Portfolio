@@ -17,7 +17,7 @@ import { useIdle } from './hooks/useIdle';
 const About = lazy(() => import('./components/About'));
 const Book = lazy(() => import('./components/Book'));
 const DevDesk = lazy(() => import('./components/DevDesk'));
-const Videos = lazy(() => import('./components/Videos'));
+const Medium = lazy(() => import('./components/Medium'));
 const Guides = lazy(() => import('./components/Guides'));
 const Scoreboard = lazy(() => import('./components/Scoreboard'));
 const Skills = lazy(() => import('./components/Skills'));
@@ -70,7 +70,7 @@ const Home = ({ introDone }: { introDone: boolean }) => {
         <About />
         <Book />
         <DevDesk />
-        <Videos />
+        <Medium />
         <Guides />
         <Scoreboard />
         <Skills />

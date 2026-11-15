@@ -1,8 +1,9 @@
 import { useState, lazy, Suspense } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee, PenLine, Briefcase, ShoppingBag, Youtube, Instagram } from 'lucide-react';
+import { Mail, MapPin, Send, Github, Linkedin, Twitter, Phone, Braces, Coffee, PenLine, Briefcase, ShoppingBag } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import { PressSection, SectionMasthead, pressReveal } from './ui/press';
+import MediumIcon from './ui/medium-icon';
 import { withBase } from '../lib/utils';
 import { LOCATION, PROFILES } from '../data/site';
 
@@ -18,8 +19,7 @@ const socialLinks = [
   { icon: Twitter, label: 'Twitter', handle: '@SurajNandan1625', url: 'https://x.com/SurajNandan1625' },
   { icon: Coffee, label: 'Ko-fi', handle: 'Buy me a coffee', url: 'https://ko-fi.com/surajnandan' },
   { icon: PenLine, label: 'DEV', handle: '@suraj_nandan', url: PROFILES.devto },
-  { icon: Youtube, label: 'YouTube', handle: '@surajnandan8283', url: PROFILES.youtube },
-  { icon: Instagram, label: 'Instagram', handle: '@pencil_in_a_box_', url: PROFILES.instagram },
+  { icon: MediumIcon, label: 'Medium', handle: '@suraj-nandan', url: PROFILES.medium },
   { icon: Briefcase, label: 'Fiverr', handle: '@surajnandan7', url: PROFILES.fiverr },
   { icon: ShoppingBag, label: 'Gumroad', handle: 'Guides & tools', url: PROFILES.gumroad },
 ];

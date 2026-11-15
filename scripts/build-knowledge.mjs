@@ -40,6 +40,13 @@ ${strip(e.details)}`
 Back cover: "${d.book.tagline}" ${d.book.blurb.join(' ')}
 You will learn: ${d.book.learn.join('; ')}. Also: ${d.book.features.join('; ')}.`,
 
+  `# Novel
+"${d.novel.title}" is a ${d.novel.genre.toLowerCase()} novel by ${d.novel.author}, his first, published in 2026. ${
+    d.novel.buyUrl ? `Buy it: ${d.novel.buyUrl}` : 'It is on sale on Amazon (search for the title and author).'
+  }${d.novel.editions?.length ? ` Other editions: ${d.novel.editions.map((e) => `${e.label} ${e.url}`).join(', ')}.` : ''} Section on the site: surajnandan.in/#book
+First line: "${d.novel.tagline}" ${d.novel.blurb.join(' ')}
+${d.novel.authorNote}`,
+
   `# Services — hiring Suraj
 Fixed-scope jobs ordered through Fiverr (${d.PROFILES.fiverr}); for bigger work, email surajnandan78@gmail.com. Prices in USD for the Basic / Standard / Premium tiers, as shown on the site.\n` +
     d.services.map((s) => `- ${s.title}: ${s.blurb} ($${s.tiers.join(' / $')})`).join('\n'),
@@ -49,12 +56,19 @@ Fixed-scope jobs ordered through Fiverr (${d.PROFILES.fiverr}); for bigger work,
 
   `# Writing on DEV (${d.PROFILES.devto})
 ${d.devto.total} published articles as of ${d.devto.fetchedAt.slice(0, 10)}: honest notes from a student learning to build software, plus "The Wire", a daily tech and security news desk written with AI and labelled as such. Latest:\n` +
-    d.devto.articles.slice(0, 12).map((a) => `- ${a.title} (${a.date.slice(0, 10)}) ${a.url}`).join('\n'),
+    d.devto.articles
+      .slice(0, 12)
+      .map((a) => `- ${a.title} (${a.date.slice(0, 10)}) ${a.url}`)
+      .join('\n'),
 
-  `# Videos and art
-YouTube (${d.PROFILES.youtube}): channel "${d.youtube.channelName}", short Hindi videos on festivals, rituals and the stories behind them (Navratri, Karwa Chauth, Dhanteras, Sharad Purnima). Latest videos:\n` +
-    d.youtube.videos.slice(0, 8).map((v) => `- ${v.title} (${v.published.slice(0, 10)}) https://www.youtube.com/watch?v=${v.id}`).join('\n') +
-    `\nInstagram (${d.PROFILES.instagram}): @pencil_in_a_box_, AI devotional art in 4K, shared as short reels. Section on the site: surajnandan.in/#videos`,
+  `# Essays on Medium (${d.PROFILES.medium})
+Personal essays: phones and focus, growing up in Kishanganj, and what building software as a student teaches you. Section on the site: surajnandan.in/#medium. Latest:\n` +
+    d.medium.stories
+      .map(
+        (s) =>
+          `- ${s.title} (${s.date.slice(0, 10)}${s.publication ? `, in ${s.publication}` : ''}) — ${s.excerpt} ${s.url}`
+      )
+      .join('\n'),
 
   `# Projects\n` +
     d.projects
@@ -83,9 +97,7 @@ Notable: ${d.notableAchievements.map((a) => `${a.title} — ${a.description}`).j
 All: ${d.certifications.map((c) => `${c.title} (${c.platform}, ${c.year}${c.score ? `, ${c.score}` : ''})`).join('; ')}`,
 
   `# Articles (the Op-Ed)\n` +
-    d.posts
-      .map((p) => `## ${p.title} — surajnandan.in/blog/${p.slug} (${p.date})\n${p.content}`)
-      .join('\n\n'),
+    d.posts.map((p) => `## ${p.title} — surajnandan.in/blog/${p.slug} (${p.date})\n${p.content}`).join('\n\n'),
 ];
 
 const text = sections.join('\n\n---\n\n');

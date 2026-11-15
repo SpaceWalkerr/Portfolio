@@ -1,8 +1,308 @@
 {
   "username": "suraj_nandan",
-  "fetchedAt": "2026-11-04T05:12:54.001Z",
-  "total": 25,
+  "fetchedAt": "2026-11-15T08:28:21.986Z",
+  "total": 45,
   "articles": [
+    {
+      "id": 4865596,
+      "title": "Thank you, and what I'm holding myself to as this series ends",
+      "url": "https://dev.to/suraj_nandan/thank-you-and-what-im-holding-myself-to-as-this-series-ends-20a",
+      "date": "2026-11-15T03:30:00Z",
+      "tags": [
+        "writing",
+        "career",
+        "learning",
+        "discuss"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Ftqty0o63owa89fmny1po.png",
+      "readingTime": 4,
+      "reactions": 1
+    },
+    {
+      "id": 4865594,
+      "title": "Read other people's code: a habit I'm trying to build",
+      "url": "https://dev.to/suraj_nandan/read-other-peoples-code-a-habit-im-trying-to-build-1675",
+      "date": "2026-11-14T03:30:00Z",
+      "tags": [
+        "opensource",
+        "learning",
+        "programming",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fnm0553x12x7klmo7euni.png",
+      "readingTime": 6,
+      "reactions": 1
+    },
+    {
+      "id": 4972520,
+      "title": "The History of AI, Part 5: Perceptrons, ELIZA, SHRDLU, and Shakey",
+      "url": "https://dev.to/suraj_nandan/the-history-of-ai-part-5-perceptrons-eliza-shrdlu-and-shakey-24oe",
+      "date": "2026-11-13T04:30:00Z",
+      "tags": [
+        "history",
+        "machinelearning",
+        "python",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fr7p38wyaa13ztz8ddo17.jpg",
+      "readingTime": 18,
+      "reactions": 0
+    },
+    {
+      "id": 4865593,
+      "title": "Packaging my own design as a template: the unglamorous parts",
+      "url": "https://dev.to/suraj_nandan/packaging-my-own-design-as-a-template-the-unglamorous-parts-45m6",
+      "date": "2026-11-13T03:30:00Z",
+      "tags": [
+        "design",
+        "gumroad",
+        "react",
+        "career"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fv5owee7aorfelac7xkcl.png",
+      "readingTime": 6,
+      "reactions": 0
+    },
+    {
+      "id": 4865591,
+      "title": "Impostor syndrome, minus the pep talk",
+      "url": "https://dev.to/suraj_nandan/impostor-syndrome-minus-the-pep-talk-24mc",
+      "date": "2026-11-12T03:30:00Z",
+      "tags": [
+        "career",
+        "mentalhealth",
+        "beginners",
+        "discuss"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F0fxf5080443nsc2mep5w.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4972511,
+      "title": "The History of AI, Part 4: Dartmouth 1956 and the Birth of Artificial Intelligence",
+      "url": "https://dev.to/suraj_nandan/the-history-of-ai-part-4-dartmouth-1956-and-the-birth-of-artificial-intelligence-3lik",
+      "date": "2026-11-11T04:30:00Z",
+      "tags": [
+        "history",
+        "computerscience",
+        "machinelearning",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Foz85lb30wnm5t2s8yvan.jpg",
+      "readingTime": 17,
+      "reactions": 1
+    },
+    {
+      "id": 4865588,
+      "title": "Shipping a Vercel serverless API route: the short version",
+      "url": "https://dev.to/suraj_nandan/shipping-a-vercel-serverless-api-route-the-short-version-ilc",
+      "date": "2026-11-11T03:30:00Z",
+      "tags": [
+        "vercel",
+        "serverless",
+        "typescript",
+        "webdev"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F5y5e3e7wr5joktiumbxh.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4865587,
+      "title": "How I try to write posts people actually finish reading",
+      "url": "https://dev.to/suraj_nandan/how-i-try-to-write-posts-people-actually-finish-reading-84a",
+      "date": "2026-11-10T03:30:00Z",
+      "tags": [
+        "writing",
+        "blogging",
+        "career",
+        "productivity"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fskornbshhpxw6ijxijx1.png",
+      "readingTime": 6,
+      "reactions": 2
+    },
+    {
+      "id": 4966372,
+      "title": "The History of AI, Part 3: Neurons on Paper, McCulloch, Pitts, and the Birth of Cybernetics",
+      "url": "https://dev.to/suraj_nandan/the-history-of-ai-part-3-neurons-on-paper-mcculloch-pitts-and-the-birth-of-cybernetics-1do3",
+      "date": "2026-11-09T04:30:00Z",
+      "tags": [
+        "history",
+        "machinelearning",
+        "computerscience",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fbl48a7ohdx3pkjvliofa.jpg",
+      "readingTime": 17,
+      "reactions": 0
+    },
+    {
+      "id": 4865585,
+      "title": "Why I keep going back to data structures even though I build web apps",
+      "url": "https://dev.to/suraj_nandan/why-i-keep-going-back-to-data-structures-even-though-i-build-web-apps-2iab",
+      "date": "2026-11-09T03:30:00Z",
+      "tags": [
+        "datastructures",
+        "computerscience",
+        "career",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fjvh3edvr6g956h6bl3jy.png",
+      "readingTime": 6,
+      "reactions": 1
+    },
+    {
+      "id": 4865583,
+      "title": "Rewrite or refactor? How I decide",
+      "url": "https://dev.to/suraj_nandan/rewrite-or-refactor-how-i-decide-1kbg",
+      "date": "2026-11-08T03:30:00Z",
+      "tags": [
+        "refactoring",
+        "programming",
+        "architecture",
+        "career"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Faynv2offtm21y14iwyix.png",
+      "readingTime": 5,
+      "reactions": 3
+    },
+    {
+      "id": 4980954,
+      "title": "BTCPay Server hot wallets drained: what self-hosting a payment server really costs",
+      "url": "https://dev.to/suraj_nandan/btcpay-server-hot-wallets-drained-what-self-hosting-a-payment-server-really-costs-582p",
+      "date": "2026-11-07T18:30:00Z",
+      "tags": [
+        "security",
+        "bitcoin",
+        "opensource",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fkfe5ibrc7v5kadbn7x2q.png",
+      "readingTime": 6,
+      "reactions": 1
+    },
+    {
+      "id": 4865582,
+      "title": "What a hackathon teaches you that a course doesn't",
+      "url": "https://dev.to/suraj_nandan/what-a-hackathon-teaches-you-that-a-course-doesnt-436f",
+      "date": "2026-11-07T03:30:00Z",
+      "tags": [
+        "hackathon",
+        "career",
+        "beginners",
+        "teamwork"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fo6va1pno9f6iyl9q79mx.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4951440,
+      "title": "Anthropic's S-1, read by a developer: the numbers, the risks, and what changes for Claude users",
+      "url": "https://dev.to/suraj_nandan/anthropics-s-1-read-by-a-developer-the-numbers-the-risks-and-what-changes-for-claude-users-2njc",
+      "date": "2026-11-06T18:30:00Z",
+      "tags": [
+        "ai",
+        "news",
+        "technology",
+        "startup"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fo0n0ptevgkf58i377y74.png",
+      "readingTime": 4,
+      "reactions": 0
+    },
+    {
+      "id": 4966367,
+      "title": "The History of AI, Part 2: Alan Turing and the Question \"Can Machines Think?\"",
+      "url": "https://dev.to/suraj_nandan/the-history-of-ai-part-2-alan-turing-and-the-question-can-machines-think-52p2",
+      "date": "2026-11-06T04:30:00Z",
+      "tags": [
+        "history",
+        "computerscience",
+        "algorithms",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F5r0br1fj44xdoahyrwaj.jpg",
+      "readingTime": 18,
+      "reactions": 1
+    },
+    {
+      "id": 4865579,
+      "title": "I don't have tests on my biggest project. Here's my plan to fix that",
+      "url": "https://dev.to/suraj_nandan/i-dont-have-tests-on-my-biggest-project-heres-my-plan-to-fix-that-4go5",
+      "date": "2026-11-06T03:30:00Z",
+      "tags": [
+        "testing",
+        "typescript",
+        "postgres",
+        "programming"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F8ih8qanzrx7hgi23vm8d.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4951439,
+      "title": "GitLab's regex problem: one max-severity bug is exploited and another is waiting",
+      "url": "https://dev.to/suraj_nandan/gitlabs-regex-problem-one-max-severity-bug-is-exploited-and-another-is-waiting-36e4",
+      "date": "2026-11-05T18:30:00Z",
+      "tags": [
+        "gitlab",
+        "devops",
+        "security",
+        "ruby"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fdrlwf99y0g73up24hm95.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4865573,
+      "title": "Learning in public vs learning in private: the trade-offs",
+      "url": "https://dev.to/suraj_nandan/learning-in-public-vs-learning-in-private-the-trade-offs-2bd0",
+      "date": "2026-11-05T03:30:00Z",
+      "tags": [
+        "learning",
+        "career",
+        "discuss",
+        "writing"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F0nmuugpny7drpdtqlidz.png",
+      "readingTime": 5,
+      "reactions": 1
+    },
+    {
+      "id": 4951437,
+      "title": "About $50 per breach: inside the AI-agent campaigns that probed 1,200+ websites",
+      "url": "https://dev.to/suraj_nandan/about-50-per-breach-inside-the-ai-agent-campaigns-that-probed-1200-websites-4h86",
+      "date": "2026-11-04T18:30:00Z",
+      "tags": [
+        "ai",
+        "cybersecurity",
+        "security",
+        "news"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2F9rahrcdhb0yyp7rzvhm5.png",
+      "readingTime": 5,
+      "reactions": 0
+    },
+    {
+      "id": 4966362,
+      "title": "The History of AI, Part 1: Myths, Automata, and the Logic of Thought",
+      "url": "https://dev.to/suraj_nandan/the-history-of-ai-part-1-myths-automata-and-the-logic-of-thought-29hb",
+      "date": "2026-11-04T04:30:00Z",
+      "tags": [
+        "history",
+        "computerscience",
+        "philosophy",
+        "beginners"
+      ],
+      "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Ftv1xg7z6xxrg4duz1v3t.jpg",
+      "readingTime": 18,
+      "reactions": 0
+    },
     {
       "id": 4865572,
       "title": "What I think a student portfolio should (and shouldn't) contain",
@@ -16,7 +316,7 @@
       ],
       "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fpqx6hw1i2qm274g96yzd.png",
       "readingTime": 5,
-      "reactions": 0
+      "reactions": 1
     },
     {
       "id": 4949298,
@@ -31,7 +331,7 @@
       ],
       "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Ft4qtxb9ffdv8czxb9ox8.png",
       "readingTime": 5,
-      "reactions": 0
+      "reactions": 1
     },
     {
       "id": 4865571,
@@ -211,7 +511,7 @@
       ],
       "cover": "https://media2.dev.to/dynamic/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.us-east-2.amazonaws.com%2Fuploads%2Farticles%2Fvx53z97fzjbuguk5x82x.png",
       "readingTime": 5,
-      "reactions": 2
+      "reactions": 3
     },
     {
       "id": 4865557,
